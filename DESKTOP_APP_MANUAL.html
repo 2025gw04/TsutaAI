@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TsutaAI - Desktop App 詳細マニュアル</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-color: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary-color: #F59E0B;
+            --accent-color: #10B981;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-gray: #6B7280;
+            --border-color: #E5E7EB;
+            --sidebar-width: 280px;
+            --header-height: 65px;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+        }
+        .page-container { display: flex; }
+        .sidebar {
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            top: 0; left: 0;
+            background: var(--bg-light);
+            border-right: 1px solid var(--border-color);
+            padding-top: var(--header-height);
+            overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
+            z-index: 2000;
+        }
+        .sidebar-header {
+            padding: 1rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .toc { padding: 1rem 0; }
+        .toc ul { list-style: none; padding: 0; margin: 0; }
+        .toc a {
+            display: block;
+            text-decoration: none;
+            color: var(--text-gray);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        .toc > ul > li > a { font-weight: 600; color: var(--text-dark); }
+        .toc ul ul a { padding-left: 2.5rem; font-size: 0.9rem; }
+        .toc a:hover { background: #E5E7EB; color: var(--text-dark); }
+        .toc a.active {
+            color: var(--primary-color);
+            background: #E0E7FF;
+            border-left-color: var(--primary-color);
+            font-weight: 600;
+        }
+        .main-wrapper {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            transition: margin-left 0.3s ease-in-out;
+        }
+        .top-header {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-white);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .top-header-title { font-size: 1.5rem; font-weight: 700; }
+        .hamburger-menu { display: none; cursor: pointer; background: none; border: none; font-size: 2rem; }
+        .main-content { padding: 2rem 3rem; }
+        .manual-page-header { padding-bottom: 2rem; border-bottom: 1px solid var(--border-color); margin-bottom: 2rem; }
+        .manual-page-header h1 { font-size: 2.6rem; margin-bottom: 0.5rem; }
+        .manual-page-header p { font-size: 1.05rem; color: var(--text-gray); }
+        .manual-section { margin-bottom: 4rem; scroll-margin-top: 85px; }
+        .manual-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .manual-subsection { margin-bottom: 2.5rem; scroll-margin-top: 85px; }
+        .manual-subsection h3 {
+            font-size: 1.45rem;
+            margin-bottom: 1rem;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+        .manual-subsection p { margin-bottom: 1rem; color: var(--text-gray); }
+        .feature-image {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        .feature-image:hover { box-shadow: var(--shadow-sm); transform: translateY(-3px); }
+        .feature-image img { width: 100%; height: auto; display: block; }
+        ul.item-list { padding-left: 20px; }
+        ul.item-list li { margin-bottom: 0.8rem; }
+        .note {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+        .note strong { color: #B45309; }
+        @media (max-width: 768px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); box-shadow: 0 0 40px rgba(0,0,0,0.3); }
+            .main-wrapper { margin-left: 0; width: 100%; }
+            .hamburger-menu { display: block; }
+            .main-content { padding: 1.5rem; }
+            .manual-page-header h1 { font-size: 2rem; }
+            .top-header { padding: 0 1rem; }
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+        }
+        .overlay.open { display: block; }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">目次</div>
+            <nav class="toc" id="toc"></nav>
+        </aside>
+        <div class="overlay" id="overlay"></div>
+        <div class="main-wrapper" id="main-wrapper">
+            <header class="top-header">
+                <button class="hamburger-menu" id="hamburger-menu">☰</button>
+                <div class="top-header-title">Desktop App 詳細マニュアル</div>
+            </header>
+            <main class="main-content" id="main-content-area">
+                <header class="manual-page-header">
+                    <h1>TsutaAI Desktop App</h1>
+                    <p>デスクトップアプリは、今日のタスク選択・作業ログ・カンバン更新・日報送信までをパソコン1台で完結させるための常駐アシスタントです。ここでは実際の画面に沿って、操作手順・便利な使い方・トラブル時のヒントを丁寧に解説します。</p>
+                </header>
+
+                <section id="layout" class="manual-section">
+                    <h2>レイアウトとログイン</h2>
+                    <div id="login" class="manual-subsection">
+                        <h3>ログイン手順</h3>
+                        <p>起動するとメールアドレスとパスワードの入力画面が表示されます。認証に成功すると、直前のセッション情報を引き継いだ状態でダッシュボードが開きます。入力漏れや誤入力は赤字で即時フィードバックされるため安心です。</p>
+                        <div class="feature-image" onclick="openGallery('login-img')">
+                            <img src="path/to/desktop-login.png" alt="ログイン画面" id="login-img">
+                        </div>
+                        <ul class="item-list">
+                            <li><strong>自動サインイン:</strong> Windowsの資格情報マネージャーに暗号化して保存でき、次回起動時は数秒でログインが完了します。</li>
+                            <li><strong>多要素認証:</strong> 必要な組織ではワンタイムコード入力にも対応。専用ダイアログが自動表示されるため手順で迷いません。</li>
+                            <li><strong>接続エラー時:</strong> ネットワークが不安定でも入力値は保持され、［再試行］を押すだけでリカバリーできます。</li>
+                        </ul>
+                        <div class="note">
+                            <strong>ヒント:</strong> 端末を家族と共用する場合は、自動ログインをオフにして毎回サインインする運用が推奨です。
+                        </div>
+                    </div>
+                    <div id="setup" class="manual-subsection">
+                        <h3>初回セットアップと画面構成</h3>
+                        <p>初回ログイン直後はセットアップウィザードが一度だけ表示され、作業フォルダ・API URL・監視モードなどを案内します。設定完了後の画面構成は「サイドバー」「上部ヘッダー」「メインコンテンツ」の3区域で統一されており、どの画面でも迷わず遷移できます。</p>
+                        <ul class="item-list">
+                            <li><strong>作業フォルダ:</strong> 日報控え・ログ・一時ファイルが保存される場所です。OneDriveや社内NASを指定するとバックアップになります。</li>
+                            <li><strong>API接続テスト:</strong> ［接続確認］ボタンで /health エンドポイントを呼び出し、成功可否をモーダルで表示します。</li>
+                            <li><strong>監視モード選択:</strong> 勤務時間のみ操作ログを取得するスケジュール設定が可能で、プライベート時間の記録を避けられます。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="dashboard" class="manual-section">
+                    <h2>ダッシュボード</h2>
+                    <div id="dashboard-overview" class="manual-subsection">
+                        <h3>今日のタスクとクイック操作</h3>
+                        <p>本日割り当てられたタスクがカード形式で表示されます。チェックを付けて［作業開始］を押すと常駐ウィジェットが起動し、タイムトラッキングがスタートします。AIが締切や依存変更を検知すると、カード上にバッジとメッセージを表示して優先順位を教えてくれます。</p>
+                        <div class="feature-image" onclick="openGallery('dashboard-img')">
+                            <img src="path/to/desktop-dashboard.png" alt="ダッシュボード画面" id="dashboard-img">
+                        </div>
+                        <ul class="item-list">
+                            <li><strong>複数選択:</strong> 複数タスクをまとめて選択すると、ウィジェット上で完了した順に次タスクへ自動で切り替わります。</li>
+                            <li><strong>メニューバー:</strong> 右上のメニューから設定・カンバン・日報・ログアウトへワンクリックで移動できます。</li>
+                            <li><strong>ショートカット:</strong> 各カードの「詳細」リンクでタスク詳細ダイアログを開き、担当者変更やコメント追記が可能です。</li>
+                        </ul>
+                    </div>
+                    <div id="dashboard-routine" class="manual-subsection">
+                        <h3>おすすめルーティン</h3>
+                        <p>朝イチでダッシュボードを確認し、AIが「優先」と判定したカードから着手します。昼前にいったんウィジェットを一時停止し、午後の予定を再確認。終業前は「未完了」フィルタで残タスクを洗い出し、ゼロになったら日報画面へ進む――このサイクルで進捗漏れを防げます。</p>
+                        <ul class="item-list">
+                            <li>昼休み前にウィジェットを停止すると、午前・午後のログがきれいに分割され、日報の見やすさが向上します。</li>
+                            <li>「日報」ボタンは途中下書きを残したい時にも利用でき、作業の区切りごとに感想をメモしておくとAIの精度が高まります。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="widget" class="manual-section">
+                    <h2>常駐ウィジェット</h2>
+                    <div id="widget-main" class="manual-subsection">
+                        <h3>リアルタイム記録と操作</h3>
+                        <p>画面右下に常駐し、現在のタスク名・予定時間・経過時間・進捗バー・操作回数をリアルタイム表示します。完了ボタンを押した瞬間に作業ログがバックエンドへ送信され、次のタスクに自動的に切り替わります。</p>
+                        <div class="feature-image" onclick="openGallery('widget-img')">
+                            <img src="path/to/desktop-widget.png" alt="常駐ウィジェット" id="widget-img">
+                        </div>
+                        <ul class="item-list">
+                            <li><strong>一時停止／再開:</strong> 予定外の会議や休憩ではワンクリックでログを停止。再開すると同じタスクで記録が継続します。</li>
+                            <li><strong>並べ替え:</strong> 複数タスクを選択している場合、ウィジェット内でドラッグして優先順位を変更できます。</li>
+                            <li><strong>自動保存:</strong> ネットワーク切断時はローカルに退避し、復旧後に自動送信します。</li>
+                            <li><strong>操作量の可視化:</strong> キーボード／マウス入力の累計が常に表示され、集中度の目安になります。</li>
+                        </ul>
+                    </div>
+                    <div id="widget-trouble" class="manual-subsection">
+                        <h3>よくある質問と対処</h3>
+                        <ul class="item-list">
+                            <li>ウィジェットを誤って閉じても、ダッシュボードから［ウィジェットを開く］を押せば状態を保ったまま再表示できます。</li>
+                            <li>長時間アイドル状態になると通知が出て、ログの取りこぼしを防ぎます。通知をクリックするとそのまま再開可能です。</li>
+                            <li>ノートPCを移動させる際は一時停止してからスリープに入れると、ログが午前／午後で分かれてレポートが読みやすくなります。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="kanban" class="manual-section">
+                    <h2>カンバンボード</h2>
+                    <div id="kanban-board" class="manual-subsection">
+                        <h3>リアルタイムでの状況共有</h3>
+                        <p>デスクトップ版カンバンはWeb版と同じデータを共有し、列の追加・カード移動・担当者変更が即時にチームへ反映されます。開発メンバーがWebブラウザを開かなくても、日中の軽微な調整をアプリだけで完結できます。</p>
+                        <div class="feature-image" onclick="openGallery('kanban-img')">
+                            <img src="path/to/desktop-kanban.png" alt="カンバンボード画面" id="kanban-img">
+                        </div>
+                        <ul class="item-list">
+                            <li><strong>ドラッグ操作:</strong> カードを列間で移動すると、WBSの状態やダッシュボードの並びも自動更新されます。</li>
+                            <li><strong>カード詳細:</strong> ダブルクリックでコメント、添付ファイル、Git差分を確認でき、デスクトップでそのまま修正作業に入れます。</li>
+                            <li><strong>スイムレーン切替:</strong> 優先度・担当者・リリース単位などの横方向ラベルを自由に追加できます。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="report" class="manual-section">
+                    <h2>日報作成</h2>
+                    <div id="report-ai" class="manual-subsection">
+                        <h3>AI下書きの確認</h3>
+                        <p>ウィジェットで収集した作業ログやGit差分から、AIが「要約／達成事項／課題／次のアクション」を自動生成します。文章を修正すると即座に「編集済み」タグが付き、加筆箇所が分かります。</p>
+                        <div class="feature-image" onclick="openGallery('report-img')">
+                            <img src="path/to/desktop-report.png" alt="日報画面" id="report-img">
+                        </div>
+                        <ul class="item-list">
+                            <li><strong>再生成ボタン:</strong> ログを追加した後や書き直したい場合に押すと、最新情報で草案を再作成します（「再生成」というボタン名が画面上にも表示されています）。</li>
+                            <li><strong>自己評価スライダー:</strong> 気分・満足度を入力すると、Web管理画面のメンタルダッシュボードにも反映されます。</li>
+                            <li><strong>AIフィードバック:</strong> 送信後には励ましや改善案が別枠に表示され、翌日の行動に役立ちます。</li>
+                        </ul>
+                    </div>
+                    <div id="report-send" class="manual-subsection">
+                        <h3>送信と控えの管理</h3>
+                        <p>［日報を送信］を押すとバックエンドに保存され、リーダーへ通知されます。ローカルの作業フォルダにも控えが自動保存され、オフラインでも参照可能です。</p>
+                        <ul class="item-list">
+                            <li>未送信のままアプリを閉じようとすると確認ダイアログが表示され、書き忘れを防ぎます。</li>
+                            <li>送信後に修正したい場合は、Web管理画面で対象レポートを開き直して編集できます。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="settings" class="manual-section">
+                    <h2>設定</h2>
+                    <div id="settings-connection" class="manual-subsection">
+                        <h3>接続とフォルダ</h3>
+                        <p>APIエンドポイントや作業フォルダなど日常的に変更する可能性がある項目はこの画面にまとまっています。項目ごとの説明とおすすめ設定値をチェックしながら調整できます。</p>
+                        <div class="feature-image" onclick="openGallery('settings-img')">
+                            <img src="path/to/desktop-settings.png" alt="接続設定画面" id="settings-img">
+                        </div>
+                        <ul class="item-list">
+                            <li><strong>API URL:</strong> 会社環境（例：本番／検証）ごとに切り替え可能。［接続テスト］ボタンで疎通を確認できます。</li>
+                            <li><strong>作業フォルダ選択:</strong> ボタン一つでエクスプローラーが開き、保存先を直感的に変更できます。変更後はアプリ再起動なしで反映されます。</li>
+                            <li><strong>プロキシ設定:</strong> 社内ネットワークを経由する場合でも、ユーザー名とパスワードを登録しておけば自動接続されます。</li>
+                        </ul>
+                    </div>
+                    <div id="settings-monitor" class="manual-subsection">
+                        <h3>監視・通知・集中モード</h3>
+                        <p>勤務形態に合わせてログ取得の範囲や通知方法をきめ細かく設定できます。集中したい時間帯は通知を減らし、チームにフォローしてほしいときはアラートを増やすなど、運用に合わせた調整が可能です。</p>
+                        <ul class="item-list">
+                            <li><strong>活動ログON/OFF:</strong> キーボード／マウスの記録を停止したい場合はチェックを外すだけ。プライバシーが気になるときに便利です。</li>
+                            <li><strong>通知チャンネル:</strong> デスクトップ通知・メール通知・アプリ内通知のオン／オフを個別に切り替えられます。</li>
+                            <li><strong>集中モード:</strong> 一時的に新規タスク割り当てを控えてほしい週は集中モードをオンにし、理由や期間を記入するとAIが他メンバーの稼働を優先するよう調整します。</li>
+                        </ul>
+                    </div>
+                    <div id="settings-vacation" class="manual-subsection">
+                        <h3>休暇・稼働調整</h3>
+                        <p>休暇や在宅勤務の予定をアプリから登録すると、Web管理画面やWBSにも自動反映されます。AIがリスケ案を作成し、関係者へ通知してくれるため、手作業での連絡が不要です。</p>
+                        <ul class="item-list">
+                            <li><strong>休暇登録:</strong> 日付とメモを入力するだけで、当日のタスクはダッシュボードから除外されます。</li>
+                            <li><strong>代替日入力:</strong> 作業の持ち越し先を指定すると、AIが新しいスケジュール案を生成し、承認フローまでサポートします。</li>
+                            <li><strong>稼働率スライダー:</strong> 数週間単位で稼働率を上げ下げすると、AIが他メンバーへのタスク配分を調整します。</li>
+                        </ul>
+                    </div>
+                    <div id="settings-support" class="manual-subsection">
+                        <h3>アップデートとサポート</h3>
+                        <p>アプリのバージョン確認・自動更新・ログのエクスポートなど、運用担当者向けのメニューもこの画面に含まれています。トラブル時はサポート情報をまとめて取得できます。</p>
+                        <ul class="item-list">
+                            <li><strong>バージョン確認:</strong> 現在のバージョンと最新バージョンを表示し、ワンクリックで更新できます。</li>
+                            <li><strong>ログエクスポート:</strong> サポート依頼時に必要なアプリログをZIPでまとめてダウンロードできます。</li>
+                            <li><strong>問い合わせリンク:</strong> ヘルプリクエスト画面へ遷移し、開発チームとチャットを開始できます。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="ai-support" class="manual-section">
+                    <h2>AIサポート機能</h2>
+                    <div id="ai-report" class="manual-subsection">
+                        <h3>自動日報ジェネレーター</h3>
+                        <p>作業ログとGit差分をAIが整理し、職種別テンプレートに沿って日報下書きを提示します。テクニカル職ならコード差分やビルド結果、PMならリスク項目が強調されます。</p>
+                    </div>
+                    <div id="ai-monitor" class="manual-subsection">
+                        <h3>アクティビティ解析</h3>
+                        <p>ActivityMonitorServiceとSystemPerformanceMonitorがCPU・メモリ負荷、入力頻度、アプリ使用状況を継続的に収集し、集中度レポートとして表示します。長時間アイドル状態が続く場合はウィジェット上でリマインドされます。</p>
+                    </div>
+                    <div id="ai-mental" class="manual-subsection">
+                        <h3>メンタルケア</h3>
+                        <p>日報の自己評価やチャット内容からストレスサインを検出し、色分けされたスコアと推奨アクション（例：短い休憩、一人作業の増加）が提示されます。低スコアが続くとマネージャーにも通知され、早期フォローにつながります。</p>
+                    </div>
+                    <div id="ai-help" class="manual-subsection">
+                        <h3>ヘルプリクエスト連携</h3>
+                        <p>画面右上のベルアイコンからヘルプリクエスト一覧を開くと、サポート待ちのタスクが把握できます。［対応する］を押すだけで自分が担当として登録され、進捗はAIが追跡します。</p>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div class="gallery-modal" id="galleryModal">
+        <button class="gallery-close" onclick="closeGallery()">&times;</button>
+        <div class="gallery-content">
+            <img src="" alt="ギャラリー画像" class="gallery-image" id="galleryImage">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryModal = document.getElementById('galleryModal');
+            const galleryImage = document.getElementById('galleryImage');
+            const galleryClose = document.querySelector('.gallery-close');
+
+            window.openGallery = (imageId) => {
+                const sourceImage = document.getElementById(imageId);
+                if (!sourceImage || sourceImage.src.includes('path/to')) return;
+                galleryImage.src = sourceImage.src;
+                galleryModal.classList.add('active');
+                document.addEventListener('keydown', handleGalleryKeydown);
+            };
+
+            const closeGallery = () => {
+                galleryModal.classList.remove('active');
+                document.removeEventListener('keydown', handleGalleryKeydown);
+            };
+
+            const handleGalleryKeydown = (e) => {
+                if (e.key === 'Escape') closeGallery();
+            };
+
+            if (galleryClose) galleryClose.addEventListener('click', closeGallery);
+            if (galleryModal) galleryModal.addEventListener('click', (e) => {
+                if (e.target === galleryModal) closeGallery();
+            });
+
+            const sidebar = document.getElementById('sidebar');
+            const hamburger = document.getElementById('hamburger-menu');
+            const overlay = document.getElementById('overlay');
+            const mainContentArea = document.getElementById('main-content-area');
+
+            if (hamburger) hamburger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('open');
+            });
+            if (overlay) overlay.addEventListener('click', () => {
+                sidebar.classList.remove('open');
+                overlay.classList.remove('open');
+            });
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+                    if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+                        sidebar.classList.remove('open');
+                        overlay.classList.remove('open');
+                    }
+                }
+            });
+
+            const tocContainer = document.getElementById('toc');
+
+            function generateToc() {
+                if (!tocContainer || !mainContentArea) return;
+                let tocHTML = '<ul>';
+                mainContentArea.querySelectorAll('.manual-section').forEach(section => {
+                    const id = section.id;
+                    const title = section.querySelector('h2').textContent;
+                    tocHTML += `<li><a href="#${id}">${title}</a><ul>`;
+                    section.querySelectorAll('.manual-subsection').forEach(subsection => {
+                        const subId = subsection.id;
+                        const subTitle = subsection.querySelector('h3').textContent;
+                        tocHTML += `<li><a href="#${subId}">${subTitle}</a></li>`;
+                    });
+                    tocHTML += '</ul></li>';
+                });
+                tocHTML += '</ul>';
+                tocContainer.innerHTML = tocHTML;
+
+                tocContainer.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (window.innerWidth <= 768) {
+                            sidebar.classList.remove('open');
+                            overlay.classList.remove('open');
+                        }
+                        const targetId = link.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - (65 + 20);
+                            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                        }
+                    });
+                });
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                let bestVisible = null;
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!bestVisible || entry.intersectionRatio > bestVisible.intersectionRatio) {
+                            bestVisible = entry;
+                        }
+                    }
+                });
+
+                if (bestVisible) {
+                    const tocLinks = tocContainer.querySelectorAll('a');
+                    tocLinks.forEach(link => link.classList.remove('active'));
+                    const id = bestVisible.target.getAttribute('id');
+                    const correspondingLink = tocContainer.querySelector(`a[href="#${id}"]`);
+                    if (correspondingLink) {
+                        correspondingLink.classList.add('active');
+                        let parentUl = correspondingLink.closest('ul');
+                        if (parentUl && parentUl.previousElementSibling?.tagName === 'A') {
+                            parentUl.previousElementSibling.classList.add('active');
+                        }
+                    }
+                }
+            }, { rootMargin: '-85px 0px -40% 0px', threshold: [0.1, 0.5] });
+
+            function observeSections() {
+                mainContentArea.querySelectorAll('.manual-section, .manual-subsection').forEach(section => observer.observe(section));
+            }
+
+            const mutationObserver = new MutationObserver(() => {
+                generateToc();
+                observeSections();
+            });
+
+            mutationObserver.observe(mainContentArea, { childList: true });
+
+            generateToc();
+            observeSections();
+        });
+    </script>
+</body>
+</html>

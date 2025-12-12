@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TsutaAI - Web Admin 詳細マニュアル</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --primary-color: #4f46e5;
+        --primary-dark: #4338ca;
+        --accent-color: #10b981;
+        --bg-light: #f9fafb;
+        --bg-white: #ffffff;
+        --text-dark: #1f2937;
+        --text-gray: #6b7280;
+        --border-color: #e5e7eb;
+        --sidebar-width: 280px;
+        --header-height: 65px;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+          "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo,
+          sans-serif;
+        line-height: 1.7;
+        color: var(--text-dark);
+        background-color: var(--bg-white);
+      }
+
+      .page-container {
+        display: flex;
+      }
+
+      .sidebar {
+        width: var(--sidebar-width);
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: var(--bg-light);
+        border-right: 1px solid var(--border-color);
+        padding-top: var(--header-height);
+        overflow-y: auto;
+        transition: transform 0.3s ease-in-out;
+        z-index: 2000;
+      }
+
+      .sidebar-header {
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .toc {
+        padding: 1rem 0;
+      }
+      .toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .toc a {
+        display: block;
+        text-decoration: none;
+        color: var(--text-gray);
+        padding: 0.5rem 1.5rem;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+        border-left: 3px solid transparent;
+      }
+      .toc > ul > li > a {
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+      .toc ul ul a {
+        padding-left: 2.5rem;
+        font-size: 0.9rem;
+      }
+      .toc a:hover {
+        background: #e5e7eb;
+        color: var(--text-dark);
+      }
+      .toc a.active {
+        color: var(--primary-color);
+        background: #e0e7ff;
+        border-left-color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      .main-wrapper {
+        margin-left: var(--sidebar-width);
+        width: calc(100% - var(--sidebar-width));
+        transition: margin-left 0.3s ease-in-out;
+      }
+
+      .top-header {
+        height: var(--header-height);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem;
+        border-bottom: 1px solid var(--border-color);
+        background: var(--bg-white);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .top-header-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+
+      .hamburger-menu {
+        display: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: 2rem;
+      }
+
+      .main-content {
+        padding: 2rem 3rem;
+      }
+      .manual-page-header {
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 2rem;
+      }
+      .manual-page-header h1 {
+        font-size: 2.8rem;
+        margin-bottom: 0.5rem;
+      }
+      .manual-page-header p {
+        font-size: 1.1rem;
+        color: var(--text-gray);
+      }
+      .manual-section {
+        margin-bottom: 4rem;
+        scroll-margin-top: 85px;
+      }
+      .manual-section h2 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--border-color);
+        color: var(--text-dark);
+      }
+      .manual-subsection {
+        margin-bottom: 2.5rem;
+        scroll-margin-top: 85px;
+      }
+      .manual-subsection h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        padding-left: 1rem;
+        border-left: 4px solid var(--primary-color);
+      }
+      .manual-subsection p {
+        margin-bottom: 1rem;
+        color: var(--text-gray);
+      }
+      .feature-image {
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: var(--shadow-md);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+      }
+      .feature-image:hover {
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-3px);
+      }
+      .feature-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      ul.item-list {
+        padding-left: 20px;
+      }
+      ul.item-list li {
+        margin-bottom: 0.75rem;
+      }
+      .note {
+        background: #fffbeb;
+        border: 1px solid #fde68a;
+        border-radius: 8px;
+        padding: 1rem;
+        margin: 1.5rem 0;
+      }
+      .note strong {
+        color: #b45309;
+      }
+
+      .gallery-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+      }
+      .gallery-modal.active {
+        display: flex;
+      }
+      .gallery-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+      }
+      .gallery-image {
+        max-width: 95%;
+        max-height: 95%;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+      .gallery-close {
+        position: absolute;
+        top: 15px;
+        right: 25px;
+        font-size: 2.5rem;
+        color: white;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 10001;
+        line-height: 1;
+        padding: 0.5rem;
+      }
+      .gallery-close:hover {
+        color: #ccc;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .sidebar {
+          transform: translateX(-100%);
+        }
+        .sidebar.open {
+          transform: translateX(0);
+          box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+        }
+        .main-wrapper {
+          margin-left: 0;
+          width: 100%;
+        }
+        .hamburger-menu {
+          display: block;
+        }
+        .main-content {
+          padding: 1.5rem;
+        }
+        .manual-page-header h1 {
+          font-size: 2rem;
+        }
+        .top-header {
+          padding: 0 1rem;
+        }
+      }
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1999;
+      }
+      .overlay.open {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">目次</div>
+        <nav class="toc" id="toc"></nav>
+      </aside>
+      <div class="overlay" id="overlay"></div>
+
+      <div class="main-wrapper" id="main-wrapper">
+        <header class="top-header">
+          <button class="hamburger-menu" id="hamburger-menu">☰</button>
+          <div class="top-header-title">Web Admin 詳細マニュアル</div>
+        </header>
+        <main class="main-content" id="main-content-area">
+          <header class="manual-page-header">
+            <h1>TsutaAI Web Admin</h1>
+            <p>
+              TsutaAIのWeb管理画面のすべての機能と操作方法について、詳細に説明します。
+            </p>
+          </header>
+
+          <section id="layout" class="manual-section">
+            <h2>レイアウトとログイン</h2>
+            <div id="login" class="manual-subsection">
+              <h3>ログイン</h3>
+              <p>
+                電子メール
+                アドレスとパスワードを入力するだけで、社内のどこからでも Web
+                Admin
+                にアクセスできます。サインインすると、最新のダッシュボードが自動的に開きます。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('login-form-img')"
+              >
+                <img
+                  src="image/login.png"
+                  alt="ログイン画面"
+                  id="login-form-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>電子メールアドレス:</strong>
+                  事前に共有したアカウントを入力してください。
+                </li>
+                <li>
+                  <strong>パスワード:</strong>
+                  初回ログイン後、セキュリティを強化するために設定から変更してください。
+                </li>
+                <li>
+                  <strong>ログインボタン:</strong>
+                  ワンクリックで検証が実行され、ダッシュボードに移動します。
+                </li>
+              </ul>
+              <div class="note">
+                <strong>ヒント:</strong>
+                同じアカウントを使用して複数のデバイスからサインインした場合でも、作業はリアルタイムで同期されます。
+              </div>
+            </div>
+            <div id="layout-structure" class="manual-subsection">
+              <h3>基本レイアウト</h3>
+              <p>
+                すべてのページは、サイドバー、上部ヘッダー、メイン領域から構築されます。レイアウトを一度覚えてしまえば迷うことはありません。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('layout-sidebar-img')"
+              >
+                <img
+                  src="path/to/layout-sidebar.png"
+                  alt="画面レイアウト"
+                  id="layout-sidebar-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>サイドバー:</strong>
+                  よく使うメニューを一覧で表示し、スクロールせずにジャンプできます。
+                </li>
+                <li>
+                  <strong>ヘッダ:</strong>
+                  ページのタイトル、通知、プロファイル設定へのクイック
+                  アクセスが表示されます。
+                </li>
+                <li>
+                  <strong>メインエリア:</strong>
+                  選択したメニューの詳細情報とアクションボタンを保持します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="projects" class="manual-section">
+            <h2>プロジェクト</h2>
+            <div id="project-list" class="manual-subsection">
+              <h3>プロジェクト一覧</h3>
+              <p>
+                このリストからすべてのエンゲージメントを管理します。新しいプロジェクトを作成したり、キーワードで検索したり、ステータスや所有者でフィルターしたりできます。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('project-list-img')"
+              >
+                <img
+                  src="path/to/project-list.png"
+                  alt="プロジェクト一覧画面"
+                  id="project-list-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>新しいプロジェクトボタン:</strong>
+                  名前、期間、概要を入力すると、数秒でドラフト
+                  プロジェクトが生成されます。
+                </li>
+                <li>
+                  <strong>検索とフィルター:</strong>
+                  アクティブなプロジェクト、完了したプロジェクト、一時停止中のプロジェクトを切り替えたり、所有者ごとに絞り込んだりして、必要なものをすばやく見つけます。
+                </li>
+                <li>
+                  <strong>ショートカット:</strong>
+                  各カードのアイコンから、そのプロジェクトの WBS、メンバー
+                  リスト、またはレポート画面に直接移動できます。
+                </li>
+              </ul>
+            </div>
+            <div id="project-wbs" class="manual-subsection">
+              <h3>WBS</h3>
+              <p>
+                WBS画面はプロジェクト計画の中心です。このページを離れることなく、タスクの追加、所有者の切り替え、AI
+                の提案の受け入れを行うことができます。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('project-wbs-img')"
+              >
+                <img
+                  src="path/to/project-wbs.png"
+                  alt="WBS画面"
+                  id="project-wbs-img"
+                />
+              </div>
+
+              <h4>主な見解</h4>
+              <ul class="item-list">
+                <li>
+                  <strong>ツリービュー:</strong>
+                  プロジェクト、フェーズ、タスクのレベルを移動します。ドラッグ
+                  アンド ドロップしてブランチ全体を一度に並べ替えます。
+                </li>
+                <li>
+                  <strong>ガントビュー:</strong>
+                  タイムラインと依存関係をカレンダー上で視覚化します。バーをドラッグして期間を伸縮すると、変更はすぐに保存されます。
+                </li>
+                <li>
+                  <strong>ボードビュー:</strong> To Do、In
+                  Progress、Review、Done
+                  などのカスタマイズ可能な列を使用して、毎日のスタンドアップを推進します。
+                </li>
+                <li>
+                  <strong>カレンダービュー:</strong>
+                  メンバーごとの週次または月次の作業量を確認し、不均一な割り当てを一目で特定します。
+                </li>
+              </ul>
+
+              <h4>AI支援</h4>
+              <ul class="item-list">
+                <li>
+                  <strong>WBSの自動生成:</strong> 目的と制約を指定すると、AI
+                  が数秒以内に構造案を作成します。
+                </li>
+                <li>
+                  <strong>タスクの分解と改良:</strong> AI
+                  に大まかなタスクを細分化して、気に入った部分だけを計画に統合してもらいます。
+                </li>
+                <li>
+                  <strong>健全性チェック:</strong>
+                  欠落している依存関係、競合する日付、オーバーブッキングされたリソースを検出し、修正ポイントをリストします。
+                </li>
+                <li>
+                  <strong>自動割り当てと期間:</strong>
+                  スキルと作業負荷に基づいて、最適な所有者と現実的な期間を提案します。承認してすぐに申請してください。
+                </li>
+                <li>
+                  <strong>提案の再スケジュール:</strong>
+                  休暇や遅延が発生した場合、AI
+                  が代わりのスケジュールを提示するので、すぐに回復できます。
+                </li>
+              </ul>
+
+              <h4>推奨されるワークフロー</h4>
+              <ol class="item-list">
+                <li>
+                  プロジェクトを作成した直後に AI WBS
+                  生成を実行して、ベースラインを確立します。
+                </li>
+                <li>
+                  ガント ビューでタイムラインを確認しながら、ツリー
+                  ビューで重要なフェーズを調整します。
+                </li>
+                <li>
+                  ボード ビューを使用して日々の動きを監視し、列が混雑した場合は
+                  AI の提案に頼ります。
+                </li>
+                <li>
+                  週に 1 回、健全性チェックとカレンダー
+                  ビューを開いて、ワークロードと依存関係のバランスをとります。
+                </li>
+              </ol>
+
+              <h4>役立つヒント</h4>
+              <ul class="item-list">
+                <li>
+                  タスクをダブルクリックすると詳細パネルが開き、コメント、添付ファイル、アクティビティ履歴をまとめて確認できます。
+                </li>
+                <li>
+                  ビューの切り替えはツールバーから 1
+                  回クリックするだけなので、現在のディスカッションに最適なレイアウトを使用してください。
+                </li>
+                <li>
+                  AI
+                  の提案を受け入れるか拒否するかの決定は自動的に追跡され、レビューが透明になります。
+                </li>
+              </ul>
+              <div class="note">
+                <strong>ヒント:</strong>
+                迷った場合は、AIの提案を確認して有用な部分だけを採用し、手動で微調整するという流れに従うと時間を大幅に節約できます。
+              </div>
+            </div>
+          </section>
+
+          <section id="project-health" class="manual-section">
+            <h2>プロジェクトの健全性</h2>
+            <p>
+              品質、コスト、納期のバランスを監視します。チャートは、今すぐに行動が必要な場所を強調します。
+            </p>
+            <div id="health-dashboard" class="manual-subsection">
+              <h3>健康ダッシュボード</h3>
+              <div
+                class="feature-image"
+                onclick="openGallery('health-dashboard-img')"
+              >
+                <img
+                  src="path/to/health-dashboard.png"
+                  alt="健康ダッシュボード"
+                  id="health-dashboard-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>スコア:</strong> AI はライブデータから 0 ～ 100
+                  のスコアを計算し、安全範囲を下回るとアラートを発します。
+                </li>
+                <li>
+                  <strong>QCDチャート:</strong>
+                  色を使用して、品質、コスト、納期のどれに余裕があるか、負担がかかっているかを確認します。
+                </li>
+                <li>
+                  <strong>AIアドバイス:</strong> 「タスク A
+                  が遅延の原因である」「レビュー担当者を追加する」などの的確な提案を提供します。
+                </li>
+                <li>
+                  <strong>履歴ビュー:</strong>
+                  週ごとの傾向が折れ線グラフで表示されるので、対策が奏功したかどうかを確認できます。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="members" class="manual-section">
+            <h2>会員管理</h2>
+            <p>
+              誰がどのプロジェクトに関与しているか、そのスキルや作業量を確認します。
+            </p>
+            <div id="member-list" class="manual-subsection">
+              <h3>メンバーリスト</h3>
+              <div
+                class="feature-image"
+                onclick="openGallery('member-list-img')"
+              >
+                <img
+                  src="path/to/member-list.png"
+                  alt="メンバーリスト"
+                  id="member-list-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>追加または編集:</strong>
+                  メールアドレスと役割を入力して新しいメンバーを登録します。スキルタグによりAI割り当ての精度が向上します。
+                </li>
+                <li>
+                  <strong>ワークロードビュー:</strong>
+                  現在の割り当てが色分けされて表示されるため、空いている人材をすぐに見つけることができます。
+                </li>
+                <li>
+                  <strong>アクセス役割:</strong>
+                  管理者、PM、およびメンバーの役割を切り替えて、表示される情報を制御します。
+                </li>
+              </ul>
+            </div>
+            <div id="member-prompt" class="manual-subsection">
+              <h3>AIアシスト設定</h3>
+              <p>
+                AI が各メンバーをどのようにサポートするかをカスタマイズします。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('member-prompt-img')"
+              >
+                <img
+                  src="path/to/member-prompt.png"
+                  alt="AIアシスト設定"
+                  id="member-prompt-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>サポートの種類を選択する:</strong>
+                  それぞれの役割に応じて、毎日の要約、レビュー支援、または成果物のチェックを有効にします。
+                </li>
+                <li>
+                  <strong>通知設定:</strong>
+                  メンバーがこれらの更新について電子メールまたはアプリ内通知のどちらを好むかを選択します。
+                </li>
+                <li>
+                  <strong>注意事項:</strong> AI
+                  の提案がコンテキストを反映するように、引き継ぎ情報や強みを記録します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="sprints" class="manual-section">
+            <h2>スプリント計画</h2>
+            <p>
+              短いサイクルで作業するチームに最適です。今週取り組むべきタスクを決定し、それらを視覚的に追跡します。
+            </p>
+            <div id="sprints-board" class="manual-subsection">
+              <h3>スプリントボード</h3>
+              <div
+                class="feature-image"
+                onclick="openGallery('sprints-board-img')"
+              >
+                <img
+                  src="path/to/sprints-board.png"
+                  alt="スプリントボード"
+                  id="sprints-board-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>スプリントの作成:</strong>
+                  開始日と終了日、およびスプリント目標を設定して、今後の作業を整理します。
+                </li>
+                <li>
+                  <strong>バックログのインポート:</strong> WBS
+                  バックログからタスクをスプリントにドラッグし、1
+                  つのビューで優先順位を付けます。
+                </li>
+                <li>
+                  <strong>バーンダウンチャート:</strong>
+                  残りの工数ラインは自動的に更新され、進捗が遅れている場合は AI
+                  が通知します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="progress-tracking" class="manual-section">
+            <h2>進捗状況の追跡</h2>
+            <p>
+              AI はステータス
+              レポートを集約し、信頼できるグラフの表示に努めます。
+            </p>
+            <div id="progress-dashboard" class="manual-subsection">
+              <h3>進捗状況ダッシュボード</h3>
+              <div
+                class="feature-image"
+                onclick="openGallery('progress-dashboard-img')"
+              >
+                <img
+                  src="path/to/progress-dashboard.png"
+                  alt="進捗状況ダッシュボード"
+                  id="progress-dashboard-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>AIの概要:</strong> 「現在、計画より 2
+                  日進んでいます。」など、状況を自然言語で説明します。
+                </li>
+                <li>
+                  <strong>バーンダウン/バーンアップ:</strong>
+                  計画された作業量と実際の作業量を比較することで、回復措置が必要な週を把握できます。
+                </li>
+                <li>
+                  <strong>スプリント分析:</strong>
+                  最近の各スプリントの完了率と残りのタスクを自動的に強調表示します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="mental-health" class="manual-section">
+            <h2>精神的なサポート</h2>
+            <p>
+              メンバーの健康状態を明確な色で視覚化し、問題が拡大する前に行動します。
+            </p>
+            <div id="mental-dashboard" class="manual-subsection">
+              <h3>メンタルケアダッシュボード</h3>
+              <div
+                class="feature-image"
+                onclick="openGallery('mental-dashboard-img')"
+              >
+                <img
+                  src="path/to/mental-dashboard.png"
+                  alt="メンタルケアダッシュボード"
+                  id="mental-dashboard-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>条件インデックス:</strong>
+                  AIが日報やチャットの口調を分析してストレスレベルを推定。
+                </li>
+                <li>
+                  <strong>チェックイン履歴:</strong>
+                  アンケート回答のタイムラインは、突然の変化を検出するのに役立ちます。
+                </li>
+                <li>
+                  <strong>フォローアップの提案:</strong>
+                  1対1のミーティングの提案や仕事量の調整などのアクションを提供します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="help-requests" class="manual-section">
+            <h2>ヘルプリクエスト</h2>
+            <p>
+              メンバーから提起された質問や障害を追跡し、それらを解決するオーナーを割り当てます。
+            </p>
+            <div id="help-list" class="manual-subsection">
+              <h3>リクエスト一覧</h3>
+              <div class="feature-image" onclick="openGallery('help-list-img')">
+                <img
+                  src="path/to/help-list.png"
+                  alt="ヘルプリクエストリスト"
+                  id="help-list-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>ステータス管理:</strong>
+                  「未割り当て」?で並べ替えます。
+                  ？進行中、？または「完了しました」優先色を確認します。
+                </li>
+                <li>
+                  <strong>詳細図:</strong>
+                  リクエストを開いて、リンクされたタスク、添付ファイル、会話履歴を
+                  1 か所で確認します。
+                </li>
+                <li>
+                  <strong>所有者の割り当て:</strong>
+                  ワンクリックで責任者を割り当て、自動的に通知します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="vacations" class="manual-section">
+            <h2>休暇管理</h2>
+            <p>
+              計画休暇と取得休暇を管理して、リソース計画を現実的に保ちます。
+            </p>
+            <div id="vacation-calendar" class="manual-subsection">
+              <h3>休暇カレンダー</h3>
+              <div
+                class="feature-image"
+                onclick="openGallery('vacation-calendar-img')"
+              >
+                <img
+                  src="path/to/vacation-calendar.png"
+                  alt="休暇カレンダー"
+                  id="vacation-calendar-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>休暇申請:</strong>
+                  メンバーが希望日を提出すると、マネージャーは承認通知を受け取ります。
+                </li>
+                <li>
+                  <strong>チームビュー:</strong>
+                  色分けされたカレンダーで二重予​​約を防止し、誰が欠席するかを示します。
+                </li>
+                <li>
+                  <strong>AI アラート:</strong>
+                  重要なタスクが休暇と重なった場合、AI
+                  はスケジュール変更のオプションを提案します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="alerts" class="manual-section">
+            <h2>AI アラート</h2>
+            <p>
+              AI によって検出された遅延、品質リスク、通信の問題を確認します。
+            </p>
+            <div id="alert-list" class="manual-subsection">
+              <h3>アラートリスト</h3>
+              <div
+                class="feature-image"
+                onclick="openGallery('alert-list-img')"
+              >
+                <img
+                  src="path/to/alert-list.png"
+                  alt="AIアラート一覧"
+                  id="alert-list-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>優先アイコン:</strong>
+                  色とアイコンは緊急性を反映しているため、迅速に優先順位を付けることができます。
+                </li>
+                <li>
+                  <strong>原因と対処法:</strong> 各アラートには、「タスク A
+                  のレビューが遅れています。別のレビュー担当者の追加を検討してください。」などの説明が含まれています。
+                </li>
+                <li>
+                  <strong>対応履歴:</strong>
+                  透明性を確保するために、アラートを処理した人、コメント、完了時間を記録します。
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="import-export" class="manual-section">
+            <h2>輸入と輸出</h2>
+            <p>
+              これらのツールを使用して、既存のデータを Web Admin
+              に取り込んだり、会議用のクリーンなレポートをエクスポートしたりできます。
+            </p>
+            <div id="import-project" class="manual-subsection">
+              <h3>プロジェクトをインポートする</h3>
+              <p>
+                Excel または別のシステムで作成した計画を Web Admin
+                に直接ロードします。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('import-project-img')"
+              >
+                <img
+                  src="path/to/import-project.png"
+                  alt="プロジェクトのインポート"
+                  id="import-project-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>サポートされている形式:</strong> CSV、XLSX、および MS
+                  プロジェクト
+                  ファイルが受け入れられます。サンプルテンプレートは画面からダウンロードできます。
+                </li>
+                <li>
+                  <strong>重複の処理:</strong>
+                  同じタスク名がすでに存在する場合、上書きするか新規エントリとして追加するかを選択します。
+                </li>
+              </ul>
+            </div>
+            <div id="import-export-task" class="manual-subsection">
+              <h3>タスクのインポートまたはエクスポート</h3>
+              <p>
+                同じ機能は「データ」からも利用できます。 WBS画面内のメニュー。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('import-export-task-img')"
+              >
+                <img
+                  src="path/to/import-export-task.png"
+                  alt="タスクのインポートとエクスポート"
+                  id="import-export-task-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>輸入:</strong>
+                  再利用可能なテンプレートに基づいて、タスクのバッチをすばやく登録します。
+                </li>
+                <li>
+                  <strong>輸出:</strong> ユースケースに応じて、現在の WBS を
+                  CSV、JSON、またはマークダウンとしてダウンロードします。
+                </li>
+              </ul>
+            </div>
+            <div id="export-report" class="manual-subsection">
+              <h3>レポートのエクスポート</h3>
+              <p>
+                ダッシュボードやヘルスレポートをファイルとして出力し、会議や関係者と共有できるようにします。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('export-report-img')"
+              >
+                <img
+                  src="path/to/export-report.png"
+                  alt="レポートのエクスポート"
+                  id="export-report-img"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section id="settings" class="manual-section">
+            <h2>設定</h2>
+            <p>アカウント情報と通知ルールを更新するための中心的な場所。</p>
+            <div id="settings-profile" class="manual-subsection">
+              <h3>プロファイル設定</h3>
+              <p>ここで表示名、写真、連絡先の詳細を更新します。</p>
+              <div
+                class="feature-image"
+                onclick="openGallery('settings-profile-img')"
+              >
+                <img
+                  src="path/to/settings-profile.png"
+                  alt="プロファイル設定"
+                  id="settings-profile-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>基本情報:</strong>
+                  表示名または部門を変更すると、メンバー
+                  リストで他の人に表示される内容も更新されます。
+                </li>
+                <li>
+                  <strong>パスワードを変更する:</strong>
+                  数回クリックするだけで更新できます。セキュリティのために定期的なアップデートをお勧めします。
+                </li>
+              </ul>
+            </div>
+            <div id="settings-notification" class="manual-subsection">
+              <h3>通知設定</h3>
+              <p>
+                通知を受け取りたいイベントと、そのイベントが電子メールまたはアプリ内アラートのどちらで届くかを選択します。
+              </p>
+              <div
+                class="feature-image"
+                onclick="openGallery('settings-notification-img')"
+              >
+                <img
+                  src="path/to/settings-notification.png"
+                  alt="通知設定"
+                  id="settings-notification-img"
+                />
+              </div>
+              <ul class="item-list">
+                <li>
+                  <strong>電子メールまたはアプリ内アラート:</strong>
+                  各タイプを個別に切り替えて、重要なアラートのみがデバイスにポップアップ表示されるようにします。
+                </li>
+                <li>
+                  <strong>ダイジェストメール:</strong> 1 日の終わりに 1
+                  つの簡潔な更新を希望する場合は、毎日の概要メールを受け取ります。
+                </li>
+              </ul>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <div class="gallery-modal" id="galleryModal">
+      <button class="gallery-close" onclick="closeGallery()">&times;</button>
+      <div class="gallery-content">
+        <img
+          src=""
+          alt="ギャラリー画像"
+          class="gallery-image"
+          id="galleryImage"
+        />
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const galleryModal = document.getElementById("galleryModal");
+        const galleryImage = document.getElementById("galleryImage");
+        const galleryClose = document.querySelector(".gallery-close");
+
+        window.openGallery = (imageId) => {
+          const sourceImage = document.getElementById(imageId);
+          if (!sourceImage || !sourceImage.src.includes("path/to")) {
+            galleryImage.src = sourceImage.src;
+            galleryModal.classList.add("active");
+            document.addEventListener("keydown", handleGalleryKeydown);
+          }
+        };
+
+        const closeGallery = () => {
+          galleryModal.classList.remove("active");
+          document.removeEventListener("keydown", handleGalleryKeydown);
+        };
+
+        const handleGalleryKeydown = (e) => {
+          if (e.key === "Escape") closeGallery();
+        };
+
+        if (galleryClose) galleryClose.addEventListener("click", closeGallery);
+        if (galleryModal)
+          galleryModal.addEventListener("click", (e) => {
+            if (e.target === galleryModal) closeGallery();
+          });
+
+        const sidebar = document.getElementById("sidebar");
+        const hamburger = document.getElementById("hamburger-menu");
+        const overlay = document.getElementById("overlay");
+        const mainContentArea = document.getElementById("main-content-area");
+
+        if (hamburger)
+          hamburger.addEventListener("click", () => {
+            sidebar.classList.toggle("open");
+            overlay.classList.toggle("open");
+          });
+        if (overlay)
+          overlay.addEventListener("click", () => {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("open");
+          });
+        if (mainContentArea)
+          mainContentArea.addEventListener("click", () => {
+            if (sidebar.classList.contains("open")) {
+              sidebar.classList.remove("open");
+              overlay.classList.remove("open");
+            }
+          });
+
+        const tocContainer = document.getElementById("toc");
+
+        function generateToc() {
+          if (!tocContainer || !mainContentArea) return;
+          let tocHTML = "<ul>";
+          mainContentArea
+            .querySelectorAll(".manual-section")
+            .forEach((section) => {
+              const id = section.id;
+              const title = section.querySelector("h2").textContent;
+              tocHTML += `<li><a href="#${id}">${title}</a><ul>`;
+              section
+                .querySelectorAll(".manual-subsection")
+                .forEach((subsection) => {
+                  const subId = subsection.id;
+                  const subTitle = subsection.querySelector("h3").textContent;
+                  tocHTML += `<li><a href="#${subId}">${subTitle}</a></li>`;
+                });
+              tocHTML += `</ul></li>`;
+            });
+          tocHTML += "</ul>";
+          tocContainer.innerHTML = tocHTML;
+
+          const tocLinks = tocContainer.querySelectorAll("a");
+          tocContainer.addEventListener("click", (e) => {
+            if (e.target.tagName === "A") {
+              e.preventDefault();
+              sidebar.classList.remove("open");
+              overlay.classList.remove("open");
+              const targetId = e.target.getAttribute("href");
+              const targetElement = document.querySelector(targetId);
+              if (targetElement) {
+                const offsetTop =
+                  targetElement.getBoundingClientRect().top +
+                  window.pageYOffset -
+                  (65 + 20);
+                window.scrollTo({ top: offsetTop, behavior: "smooth" });
+              }
+            }
+          });
+        }
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            let bestVisible = null;
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                if (
+                  !bestVisible ||
+                  entry.intersectionRatio > bestVisible.intersectionRatio
+                ) {
+                  bestVisible = entry;
+                }
+              }
+            });
+
+            if (bestVisible) {
+              const tocLinks = tocContainer.querySelectorAll("a");
+              tocLinks.forEach((link) => link.classList.remove("active"));
+              const id = bestVisible.target.getAttribute("id");
+              const correspondingLink = tocContainer.querySelector(
+                `a[href="#${id}"]`
+              );
+              if (correspondingLink) {
+                correspondingLink.classList.add("active");
+                let parentUl = correspondingLink.closest("ul");
+                if (
+                  parentUl &&
+                  parentUl.previousElementSibling?.tagName === "A"
+                ) {
+                  parentUl.previousElementSibling.classList.add("active");
+                }
+              }
+            }
+          },
+          { rootMargin: `-${85}px 0px -50% 0px`, threshold: [0.1, 0.5] }
+        );
+
+        function observeSections() {
+          mainContentArea
+            .querySelectorAll(".manual-section, .manual-subsection")
+            .forEach((section) => observer.observe(section));
+        }
+
+        // Use a MutationObserver to regenerate ToC and re-observe when content changes
+        const mutationObserver = new MutationObserver((mutations) => {
+          for (const mutation of mutations) {
+            if (mutation.type === "childList") {
+              generateToc();
+              observeSections();
+              break;
+            }
+          }
+        });
+
+        mutationObserver.observe(mainContentArea, { childList: true });
+
+        // Initial generation
+        generateToc();
+        observeSections();
+      });
+    </script>
+  </body>
+</html>

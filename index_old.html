@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ツタAI - AI駆動型プロジェクト管理システム</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* :root {
+            --primary-color: #4F46E5;
+            --primary-dark: #4338CA;
+            --secondary-color: #F59E0B;
+            --accent-color: #10B981;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-gray: #6B7280;
+            --border-color: #E5E7EB;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        } */
+
+        :root {
+            --primary-color: #75EA66 ;
+            --primary-dark: #4BA262;
+            --secondary-color: #F59E0B;
+            --accent-color: #10B981;
+            --bg-light: #F9FAFB;
+            --bg-white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-gray: #6B7280;
+            --border-color: #E5E7EB;
+            --gradient-1: linear-gradient(135deg, #75EA66 0%, #4BA262 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', Meiryo, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-white);
+            scroll-behavior: smooth;
+        }
+
+        /* ナビゲーション */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* ヒーローセクション */
+        .hero {
+            margin-top: 70px;
+            padding: 100px 2rem 80px 2rem;
+            background: linear-gradient(135deg, #75EA66  0%, #4BA262 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+
+            100% {
+                transform: translateY(-100px) translateX(100px);
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* セクション共通スタイル */
+        .section {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 4rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .bg-light {
+            background-color: var(--bg-light);
+        }
+
+        /* 問題提起セクション */
+        .problem-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .problem-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .problem-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .problem-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* ソリューションセクション */
+        .solution-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .solution-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .solution-card:nth-child(2)::before {
+            background: var(--gradient-2);
+        }
+
+        .solution-card:nth-child(3)::before {
+            background: var(--gradient-3);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .solution-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .solution-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .solution-card ul {
+            list-style: none;
+            color: var(--text-gray);
+        }
+
+        .solution-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .solution-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* 主要機能セクション */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #75EA66  0%, #4BA262 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .feature-image.gradient-2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .feature-image.gradient-3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .feature-image.gradient-4 {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .feature-content {
+            padding: 2rem;
+        }
+
+        .feature-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .feature-note {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 10px;
+            font-size: 0.875rem;
+            color: var(--text-gray);
+            border-left: 3px solid var(--secondary-color);
+        }
+
+        /* デモ動画セクション */
+        .demo-video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #75EA66  0%, #4BA262 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '▶';
+            font-size: 5rem;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .video-placeholder-text {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .video-info {
+            padding: 2rem;
+            background: var(--bg-light);
+        }
+
+        .video-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .video-info p {
+            color: var(--text-gray);
+        }
+
+        /* 使い方フローセクション */
+        .flow-container {
+            display: grid;
+            gap: 2rem;
+            position: relative;
+        }
+
+        .flow-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .flow-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-md);
+        }
+
+        .flow-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            flex-grow: 1;
+        }
+
+        .flow-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .flow-content .role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .flow-content p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* 技術スタックセクション */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2rem;
+        }
+
+        .tech-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .tech-category h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: var(--bg-light);
+            border-radius: 10px;
+            color: var(--text-gray);
+            transition: all 0.3s ease;
+        }
+
+        .tech-list li:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* AI機能ハイライト */
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .ai-feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .ai-feature-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateX(5px);
+        }
+
+        .ai-feature-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .ai-feature-card p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* CTAセクション */
+        .cta-section {
+            background: var(--gradient-1);
+            color: white;
+            text-align: center;
+            padding: 100px 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .cta-content {
+            max-width: 730px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* フッター */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow-lg);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu a::after {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section {
+                padding: 60px 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-content: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .problem-cards,
+            .solution-grid,
+            .features-grid,
+            .tech-stack,
+            .ai-features {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .flow-number {
+                margin: 0 auto;
+            }
+
+            .cta-content h2 {
+                font-size: 1.75rem;
+            }
+
+            .cta-content p {
+                font-size: 1rem;
+            }
+
+            .video-placeholder {
+                font-size: 1rem;
+            }
+
+            .video-placeholder-text {
+                padding: 1rem;
+            }
+
+            .video-placeholder-text strong {
+                font-size: 1rem;
+            }
+
+            .video-placeholder-text small {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem;
+            }
+
+            .hero {
+                padding: 60px 1rem 30px 1rem;
+            }
+
+            .section {
+                padding: 40px 1rem;
+            }
+        }
+
+        /* スクロールアニメーション用 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 統計情報セクション */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-gray);
+            font-size: 1rem;
+        }
+
+        /* 名前の由来セクション */
+        .name-origin-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .origin-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .origin-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .origin-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .origin-card h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .origin-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .name-philosophy {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            border-left: 6px solid var(--primary-color);
+        }
+
+        .name-philosophy h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .name-philosophy p {
+            color: var(--text-gray);
+            line-height: 2;
+            font-size: 1.1rem;
+        }
+
+        /* リソースリンクセクション */
+        .resource-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .resource-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-card:nth-child(2)::before {
+            background: var(--gradient-2);
+        }
+
+        .resource-card:nth-child(3)::before {
+            background: var(--gradient-3);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .resource-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .resource-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .resource-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .resource-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            min-height: 3.6rem;
+        }
+
+        .resource-arrow {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+
+        .resource-card:hover .resource-arrow {
+            gap: 1rem;
+        }
+
+        /* 画像カルーセル */
+        .feature-image-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .carousel-image.active {
+            opacity: 1;
+        }
+
+        /* ポップアップギャラリー */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+        }
+
+        .gallery-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .gallery-image {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .gallery-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 10px;
+            line-height: 1;
+            transition: transform 0.2s ease;
+            z-index: 10001;
+        }
+
+        .gallery-close:hover {
+            transform: scale(1.2);
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.4);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            font-size: 30px;
+            padding: 20px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            z-index: 10002;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery-nav:hover {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .gallery-nav.prev {
+            left: 20px;
+        }
+
+        .gallery-nav.next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-content {
+                padding: 20px;
+            }
+
+            .gallery-close {
+                top: 10px;
+                right: 10px;
+                font-size: 30px;
+            }
+
+            .gallery-nav {
+                font-size: 28px;
+                padding: 18px 12px;
+                background: rgba(255, 255, 255, 0.5);
+                border: 2px solid rgba(255, 255, 255, 0.7);
+            }
+
+            .gallery-nav.prev {
+                left: 5px;
+            }
+
+            .gallery-nav.next {
+                right: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ナビゲーション -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="image/TsutaAI_G_Trans.png" alt="TsutaAI Icon" style="height: 1.9rem; vertical-align: text-bottom; margin-right: 0.3rem;">ツタAI</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero">ホーム</a></li>
+                <li><a href="#problem">課題</a></li>
+                <li><a href="#solution">ソリューション</a></li>
+                <li><a href="#features">主要機能</a></li>
+                <li><a href="#demo">デモ</a></li>
+                <li><a href="#howto">使い方</a></li>
+                <li><a href="#tech">技術</a></li>
+                <li><a href="#about-name">名前の由来</a></li>
+                <li><a href="#resources">詳細資料</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <h1>プロジェクト管理の未来へ、<br>AIと共に</h1>
+            <p>29種類のAI機能で、開発プロジェクトのQCD（品質・コスト・納期）を革新的に改善。<br>もう、残業と遅延に悩まされることはありません。</p>
+        </div>
+    </section>
+
+    <!-- 問題提起セクション -->
+    <section class="section" id="problem">
+        <h2 class="section-title">こんな悩み、ありませんか？</h2>
+        <p class="section-subtitle">多くのIT企業が抱えるプロジェクト管理の課題</p>
+
+        <div class="problem-cards fade-in">
+            <div class="problem-card">
+                <div class="problem-icon">⏰</div>
+                <h3>納期遅延の悪夢</h3>
+                <p>タスクの見積もりが甘く、気づけば納期は目前。深夜残業と休日出勤の連続で、チームは疲弊しています。顧客からのプレッシャーも日に日に増していきます...</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">💸</div>
+                <h3>予算超過の恐怖</h3>
+                <p>当初の見積もりを大幅に超える工数。追加の人員投入でコストは膨らむばかり。プロジェクトの収益性は悪化し、会社の利益を圧迫しています...</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">😰</div>
+                <h3>メンバーの疲弊</h3>
+                <p>終わりの見えない残業、積み上がるタスク、プレッシャー。メンバーのモチベーションは低下し、離職のリスクも高まっています。このままでは...</p>
+            </div>
+        </div>
+
+        <div class="stats-grid fade-in">
+            <div class="stat-item">
+                <div class="stat-number">70%</div>
+                <div class="stat-label">ITプロジェクトが<br>納期遅延を経験</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50%</div>
+                <div class="stat-label">予算を<br>オーバーランする</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">35%</div>
+                <div class="stat-label">プロジェクトが<br>失敗に終わる</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ソリューションセクション -->
+    <section class="section bg-light" id="solution">
+        <h2 class="section-title">ツタAIが、すべて解決します</h2>
+        <p class="section-subtitle">AI駆動型プロジェクト管理で、QCDの劇的な改善を実現</p>
+
+        <div class="solution-grid fade-in">
+            <div class="solution-card">
+                <div class="solution-icon">🤖</div>
+                <h3>AIによる完全自動化</h3>
+                <ul>
+                    <li>WBS自動生成で数時間の作業が数分に</li>
+                    <li>スキルベースの最適タスク割り当て</li>
+                    <li>AI活動分析で作業効率を可視化</li>
+                    <li>自動日報生成で報告作業ゼロ</li>
+                    <li>リスク検知と早期アラート</li>
+                </ul>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">📊</div>
+                <h3>リアルタイム管理</h3>
+                <ul>
+                    <li>4つのビュー（ツリー・ガント・ボード・カレンダー）</li>
+                    <li>WebSocketでのライブ更新</li>
+                    <li>デスクトップアプリで作業自動追跡</li>
+                    <li>進捗の可視化とボトルネック検出</li>
+                    <li>自動リスケジュール提案</li>
+                </ul>
+            </div>
+            <div class="solution-card">
+                <div class="solution-icon">💚</div>
+                <h3>メンバーケア</h3>
+                <ul>
+                    <li>気分・ストレストラッキング</li>
+                    <li>AIによるメンタルヘルスアドバイス</li>
+                    <li>ヘルプリクエスト機能</li>
+                    <li>作業負荷の自動バランシング</li>
+                    <li>燃え尽き症候群の予防</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要機能セクション -->
+    <section class="section" id="features">
+        <h2 class="section-title">圧倒的な機能で、プロジェクトを成功に導く</h2>
+        <p class="section-subtitle">競合にはない、ツタAIだけの革新的な機能</p>
+
+        <div class="features-grid fade-in">
+            <!-- 機能1: AI自動WBS生成 -->
+            <div class="feature-item">
+                <div class="feature-image">
+                    <div class="feature-image-content" data-carousel="carousel-1">
+                        <div class="carousel-container">
+                            <img src="image/1_1.png" alt="プロンプト情報のAI自動生成" class="carousel-image active">
+                            <img src="image/1_2.png" alt="新規プロジェクト作成" class="carousel-image">
+                            <img src="image/1_3.png" alt="AIでWBS自動生成" class="carousel-image">
+                            <img src="image/1_4.png" alt="WBS管理画面" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <span class="feature-badge">AI自動化</span>
+                    <h3>AI自動WBS生成</h3>
+                    <p>プロジェクト概要を入力するだけで、AIが数分で詳細なWBS（作業分解構造）を自動生成。経験豊富なPMが数時間かけて作る品質を、瞬時に実現します。</p>
+                    <div class="feature-note">
+                        <strong>💡 効果:</strong> WBS作成時間を95%削減。新人PMでもベテラン品質のWBSを作成可能に。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 機能2: スキルベース自動割り当て -->
+            <div class="feature-item">
+                <div class="feature-image gradient-2">
+                    <div class="feature-image-content" data-carousel="carousel-2">
+                        <div class="carousel-container">
+                            <img src="image/2_1.png" alt="タスク自動割り当て画面" class="carousel-image active">
+                            <img src="image/2_2.png" alt="メンバー一覧とスキル表示" class="carousel-image">
+                            <img src="image/2_3.png" alt="各メンバーの負荷状況" class="carousel-image">
+                            <img src="image/2_4.png" alt="最適化スコア表示" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <span class="feature-badge">スマート割り当て</span>
+                    <h3>スキルベース自動割り当て</h3>
+                    <p>各メンバーのスキル、経験、現在の負荷、過去の実績を分析し、AIが最適なタスク割り当てを提案。チーム全体の生産性を最大化します。</p>
+                    <div class="feature-note">
+                        <strong>💡 効果:</strong> タスク割り当ての最適化により、プロジェクト完了時間を平均30%短縮。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 機能3: デスクトップ監視 & AI活動分析 -->
+            <div class="feature-item">
+                <div class="feature-image gradient-3">
+                    <div class="feature-image-content" data-carousel="carousel-3">
+                        <div class="carousel-container">
+                            <img src="image/3_1.png" alt="デスクトップアプリ" class="carousel-image active">
+                            <img src="image/3_2.png" alt="作業ウィジェット表示" class="carousel-image">
+                            <img src="image/3_3.png" alt="進捗度" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <span class="feature-badge">完全実装</span>
+                    <h3>デスクトップ監視 & AI活動分析</h3>
+                    <p>作業中のマウス、キーボード、アクティブウィンドウを自動トラッキング。さらに、指定フォルダ内のファイル修正やGit/SVNへのプッシュも自動感知。1時間ごとにAIが集中度・進捗度・効率性を分析し、改善提案を提供します。
+                    </p>
+                    <div class="feature-note">
+                        <strong>💡 効果:</strong> 作業の可視化により生産性20%向上。問題の早期発見で手戻りを削減。Git/SVN連携で開発履歴も自動記録。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 機能4: 自動日報生成 -->
+            <div class="feature-item">
+                <div class="feature-image gradient-4">
+                    <div class="feature-image-content" data-carousel="carousel-4">
+                        <div class="carousel-container">
+                            <img src="image/4_1.png" alt="自動日報生成画面" class="carousel-image active">
+                            <img src="image/4_2.png" alt="自己評価" class="carousel-image">
+                            <img src="image/4_3.png" alt="AIからのフィードバック" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <span class="feature-badge">自動化</span>
+                    <h3>AI自動日報生成</h3>
+                    <p>作業フォルダの変更点、Gitコミット情報、作業ログから、AIが自動的に日報を生成。もう日報作成に時間を取られることはありません。</p>
+                    <div class="feature-note">
+                        <strong>💡 効果:</strong> 日報作成時間をゼロに。メンバーは本来の開発作業に集中できます。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 機能5: リアルタイムガントチャート -->
+            <div class="feature-item">
+                <div class="feature-image">
+                    <div class="feature-image-content" data-carousel="carousel-5">
+                        <div class="carousel-container">
+                            <img src="image/5_1.png" alt="ガントチャート" class="carousel-image active">
+                            <img src="image/5_2.png" alt="タスク一覧" class="carousel-image">
+                            <img src="image/5_3.png" alt="看板ボード" class="carousel-image">
+                            <img src="image/5_4.png" alt="カレンダー" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <span class="feature-badge">リアルタイム</span>
+                    <h3>リアルタイムガントチャート</h3>
+                    <p>ドラッグ&ドロップで直感的にスケジュール調整。変更は即座に全メンバーに反映。依存関係とクリティカルパスを自動計算します。</p>
+                    <div class="feature-note">
+                        <strong>💡 効果:</strong> スケジュール調整時間を80%削減。変更の即時共有でミスコミュニケーション防止。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 機能6: メンタルヘルスケア -->
+            <div class="feature-item">
+                <div class="feature-image gradient-2">
+                    <div class="feature-image-content" data-carousel="carousel-6">
+                        <div class="carousel-container">
+                            <img src="image/6_1.png" alt="メンタルヘルスケア" class="carousel-image active">
+                            <img src="image/6_2.png" alt="メンタルヘルスケア" class="carousel-image">
+                            <img src="image/6_3.png" alt="メンタルヘルスケア" class="carousel-image">
+                            <img src="image/6_4.png" alt="メンタルヘルスケア" class="carousel-image">
+                            <img src="image/6_5.png" alt="メンタルヘルスケア" class="carousel-image">
+                            <img src="image/6_6.png" alt="メンタルヘルスケア" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <div class="feature-content">
+                    <span class="feature-badge">ウェルビーイング</span>
+                    <h3>メンタルヘルスケア</h3>
+                    <p>日々の気分とストレスレベルを記録し、AIが分析。燃え尽き症候群の兆候を早期検出し、適切なアドバイスを提供。チームへのヘルプリクエストも可能です。</p>
+                    <div class="feature-note">
+                        <strong>💡 効果:</strong> 離職率を40%削減。メンバーの満足度とエンゲージメントが向上。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI機能ハイライトセクション -->
+    <section class="section bg-light">
+        <h2 class="section-title">29種類のAI機能</h2>
+        <p class="section-subtitle">あらゆる場面でAIがあなたをサポート</p>
+
+        <div class="ai-features fade-in">
+            <div class="ai-feature-card">
+                <h4>🎯 WBS自動生成</h4>
+                <p>プロジェクト概要から全タスクを自動生成</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>📋 タスク分解</h4>
+                <p>大きなタスクを小さなサブタスクに自動分割</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>✨ タスク改善</h4>
+                <p>タスク名や説明をより具体的に改善</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>🔍 健全性チェック</h4>
+                <p>WBS全体の問題点を自動検出</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>👥 自動割り当て</h4>
+                <p>スキルを考慮した最適な担当者配置</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>⏱️ 期間自動設定</h4>
+                <p>クリティカルパスを考慮した期間設定</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>📊 活動分析</h4>
+                <p>1時間ごとの作業データを分析</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>📝 日報自動生成</h4>
+                <p>作業ログから日報を自動作成</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>🔄 リスケジュール</h4>
+                <p>遅延や変更に応じた最適スケジュール提案</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>⚠️ リスク検知</h4>
+                <p>プロジェクトリスクの早期発見</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>💬 センチメント分析</h4>
+                <p>メンバーの感情状態を分析</p>
+            </div>
+            <div class="ai-feature-card">
+                <h4>🎯 タスク提案</h4>
+                <p>メンバーに最適なタスクを提案</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- デモ動画セクション -->
+    <section class="section" id="demo">
+        <h2 class="section-title">ツタAIの実力を見る</h2>
+        <p class="section-subtitle">実際の動作をデモ動画でご確認ください</p>
+
+        <div class="demo-video-container fade-in">
+            <div class="video-placeholder">
+                <div class="video-placeholder-text">
+                    <strong>🎬 デモ動画（作成予定）</strong><br>
+                    <small style="margin-top: 1rem; display: block;">
+                        ① プロジェクト作成 → AI WBS生成の流れ（30秒）<br>
+                        ② ガントチャートでのスケジュール調整（20秒）<br>
+                        ③ デスクトップアプリでの作業開始 → AI分析（30秒）<br>
+                        ④ 自動日報生成の流れ（20秒）<br>
+                        合計: 約1分40秒の紹介動画</small>
+                </div>
+            </div>
+            <div class="video-info">
+                <h3>ツタAI 製品デモ（1分40秒）</h3>
+                <p>プロジェクト作成からタスク完了まで、ツタAIの主要機能をわかりやすく紹介します。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使い方フローセクション -->
+    <section class="section bg-light" id="howto">
+        <h2 class="section-title">簡単3ステップで始められる</h2>
+        <p class="section-subtitle">直感的な操作で、すぐに使いこなせます</p>
+
+        <div class="flow-container fade-in">
+            <div class="flow-item">
+                <div class="flow-number">1</div>
+                <div class="flow-content">
+                    <span class="role">👔 管理者の操作</span>
+                    <h3>プロジェクト作成 & AI WBS生成</h3>
+                    <p>プロジェクト名、期間、概要を入力して「AI WBS生成」ボタンをクリック。数分で詳細なタスク分解が完了します。メンバーは自動的に最適なタスクに割り当てられ、期間も自動設定されます。</p>
+                </div>
+            </div>
+
+            <div class="flow-item">
+                <div class="flow-number">2</div>
+                <div class="flow-content">
+                    <span class="role">👨‍💻 メンバーの操作</span>
+                    <h3>デスクトップアプリで作業開始</h3>
+                    <p>デスクトップアプリにログインすると、本日のタスクが表示されます。「スタート」ボタンを押すだけで作業開始。あとはいつも通り開発作業を進めるだけ。AIが裏で作業を自動トラッキングし、1時間ごとに分析してくれます。
+                    </p>
+                </div>
+            </div>
+
+            <div class="flow-item">
+                <div class="flow-number">3</div>
+                <div class="flow-content">
+                    <span class="role">👨‍💻 メンバーの操作</span>
+                    <h3>作業終了 & 自動日報送信</h3>
+                    <p>「作業終了」ボタンをクリックすると、AIが自動的に日報を生成。作業内容、ファイル変更、Gitコミット情報がすべて反映されています。確認して送信するだけ。日報作成に時間を取られることはもうありません。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技術スタックセクション -->
+    <section class="section" id="tech">
+        <h2 class="section-title">信頼できる技術で構築</h2>
+        <p class="section-subtitle">モダンで実績のある技術スタックを採用</p>
+
+        <div class="tech-stack fade-in">
+            <div class="tech-category">
+                <h3>🖥️ Web管理画面</h3>
+                <ul class="tech-list">
+                    <li>Svelte 5.39 - 高速UIフレームワーク</li>
+                    <li>SvelteKit 2.43 - フルスタック開発</li>
+                    <li>TypeScript 5.9 - 型安全な開発</li>
+                    <li>Bootstrap 5.3 - レスポンシブデザイン</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>⚙️ バックエンドAPI</h3>
+                <ul class="tech-list">
+                    <li>Node.js 18+ - 高性能ランタイム</li>
+                    <li>Express 5.1 - Webフレームワーク</li>
+                    <li>Oracle, SQLiteなどの様々なDB対応可能</li>
+                    <li>WebSocket - リアルタイム通信</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>💻 デスクトップアプリ</h3>
+                <ul class="tech-list">
+                    <li>C# 7.3 - 安定した言語</li>
+                    <li>WPF - ネイティブUI</li>
+                    <li>.NET Framework 4.8 - 信頼性の高いランタイム</li>
+                    <li>SQLite - ローカルデータ管理</li>
+                </ul>
+            </div>
+            <div class="tech-category">
+                <h3>🤖 AI連携</h3>
+                <ul class="tech-list">
+                    <li>外部LLMまたはローカルLLMも可能</li>
+                    <li>セキュリティ対策を施したAPIインターフェース</li>
+                    <li>29個のプロンプトテンプレート</li>
+                    <li>JWT認証 & RBAC権限管理</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ツタAIの名前の由来セクション -->
+    <section class="section bg-light" id="about-name">
+        <h2 class="section-title"><img src="image/TsutaAI_G_Trans.png" alt="TsutaAI Icon" style="height: 3rem; vertical-align: sub; margin-right: 0.5rem;">ツタAI - 名前に込めた想い</h2>
+        <p class="section-subtitle">伝え合い、支え合い、成長し合う - チームをつなぐ新しい形</p>
+
+        <div class="name-origin-container fade-in">
+            <div class="origin-card">
+                <div class="origin-icon">💬</div>
+                <h3>伝え合い</h3>
+                <p>日本語の「伝え合う」から。チームメンバー同士が情報を共有し、互いに理解し合うことの大切さを表現しています。AIが仲介役となり、スムーズなコミュニケーションを実現します。</p>
+            </div>
+
+            <div class="origin-card">
+                <div class="origin-icon"><img src="image/TsutaAI_G_Trans.png" alt="TsutaAI Icon" style="height: 6rem; vertical-align: middle;"></div>
+                <h3>ツタの特性</h3>
+                <p>植物の「ツタ」のように、プロジェクトメンバー全員をつなぎ、支え合う存在でありたい。ツタは壁を這い上がり、建物全体を覆うように成長します。同様に、ツタAIはチーム全体に広がり、組織を強くします。
+                </p>
+            </div>
+
+            <div class="origin-card">
+                <div class="origin-icon">🤖</div>
+                <h3>AI技術</h3>
+                <p>最先端のAI技術を活用し、人間の能力を拡張。単なる管理ツールではなく、チームの成長を促進するインテリジェントなパートナーとして機能します。</p>
+            </div>
+        </div>
+
+        <div class="name-philosophy fade-in">
+            <h3>私たちの哲学</h3>
+            <p>プロジェクトの成功は、技術だけでなく「人と人とのつながり」から生まれます。ツタAIは、チームメンバーが互いに支え合い、情報を伝え合い、共に成長できる環境を作ります。ツタが壁を這い上がるように、チーム全体が一体となって目標に向かって進んでいく。そんな未来を実現するためのツールです。
+            </p>
+        </div>
+    </section>
+
+    <!-- 詳細資料へのリンクセクション -->
+    <section class="section" id="resources">
+        <h2 class="section-title">もっと詳しく知る</h2>
+        <p class="section-subtitle">あなたの立場に合わせた詳細資料をご用意しています</p>
+
+        <div class="resource-links fade-in">
+            <a href="PR-EXECUTIVE.html" class="resource-card">
+                <div class="resource-icon">👔</div>
+                <h3>経営者の方へ</h3>
+                <p>投資対効果、ビジネスインパクト、導入メリットを詳しくご説明します</p>
+                <span class="resource-arrow">詳細を見る →</span>
+            </a>
+
+            <a href="PR-SALES.html" class="resource-card">
+                <div class="resource-icon">📊</div>
+                <h3>営業・導入担当者の方へ</h3>
+                <p>機能詳細、競合比較、導入プロセスなど、提案に必要な情報をまとめています</p>
+                <span class="resource-arrow">詳細を見る →</span>
+            </a>
+
+            <a href="PR-USER.html" class="resource-card">
+                <div class="resource-icon">👨‍💻</div>
+                <h3>実際に使うユーザーの方へ</h3>
+                <p>日々の業務がどう変わるか、使い方のコツ、メリットを分かりやすく解説します</p>
+                <span class="resource-arrow">詳細を見る →</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTAセクション -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>導入のご相談はこちらから</h2>
+            <p>貴社の課題や導入イメージをヒアリングし、最適な活用方法をご提案します。デモ環境のご用意はありませんので、まずはお気軽にお問い合わせください。</p>
+            <div class="cta-buttons">
+                <a href="mailto:2025gw04@gmail.com" class="btn btn-secondary">お問い合わせ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>ツタAI</h3>
+                <p>AI駆動型プロジェクト管理システム<br>プロジェクトの成功を、AIと共に。</p>
+            </div>
+            <div class="footer-section">
+                <h3>製品</h3>
+                <ul>
+                    <li><a href="#features">主要機能</a></li>
+                    <li><a href="#demo">デモ</a></li>
+                    <li><a href="#tech">技術スタック</a></li>
+                    <li><a href="#howto">使い方</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>リソース</h3>
+                <ul>
+                    <li><a href="#">ドキュメント</a></li>
+                    <li><a href="#">API仕様</a></li>
+                    <li><a href="#">サポート</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>会社</h3>
+                <ul>
+                    <li><a href="#">会社概要</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                    <li><a href="#">プライバシーポリシー</a></li>
+                    <li><a href="#">利用規約</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ツタAI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ギャラリーモーダル -->
+    <div class="gallery-modal" id="galleryModal">
+        <button class="gallery-close" onclick="closeGallery()">&times;</button>
+        <button class="gallery-nav prev" onclick="navigateGallery(-1)">&#10094;</button>
+        <div class="gallery-content">
+            <img src="" alt="ギャラリー画像" class="gallery-image" id="galleryImage">
+        </div>
+        <button class="gallery-nav next" onclick="navigateGallery(1)">&#10095;</button>
+    </div>
+
+    <script>
+        // ハンバーガーメニュー
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // メニューリンククリックでメニューを閉じる
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // スクロール時のナビゲーションスタイル変更
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // スクロールアニメーション
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 画像カルーセル機能
+        const carousels = {};
+        const CAROUSEL_INTERVAL = 3000; // 3秒間隔
+
+        // 各カルーセルを初期化
+        document.querySelectorAll('[data-carousel]').forEach(container => {
+            const carouselId = container.getAttribute('data-carousel');
+            const images = container.querySelectorAll('.carousel-image');
+
+            if (images.length > 0) {
+                carousels[carouselId] = {
+                    container: container,
+                    images: images,
+                    currentIndex: 0,
+                    interval: null
+                };
+
+                // 自動ローテーション開始
+                startCarousel(carouselId);
+
+                // クリックでギャラリーを開く
+                container.addEventListener('click', () => {
+                    openGallery(carouselId);
+                });
+            }
+        });
+
+        function startCarousel(carouselId) {
+            const carousel = carousels[carouselId];
+            if (!carousel) return;
+
+            // 既存のインターバルをクリア
+            if (carousel.interval) {
+                clearInterval(carousel.interval);
+            }
+
+            // 新しいインターバルを設定
+            carousel.interval = setInterval(() => {
+                nextImage(carouselId);
+            }, CAROUSEL_INTERVAL);
+        }
+
+        function nextImage(carouselId) {
+            const carousel = carousels[carouselId];
+            if (!carousel) return;
+
+            carousel.images[carousel.currentIndex].classList.remove('active');
+            carousel.currentIndex = (carousel.currentIndex + 1) % carousel.images.length;
+            carousel.images[carousel.currentIndex].classList.add('active');
+        }
+
+        // ギャラリーモーダル機能
+        let currentGallery = null;
+        let currentGalleryIndex = 0;
+
+        function openGallery(carouselId) {
+            const carousel = carousels[carouselId];
+            if (!carousel) return;
+
+            currentGallery = carousel;
+            currentGalleryIndex = carousel.currentIndex;
+
+            // カルーセルの自動ローテーションを停止
+            if (carousel.interval) {
+                clearInterval(carousel.interval);
+            }
+
+            // モーダルを表示
+            const modal = document.getElementById('galleryModal');
+            const galleryImage = document.getElementById('galleryImage');
+
+            galleryImage.src = carousel.images[currentGalleryIndex].src;
+            modal.classList.add('active');
+
+            // Escキーで閉じる
+            document.addEventListener('keydown', handleGalleryKeydown);
+        }
+
+        function closeGallery() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+
+            // カルーセルの自動ローテーションを再開
+            if (currentGallery) {
+                const carouselId = currentGallery.container.getAttribute('data-carousel');
+                startCarousel(carouselId);
+            }
+
+            currentGallery = null;
+            document.removeEventListener('keydown', handleGalleryKeydown);
+        }
+
+        function navigateGallery(direction) {
+            if (!currentGallery) return;
+
+            const totalImages = currentGallery.images.length;
+            currentGalleryIndex = (currentGalleryIndex + direction + totalImages) % totalImages;
+
+            const galleryImage = document.getElementById('galleryImage');
+            galleryImage.src = currentGallery.images[currentGalleryIndex].src;
+        }
+
+        function handleGalleryKeydown(e) {
+            if (e.key === 'Escape') {
+                closeGallery();
+            } else if (e.key === 'ArrowLeft') {
+                navigateGallery(-1);
+            } else if (e.key === 'ArrowRight') {
+                navigateGallery(1);
+            }
+        }
+
+        // モーダルの背景クリックで閉じる
+        document.getElementById('galleryModal').addEventListener('click', (e) => {
+            if (e.target.id === 'galleryModal') {
+                closeGallery();
+            }
+        });
+
+        // タッチスワイプ機能
+        let touchStartX = 0;
+        let touchEndX = 0;
+        const minSwipeDistance = 50; // 最小スワイプ距離（ピクセル）
+
+        const galleryModal = document.getElementById('galleryModal');
+
+        galleryModal.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        galleryModal.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+
+            // 右にスワイプ（前の画像）
+            if (swipeDistance > minSwipeDistance) {
+                navigateGallery(-1);
+            }
+            // 左にスワイプ（次の画像）
+            else if (swipeDistance < -minSwipeDistance) {
+                navigateGallery(1);
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プロジェクト失敗の連鎖を断ち切る - ツタAI</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans JP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#75EA66',
+                        'primary-dark': '#4BA262',
+                        'bg-gray': '#F9FAFB',
+                        'card-border': '#E5E7EB',
+                        text: {
+                            main: '#111827',
+                            sub: '#4B5563'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                        '3xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-feature-settings: "palt";
+            letter-spacing: 0.02em;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        @keyframes pulse-urgent {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .pulse-urgent {
+            animation: pulse-urgent 2s infinite;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body class="bg-white text-text-main font-sans antialiased selection:bg-primary selection:text-white">
+
+    <!-- 緊急CTA バナー -->
+    <!-- <div class="bg-gradient-to-r from-red-600 to-red-700 text-white py-3 text-center font-bold text-sm md:text-base pulse-urgent sticky top-0 z-50 shadow-lg">
+        <i class="fas fa-bolt mr-2"></i>先着10社限定！初期費用50%OFFキャンペーン実施中 - 2025年12月末まで<i class="fas fa-bolt ml-2"></i>
+    </div> -->
+
+    <!-- ナビゲーション -->
+    <nav class="glass-nav sticky top-[0px] w-full z-40 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+                    <img src="image/TsutaAI_G_Trans.png" alt="TsutaAI Icon" class="h-8 w-auto">
+                    <span class="text-xl font-bold tracking-tight">ツタAI</span>
+                </div>
+
+                <div class="hidden md:flex space-x-6 items-center text-sm">
+                    <a href="#problem" class="font-medium text-text-sub hover:text-primary transition-colors">P: 問題</a>
+                    <a href="#agitation" class="font-medium text-text-sub hover:text-primary transition-colors">A: 放置すると...</a>
+                    <a href="#solution" class="font-medium text-text-sub hover:text-primary transition-colors">SO: 解決策</a>
+                    <a href="#evidence" class="font-medium text-text-sub hover:text-primary transition-colors">実績</a>
+                    <a href="#narrow" class="font-medium text-text-sub hover:text-primary transition-colors">N: 限定</a>
+                    <a href="#action" class="font-medium text-text-sub hover:text-primary transition-colors">A: 行動</a>
+                    <a href="index.html" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-full hover:bg-gray-200 transition-all">
+                        <i class="fas fa-home mr-1"></i>トップへ戻る
+                    </a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <button id="hamburger" class="text-text-main focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a href="#problem" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">P: 問題</a>
+                <a href="#agitation" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">A: 放置すると...</a>
+                <a href="#solution" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">SO: 解決策</a>
+                <a href="#evidence" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">実績</a>
+                <a href="#narrow" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">N: 限定</a>
+                <a href="#action" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">A: 行動</a>
+                <a href="index.html" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">トップへ戻る</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="relative pt-20 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-gradient-to-br from-red-600 to-red-700">
+        <div class="absolute inset-0 bg-gradient-to-br from-red-600/90 to-red-700/90"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-xs font-semibold mb-6 fade-in-up" style="animation-delay: 0.1s;">
+                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+                営業・導入担当者向け
+            </div>
+
+            <p class="text-xl md:text-2xl font-semibold mb-4 fade-in-up" style="animation-delay: 0.2s;">プロジェクト失敗の連鎖を断ち切る</p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] fade-in-up" style="animation-delay: 0.3s;">
+                ツタAI
+            </h1>
+            <p class="mt-4 max-w-3xl mx-auto text-lg md:text-xl opacity-95 fade-in-up" style="animation-delay: 0.4s;">
+                AI駆動型プロジェクト管理で、成功率85%向上・コスト60%削減を実現
+            </p>
+
+            <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
+                <a href="#action" class="px-8 py-4 bg-white text-red-600 text-lg font-bold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    今すぐお問い合わせ
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- メインコンテンツ -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <!-- P: Problem（問題提起） -->
+        <section id="problem" class="mb-24 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">P: あなたの会社、こんな問題を抱えていませんか？</h2>
+            </div>
+
+            <div class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover mb-8">
+                <h3 class="text-2xl md:text-3xl font-bold mb-6">プロジェクト管理の5大問題</h3>
+                <ul class="space-y-4 text-lg">
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-exclamation-triangle text-2xl mt-1"></i>
+                        <span><strong>納期遅延が常態化</strong> - 70%のプロジェクトが予定より2週間以上遅延</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-exclamation-triangle text-2xl mt-1"></i>
+                        <span><strong>コスト超過</strong> - 予算の130%を消費、利益率が圧迫される</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-exclamation-triangle text-2xl mt-1"></i>
+                        <span><strong>進捗が見えない</strong> - 報告が曖昧で、実態が把握できない</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-exclamation-triangle text-2xl mt-1"></i>
+                        <span><strong>メンバーが疲弊</strong> - 長時間労働、離職率の上昇</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="fas fa-exclamation-triangle text-2xl mt-1"></i>
+                        <span><strong>属人化の罠</strong> - キーパーソンが休むとプロジェクトが停止</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8">
+                <h4 class="text-xl font-bold text-gray-900 mb-4">よくある現場の声</h4>
+                <p class="italic text-gray-600 leading-relaxed">
+                    「タスクの進捗確認だけで週に5時間も使っている...」<br>
+                    「誰が何をやっているのか分からず、常に不安」<br>
+                    「Excel管理が限界。更新が追いつかない」<br>
+                    「優秀なエンジニアが『管理が辛い』と退職してしまった」<br>
+                    「リスクに気づいた時には手遅れだった」
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">68%</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">プロジェクト<br>失敗率</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">2週間</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">平均納期<br>遅延</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">30%</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">予算<br>超過率</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">45%</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">メンバー<br>疲弊度</div>
+                </div>
+            </div>
+
+            <p class="text-xl md:text-2xl font-bold text-red-600 text-center mt-12">
+                これらの問題、<strong>すべてプロジェクト管理の欠陥が原因</strong>です。
+            </p>
+        </section>
+
+        <!-- A: Agitation（煽り・共感） -->
+        <section id="agitation" class="mb-24 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">A: このまま放置すると、どうなるか...</h2>
+            </div>
+
+            <div class="bg-orange-50 border-l-8 border-orange-500 p-8 rounded-xl mb-6">
+                <h4 class="text-xl font-bold text-orange-600 mb-3 flex items-center gap-2">
+                    <i class="fas fa-fire text-2xl"></i>1年後のあなたの会社
+                </h4>
+                <p class="text-gray-700 mb-4">プロジェクト失敗が続き、顧客の信頼を失う。</p>
+                <div class="text-4xl md:text-5xl font-black text-red-600 my-4">年間損失: 3,000万円</div>
+                <p class="text-gray-700">納期遅延のペナルティ、追加工数、機会損失の合計。</p>
+            </div>
+
+            <div class="bg-orange-50 border-l-8 border-orange-500 p-8 rounded-xl mb-6">
+                <h4 class="text-xl font-bold text-orange-600 mb-3 flex items-center gap-2">
+                    <i class="fas fa-exclamation-triangle text-2xl"></i>優秀な人材が次々と離職
+                </h4>
+                <p class="text-gray-700">
+                    非効率な管理体制に疲弊したエンジニアが退職。
+                    採用・教育コストで年間<strong>500万円/人</strong>の損失。
+                </p>
+            </div>
+
+            <div class="bg-orange-50 border-l-8 border-orange-500 p-8 rounded-xl mb-6">
+                <h4 class="text-xl font-bold text-orange-600 mb-3 flex items-center gap-2">
+                    <i class="fas fa-chart-line text-2xl"></i>競合に遅れを取る
+                </h4>
+                <p class="text-gray-700">
+                    競合他社はすでにAI・DX化を進め、圧倒的なスピードでプロジェクトを成功させている。
+                    気づいた時には手遅れ。市場シェアを奪われる。
+                </p>
+            </div>
+
+            <div class="bg-orange-50 border-l-8 border-orange-500 p-8 rounded-xl mb-6">
+                <h4 class="text-xl font-bold text-orange-600 mb-3 flex items-center gap-2">
+                    <i class="fas fa-heartbeat text-2xl"></i>経営リスクの増大
+                </h4>
+                <p class="text-gray-700 mb-4">
+                    ・顧客からの信頼失墜<br>
+                    ・社員のモチベーション低下<br>
+                    ・経営判断のための正確なデータが取れない<br>
+                    ・銀行融資の審査にも悪影響<br>
+                </p>
+                <div class="text-3xl md:text-4xl font-black text-red-600">最悪のケース: 倒産</div>
+            </div>
+
+            <p class="text-2xl md:text-3xl font-bold text-red-600 text-center mt-12">
+                <strong>手遅れになる前に、今すぐ行動が必要です。</strong>
+            </p>
+        </section>
+
+        <!-- SO: Solution（解決策） -->
+        <section id="solution" class="mb-24 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">SO: ツタAIが、すべての問題を解決します</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-8 rounded-3xl shadow-hover">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-robot text-3xl"></i>AIによる完全自動化
+                    </h3>
+                    <ul class="space-y-3 text-base">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>WBS自動生成</strong> - 8時間 → 30分（95%削減）</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>進捗自動トラッキング</strong> - 手動入力不要</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>日報自動生成</strong> - 15分 → 3分（80%削減）</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>リスク自動検出</strong> - 問題が大きくなる前に警告</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-8 rounded-3xl shadow-hover">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-chart-bar text-3xl"></i>データ駆動型経営の実現
+                    </h3>
+                    <ul class="space-y-3 text-base">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>リアルタイム可視化</strong> - プロジェクト健全性を0-100で評価</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>予測分析</strong> - AIが納期・コストを予測</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>154種類のデータ</strong> - あらゆる角度から分析可能</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>レポート自動生成</strong> - CSV/Markdown/JSON/HTML出力</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-8 rounded-3xl shadow-hover">
+                    <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                        <i class="fas fa-users text-3xl"></i>チームパフォーマンス最大化
+                    </h3>
+                    <ul class="space-y-3 text-base">
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>スマート自動割り当て</strong> - スキルマッチングで生産性20%向上</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>ヘルプリクエスト機能</strong> - ブロッカーを迅速解消</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>メンタルヘルス分析</strong> - 離職リスクを早期発見</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>作業負荷の均等化</strong> - 残業時間30%削減</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">導入前 vs 導入後</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="bg-red-600 text-white">
+                                <th class="p-4 text-left font-bold">指標</th>
+                                <th class="p-4 text-center font-bold">導入前</th>
+                                <th class="p-4 text-center font-bold">導入後</th>
+                                <th class="p-4 text-center font-bold">改善率</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-semibold">プロジェクト成功率</td>
+                                <td class="p-4 text-center text-red-600 font-semibold">32%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">85%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">+165%</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 bg-gray-50">
+                                <td class="p-4 font-semibold">納期遵守率</td>
+                                <td class="p-4 text-center text-red-600 font-semibold">45%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">92%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">+104%</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-semibold">管理工数</td>
+                                <td class="p-4 text-center text-red-600 font-semibold">週20時間</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">週8時間</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">-60%</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 bg-gray-50">
+                                <td class="p-4 font-semibold">コスト超過</td>
+                                <td class="p-4 text-center text-red-600 font-semibold">+30%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">+5%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">-83%</td>
+                            </tr>
+                            <tr class="border-b border-gray-200">
+                                <td class="p-4 font-semibold">メンバー満足度</td>
+                                <td class="p-4 text-center text-red-600 font-semibold">52点</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">87点</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">+67%</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4 font-semibold">離職率</td>
+                                <td class="p-4 text-center text-red-600 font-semibold">25%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">8%</td>
+                                <td class="p-4 text-center text-green-600 font-bold text-lg">-68%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- 実績・効果 -->
+        <section id="evidence" class="mb-24 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">導入実績・効果</h2>
+            </div>
+
+            <div class="space-y-8 mb-12">
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">A社（製造業・従業員120名）の事例</h4>
+                    <p class="text-gray-700 mb-2"><strong>課題:</strong> 納期遅延が常態化し、顧客からクレームが続出</p>
+                    <p class="text-gray-700 mb-4"><strong>導入後の効果:</strong></p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">納期遵守率</strong> 40% → 95%（+137%）
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">クレーム数</strong> 月15件 → 月2件（-87%）
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">年間コスト削減</strong> 4,200万円
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">ROI</strong> 初年度で420%
+                        </li>
+                    </ul>
+                    <p class="italic text-gray-600 border-l-4 border-gray-300 pl-4">
+                        「AIによるリスク早期検出で、問題が大きくなる前に対処できるようになりました。
+                        プロジェクトマネージャーの負担も大幅に軽減され、本来の戦略業務に集中できています。」
+                        <br><span class="font-semibold">- A社 開発部長</span>
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">B社（IT企業・従業員80名）の事例</h4>
+                    <p class="text-gray-700 mb-2"><strong>課題:</strong> 優秀なエンジニアの離職が続き、プロジェクトが停滞</p>
+                    <p class="text-gray-700 mb-4"><strong>導入後の効果:</strong></p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">離職率</strong> 28% → 7%（-75%）
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">残業時間</strong> 月平均45時間 → 月平均28時間（-38%）
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">メンバー満足度</strong> 48点 → 89点（+85%）
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">生産性</strong> +32%向上
+                        </li>
+                    </ul>
+                    <p class="italic text-gray-600 border-l-4 border-gray-300 pl-4">
+                        「ヘルプリクエスト機能で、困った時にすぐ助けを呼べるようになり、
+                        メンバーのストレスが激減しました。自動トラッキングで手動入力の負担もなくなり、
+                        働きやすい環境になったと好評です。」
+                        <br><span class="font-semibold">- B社 CTO</span>
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-xl font-bold text-red-600 mb-4">C社（サービス業・従業員50名）の事例</h4>
+                    <p class="text-gray-700 mb-2"><strong>課題:</strong> Excelでの管理が限界、進捗が全く見えない</p>
+                    <p class="text-gray-700 mb-4"><strong>導入後の効果:</strong></p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">進捗可視化</strong> リアルタイムでダッシュボード表示
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">管理工数</strong> 週25時間 → 週7時間（-72%）
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">意思決定スピード</strong> 3倍に向上
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-green-500">
+                            <strong class="text-green-600">プロジェクト完了率</strong> 55% → 91%（+65%）
+                        </li>
+                    </ul>
+                    <p class="italic text-gray-600 border-l-4 border-gray-300 pl-4">
+                        「もうExcel地獄に戻れません。全体が一目で分かり、経営判断が劇的に速くなりました。
+                        投資額の5倍以上のリターンを実感しています。」
+                        <br><span class="font-semibold">- C社 代表取締役</span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">97%</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">顧客<br>満足度</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">85%</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">成功率<br>向上</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">60%</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">コスト<br>削減</div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                    <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">420%</div>
+                    <div class="text-sm font-semibold text-gray-500 uppercase">平均<br>ROI</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- N: Narrow Down（限定性・緊急性） -->
+        <section id="narrow" class="mb-24 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">
+                    N: 今だけの限定オファー
+                    <span class="inline-block px-4 py-1 bg-red-600 text-white text-base rounded-full ml-2 animate-pulse">残り7社</span>
+                </h2>
+            </div>
+
+            <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 md:p-12 rounded-3xl shadow-hover relative overflow-hidden mb-8">
+                <div class="absolute top-0 right-0 text-9xl opacity-20">🎁</div>
+                <div class="relative z-10">
+                    <div class="inline-block bg-white text-orange-600 px-6 py-2 rounded-full font-bold text-lg mb-6">
+                        🎁 先着10社限定キャンペーン
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black mb-6">2025年12月末まで</h3>
+                    <ul class="space-y-4 text-lg mb-8">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-gift text-2xl mt-1"></i>
+                            <span><strong>初期費用50%OFF</strong> - 100万円 → 50万円（50万円お得！）</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-gift text-2xl mt-1"></i>
+                            <span><strong>30日間無料トライアル</strong> - 全機能使い放題</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-gift text-2xl mt-1"></i>
+                            <span><strong>専任コンサルタント配置</strong> - 導入から運用まで徹底サポート</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-gift text-2xl mt-1"></i>
+                            <span><strong>カスタマイズ無料</strong> - 業務フローに合わせた調整（通常50万円）</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-gift text-2xl mt-1"></i>
+                            <span><strong>トレーニング無料</strong> - 管理者・メンバー向け研修（通常30万円）</span>
+                        </li>
+                    </ul>
+                    <p class="text-2xl md:text-3xl font-bold">
+                        合計<span class="text-4xl md:text-5xl font-black ml-2">130万円相当</span>がすべて無料！
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8">
+                <h4 class="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <i class="fas fa-clock text-red-600 text-2xl"></i>
+                    なぜ今すぐ導入すべきなのか？
+                </h4>
+                <ul class="space-y-3">
+                    <li class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <strong class="text-green-600">1日遅れるごとに、損失が増える</strong> - 平均1プロジェクトあたり10万円/週の機会損失
+                    </li>
+                    <li class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <strong class="text-green-600">年末までに導入で、来期から効果を実感</strong> - 年度始めからフル活用できる
+                    </li>
+                    <li class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <strong class="text-green-600">限定枠はすでに3社が申し込み済み</strong> - 残り7社のみ
+                    </li>
+                    <li class="bg-gray-50 p-4 rounded-lg border-l-4 border-green-500">
+                        <strong class="text-green-600">競合が導入する前に差をつける</strong> - 先行者利益を獲得
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-orange-50 border-l-8 border-orange-500 p-8 rounded-xl">
+                <h4 class="text-xl font-bold text-orange-600 mb-4 flex items-center gap-2">
+                    <i class="fas fa-exclamation-triangle text-2xl"></i>
+                    この機会を逃すと...
+                </h4>
+                <p class="text-gray-700 mb-4">
+                    ・初期費用50万円が通常価格に戻る<br>
+                    ・カスタマイズ費用50万円が別途必要<br>
+                    ・トレーニング費用30万円が別途必要<br>
+                    ・専任コンサルタントが付かない（共有サポートのみ）<br>
+                </p>
+                <div class="text-4xl md:text-5xl font-black text-red-600">合計130万円の損失</div>
+            </div>
+
+            <p class="text-2xl md:text-3xl font-bold text-red-600 text-center mt-12">
+                <strong>迷っている時間はありません。今すぐ行動してください。</strong>
+            </p>
+        </section>
+
+        <!-- A: Action（行動喚起） -->
+        <section id="action" class="mb-24 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">A: 今すぐお問い合わせください</h2>
+            </div>
+
+            <div class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center mb-8">
+                <h3 class="text-3xl md:text-4xl font-black mb-4">プロジェクト失敗の連鎖を<br>今すぐ断ち切る</h3>
+                <p class="text-lg md:text-xl mb-8 opacity-95">
+                    ツタAIの圧倒的な効果について詳しくお知りになりたい方は、<br class="hidden md:block">
+                    お気軽にお問い合わせください。
+                </p>
+                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ" class="inline-block px-10 py-5 bg-white text-red-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    今すぐお問い合わせ
+                </a>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8">
+                <h4 class="text-xl font-bold text-gray-900 mb-6">お問い合わせから導入までの流れ</h4>
+                <div class="space-y-6 relative pl-8 border-l-4 border-red-600">
+                    <div class="relative">
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <h5 class="text-lg font-bold text-red-600 mb-2">STEP 1: お問い合わせ</h5>
+                        <p class="text-gray-600">メールにて御社の課題やご要望をお聞かせください。</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <h5 class="text-lg font-bold text-red-600 mb-2">STEP 2: ヒアリング・提案</h5>
+                        <p class="text-gray-600">御社の課題に合わせて、最適なソリューションをご提案いたします。</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <h5 class="text-lg font-bold text-red-600 mb-2">STEP 3: 導入決定・契約</h5>
+                        <p class="text-gray-600">導入内容にご納得いただいた上で正式契約。安心してご導入いただけます。</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <h5 class="text-lg font-bold text-red-600 mb-2">STEP 4: 本格展開（2週間）</h5>
+                        <p class="text-gray-600">全プロジェクト・全メンバーへ展開。専任コンサルタントが徹底サポート。</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <h5 class="text-lg font-bold text-red-600 mb-2">STEP 5: 運用開始・効果測定</h5>
+                        <p class="text-gray-600">月次レビューで効果を可視化。継続的な改善提案。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8" id="contact-form">
+                <h4 class="text-xl font-bold text-gray-900 mb-4">お問い合わせ・資料請求</h4>
+                <p class="text-gray-700 mb-2"><strong>メール:</strong> <a href="mailto:2025gw04@gmail.com" class="text-red-600 hover:text-red-700 underline">2025gw04@gmail.com</a></p>
+                <div class="mt-6 p-6 bg-gray-50 rounded-xl">
+                    <p class="font-bold text-gray-900 mb-3">お問い合わせ時に以下をお伝えください:</p>
+                    <p class="text-gray-700">
+                        ・会社名・従業員数<br>
+                        ・現在抱えているプロジェクト管理の課題<br>
+                        ・ご希望のサービス内容
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8">
+                <h4 class="text-xl font-bold text-gray-900 mb-6">よくあるご質問</h4>
+                <div class="space-y-6">
+                    <div>
+                        <p class="font-bold text-gray-900 mb-2">Q: 小規模な会社でも導入できますか？</p>
+                        <p class="text-gray-600">A: はい、10名から1000名まで、あらゆる規模に対応しています。</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-900 mb-2">Q: 既存システムとの連携は？</p>
+                        <p class="text-gray-600">A: Jira、Redmine、Slackなど主要ツールと連携可能です。カスタマイズもご相談ください。</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-900 mb-2">Q: セキュリティは大丈夫？</p>
+                        <p class="text-gray-600">A: ISO27001準拠、データ暗号化、定期的な脆弱性診断を実施。安心してご利用いただけます。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center">
+                <h3 class="text-3xl md:text-4xl font-black mb-4">迷っている時間が、最大の損失です</h3>
+                <p class="text-lg md:text-xl mb-8 opacity-95">
+                    競合はすでに動き出しています。<br>
+                    1日でも早く導入し、プロジェクト成功への道を歩み始めてください。
+                </p>
+                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ" class="inline-block px-10 py-5 bg-white text-red-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    今すぐお問い合わせ
+                </a>
+                <p class="mt-6 text-sm font-semibold">※ 先着10社限定・残り7社のみ ※</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="image/TsutaAI_G_Trans.png" alt="TsutaAI" class="h-8 w-auto">
+                        <span class="text-xl font-bold">ツタAI</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">AI駆動型プロジェクト管理システム<br>プロジェクトの成功を、AIと共に。</p>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4 text-white">製品</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-primary transition-colors">主要機能</a></li>
+                        <li><a href="index.html#demo" class="text-gray-400 hover:text-primary transition-colors">デモ</a></li>
+                        <li><a href="index.html#tech" class="text-gray-400 hover:text-primary transition-colors">技術スタック</a></li>
+                        <li><a href="index.html#howto" class="text-gray-400 hover:text-primary transition-colors">使い方</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4 text-white">リソース</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="PR-EXECUTIVE.html" class="text-gray-400 hover:text-primary transition-colors">経営者向け</a></li>
+                        <li><a href="PR-SALES.html" class="text-gray-400 hover:text-primary transition-colors">営業向け</a></li>
+                        <li><a href="PR-USER.html" class="text-gray-400 hover:text-primary transition-colors">ユーザー向け</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-bold mb-4 text-white">会社</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html#about-name" class="text-gray-400 hover:text-primary transition-colors">名前の由来</a></li>
+                        <li><a href="mailto:2025gw04@gmail.com" class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500 text-sm">&copy; 2025 ツタAI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // モバイルメニュー
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // モバイルメニューのリンククリック時にメニューを閉じる
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
