@@ -1,0 +1,572 @@
+<!-- セッション 13: 休暇管理 -->
+<section id="section-13" class="manual-section">
+    <h2>13. 休暇管理（/vacations）</h2>
+    <p>休暇申請を管理し、プロジェクトへの影響をAIが自動分析します。</p>
+
+    <!-- 13.1 画面概要 -->
+    <div id="subsection-13-1" class="manual-subsection">
+        <h3>13.1 画面概要</h3>
+        <div class="description-box">
+            <p>休暇管理画面は、チームメンバーの休暇予定を一元管理し、プロジェクトへの影響をAIが自動分析する画面です。画面は2つの主要セクションで構成されています。休暇影響分析セクションでは、指定した期間内の休暇を集計し、メンバーごとの休暇日数と日程を表示します。これにより、特定期間に複数のメンバーが同時に休暇を取得していないか、重要なメンバーの休暇がプロジェクトの重要マイルストーンと重ならないかを事前に確認できます。登録済み休暇一覧セクションでは、全メンバーの休暇がテーブル形式で表示され、ユーザー名、役割、開始日、終了日、休暇種類、備考が一覧できます。休暇の追加・削除も簡単に行え、柔軟な休暇管理を実現します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('vacations-overview')">
+            <img id="vacations-overview" src="../image/web-admin/800x500.png" alt="休暇管理画面全体">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>機能カテゴリ</th>
+                    <th>提供する情報</th>
+                    <th>主な用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>休暇影響分析</strong></td>
+                    <td>期間内の休暇集計、メンバー別休暇日数</td>
+                    <td>リソース計画、スケジュール調整</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇一覧管理</strong></td>
+                    <td>全休暇の詳細情報（日程、種類、備考）</td>
+                    <td>休暇の登録・確認・削除</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇種類分類</strong></td>
+                    <td>有給休暇、夏季休暇、特別休暇、その他</td>
+                    <td>休暇タイプ別の集計・分析</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>早めの休暇登録を推奨:</strong>
+                メンバーには休暇予定が決まり次第、早めに登録してもらいましょう。特に1週間以上の長期休暇は、最低でも1ヶ月前には登録することをルール化すると、プロジェクトへの影響を事前に軽減できます。</p>
+        </div>
+    </div>
+
+    <!-- 13.2 休暇影響分析セクション -->
+    <div id="subsection-13-2" class="manual-subsection">
+        <h3>13.2 休暇影響分析セクション</h3>
+        <div class="description-box">
+            <p>休暇影響分析セクションは、指定した期間内の休暇を集計し、プロジェクトへの影響を可視化する機能です。分析開始日と分析終了日を設定し、「影響を分析」ボタンをクリックすると、AIが該当期間内の全休暇を集計します。分析結果は、メンバーごとにカード形式で表示されます。各カードには、メンバー名、役割、休暇日数の合計、個別の休暇期間リストが含まれます。休暇日数は青色の統計ボックスで強調表示され、一目で把握できます。複数の休暇がある場合は、リスト形式で全ての休暇期間と日数が表示されます。デフォルトでは、今日から30日後までの期間が設定されており、近い将来の休暇予定を素早く確認できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('impact-analysis')">
+            <img id="impact-analysis" src="../image/web-admin/800x500.png" alt="休暇影響分析">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>表示項目</th>
+                    <th>データソース</th>
+                    <th>表示形式</th>
+                    <th>意味</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>分析開始日</strong></td>
+                    <td>ユーザー入力</td>
+                    <td>日付選択（デフォルト: 今日）</td>
+                    <td>分析対象期間の開始日</td>
+                </tr>
+                <tr>
+                    <td><strong>分析終了日</strong></td>
+                    <td>ユーザー入力</td>
+                    <td>日付選択（デフォルト: 今日+30日）</td>
+                    <td>分析対象期間の終了日</td>
+                </tr>
+                <tr>
+                    <td><strong>メンバー名</strong></td>
+                    <td>userName</td>
+                    <td>テキスト（大きめのフォント）</td>
+                    <td>休暇取得者の氏名</td>
+                </tr>
+                <tr>
+                    <td><strong>役割</strong></td>
+                    <td>role</td>
+                    <td>テキスト（小さめのフォント）</td>
+                    <td>メンバーの役割</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇日数</strong></td>
+                    <td>totalVacationDays</td>
+                    <td>統計ボックス（青色背景）</td>
+                    <td>期間内の合計休暇日数</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇期間リスト</strong></td>
+                    <td>vacations (startDate, endDate, days)</td>
+                    <td>リスト形式</td>
+                    <td>個別の休暇期間と日数</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>分析期間の設定方法:</strong>
+                分析期間は用途に応じて柔軟に設定できます。例えば、「来月の休暇状況を確認」する場合は、来月1日から末日までを設定します。「年末年始の休暇計画」を確認する場合は、12月中旬から1月中旬までを設定します。長期的な計画では、3ヶ月先まで設定することもあります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.3 影響分析カード -->
+    <div id="subsection-13-3" class="manual-subsection">
+        <h3>13.3 影響分析カード</h3>
+        <div class="description-box">
+            <p>影響分析カードは、各メンバーの休暇情報を視覚的に整理したカード形式のUIです。カード上部にはメンバー名が大きく表示され、その下に役割が小さく表示されます。中央部には休暇日数が青色の統計ボックスで強調表示され、「X日」という形式で表示されます。下部には、そのメンバーが期間内に取得する全ての休暇がリスト形式で表示されます。各休暇アイテムには「開始日
+                〜 終了日
+                (X日)」という形式で日程と日数が記載されます。カードは複数並んでグリッド表示され、画面サイズに応じて1列、2列、3列と自動調整されます。休暇日数が多いメンバーは、リソース不足のリスクがあるため、特に注意が必要です。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('impact-card')">
+            <img id="impact-card" src="../image/web-admin/800x500.png" alt="影響分析カード">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>カード要素</th>
+                    <th>表示内容</th>
+                    <th>デザイン</th>
+                    <th>判断基準</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>メンバー名</strong></td>
+                    <td>氏名</td>
+                    <td>16pxフォント、太字</td>
+                    <td>誰が休暇を取得するか</td>
+                </tr>
+                <tr>
+                    <td><strong>役割</strong></td>
+                    <td>admin/project_manager/member</td>
+                    <td>12pxフォント、灰色</td>
+                    <td>重要度の判断材料</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇日数</strong></td>
+                    <td>合計日数</td>
+                    <td>青色背景、16px太字</td>
+                    <td>5日以上で要注意、10日以上で要対策</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇期間リスト</strong></td>
+                    <td>開始日、終了日、日数</td>
+                    <td>13pxフォント、リスト形式</td>
+                    <td>タスクスケジュールとの照合</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>複数メンバーの同時休暇に注意:</strong>
+                複数の重要メンバー（特にadminやproject_manager）が同時期に休暇を取得する場合、プロジェクトが停滞するリスクがあります。影響分析カードで複数のカードが同じ期間を含んでいる場合は、休暇日程の調整や、代理者の指名を検討してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.4 休暇一覧テーブル -->
+    <div id="subsection-13-4" class="manual-subsection">
+        <h3>13.4 休暇一覧テーブル</h3>
+        <div class="description-box">
+            <p>休暇一覧テーブルは、登録されている全ての休暇情報をテーブル形式で表示します。テーブルには7列（ユーザー名、役割、開始日、終了日、種類、備考、操作）が含まれます。ユーザー名列にはメンバーの氏名が表示され、データが取得できない場合は「ユーザーX」（XはユーザーID）と表示されます。役割列には、メンバーの役割が表示されます。開始日と終了日は日本語形式の日付（YYYY-MM-DD）で表示されます。種類列には、休暇の種類（有給休暇、夏季休暇、特別休暇、その他）が表示されます。備考列には、休暇に関するメモが表示され、未入力の場合は「-」と表示されます。操作列には削除ボタンがあり、クリックすると確認ダイアログが表示され、確認後に休暇が削除されます。テーブルはモバイル画面ではカード形式に自動変換されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('vacation-table')">
+            <img id="vacation-table" src="../image/web-admin/800x500.png" alt="休暇一覧テーブル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>列名</th>
+                    <th>データソース</th>
+                    <th>表示形式</th>
+                    <th>備考</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ユーザー名</strong></td>
+                    <td>user_name</td>
+                    <td>テキスト（nullの場合は「ユーザーX」）</td>
+                    <td>休暇取得者の識別</td>
+                </tr>
+                <tr>
+                    <td><strong>役割</strong></td>
+                    <td>role</td>
+                    <td>テキスト（nullの場合は「未設定」）</td>
+                    <td>メンバーの役割</td>
+                </tr>
+                <tr>
+                    <td><strong>開始日</strong></td>
+                    <td>start_date</td>
+                    <td>日付（YYYY-MM-DD形式）</td>
+                    <td>休暇の開始日</td>
+                </tr>
+                <tr>
+                    <td><strong>終了日</strong></td>
+                    <td>end_date</td>
+                    <td>日付（YYYY-MM-DD形式）</td>
+                    <td>休暇の終了日</td>
+                </tr>
+                <tr>
+                    <td><strong>種類</strong></td>
+                    <td>vacation_type</td>
+                    <td>テキスト（4種類のいずれか）</td>
+                    <td>休暇の分類</td>
+                </tr>
+                <tr>
+                    <td><strong>備考</strong></td>
+                    <td>notes</td>
+                    <td>テキスト（nullの場合は「-」）</td>
+                    <td>追加情報</td>
+                </tr>
+                <tr>
+                    <td><strong>操作</strong></td>
+                    <td>-</td>
+                    <td>削除ボタン</td>
+                    <td>クリックで確認後削除</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>テーブルのソート機能:</strong>
+                休暇一覧テーブルは、開始日の昇順（早い順）で自動ソートされています。過去の休暇も含めて全て表示されるため、履歴の確認にも使えます。過去の休暇データは統計分析にも活用できるため、削除せずに残しておくことをお勧めします。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.5 休暇種類 -->
+    <div id="subsection-13-5" class="manual-subsection">
+        <h3>13.5 休暇種類</h3>
+        <div class="description-box">
+            <p>TsutaAIでは、休暇を4つのタイプに分類して管理します。有給休暇は、労働基準法に基づく年次有給休暇で、メンバーが自由に取得できる休暇です。夏季休暇は、企業が定める夏季休暇期間（一般的に7-9月）に取得する特別休暇です。特別休暇は、結婚、出産、忌引など、特別な事由による休暇です。その他は、上記3つに該当しない休暇（例：リフレッシュ休暇、ボランティア休暇など）です。休暇種類を正確に分類することで、休暇消化率の分析や、法定休暇の管理が容易になります。種類別の集計により、チームの休暇取得傾向も把握できます。休暇種類は、休暇追加モーダルでドロップダウンから選択して設定します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('vacation-types')">
+            <img id="vacation-types" src="../image/web-admin/800x500.png" alt="休暇種類">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>休暇種類</th>
+                    <th>説明</th>
+                    <th>用途例</th>
+                    <th>表示色</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="vacation-type-badge vacation-type-paid">有給休暇</span></td>
+                    <td>年次有給休暇（法定休暇）</td>
+                    <td>私用、旅行、通院など</td>
+                    <td>青色</td>
+                </tr>
+                <tr>
+                    <td><span class="vacation-type-badge vacation-type-summer">夏季休暇</span></td>
+                    <td>企業が定める夏季休暇</td>
+                    <td>お盆休み、夏季レジャー</td>
+                    <td>橙色</td>
+                </tr>
+                <tr>
+                    <td><span class="vacation-type-badge vacation-type-special">特別休暇</span></td>
+                    <td>特別な事由による休暇</td>
+                    <td>結婚、出産、忌引、災害</td>
+                    <td>ピンク色</td>
+                </tr>
+                <tr>
+                    <td><span class="vacation-type-badge vacation-type-other">その他</span></td>
+                    <td>上記3つに該当しない休暇</td>
+                    <td>リフレッシュ休暇、研修</td>
+                    <td>灰色</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>休暇種類のカスタマイズ:</strong>
+                上記4種類はデフォルトの分類ですが、企業の休暇制度に応じて「その他」に独自の休暇タイプを設定できます。例えば、「リモートワーク休暇」「ボランティア休暇」など、企業独自の休暇制度を「その他」として登録し、備考欄に詳細を記入することで柔軟に管理できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.6 休暇追加モーダル -->
+    <div id="subsection-13-6" class="manual-subsection">
+        <h3>13.6 休暇追加モーダル</h3>
+        <div class="description-box">
+            <p>休暇追加モーダルは、新しい休暇を登録するためのモーダルウィンドウです。画面右上の「休暇を追加」ボタンをクリックすると表示されます。モーダルには5つの入力フィールドがあります。ユーザー選択では、ドロップダウンから休暇取得者を選択します。リストには全メンバーの氏名と役割が表示されます。開始日と終了日は、日付選択カレンダーから入力します。休暇種類は、4つの選択肢（有給休暇、夏季休暇、特別休暇、その他）からドロップダウンで選択します。備考は、任意のテキストエリアで、休暇に関する追加情報を入力できます。全てのフィールド（備考以外）は必須入力です。モーダル下部には「キャンセル」と「登録」ボタンがあり、登録ボタンをクリックするとバリデーションが実行され、問題なければ休暇が登録されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('add-vacation-modal')">
+            <img id="add-vacation-modal" src="../image/web-admin/800x500.png" alt="休暇追加モーダル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>フィールド</th>
+                    <th>入力形式</th>
+                    <th>必須</th>
+                    <th>バリデーション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ユーザー</strong></td>
+                    <td>ドロップダウン選択</td>
+                    <td>必須</td>
+                    <td>登録済みユーザーから選択</td>
+                </tr>
+                <tr>
+                    <td><strong>開始日</strong></td>
+                    <td>日付選択（カレンダー）</td>
+                    <td>必須</td>
+                    <td>有効な日付形式</td>
+                </tr>
+                <tr>
+                    <td><strong>終了日</strong></td>
+                    <td>日付選択（カレンダー）</td>
+                    <td>必須</td>
+                    <td>開始日以降の日付</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇種類</strong></td>
+                    <td>ドロップダウン選択</td>
+                    <td>必須</td>
+                    <td>4種類から選択</td>
+                </tr>
+                <tr>
+                    <td><strong>備考</strong></td>
+                    <td>テキストエリア（3行）</td>
+                    <td>任意</td>
+                    <td>なし</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>備考欄の活用方法:</strong>
+                備考欄には、休暇の理由や連絡先、代理者情報などを記入することをお勧めします。例えば「海外旅行のため。緊急時は携帯に連絡可能。代理：山田太郎」のように記入すると、休暇中に問題が発生した場合の対処がスムーズになります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.7 休暇の削除 -->
+    <div id="subsection-13-7" class="manual-subsection">
+        <h3>13.7 休暇の削除</h3>
+        <div class="description-box">
+            <p>休暇の削除は、休暇一覧テーブルの操作列にある削除ボタンから実行します。削除ボタンは赤色の背景にゴミ箱アイコンが表示されています。ボタンをクリックすると、「この休暇を削除しますか？」という確認ダイアログが表示されます。OKをクリックすると、休暇がデータベースから削除され、テーブル表示が更新されます。キャンセルをクリックすると、削除は実行されずにダイアログが閉じます。削除は即座に実行され、元に戻すことはできません。過去の休暇データは統計分析に使用される場合があるため、特別な理由がない限り削除しないことをお勧めします。誤って登録した休暇や、予定が変更になった休暇のみを削除してください。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('delete-vacation')">
+            <img id="delete-vacation" src="../image/web-admin/800x500.png" alt="休暇削除">
+        </div>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>削除の取り消しは不可:</strong>
+                休暇を削除すると、データベースから完全に削除され、復元できません。削除前に、本当に削除が必要かを慎重に確認してください。休暇予定が変更になった場合は、削除するのではなく、新しい日程で再登録することも検討してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.8 影響分析の活用方法 -->
+    <div id="subsection-13-8" class="manual-subsection">
+        <h3>13.8 影響分析の活用方法</h3>
+        <div class="description-box">
+            <p>休暇影響分析は、プロジェクトのリソース計画において非常に重要な機能です。スプリント計画時には、次のスプリント期間を分析期間として設定し、休暇取得者がいないかを確認します。もし重要なメンバーが休暇を取得する場合は、そのメンバーの作業負荷を軽減するか、代理者を指名します。マイルストーン設定時には、重要な納期の前後1週間を分析期間として設定し、コアメンバーが休暇を取得していないかを確認します。休暇が重なる場合は、マイルストーンの日程を調整するか、休暇日程の変更を依頼します。年次計画時には、1年先までの期間を分析し、長期休暇（年末年始、ゴールデンウィーク、夏季休暇）の影響を把握します。これにより、現実的なプロジェクトスケジュールを策定できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('impact-analysis-usage')">
+            <img id="impact-analysis-usage" src="../image/web-admin/800x500.png" alt="影響分析の活用方法">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>活用シーン</th>
+                    <th>分析期間の設定</th>
+                    <th>確認ポイント</th>
+                    <th>対策例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>スプリント計画</strong></td>
+                    <td>次スプリントの開始日〜終了日（通常2週間）</td>
+                    <td>休暇日数が5日以上のメンバー</td>
+                    <td>作業負荷の軽減、代理者指名</td>
+                </tr>
+                <tr>
+                    <td><strong>マイルストーン設定</strong></td>
+                    <td>重要納期の前後1週間</td>
+                    <td>コアメンバーの休暇有無</td>
+                    <td>日程調整、休暇変更依頼</td>
+                </tr>
+                <tr>
+                    <td><strong>年次計画</strong></td>
+                    <td>1年先まで（または四半期ごと）</td>
+                    <td>長期休暇期間（年末年始、GW、夏季）</td>
+                    <td>現実的なスケジュール策定</td>
+                </tr>
+                <tr>
+                    <td><strong>緊急対応</strong></td>
+                    <td>今週〜来週（7-14日間）</td>
+                    <td>現在休暇中のメンバー</td>
+                    <td>代理対応者の確認、連絡</td>
+                </tr>
+                <tr>
+                    <td><strong>採用計画</strong></td>
+                    <td>3ヶ月先まで</td>
+                    <td>特定スキルを持つメンバーの休暇</td>
+                    <td>一時的なリソース不足に備えた採用</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>定期的な分析習慣:</strong>
+                毎週月曜日に「今週+来週」の2週間を分析する習慣をつけましょう。これにより、直近の休暇予定を常に把握でき、突発的なリソース不足を防げます。また、月初には「今月+来月」の2ヶ月を分析し、中長期的な休暇予定も確認すると、計画的なプロジェクト運営ができます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.9 プロジェクトへの影響評価 -->
+    <div id="subsection-13-9" class="manual-subsection">
+        <h3>13.9 プロジェクトへの影響評価</h3>
+        <div class="description-box">
+            <p>休暇がプロジェクトに与える影響は、休暇取得者の役割、期間、タイミングによって大きく異なります。影響レベルを3段階（高・中・低）で評価し、適切な対策を講じることが重要です。影響レベル「高」は、プロジェクトマネージャーやテックリードなど、代替が困難なメンバーが、重要マイルストーン直前に1週間以上の休暇を取得する場合です。影響レベル「中」は、一般メンバーが1週間以上の休暇を取得する、または複数メンバーが同時期に休暇を取得する場合です。影響レベル「低」は、一般メンバーが数日程度の休暇を取得し、他のメンバーでカバー可能な場合です。影響レベルに応じて、日程調整、代理者指名、作業の前倒し、スケジュール延長などの対策を実施します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('impact-evaluation')">
+            <img id="impact-evaluation" src="../image/web-admin/800x500.png" alt="影響評価">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>影響レベル</th>
+                    <th>判定基準</th>
+                    <th>リスク</th>
+                    <th>推奨対策</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>高</strong></td>
+                    <td>PM/テックリードが重要マイルストーン直前に1週間以上休暇</td>
+                    <td>プロジェクト遅延、品質低下</td>
+                    <td>休暇日程の変更依頼、マイルストーン延期、代理PM指名</td>
+                </tr>
+                <tr>
+                    <td><strong>中</strong></td>
+                    <td>一般メンバー1週間以上休暇、または複数メンバー同時休暇</td>
+                    <td>一部作業の遅延、負荷増加</td>
+                    <td>作業の前倒し、他メンバーへの再配分</td>
+                </tr>
+                <tr>
+                    <td><strong>低</strong></td>
+                    <td>一般メンバーの数日程度の休暇</td>
+                    <td>ほぼ影響なし</td>
+                    <td>通常通り、必要に応じて他メンバーがカバー</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>影響レベル「高」の放置は厳禁:</strong>
+                影響レベルが「高」と判定された休暇を放置すると、プロジェクトが深刻な遅延や品質問題に直面します。影響分析で「高」レベルの休暇を発見したら、即座にメンバーと面談し、日程調整の可能性を探ってください。調整が困難な場合は、プロジェクトスケジュールやマイルストーンの見直しを経営層に提案してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 13.10 活用シーンとベストプラクティス -->
+    <div id="subsection-13-10" class="manual-subsection">
+        <h3>13.10 活用シーンとベストプラクティス</h3>
+        <div class="description-box">
+            <p>休暇管理画面は、計画的なプロジェクト運営に欠かせないツールです。プロジェクト開始時には、全メンバーに今後3ヶ月の休暇予定を早めに登録してもらい、プロジェクトスケジュールに反映します。週次のスプリント計画では、次スプリント期間の影響分析を行い、休暇取得者の作業負荷を調整します。月次のマイルストーンレビューでは、次月の休暇予定を確認し、重要な納期との重複がないかをチェックします。年次計画では、年末年始、ゴールデンウィーク、夏季休暇などの長期休暇期間を考慮し、現実的なプロジェクトスケジュールを策定します。緊急対応時には、現在休暇中のメンバーを確認し、代理対応者を迅速に特定します。これらの活動により、休暇によるプロジェクトへの悪影響を最小限に抑えられます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('best-practices')">
+            <img id="best-practices" src="../image/web-admin/800x500.png" alt="ベストプラクティス">
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <h6><i class="bi bi-1-circle-fill"></i> プロジェクト開始時（キックオフミーティング）</h6>
+                <p>プロジェクト期間が決まったら、全メンバーに今後3ヶ月の休暇予定を共有してもらいます。特に1週間以上の長期休暇は必ず登録してもらいます。収集した休暇情報を元に、プロジェクトスケジュールを調整し、重要マイルストーンと休暇が重ならないように計画します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-2-circle-fill"></i> スプリント計画ミーティング（2週間ごと）</h6>
+                <p>次スプリント期間（2週間）を分析期間として設定し、影響分析を実行します。休暇取得者がいる場合は、そのメンバーのストーリーポイントを通常より20-30%削減します。休暇日数が5日以上の場合は、そのメンバーに新規タスクを割り当てず、既存タスクの完了に専念してもらいます。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-3-circle-fill"></i> 月次マイルストーンレビュー（月末）</h6>
+                <p>来月1ヶ月間を分析期間として設定し、影響分析を実行します。重要なマイルストーン（例：ベータ版リリース、デモ実施）の前後1週間に、コアメンバーの休暇が重なっていないかを確認します。重複がある場合は、マイルストーンの日程調整または休暇日程の変更を協議します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-4-circle-fill"></i> 年次計画策定（年度初め）</h6>
+                <p>1年間を分析期間として設定し、長期休暇期間（年末年始12/28-1/5、GW4/29-5/7、お盆8/11-8/16）を特定します。これらの期間は多くのメンバーが休暇を取得するため、重要な納期を設定しないようにします。長期休暇の前後1週間は、準備・引き継ぎ期間としてバッファを確保します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-5-circle-fill"></i> 緊急対応時（トラブル発生時）</h6>
+                <p>緊急のバグ修正や顧客対応が必要になった際、「今日〜7日後」を分析期間として設定し、現在休暇中のメンバーを確認します。休暇中のメンバーが対応必須の場合は、備考欄に記載された連絡先に連絡します。代理対応が可能な場合は、スキルマトリクスを参照して適切な代理者を選定します。
+                </p>
+            </div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>ベストプラクティス</th>
+                    <th>具体的なアクション</th>
+                    <th>期待効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>早めの休暇登録ルール化</strong></td>
+                    <td>1週間以上の休暇は1ヶ月前までに登録するルールを設定</td>
+                    <td>計画的なリソース配分、トラブル防止</td>
+                </tr>
+                <tr>
+                    <td><strong>週次の影響分析習慣</strong></td>
+                    <td>毎週月曜日に「今週+来週」の2週間を分析</td>
+                    <td>直近の休暇予定を常に把握、突発対応の準備</td>
+                </tr>
+                <tr>
+                    <td><strong>備考欄の活用徹底</strong></td>
+                    <td>休暇登録時に連絡先と代理者情報を必ず記入</td>
+                    <td>緊急時の迅速な対応、スムーズな引き継ぎ</td>
+                </tr>
+                <tr>
+                    <td><strong>休暇データの長期保存</strong></td>
+                    <td>過去の休暇データを削除せず、統計分析に活用</td>
+                    <td>休暇取得傾向の把握、来年度の計画精度向上</td>
+                </tr>
+                <tr>
+                    <td><strong>影響レベルの可視化</strong></td>
+                    <td>影響分析結果をスプレッドシートにエクスポートし、影響レベルを色分け</td>
+                    <td>視覚的なリスク把握、経営層への報告資料</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>上級者向けテクニック:</strong>
+                休暇影響分析のデータをGoogleカレンダーにエクスポートすることで、プロジェクトスケジュールと休暇予定を一元的に可視化できます。カレンダー上で休暇期間を色分け表示し、タスクの期限と照らし合わせることで、より直感的にリスクを把握できます。また、過去1年間の休暇データを分析し、「月別平均休暇取得日数」「メンバー別年間休暇取得率」などを集計することで、来年度のリソース計画の精度が向上します。
+            </p>
+        </div>
+    </div>
+
+    <!-- ギャラリーモーダル -->
+</section>

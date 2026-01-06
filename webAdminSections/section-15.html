@@ -1,0 +1,726 @@
+<!-- セッション 15: ヘルプリクエスト -->
+<section id="section-15" class="manual-section">
+    <h2>15. ヘルプリクエスト（/help-requests）</h2>
+    <p>チームメンバー間の支援依頼を管理し、AIが最適なヘルパーをマッチングします。</p>
+
+    <p class="page-subtitle">AIによる最適なヘルパーマッチングで、チーム内の困りごとを迅速に解決する支援システムです。</p>
+
+    <!-- 15.1 画面概要 -->
+    <div id="subsection-15-1" class="manual-subsection">
+        <h3>15.1 画面概要</h3>
+        <div class="description-box">
+            <p>
+                ヘルプリクエスト画面は、プロジェクトメンバーが困っている時に支援を求め、AIが最適なヘルパーを推奨するマッチングプラットフォームです。統計ダッシュボード（6つの指標カード）、トップヘルパーランキング、リクエスト作成フォーム、フィルター機能付きリクエスト一覧、詳細パネル（AIコンテキスト分析・ヘルパー推奨リスト・解決ノート）という5つの主要エリアで構成されます。各リクエストは、緊急度（critical/high/medium/low）とステータス（open/assigned/in_progress/resolved）という2つの軸で管理され、AIが過去のタスク実績とスキルデータを基に最も適任なヘルパーを自動的に推奨します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('help-request-overview')">
+            <img id="help-request-overview" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">画面エリア</th>
+                    <th style="width: 35%;">主要機能</th>
+                    <th style="width: 40%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>統計ダッシュボード</strong></td>
+                    <td>6つの指標カード</td>
+                    <td>総リクエスト数、オープン、対応中、解決済み、解決率、平均解決日数を表示</td>
+                </tr>
+                <tr>
+                    <td><strong>トップヘルパー</strong></td>
+                    <td>貢献度ランキング</td>
+                    <td>解決数と総対応数でトップ貢献者を表示（最大10名）</td>
+                </tr>
+                <tr>
+                    <td><strong>リクエスト作成フォーム</strong></td>
+                    <td>新規リクエスト作成</td>
+                    <td>タスクID、タイトル、説明、緊急度を入力し、AIコンテキスト自動生成</td>
+                </tr>
+                <tr>
+                    <td><strong>フィルター</strong></td>
+                    <td>ステータス・緊急度・プロジェクト別絞り込み</td>
+                    <td>3つのドロップダウンで効率的に目的のリクエストを検索</td>
+                </tr>
+                <tr>
+                    <td><strong>リクエスト一覧</strong></td>
+                    <td>カード形式リスト</td>
+                    <td>各リクエストをクリックで詳細パネルを開き、AIによるヘルパー推奨を表示</td>
+                </tr>
+                <tr>
+                    <td><strong>詳細パネル</strong></td>
+                    <td>右サイドパネル（固定）</td>
+                    <td>リクエスト詳細、AIコンテキスト分析、推奨ヘルパーリスト、解決ノート</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>ヘルプリクエストは、デスクトップアプリまたはWeb管理画面の両方から作成できます。デスクトップアプリから作成する場合、現在作業中のタスクが自動的に紐づけられるため、入力の手間が省けます。AIコンテキスト自動生成機能を有効にすると、タスクの作業ログ、ファイル変更履歴、過去のコメントなどから背景情報が自動的に抽出されます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.2 統計ダッシュボード（6つの指標カード） -->
+    <div id="subsection-15-2" class="manual-subsection">
+        <h3>15.2 統計ダッシュボード（6つの指標カード）</h3>
+        <div class="description-box">
+            <p>
+                統計ダッシュボードは、ヘルプリクエストシステムの全体的な稼働状況を6つの指標カードで可視化します。各カードはアイコン（60×60px、角丸15px）、ラベル（大文字、レタースペース0.5px）、数値（2rem、グラデーション文字）という3層構造で統一されています。①総リクエスト数カード（ピンク→黄色グラデーション）、②オープンカード（黄色グラデーション）、③対応中カード（青グラデーション）、④解決済みカード（緑グラデーション）、⑤解決率カード（紫グラデーション、パーセンテージ表示）、⑥平均解決日数カード（紫グラデーション、日数表示）という6つのカードがレスポンシブグリッド（220px最小幅）で配置され、ホバー時には上方向に5px浮き上がるアニメーション効果があります。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('stats-dashboard')">
+            <img id="stats-dashboard" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">カード種類</th>
+                    <th style="width: 15%;">アイコン</th>
+                    <th style="width: 25%;">グラデーション色</th>
+                    <th style="width: 20%;">表示内容</th>
+                    <th style="width: 20%;">計算方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>総リクエスト数</strong></td>
+                    <td><i class="bi bi-clipboard-check" style="font-size: 1.5rem; color: #fa709a;"></i></td>
+                    <td>ピンク→黄色<br>(#fa709a → #fee140)</td>
+                    <td>数値のみ</td>
+                    <td>全ステータスの合計</td>
+                </tr>
+                <tr>
+                    <td><strong>オープン</strong></td>
+                    <td><i class="bi bi-hourglass-split" style="font-size: 1.5rem; color: #fbbf24;"></i></td>
+                    <td>黄色<br>(#fbbf24 → #f59e0b)</td>
+                    <td>数値のみ</td>
+                    <td>status='open'の件数</td>
+                </tr>
+                <tr>
+                    <td><strong>対応中</strong></td>
+                    <td><i class="bi bi-gear-fill" style="font-size: 1.5rem; color: #3b82f6;"></i></td>
+                    <td>青<br>(#3b82f6 → #2563eb)</td>
+                    <td>数値のみ</td>
+                    <td>status='assigned' + 'in_progress'の合計</td>
+                </tr>
+                <tr>
+                    <td><strong>解決済み</strong></td>
+                    <td><i class="bi bi-check-circle-fill" style="font-size: 1.5rem; color: #22c55e;"></i></td>
+                    <td>緑<br>(#22c55e → #16a34a)</td>
+                    <td>数値のみ</td>
+                    <td>status='resolved'の件数</td>
+                </tr>
+                <tr>
+                    <td><strong>解決率</strong></td>
+                    <td><i class="bi bi-percent" style="font-size: 1.5rem; color: #8b5cf6;"></i></td>
+                    <td>紫<br>(#8b5cf6 → #7c3aed)</td>
+                    <td>X.X%</td>
+                    <td>(解決済み ÷ 総数) × 100</td>
+                </tr>
+                <tr>
+                    <td><strong>平均解決日数</strong></td>
+                    <td><i class="bi bi-clock-history" style="font-size: 1.5rem; color: #8b5cf6;"></i></td>
+                    <td>紫<br>(#8b5cf6 → #7c3aed)</td>
+                    <td>X.X日</td>
+                    <td>(作成日時 - 解決日時)の平均</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>健全性の目安：</strong>
+                解決率が70%以上、平均解決日数が3日以内であれば、ヘルプリクエストシステムが効果的に機能しています。オープン件数が10件以上溜まっている場合は、ヘルパーが不足しているか、緊急度の見直しが必要です。対応中が5件以上の場合は、各ヘルパーが複数のリクエストを抱えている可能性があるため、負荷分散を検討してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.3 トップヘルパーランキング -->
+    <div id="subsection-15-3" class="manual-subsection">
+        <h3>15.3 トップヘルパーランキング</h3>
+        <div class="description-box">
+            <p>
+                トップヘルパーランキングは、過去にヘルプリクエストを解決したメンバーの中から、特に貢献度の高い上位10名を自動抽出して表示する功労者表彰エリアです。各ヘルパーはカード形式（50×50pxのアイコン、フルネーム、解決数、総対応数）で表示され、解決数の降順でソートされます。カードはレスポンシブグリッド（280px最小幅）で配置され、ホバー時には紫の枠線とシャドウ効果、上方向3pxの浮き上がりアニメーションが適用されます。このランキングは、チーム内で誰が積極的にサポートしているかを可視化し、貢献文化を促進する目的で設計されています。定期的に確認し、貢献度の高いメンバーへの感謝や表彰の材料として活用できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('top-helpers')">
+            <img id="top-helpers" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">表示項目</th>
+                    <th style="width: 35%;">内容</th>
+                    <th style="width: 40%;">デザイン仕様</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>アイコン</strong></td>
+                    <td>人物バッジアイコン（<i class="bi bi-person-badge"></i>）</td>
+                    <td>50×50px、角丸12px、ピンク→黄色グラデーション背景</td>
+                </tr>
+                <tr>
+                    <td><strong>ヘルパー名</strong></td>
+                    <td>フルネーム（full_name）</td>
+                    <td>1.1rem、太字、#1f2937色</td>
+                </tr>
+                <tr>
+                    <td><strong>解決数</strong></td>
+                    <td>✓アイコン + 「解決数: X」</td>
+                    <td>0.875rem、太字、#6b7280色</td>
+                </tr>
+                <tr>
+                    <td><strong>総対応数</strong></td>
+                    <td>リストアイコン + 「総対応: X」</td>
+                    <td>0.875rem、太字、#6b7280色</td>
+                </tr>
+                <tr>
+                    <td><strong>ソート順</strong></td>
+                    <td>解決数の降順</td>
+                    <td>最大10名まで表示</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>トップヘルパーランキングは、`resolved_at`が存在し、`assigned_to`が設定されているヘルプリクエストのみを集計対象とします。つまり、割り当てられたが未解決のリクエストや、誰にも割り当てられていないリクエストは集計に含まれません。総対応数には、解決済み以外のステータス（assigned、in_progress）も含まれるため、「総対応数
+                ≥ 解決数」という関係が常に成り立ちます。</p>
+        </div>
+    </div>
+
+    <!-- 15.4 新規リクエスト作成フォーム -->
+    <div id="subsection-15-4" class="manual-subsection">
+        <h3>15.4 新規リクエスト作成フォーム</h3>
+        <div class="description-box">
+            <p>
+                新規リクエスト作成フォームは、「新規リクエスト作成」ボタンをクリックすることで展開される5フィールドのフォームです。①タスクID（必須、数値入力）、②リクエスターID（必須、数値入力）、③緊急度（ドロップダウン、4段階：low/medium/high/critical）、④タイトル（必須、テキスト入力、最大255文字）、⑤説明（任意、テキストエリア、4行）という5つの入力項目と、⑥AIによるコンテキスト自動生成チェックボックス（デフォルトON）が含まれます。フォームはレスポンシブグリッド（250px最小幅）で配置され、タイトルと説明は全幅表示されます。作成ボタンをクリックすると、バックエンドAPIにPOSTリクエストが送信され、AIコンテキスト生成が有効な場合は自動的に背景情報が抽出されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('create-form')">
+            <img id="create-form" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">フィールド名</th>
+                    <th style="width: 15%;">必須</th>
+                    <th style="width: 25%;">入力タイプ</th>
+                    <th style="width: 40%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>タスクID</strong></td>
+                    <td><span class="badge-high">必須</span></td>
+                    <td>数値入力（number）</td>
+                    <td>困っているタスクのIDを入力（例: 123）</td>
+                </tr>
+                <tr>
+                    <td><strong>リクエスターID</strong></td>
+                    <td><span class="badge-high">必須</span></td>
+                    <td>数値入力（number）</td>
+                    <td>支援を求めているメンバーのIDを入力（例: 5）</td>
+                </tr>
+                <tr>
+                    <td><strong>緊急度</strong></td>
+                    <td>任意</td>
+                    <td>ドロップダウン（4段階）</td>
+                    <td>low（低）/ medium（中）/ high（高）/ critical（緊急）から選択</td>
+                </tr>
+                <tr>
+                    <td><strong>タイトル</strong></td>
+                    <td><span class="badge-high">必須</span></td>
+                    <td>テキスト入力（最大255文字）</td>
+                    <td>問題を簡潔に要約（例: データベース接続エラーの調査）</td>
+                </tr>
+                <tr>
+                    <td><strong>説明</strong></td>
+                    <td>任意</td>
+                    <td>テキストエリア（4行）</td>
+                    <td>詳細な状況、エラーメッセージ、試したことなどを記述</td>
+                </tr>
+                <tr>
+                    <td><strong>AIコンテキスト自動生成</strong></td>
+                    <td>任意</td>
+                    <td>チェックボックス（デフォルトON）</td>
+                    <td>タスクの作業ログ・ファイル変更・コメントから背景情報を自動抽出</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>必須フィールドの確認：</strong>
+                タスクID、リクエスターID、タイトルの3つは必須項目です。いずれかが空欄の場合、「タスク、リクエスター、タイトルは必須です」というエラーメッセージが表示され、作成処理が実行されません。また、タスクIDとリクエスターIDは、実際に存在するIDである必要があります。存在しないIDを入力すると、バックエンドエラーが返されます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.5 緊急度とステータスの管理 -->
+    <div id="subsection-15-5" class="manual-subsection">
+        <h3>15.5 緊急度とステータスの管理</h3>
+        <div class="description-box">
+            <p>
+                ヘルプリクエストは、緊急度（urgency）とステータス（status）という2つの軸で管理されます。緊急度は4段階（critical=緊急、high=高、medium=中、low=低）で設定され、それぞれ赤・オレンジ・黄色・緑のバッジカラーで視覚的に区別されます。ステータスは4段階（open=オープン、assigned=割り当て済み、in_progress=対応中、resolved=解決済み）で遷移し、それぞれ黄色・青・紫・緑のバッジカラーで表示されます。リクエストカードには、この2つのバッジが常に並んで表示され、一目で優先度と進行状況を把握できます。緊急度が高いリクエストは、リスト上部に優先的に表示され、早期対応を促します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('urgency-status')">
+            <img id="urgency-status" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">緊急度</th>
+                    <th style="width: 20%;">バッジカラー</th>
+                    <th style="width: 30%;">対応目安</th>
+                    <th style="width: 30%;">使用例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>critical（緊急）</strong></td>
+                    <td><span class="badge-critical">CRITICAL</span></td>
+                    <td>即座（1時間以内）</td>
+                    <td>本番障害、セキュリティ問題、納期直前のブロッカー</td>
+                </tr>
+                <tr>
+                    <td><strong>high（高）</strong></td>
+                    <td><span class="badge-high">HIGH</span></td>
+                    <td>当日中</td>
+                    <td>重要機能の不具合、テスト環境の障害</td>
+                </tr>
+                <tr>
+                    <td><strong>medium（中）</strong></td>
+                    <td><span class="badge-medium">MEDIUM</span></td>
+                    <td>2-3日以内</td>
+                    <td>設計相談、コードレビュー依頼、技術調査</td>
+                </tr>
+                <tr>
+                    <td><strong>low（低）</strong></td>
+                    <td><span class="badge-low">LOW</span></td>
+                    <td>1週間以内</td>
+                    <td>ドキュメント作成支援、リファクタリング相談</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">ステータス</th>
+                    <th style="width: 20%;">バッジカラー</th>
+                    <th style="width: 30%;">状態説明</th>
+                    <th style="width: 30%;">次のアクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>open（オープン）</strong></td>
+                    <td><span class="badge-open">オープン</span></td>
+                    <td>作成されたが未割り当て</td>
+                    <td>ヘルパーを割り当てる</td>
+                </tr>
+                <tr>
+                    <td><strong>assigned（割り当て済み）</strong></td>
+                    <td><span class="badge-assigned">割り当て済み</span></td>
+                    <td>ヘルパーが決定、対応待ち</td>
+                    <td>ヘルパーが対応を開始</td>
+                </tr>
+                <tr>
+                    <td><strong>in_progress（対応中）</strong></td>
+                    <td><span class="badge-in-progress">対応中</span></td>
+                    <td>ヘルパーが対応中</td>
+                    <td>解決または追加情報提供</td>
+                </tr>
+                <tr>
+                    <td><strong>resolved（解決済み）</strong></td>
+                    <td><span class="badge-resolved">解決済み</span></td>
+                    <td>問題が解決し、クローズ</td>
+                    <td>なし（完了）</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>緊急度の適切な設定：</strong>
+                緊急度は、リクエスターの主観ではなく、プロジェクト全体への影響度で判断することが重要です。「自分が困っている」だけでcriticalにするのではなく、「納期に影響する」「他のメンバーもブロックされる」「本番環境に影響する」という客観的な基準で設定してください。緊急度のインフレ（すべてhigh以上になる）を防ぐため、週次でcriticalとhighの比率を確認し、30%以下に保つことを推奨します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.6 フィルター機能と検索 -->
+    <div id="subsection-15-6" class="manual-subsection">
+        <h3>15.6 フィルター機能と検索</h3>
+        <div class="description-box">
+            <p>
+                フィルター機能は、大量のヘルプリクエストの中から目的のリクエストを素早く見つけるための3つのドロップダウンフィルターで構成されます。①ステータスフィルター（すべて/オープン/割り当て済み/対応中/解決済みの5選択肢）、②緊急度フィルター（すべて/low/medium/high/criticalの5選択肢）、③プロジェクトフィルター（すべて
+                +
+                全プロジェクトリスト）という3つのフィルターが横並びで配置され、いずれかを変更すると即座にリクエスト一覧が再読み込みされます。フィルターは白い背景のカード形式で、各ドロップダウンには紫の枠線ホバー効果があります。複数のフィルターを組み合わせることで、「プロジェクトAのcritical
+                + openのリクエスト」といった高度な絞り込みが可能です。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('filters')">
+            <img id="filters" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">フィルター名</th>
+                    <th style="width: 35%;">選択肢</th>
+                    <th style="width: 40%;">使用例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ステータスフィルター</strong></td>
+                    <td>すべて、オープン、割り当て済み、対応中、解決済み</td>
+                    <td>「オープン」のみを表示して、未割り当てリクエストを確認</td>
+                </tr>
+                <tr>
+                    <td><strong>緊急度フィルター</strong></td>
+                    <td>すべて、low、medium、high、critical</td>
+                    <td>「critical」のみを表示して、緊急対応が必要なリクエストを確認</td>
+                </tr>
+                <tr>
+                    <td><strong>プロジェクトフィルター</strong></td>
+                    <td>すべて + 全プロジェクトリスト</td>
+                    <td>「ECサイトリニューアル」プロジェクトのリクエストのみを表示</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>フィルターは「AND条件」で機能します。つまり、「ステータス=オープン」「緊急度=critical」「プロジェクト=A」と設定した場合、この3つの条件すべてを満たすリクエストのみが表示されます。フィルターをリセットしたい場合は、すべてのドロップダウンを「すべて」に戻してください。現在、フィルターのリセットボタンは実装されていないため、手動で各フィルターを「すべて」に設定する必要があります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.7 リクエスト詳細とAIコンテキスト分析 -->
+    <div id="subsection-15-7" class="manual-subsection">
+        <h3>15.7 リクエスト詳細とAIコンテキスト分析</h3>
+        <div class="description-box">
+            <p>
+                リクエストカードをクリックすると、画面右側に固定サイドパネル（幅500px、モバイルでは全幅）が展開され、リクエストの詳細情報が表示されます。パネルは3つのセクションで構成されます。①基本情報セクション（タイトル、説明、作成日時、リクエスター、ヘルパー）、②AIコンテキスト分析セクション（タスクの作業ログ、ファイル変更履歴、過去のコメントから自動抽出された背景情報をpre形式で表示）、③推奨ヘルパーセクション（スキルマッチ度、可用性、経験値、総合スコアという4つの指標でランク付けされたヘルパーリスト）という3つのエリアが縦に並びます。AIコンテキスト分析は、リクエスト作成時に「AIコンテキスト自動生成」が有効だった場合のみ表示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('request-detail')">
+            <img id="request-detail" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">セクション名</th>
+                    <th style="width: 35%;">表示内容</th>
+                    <th style="width: 40%;">データソース</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>基本情報</strong></td>
+                    <td>タイトル、説明、作成日時、リクエスター名、ヘルパー名</td>
+                    <td>help_requestsテーブル + usersテーブル（JOIN）</td>
+                </tr>
+                <tr>
+                    <td><strong>AIコンテキスト分析</strong></td>
+                    <td>タスク背景情報（作業ログ、ファイル変更、コメント履歴）</td>
+                    <td>ai_context_summaryフィールド（Groq APIが生成）</td>
+                </tr>
+                <tr>
+                    <td><strong>推奨ヘルパー</strong></td>
+                    <td>ヘルパー名、4つのマッチ度スコア、AI推奨理由</td>
+                    <td>helper_suggestionsテーブル（Groq APIが生成）</td>
+                </tr>
+                <tr>
+                    <td><strong>解決ノート</strong></td>
+                    <td>解決内容、効果評価、解決日時</td>
+                    <td>resolution_notes、effectiveness、resolved_atフィールド</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>AIコンテキスト分析の活用：</strong>
+                AIコンテキスト分析は、リクエスターが入力した説明だけでは伝わりにくい「暗黙の背景情報」を自動的に補完します。例えば、「データベース接続エラー」という説明だけでは、どのデータベース、どの環境、どの操作で発生したかが不明ですが、AIコンテキスト分析により「過去7日間でPostgreSQLへの接続処理を3回変更、最新のコミットで接続タイムアウト値を変更」といった具体的な情報が抽出されます。これにより、ヘルパーは問題の原因を迅速に特定できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.8 AIによる推奨ヘルパーマッチング -->
+    <div id="subsection-15-8" class="manual-subsection">
+        <h3>15.8 AIによる推奨ヘルパーマッチング</h3>
+        <div class="description-box">
+            <p>
+                AIによる推奨ヘルパーマッチングは、ヘルプリクエストシステムの中核機能です。リクエストが作成されると、バックエンドAPIがGroq
+                APIを呼び出し、①スキルマッチ度（リクエストに必要なスキルとヘルパーのスキルの一致度、0-100%）、②可用性スコア（現在の作業負荷と空き時間、0-100%）、③経験値スコア（過去の解決実績と類似タスクの経験、0-100%）という3つの指標を算出します。さらに、これら3つを総合した総合マッチ度（total_match_score、0-100%）と、AI推奨理由（ai_reasoning、日本語の文章）が生成されます。推奨ヘルパーは総合マッチ度の降順でソートされ、90%以上は「推奨(高)」（緑バッジ）、80-89%は「推奨」（青バッジ）、80%未満は「候補」（グレーバッジ）として表示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('helper-suggestion')">
+            <img id="helper-suggestion" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">マッチ度指標</th>
+                    <th style="width: 35%;">評価内容</th>
+                    <th style="width: 40%;">計算方法（AI判断）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>スキルマッチ度</strong></td>
+                    <td>リクエストに必要なスキルとの一致度</td>
+                    <td>タスクの技術タグとヘルパーのスキルテーブルを比較</td>
+                </tr>
+                <tr>
+                    <td><strong>可用性スコア</strong></td>
+                    <td>現在の作業負荷と空き時間</td>
+                    <td>割り当て済みタスク数、今週の作業時間、休暇予定を考慮</td>
+                </tr>
+                <tr>
+                    <td><strong>経験値スコア</strong></td>
+                    <td>過去の解決実績と類似タスクの経験</td>
+                    <td>help_requestsテーブルの解決数、類似タスクの担当履歴</td>
+                </tr>
+                <tr>
+                    <td><strong>総合マッチ度</strong></td>
+                    <td>上記3つを総合した最終スコア</td>
+                    <td>加重平均（スキル40%、可用性30%、経験30%）</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">推奨レベル</th>
+                    <th style="width: 20%;">総合スコア</th>
+                    <th style="width: 20%;">バッジカラー</th>
+                    <th style="width: 40%;">推奨アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>推奨(高)</strong></td>
+                    <td>90%以上</td>
+                    <td><span class="badge-low">推奨(高)</span></td>
+                    <td>最優先候補、即座に割り当てを推奨</td>
+                </tr>
+                <tr>
+                    <td><strong>推奨</strong></td>
+                    <td>80-89%</td>
+                    <td><span class="badge-assigned">推奨</span></td>
+                    <td>有力候補、上位候補が対応不可の場合に割り当て</td>
+                </tr>
+                <tr>
+                    <td><strong>候補</strong></td>
+                    <td>80%未満</td>
+                    <td><span
+                            style="background: #6b7280; color: white; padding: 8px 16px; border-radius: 8px;">候補</span>
+                    </td>
+                    <td>代替候補、他に適任者がいない場合のみ検討</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>AIマッチングの限界：</strong>
+                AIマッチングは、データベース上のスキル情報と過去の実績データに基づいて推奨を行いますが、「人間関係」「コミュニケーションスタイルの相性」「最近の業務状況（例:
+                家族の事情で今週は忙しい）」といった定性的な要素は考慮できません。推奨スコアが高くても、実際に割り当てる前に、そのヘルパーの現在の状況を確認し、本人の同意を得ることが重要です。また、スキル情報が古い（半年以上更新されていない）場合、マッチング精度が低下するため、定期的なスキル情報の更新を促してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.9 ヘルパー割り当てと解決フロー -->
+    <div id="subsection-15-9" class="manual-subsection">
+        <h3>15.9 ヘルパー割り当てと解決フロー</h3>
+        <div class="description-box">
+            <p>
+                ヘルプリクエストの典型的なライフサイクルは、①作成（open）→②割り当て（assigned）→③対応開始（in_progress）→④解決（resolved）という4段階で進行します。①リクエストカードの「ヘルパー割り当て」ボタンをクリックすると、割り当てモーダルが開き、全メンバーのドロップダウンリストから手動でヘルパーを選択できます（推奨ヘルパーからワンクリック割り当ても可能）。②割り当てが完了すると、ステータスが「assigned」に変更され、ヘルパーにメール通知が送信されます（機能未実装の場合あり）。③ヘルパーが対応を開始すると、ステータスを「in_progress」に手動変更します。④問題が解決したら、「解決」ボタンをクリックして解決モーダルを開き、解決ノート（必須）と効果評価（4段階）を入力して完了します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('assign-resolve-flow')">
+            <img id="assign-resolve-flow" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">ステップ</th>
+                    <th style="width: 20%;">アクション</th>
+                    <th style="width: 25%;">操作方法</th>
+                    <th style="width: 40%;">結果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>①作成</strong></td>
+                    <td>リクエスト作成</td>
+                    <td>新規リクエスト作成フォームに入力 → 作成ボタン</td>
+                    <td>ステータス=open、AIコンテキスト分析と推奨ヘルパーが自動生成</td>
+                </tr>
+                <tr>
+                    <td><strong>②割り当て</strong></td>
+                    <td>ヘルパー選択</td>
+                    <td>リクエストカードの「ヘルパー割り当て」ボタン → ドロップダウンで選択 → 割り当て</td>
+                    <td>ステータス=assigned、assigned_toフィールドにヘルパーIDが保存</td>
+                </tr>
+                <tr>
+                    <td><strong>③対応開始</strong></td>
+                    <td>ステータス変更</td>
+                    <td>（手動でステータスを「in_progress」に変更する機能は未実装の可能性）</td>
+                    <td>ステータス=in_progress</td>
+                </tr>
+                <tr>
+                    <td><strong>④解決</strong></td>
+                    <td>解決ノート入力</td>
+                    <td>リクエストカードの「解決」ボタン → 解決ノート入力 → 効果評価選択 → 解決</td>
+                    <td>ステータス=resolved、resolution_notes、effectiveness、resolved_atが保存</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">効果評価</th>
+                    <th style="width: 35%;">意味</th>
+                    <th style="width: 40%;">使用例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>very_effective（非常に効果的）</strong></td>
+                    <td>問題が完全に解決し、追加対応不要</td>
+                    <td>根本原因を特定し、再発防止策も実施</td>
+                </tr>
+                <tr>
+                    <td><strong>effective（効果的）</strong></td>
+                    <td>問題は解決したが、一部改善余地あり</td>
+                    <td>暫定対処で問題は解決したが、長期的な改善が必要</td>
+                </tr>
+                <tr>
+                    <td><strong>somewhat_effective（やや効果的）</strong></td>
+                    <td>部分的に解決したが、完全ではない</td>
+                    <td>一部の問題は解決したが、別の問題が残っている</td>
+                </tr>
+                <tr>
+                    <td><strong>not_effective（効果なし）</strong></td>
+                    <td>解決に至らなかった</td>
+                    <td>試した方法が効果なく、別のアプローチが必要</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>現在のシステムでは、ステータスの「assigned」→「in_progress」への変更は、手動で行う必要がある可能性があります（UIに専用ボタンがない場合）。この場合、データベースを直接更新するか、バックエンドAPIに新しいエンドポイントを追加する必要があります。また、ヘルパーへのメール通知機能は、バックエンドに実装されている可能性がありますが、SMTP設定が必要なため、環境によっては動作しない場合があります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 15.10 活用シーンとベストプラクティス -->
+    <div id="subsection-15-10" class="manual-subsection">
+        <h3>15.10 活用シーンとベストプラクティス</h3>
+        <div class="description-box">
+            <p>
+                ヘルプリクエストシステムを効果的に活用するためのベストプラクティスとして、5つのワークフローを推奨します。①困った時の即座のリクエスト作成（30分以上悩んだら作成）、②朝礼でのオープンリクエスト確認（毎日9:00-9:10）、③週次でのトップヘルパー表彰（毎週金曜夕方）、④月次での解決率・平均解決日数レビュー（毎月第1営業日）、⑤四半期でのヘルパー育成計画（解決実績の少ないメンバーへのサポート）という5段階のサイクルを確立することで、ヘルプリクエストをチーム文化として定着させ、助け合いの習慣を促進できます。特に重要なのは、「困った時に助けを求めることは恥ずかしいことではない」という心理的安全性の醸成です。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('best-practices-help')">
+            <img id="best-practices-help" src="../image/web-admin/800x500.png" />
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <i class="bi bi-1-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>困った時の即座のリクエスト作成（30分ルール）</h6>
+                    <p>
+                        <strong>目的：</strong> 長時間の悩みを防ぎ、早期解決を実現<br>
+                        <strong>手順：</strong> ①問題に直面し、30分間自力で調査 → ②解決しない場合、ヘルプリクエストを作成 → ③タスクID、タイトル、説明を簡潔に入力（5分以内） →
+                        ④AIコンテキスト自動生成をONにして作成 → ⑤推奨ヘルパーリストを確認し、最適なヘルパーに割り当て<br>
+                        <strong>所要時間：</strong> 5-10分<br>
+                        <strong>成功指標：</strong> 1日以内に解決、または有益なアドバイスを受ける
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-2-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>朝礼でのオープンリクエスト確認（毎日9:00-9:10）</h6>
+                    <p>
+                        <strong>目的：</strong> 未対応リクエストをゼロにし、チーム全体でサポート意識を高める<br>
+                        <strong>手順：</strong> ①朝礼開始前にヘルプリクエスト画面を開く → ②フィルターで「ステータス=オープン」に設定 →
+                        ③オープンリクエスト件数を確認（5件以上の場合は要注意） → ④緊急度「critical」のリクエストを最優先で割り当て →
+                        ⑤朝礼で「今日のオープンリクエストは○件です。特に緊急度の高いリクエストは△件あるので、手が空いている方はサポートをお願いします」とアナウンス<br>
+                        <strong>所要時間：</strong> 5-10分<br>
+                        <strong>成功指標：</strong> 当日中にオープンリクエストが50%以上減少
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-3-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>週次でのトップヘルパー表彰（毎週金曜17:00）</h6>
+                    <p>
+                        <strong>目的：</strong> サポート文化を促進し、貢献者に感謝を伝える<br>
+                        <strong>手順：</strong> ①金曜日の夕方にヘルプリクエスト画面を開く → ②トップヘルパーランキングを確認 → ③今週の解決数トップ3を抽出 →
+                        ④週次ミーティングで「今週のトップヘルパーは○○さん（解決数△件）、××さん（解決数□件）、◇◇さん（解決数☆件）でした。ありがとうございました！」と表彰 →
+                        ⑤SlackやTeamsで全体に共有<br>
+                        <strong>所要時間：</strong> 5分<br>
+                        <strong>成功指標：</strong> トップヘルパーの継続的な貢献、他メンバーのサポート意欲向上
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-4-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>月次での解決率・平均解決日数レビュー（毎月第1営業日10:00）</h6>
+                    <p>
+                        <strong>目的：</strong> ヘルプリクエストシステムの健全性を定量評価し、改善策を立案<br>
+                        <strong>手順：</strong> ①月初にヘルプリクエスト画面を開く → ②統計ダッシュボードの6指標を記録（Excelやスプレッドシートに月次推移を記録） →
+                        ③解決率が70%未満、または平均解決日数が3日以上の場合は要改善 → ④原因分析（ヘルパー不足、緊急度の設定ミス、AIマッチング精度の問題など） → ⑤改善策を立案し、チームで共有<br>
+                        <strong>所要時間：</strong> 15-20分<br>
+                        <strong>成功指標：</strong> 解決率が前月比で5%以上改善、平均解決日数が0.5日以上短縮
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-5-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>四半期でのヘルパー育成計画（3ヶ月ごと）</h6>
+                    <p>
+                        <strong>目的：</strong> 解決実績の少ないメンバーをサポートし、チーム全体のヘルプ能力を向上<br>
+                        <strong>手順：</strong> ①四半期末にトップヘルパーランキングを確認 → ②過去3ヶ月で解決数が0-2件のメンバーをリストアップ →
+                        ③各メンバーに個別面談を設定し、「ヘルプリクエストに対応しにくい理由」をヒアリング（時間不足、スキル不足、心理的ハードルなど） → ④原因に応じた支援策を実施（例:
+                        時間不足→タスク負荷調整、スキル不足→ペアサポート、心理的ハードル→メンタリング） → ⑤次四半期でフォローアップ<br>
+                        <strong>所要時間：</strong> 2-3時間（全メンバー分）<br>
+                        <strong>成功指標：</strong> 次四半期で解決数ゼロメンバーが50%以上減少
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>心理的安全性の醸成：</strong>
+                ヘルプリクエストシステムの成功の鍵は、「困った時に助けを求めることは恥ずかしいことではない」という文化を作ることです。リーダー自身が積極的にヘルプリクエストを作成し、「私もわからないことがある」という姿勢を見せることで、メンバーは安心して助けを求められるようになります。また、「解決できなかった」リクエストに対してもネガティブな評価をせず、「一緒に考えよう」というポジティブなフィードバックを心がけてください。
+            </p>
+        </div>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>依存症の防止：</strong>
+                ヘルプリクエストは便利な機能ですが、「何でも人に聞く」という依存症を生む危険性もあります。30分ルールを厳守し、最低限の自力調査を行った上で作成することを徹底してください。また、同じメンバーが週に5件以上リクエストを作成している場合は、スキル不足やタスク難易度の問題がある可能性があるため、1on1でフォローアップすることを推奨します。
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- ギャラリーモーダル -->
+    <div id="galleryModal" class="gallery-modal" onclick="closeGallery()">
+        <span class="close-modal">&times;</span>
+        <img id="galleryImage" src="" alt="拡大画像">
+</section>

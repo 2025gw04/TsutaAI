@@ -1,0 +1,691 @@
+<!-- セッション 11: 作業報告 -->
+<section id="section-11" class="manual-section">
+    <h2>11. 作業報告（/work-reports）</h2>
+    <p>メンバーの日報と作業ログを管理し、AIによる自動生成機能を提供します。</p>
+
+    <!-- 11.1 画面概要 -->
+    <div id="subsection-11-1" class="manual-subsection">
+        <h3>11.1 画面概要</h3>
+        <div class="description-box">
+            <p>作業報告画面は、チームメンバーの日報と作業ログを一元的に管理・分析するための画面です。日報には満足度、達成率、集中度、難易度、学習度などの5つの評価指標と、AIが自動生成した要約が含まれます。作業ログには、各メンバーの活動種別（コーディング、会議、レビューなど）と作業時間が記録されます。フィルタ機能により、特定のメンバー・日付のデータを絞り込んで表示でき、表示モードを切り替えて日報のみ、作業ログのみ、または両方を同時に表示できます。詳細モーダルでは、各データの完全な情報を確認でき、チームのパフォーマンス分析や個別メンバーの成長支援に活用できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('work-reports-overview')">
+            <img id="work-reports-overview" src="../image/web-admin/800x500.png" alt="作業報告画面全体">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>機能カテゴリ</th>
+                    <th>提供する情報</th>
+                    <th>主な用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>日報管理</strong></td>
+                    <td>満足度、達成率、集中度、難易度、学習度、AI生成要約</td>
+                    <td>メンバーのパフォーマンス評価、モチベーション管理</td>
+                </tr>
+                <tr>
+                    <td><strong>作業ログ管理</strong></td>
+                    <td>活動種別、作業時間、メモ、開始・終了時刻</td>
+                    <td>時間管理、活動分析、リソース配分の最適化</td>
+                </tr>
+                <tr>
+                    <td><strong>フィルタ機能</strong></td>
+                    <td>メンバー別、日付別、表示モード別のデータ絞り込み</td>
+                    <td>特定の分析、問題の特定、トレンド分析</td>
+                </tr>
+                <tr>
+                    <td><strong>詳細表示</strong></td>
+                    <td>各データの完全な情報、コメント、メモ</td>
+                    <td>詳細な分析、フィードバック、改善提案</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>データ活用のポイント:</strong>
+                日報データはメンバーの定期的な1on1ミーティングで活用し、満足度の低下や学習度の停滞を早期に発見しましょう。作業ログデータはプロジェクトのリソース配分分析に活用し、特定の活動種別に時間が集中していないか確認します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.2 フィルタパネル -->
+    <div id="subsection-11-2" class="manual-subsection">
+        <h3>11.2 フィルタパネル</h3>
+        <div class="description-box">
+            <p>画面上部に配置されたフィルタパネルでは、表示するデータを柔軟に絞り込めます。メンバー選択ドロップダウンでは、全メンバーまたは特定のメンバーを選択でき、日付選択では特定の日付のデータのみを表示できます。表示モードでは「日報
+                +
+                作業ログ」「日報のみ」「作業ログのみ」の3つから選択でき、分析目的に応じて最適な表示形式を選べます。フィルタをクリアボタンで、すべてのフィルタ条件を一括でリセットできます。フィルタ条件を変更すると、リアルタイムで表示データが更新され、即座に分析結果を確認できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('filter-panel')">
+            <img id="filter-panel" src="../image/web-admin/800x500.png" alt="フィルタパネル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>フィルタ項目</th>
+                    <th>選択肢</th>
+                    <th>用途</th>
+                    <th>デフォルト値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>メンバー</strong></td>
+                    <td>すべてのメンバー、各メンバー名</td>
+                    <td>特定メンバーのパフォーマンス分析</td>
+                    <td>すべてのメンバー</td>
+                </tr>
+                <tr>
+                    <td><strong>日付</strong></td>
+                    <td>カレンダーから日付選択</td>
+                    <td>特定日の状況確認、日次分析</td>
+                    <td>未選択（全期間）</td>
+                </tr>
+                <tr>
+                    <td><strong>表示モード</strong></td>
+                    <td>日報 + 作業ログ、日報のみ、作業ログのみ</td>
+                    <td>分析対象の絞り込み、画面整理</td>
+                    <td>日報 + 作業ログ</td>
+                </tr>
+                <tr>
+                    <td><strong>フィルタクリア</strong></td>
+                    <td>ボタンクリックで全フィルタリセット</td>
+                    <td>分析のリセット、全体表示への戻り</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>フィルタの組み合わせ:</strong> 複数のフィルタ条件を組み合わせて使用できます。例えば「特定メンバー + 特定日付 +
+                日報のみ」のように絞り込むことで、非常に詳細な分析が可能です。フィルタ条件はURLパラメータとして保存され、ブラウザの戻るボタンで前の状態に戻ることもできます。</p>
+        </div>
+    </div>
+
+    <!-- 11.3 日報テーブル -->
+    <div id="subsection-11-3" class="manual-subsection">
+        <h3>11.3 日報テーブル</h3>
+        <div class="description-box">
+            <p>日報テーブルには、各メンバーの日報データが一覧表示されます。テーブルには日付、メンバー名、満足度（絵文字と数値）、達成率（プログレスバー）、要約（省略表示）、操作ボタンの6列が含まれます。満足度は5段階評価で、😊😐😞の絵文字で視覚的に表現され、達成率は緑色のプログレスバーで0-100%を表示します。要約は300文字以内で表示され、長い場合は省略されます。各行の詳細ボタンをクリックすると、日報詳細モーダルが開き、完全な情報を確認できます。テーブルは日付の降順でソートされ、最新の日報が上部に表示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('daily-reports-table')">
+            <img id="daily-reports-table" src="../image/web-admin/800x500.png" alt="日報テーブル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>列名</th>
+                    <th>表示内容</th>
+                    <th>データ型</th>
+                    <th>特徴</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>日付</strong></td>
+                    <td>report_date（YYYY/MM/DD形式）</td>
+                    <td>日付</td>
+                    <td>日本語形式で表示</td>
+                </tr>
+                <tr>
+                    <td><strong>メンバー</strong></td>
+                    <td>user_name（メンバーの氏名）</td>
+                    <td>テキスト</td>
+                    <td>不明の場合は「不明」と表示</td>
+                </tr>
+                <tr>
+                    <td><strong>満足度</strong></td>
+                    <td>satisfaction_level（1-5）+ 絵文字</td>
+                    <td>バッジ</td>
+                    <td>😊(4-5)、😐(3)、😞(1-2)</td>
+                </tr>
+                <tr>
+                    <td><strong>達成率</strong></td>
+                    <td>achievement_rate（0-100%）</td>
+                    <td>プログレスバー</td>
+                    <td>緑色、パーセンテージ表示</td>
+                </tr>
+                <tr>
+                    <td><strong>要約</strong></td>
+                    <td>summary（AI生成または手入力）</td>
+                    <td>テキスト</td>
+                    <td>300文字で省略、text-truncate</td>
+                </tr>
+                <tr>
+                    <td><strong>操作</strong></td>
+                    <td>詳細ボタン</td>
+                    <td>ボタン</td>
+                    <td>クリックで詳細モーダルを開く</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>満足度の読み解き方:</strong>
+                満足度が3以下のメンバーが続く場合は、何らかの問題が発生している可能性があります。達成率が高いにもかかわらず満足度が低い場合は、過負荷や技術的困難が原因かもしれません。逆に満足度が高いが達成率が低い場合は、タスクの難易度が低すぎる可能性があります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.4 作業ログテーブル -->
+    <div id="subsection-11-4" class="manual-subsection">
+        <h3>11.4 作業ログテーブル</h3>
+        <div class="description-box">
+            <p>作業ログテーブルには、各メンバーの作業ログが時系列で表示されます。テーブルには開始時刻、メンバー名、作業時間、活動種別、操作ボタンの5列が含まれます。開始時刻は日本語形式の日時で表示され、作業時間は「X時間Y分」の形式で分かりやすく表示されます。活動種別は8種類（コーディング、会議、レビュー、計画、テスト、ドキュメント作成、調査、その他）からなり、それぞれ色分けされたバッジで表示されます。作業ログは開始時刻の降順でソートされ、最新の作業が上部に表示されます。詳細ボタンをクリックすると、作業ログ詳細モーダルが開きます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('work-logs-table')">
+            <img id="work-logs-table" src="../image/web-admin/800x500.png" alt="作業ログテーブル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>列名</th>
+                    <th>表示内容</th>
+                    <th>データ型</th>
+                    <th>特徴</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>開始時刻</strong></td>
+                    <td>start_time（YYYY/MM/DD HH:MM形式）</td>
+                    <td>日時</td>
+                    <td>日本語形式で表示</td>
+                </tr>
+                <tr>
+                    <td><strong>メンバー</strong></td>
+                    <td>user_name（メンバーの氏名）</td>
+                    <td>テキスト</td>
+                    <td>不明の場合は「不明」と表示</td>
+                </tr>
+                <tr>
+                    <td><strong>作業時間</strong></td>
+                    <td>duration_minutes（分）</td>
+                    <td>バッジ</td>
+                    <td>「X時間Y分」形式で変換表示</td>
+                </tr>
+                <tr>
+                    <td><strong>活動種別</strong></td>
+                    <td>activity_type（8種類）</td>
+                    <td>バッジ</td>
+                    <td>日本語ラベル、色分け</td>
+                </tr>
+                <tr>
+                    <td><strong>操作</strong></td>
+                    <td>詳細ボタン</td>
+                    <td>ボタン</td>
+                    <td>クリックで詳細モーダルを開く</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>活動種別</th>
+                    <th>日本語ラベル</th>
+                    <th>バッジ色</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>coding</td>
+                    <td>コーディング</td>
+                    <td>青</td>
+                    <td>プログラミング、実装作業</td>
+                </tr>
+                <tr>
+                    <td>meeting</td>
+                    <td>会議</td>
+                    <td>紫</td>
+                    <td>各種ミーティング、打ち合わせ</td>
+                </tr>
+                <tr>
+                    <td>review</td>
+                    <td>レビュー</td>
+                    <td>緑</td>
+                    <td>コードレビュー、設計レビュー</td>
+                </tr>
+                <tr>
+                    <td>planning</td>
+                    <td>計画</td>
+                    <td>橙</td>
+                    <td>プロジェクト計画、タスク計画</td>
+                </tr>
+                <tr>
+                    <td>testing</td>
+                    <td>テスト</td>
+                    <td>赤</td>
+                    <td>単体テスト、結合テスト</td>
+                </tr>
+                <tr>
+                    <td>documentation</td>
+                    <td>ドキュメント作成</td>
+                    <td>水色</td>
+                    <td>仕様書、マニュアル作成</td>
+                </tr>
+                <tr>
+                    <td>research</td>
+                    <td>調査</td>
+                    <td>黄</td>
+                    <td>技術調査、市場調査</td>
+                </tr>
+                <tr>
+                    <td>other</td>
+                    <td>その他</td>
+                    <td>灰</td>
+                    <td>上記以外の活動</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>活動種別の分析:</strong>
+                作業ログデータを活動種別で集計することで、チームの時間配分を分析できます。理想的な配分はプロジェクトのフェーズによって異なりますが、一般的に「コーディング:60%、会議:15%、レビュー:10%、その他:15%」が目安です。会議時間が30%を超える場合は、会議の効率化を検討すべきです。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.5 日報詳細モーダル -->
+    <div id="subsection-11-5" class="manual-subsection">
+        <h3>11.5 日報詳細モーダル</h3>
+        <div class="description-box">
+            <p>日報詳細モーダルは、日報テーブルの詳細ボタンをクリックすると開く大型モーダルです。モーダル上部には日付とメンバー名が表示され、評価指標セクションでは満足度、達成率、集中度、難易度の4つの指標が色分けされたバッジで表示されます。学習度はプログレスバーで0-100%を視覚的に示します。要約セクションにはAI生成または手入力された日報の要約が表示され、コメントセクションにはメンバーの自由記述があれば表示されます。モーダル下部にはAI生成フラグと作成日時が表示され、データの信頼性を確認できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('daily-report-modal')">
+            <img id="daily-report-modal" src="../image/web-admin/800x500.png" alt="日報詳細モーダル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>セクション</th>
+                    <th>表示内容</th>
+                    <th>データソース</th>
+                    <th>特徴</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>基本情報</strong></td>
+                    <td>日付、メンバー名</td>
+                    <td>report_date, user_name</td>
+                    <td>モーダルヘッダーに表示</td>
+                </tr>
+                <tr>
+                    <td><strong>評価指標</strong></td>
+                    <td>満足度、達成率、集中度、難易度</td>
+                    <td>satisfaction_level, achievement_rate, focus_level, difficulty_level</td>
+                    <td>色分けバッジ、数値表示</td>
+                </tr>
+                <tr>
+                    <td><strong>学習度</strong></td>
+                    <td>学習度プログレスバー</td>
+                    <td>learning_level</td>
+                    <td>0-100%、紫色プログレスバー</td>
+                </tr>
+                <tr>
+                    <td><strong>要約</strong></td>
+                    <td>日報の要約テキスト</td>
+                    <td>summary</td>
+                    <td>薄い背景、完全なテキスト</td>
+                </tr>
+                <tr>
+                    <td><strong>コメント</strong></td>
+                    <td>メンバーの自由記述</td>
+                    <td>comment</td>
+                    <td>存在する場合のみ表示</td>
+                </tr>
+                <tr>
+                    <td><strong>メタ情報</strong></td>
+                    <td>AI生成フラグ、作成日時</td>
+                    <td>ai_generated, created_at</td>
+                    <td>小文字、薄い色で表示</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>評価指標の解釈:</strong>
+                満足度と達成率の相関関係に注目してください。満足度が高く達成率も高い場合は理想的な状態です。満足度が低いが達成率が高い場合は、過負荷の可能性があります。満足度が高いが達成率が低い場合は、タスクが簡単すぎるか、時間管理に問題がある可能性があります。集中度と難易度のバランスも重要な指標です。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.6 作業ログ詳細モーダル -->
+    <div id="subsection-11-6" class="manual-subsection">
+        <h3>11.6 作業ログ詳細モーダル</h3>
+        <div class="description-box">
+            <p>作業ログ詳細モーダルは、作業ログテーブルの詳細ボタンをクリックすると開くモーダルです。モーダル上部にはメンバー名と活動種別がバッジで表示されます。基本情報セクションでは開始時刻と終了時刻が日本語形式で表示され、作業時間セクションには「X時間Y分」の形式で大きな文字で作業時間が表示されます。メモセクションには、作業ログに記録されたメモがあれば表示され、作業の詳細な内容を確認できます。モーダル下部には作成日時が表示され、データの鮮度を確認できます。シンプルな構造ながら、作業の詳細な情報を効率的に確認できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('work-log-modal')">
+            <img id="work-log-modal" src="../image/web-admin/800x500.png" alt="作業ログ詳細モーダル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>セクション</th>
+                    <th>表示内容</th>
+                    <th>データソース</th>
+                    <th>特徴</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>基本情報</strong></td>
+                    <td>メンバー名、活動種別</td>
+                    <td>user_name, activity_type</td>
+                    <td>モーダルヘッダー、バッジ表示</td>
+                </tr>
+                <tr>
+                    <td><strong>時刻情報</strong></td>
+                    <td>開始時刻、終了時刻</td>
+                    <td>start_time, end_time</td>
+                    <td>日本語形式の日時表示</td>
+                </tr>
+                <tr>
+                    <td><strong>作業時間</strong></td>
+                    <td>作業時間（変換後）</td>
+                    <td>duration_minutes</td>
+                    <td>大きな文字、情報ボックス</td>
+                </tr>
+                <tr>
+                    <td><strong>メモ</strong></td>
+                    <td>作業に関するメモ</td>
+                    <td>notes</td>
+                    <td>存在する場合のみ表示</td>
+                </tr>
+                <tr>
+                    <td><strong>メタ情報</strong></td>
+                    <td>作成日時</td>
+                    <td>created_at</td>
+                    <td>小文字、薄い色で表示</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>作業時間の分析:</strong>
+                作業ログ詳細モーダルで表示される作業時間は、デスクトップアプリが自動的に記録した正確な時間です。手動で入力された時間ではないため、信頼性が高いデータです。このデータを活用して、各メンバーの実際の作業時間と計画時間の乖離を分析し、見積もりの精度向上に役立ててください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.7 評価指標の詳細 -->
+    <div id="subsection-11-7" class="manual-subsection">
+        <h3>11.7 評価指標の詳細</h3>
+        <div class="description-box">
+            <p>日報には5つの評価指標が含まれ、メンバーのパフォーマンスを多角的に評価します。満足度は1-5段階で、その日の仕事に対する主観的な満足度を示します。達成率は0-100%で、計画したタスクのうちどれだけ完了したかを示します。集中度は0-100%で、作業中の集中レベルをAIが分析した値です。難易度は0-100%で、取り組んだタスクの難易度を評価します。学習度は0-100%で、その日に新しいスキルや知識をどれだけ学習したかを示します。これらの指標を組み合わせることで、メンバーの成長や課題を総合的に把握できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('evaluation-metrics')">
+            <img id="evaluation-metrics" src="../image/web-admin/800x500.png" alt="評価指標の詳細">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>評価指標</th>
+                    <th>範囲</th>
+                    <th>評価方法</th>
+                    <th>活用方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge-satisfaction">満足度</span></td>
+                    <td>1-5段階</td>
+                    <td>メンバーの主観的評価</td>
+                    <td>モチベーション管理、環境改善</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-achievement">達成率</span></td>
+                    <td>0-100%</td>
+                    <td>完了タスク数/計画タスク数</td>
+                    <td>生産性評価、計画精度分析</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-focus">集中度</span></td>
+                    <td>0-100%</td>
+                    <td>AIによる活動分析</td>
+                    <td>作業環境評価、集中時間分析</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-difficulty">難易度</span></td>
+                    <td>0-100%</td>
+                    <td>メンバーの主観的評価</td>
+                    <td>タスク配分の適正化、スキルマッチ</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-learning">学習度</span></td>
+                    <td>0-100%</td>
+                    <td>AIによる学習活動分析</td>
+                    <td>成長評価、教育計画の策定</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>評価指標の相関分析:</strong>
+                各指標間の相関関係を分析することで、より深い洞察が得られます。例えば「難易度が高いほど学習度も高い」「集中度が高いほど達成率も高い」といった相関が見られる場合、チームの強みや改善点を特定できます。逆に相関が期待通りでない場合は、何らかの問題が隠れている可能性があります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.8 AI生成日報 -->
+    <div id="subsection-11-8" class="manual-subsection">
+        <h3>11.8 AI生成日報</h3>
+        <div class="description-box">
+            <p>AI生成日報は、デスクトップアプリが自動的に収集した作業ログ、Gitコミット、ファイル変更差分などのデータをAIが分析して自動生成する日報です。AIは1日の活動を要約し、主要な成果、直面した課題、学習したことなどを自然言語で記述します。AI生成フラグが付いた日報は、手入力によるバイアスがなく、客観的なデータに基づいているため信頼性が高いです。AI生成日報は、メンバーが日報作成に費やす時間を削減し、より重要な業務に集中できるようにします。また、AIが人間では気づきにくい活動パターンや改善点を指摘することもあります。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('ai-generated-report')">
+            <img id="ai-generated-report" src="../image/web-admin/800x500.png" alt="AI生成日報">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>データソース</th>
+                    <th>AIの分析内容</th>
+                    <th>生成される情報</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>作業ログ</strong></td>
+                    <td>活動種別、時間配分、集中度</td>
+                    <td>活動サマリー、生産性評価</td>
+                </tr>
+                <tr>
+                    <td><strong>Gitコミット</strong></td>
+                    <td>コミットメッセージ、変更ファイル数</td>
+                    <td>コード貢献、技術的成果</td>
+                </tr>
+                <tr>
+                    <td><strong>ファイル変更</strong></td>
+                    <td>変更差分、新規作成ファイル</td>
+                    <td>具体的な作業内容、成果物</td>
+                </tr>
+                <tr>
+                    <td><strong>アクティブウィンドウ</strong></td>
+                    <td>使用ツール、アプリケーション</td>
+                    <td>使用技術、ツール習熟度</td>
+                </tr>
+                <tr>
+                    <td><strong>CPU/メモリ使用率</strong></td>
+                    <td>リソース消費パターン</td>
+                    <td>作業効率、環境評価</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>AI生成の精度:</strong>
+                AI生成日報の精度は、データの質と量に依存します。デスクトップアプリが正確に活動を記録しているほど、精度の高い日報が生成されます。AI生成日報を参考にしつつ、必要に応じてメンバーが手動で補足・修正することで、より完全な日報を作成できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.9 データ分析と活用 -->
+    <div id="subsection-11-9" class="manual-subsection">
+        <h3>11.9 データ分析と活用</h3>
+        <div class="description-box">
+            <p>作業報告画面で収集されたデータは、チームマネジメントやプロジェクト改善に多角的に活用できます。日報データを時系列で分析することで、メンバーのモチベーション変動や成長トレンドを把握できます。満足度の低下傾向を早期に発見し、原因究明と対策を実施できます。作業ログデータを活動種別で集計することで、チームの時間配分の最適化や非効率な活動の特定ができます。週次・月次でデータを集計し、チーム全体のパフォーマンスを評価し、経営層への報告資料として活用することも可能です。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('data-analysis')">
+            <img id="data-analysis" src="../image/web-admin/800x500.png" alt="データ分析と活用">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>分析目的</th>
+                    <th>使用データ</th>
+                    <th>分析方法</th>
+                    <th>期待される洞察</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>パフォーマンス評価</strong></td>
+                    <td>達成率、満足度、集中度</td>
+                    <td>時系列分析、相関分析</td>
+                    <td>生産性の変動、モチベーション要因</td>
+                </tr>
+                <tr>
+                    <td><strong>スキル成長分析</strong></td>
+                    <td>学習度、難易度、活動種別</td>
+                    <td>トレンド分析、スキルマトリクス</td>
+                    <td>成長速度、習得スキル、課題</td>
+                </tr>
+                <tr>
+                    <td><strong>時間管理分析</strong></td>
+                    <td>作業時間、活動種別</td>
+                    <td>配分分析、効率性評価</td>
+                    <td>時間配分の最適化、非効率の特定</td>
+                </tr>
+                <tr>
+                    <td><strong>チーム健全性評価</strong></td>
+                    <td>全メンバーの評価指標</td>
+                    <td>統計分析、分散評価</td>
+                    <td>チームの均一性、リスク要因</td>
+                </tr>
+                <tr>
+                    <td><strong>プロジェクト改善</strong></td>
+                    <td>難易度、達成率、コメント</td>
+                    <td>課題分析、改善提案</td>
+                    <td>プロセスの問題点、改善策</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>データドリブンなマネジメント:</strong>
+                作業報告データを定期的に分析し、客観的なデータに基づいてマネジメント判断を行うことが重要です。主観的な印象だけで判断するのではなく、データが示す傾向やパターンを重視してください。特に異常値（急激な満足度の低下など）を発見した場合は、迅速に原因究明と対応を行うことで、大きな問題の発生を防げます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 11.10 活用シーンとベストプラクティス -->
+    <div id="subsection-11-10" class="manual-subsection">
+        <h3>11.10 活用シーンとベストプラクティス</h3>
+        <div class="description-box">
+            <p>作業報告画面は、マネージャーとメンバー双方にとって重要なツールです。マネージャーは1on1ミーティングの準備として、メンバーの最近の日報を確認し、満足度の変動や学習度の向上を議論します。週次のチームミーティングでは、作業ログデータを活用してチーム全体の時間配分をレビューし、非効率な活動の改善を検討します。月次のパフォーマンスレビューでは、日報データのトレンド分析を活用して、メンバーの成長を評価し、次期の目標設定に役立てます。メンバー自身も自己のパフォーマンスを振り返り、改善点を特定するために活用できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('best-practices')">
+            <img id="best-practices" src="../image/web-admin/800x500.png" alt="活用シーンとベストプラクティス">
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <h6><i class="bi bi-1-circle-fill"></i> 1on1ミーティング準備（週1回）</h6>
+                <p>ミーティング前にメンバーの直近1週間の日報を確認し、満足度の変動、学習度の傾向、コメント内容を把握します。特に満足度が低下している週があれば、その原因を特定し、ミーティングで深掘りする質問を準備します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-2-circle-fill"></i> チーム週次レビュー（金曜15:00）</h6>
+                <p>週の作業ログデータを活動種別で集計し、チーム全体の時間配分をレビューします。会議時間が30%を超えていないか、コーディング時間が適切に確保されているかを確認し、問題があれば改善策をチームで議論します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-3-circle-fill"></i> 月次パフォーマンス評価（月末）</h6>
+                <p>各メンバーの日報データを月次で集計し、満足度、達成率、学習度のトレンドを分析します。成長が著しいメンバーを称賛し、停滞しているメンバーには具体的な支援策を提案します。データに基づいた客観的な評価を行います。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-4-circle-fill"></i> プロジェクト振り返り（フェーズ終了時）</h6>
+                <p>プロジェクト期間中の作業ログデータを分析し、どの活動に時間がかかったか、難易度が高かったタスクは何だったかをレビューします。次のプロジェクトでの見積もり精度向上や、リソース配分の改善に活かします。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-5-circle-fill"></i> 自己振り返り（メンバー個人）</h6>
+                <p>メンバー自身が自分の日報と作業ログを定期的に確認し、自分のパフォーマンスを客観的に評価します。満足度と達成率の関係、集中度と作業時間の相関などを分析し、自己改善の目標を設定します。</p>
+            </div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>ベストプラクティス</th>
+                    <th>具体的なアクション</th>
+                    <th>期待効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>定期的なレビュー習慣</strong></td>
+                    <td>毎週金曜日にチームの作業報告データを確認する</td>
+                    <td>問題の早期発見、継続的な改善</td>
+                </tr>
+                <tr>
+                    <td><strong>データに基づく対話</strong></td>
+                    <td>1on1で「満足度が3でしたが、何かありましたか？」と具体的に質問</td>
+                    <td>建設的な対話、問題解決の促進</td>
+                </tr>
+                <tr>
+                    <td><strong>ポジティブな強化</strong></td>
+                    <td>学習度が高い日報をチームで共有し、称賛する</td>
+                    <td>学習意欲の向上、良い事例の横展開</td>
+                </tr>
+                <tr>
+                    <td><strong>目標設定との連携</strong></td>
+                    <td>日報データを元に次期のSMART目標を設定</td>
+                    <td>現実的な目標設定、モチベーション維持</td>
+                </tr>
+                <tr>
+                    <td><strong>非効率の特定と改善</strong></td>
+                    <td>会議時間が多いメンバーに会議の効率化を指導</td>
+                    <td>時間管理の改善、生産性向上</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>注意すべき点:</strong>
+                ①日報データを評価だけでなく、成長支援のツールとして活用すること、②満足度の低いメンバーを責めるのではなく、支援することに焦点を当てること、③データだけで判断せず、必ず対話を組み合わせること、④プライバシーに配慮し、個人のデータを不適切に共有しないこと、⑤AI生成日報を鵜呑みにせず、必要に応じて補足情報を求めること。
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>上級者向けテクニック:</strong>
+                作業報告データをスプレッドシートにエクスポートし、ピボットテーブルで多次元的に分析することで、より深い洞察が得られます。「メンバー×活動種別×時間」の3軸で分析したり、「満足度×達成率×難易度」の相関をヒートマップで可視化したりすることで、チームの特性をより詳細に把握できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- ギャラリーモーダル -->
+</section>

@@ -1,0 +1,461 @@
+<!-- セッション 3: ダッシュボード -->
+<section id="section-3" class="manual-section">
+    <h2>3. ダッシュボード（/dashboard）</h2>
+    <p>ログイン後最初に表示される画面で、プロジェクト全体の状況をリアルタイムで把握できます。AIによる自動分析と視覚的なグラフィックスにより、重要な情報を一目で確認できます。</p>
+
+    <div id="subsection-3-1" class="manual-subsection">
+        <h3>3.1 概要</h3>
+        <p>ダッシュボードは、TsutaAI Web管理画面の中心となる画面です。プロジェクトの進捗状況、AIアラート、チームメンバーの稼働状況などを一画面に集約し、管理者が全体像を素早く把握できるように設計されています。</p>
+        
+        <div class="feature-image" onclick="openGallery('dashboard-overview-img')">
+            <img id="dashboard-overview-img" 
+                 src="../image/web-admin/dashboard-overview.png" 
+                 alt="ダッシュボード全体" 
+                 loading="lazy" />
+        </div>
+
+        <h4>主要な機能</h4>
+        <ul class="item-list">
+            <li><strong>メトリクスグリッド</strong> - 総プロジェクト数、アクティブ案件、期限超過タスク、今週の締切の4つの重要指標を表示</li>
+            <li><strong>プロジェクトハイライト</strong> - 各プロジェクトの進捗状況とAI生成サマリーをカード形式で表示</li>
+            <li><strong>AIリスクアラート</strong> - AIが自動検知したリスクと提案を重要度別に表示</li>
+            <li><strong>チームコンディション</strong> - メンバーごとの稼働率と負荷状況を視覚的に表示</li>
+            <li><strong>リアルタイム更新</strong> - WebSocket接続により、他のユーザーの操作が自動的に反映される</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 リアルタイム更新</strong>
+            ダッシュボードはWebSocketで常に最新の情報を受信しています。他のユーザーがプロジェクトを更新したり、新しいタスクを追加すると、自動的に画面が更新されます。
+        </div>
+    </div>
+
+    <div id="subsection-3-2" class="manual-subsection">
+        <h3>3.2 メトリクスグリッド</h3>
+        <p>画面上部に配置された4つのメトリクスカードは、プロジェクト全体の健全性を数値で表します。</p>
+
+        <div class="feature-image" onclick="openGallery('dashboard-metrics-img')">
+            <img id="dashboard-metrics-img" 
+                 src="../image/web-admin/dashboard-metrics.png" 
+                 alt="メトリクスグリッド" 
+                 loading="lazy" />
+        </div>
+
+        <h4>表示される指標</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>指標名</th>
+                    <th>説明</th>
+                    <th>計算方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>総プロジェクト数</td>
+                    <td>システムに登録されている全プロジェクトの数</td>
+                    <td>全プロジェクトをカウント（ステータス問わず）</td>
+                </tr>
+                <tr>
+                    <td>アクティブ案件</td>
+                    <td>現在進行中のプロジェクト数</td>
+                    <td>ステータスが「完了」以外のプロジェクトをカウント</td>
+                </tr>
+                <tr>
+                    <td>期限超過タスク</td>
+                    <td>期限を過ぎているのに未完了のタスク数</td>
+                    <td>期限日が今日より前、かつステータスが「完了」「Done」以外のタスク</td>
+                </tr>
+                <tr>
+                    <td>今週の締切</td>
+                    <td>7日以内に期限を迎えるタスク数</td>
+                    <td>期限日が今日から7日以内のタスクをカウント</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>カードの配色</h4>
+        <ul class="item-list">
+            <li><strong>総プロジェクト数</strong> - 標準の白色カード</li>
+            <li><strong>アクティブ案件</strong> - 青いアクセントカラーで強調表示（重要指標）</li>
+            <li><strong>期限超過タスク</strong> - オレンジの警告カラーで表示（注意が必要）</li>
+            <li><strong>今週の締切</strong> - 標準の白色カード</li>
+        </ul>
+
+        <div class="note">
+            <strong>📊 リアルタイム集計</strong>
+            メトリクスは、プロジェクトやタスクが追加・更新されるたびに自動的に再計算されます。WebSocketによる更新も即座に反映されます。
+        </div>
+    </div>
+
+    <div id="subsection-3-3" class="manual-subsection">
+        <h3>3.3 プロジェクトハイライト</h3>
+        <p>各プロジェクトの進捗状況とAIが生成したサマリーをカード形式で一覧表示します。プロジェクトの現状を素早く把握できる重要なセクションです。</p>
+
+        <div class="feature-image" onclick="openGallery('dashboard-projects-img')">
+            <img id="dashboard-projects-img" 
+                 src="../image/web-admin/dashboard-projects.png" 
+                 alt="プロジェクトハイライト" 
+                 loading="lazy" />
+        </div>
+
+        <h4>プロジェクトカードの構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト名</td>
+                    <td>プロジェクトのタイトル。クリックするとプロジェクト詳細画面に移動</td>
+                </tr>
+                <tr>
+                    <td>進捗率</td>
+                    <td>完了タスク数 ÷ 総タスク数 × 100% で計算されたパーセンテージ</td>
+                </tr>
+                <tr>
+                    <td>プログレスバー</td>
+                    <td>進捗率を視覚的に表示する横棒グラフ（0%～100%）</td>
+                </tr>
+                <tr>
+                    <td>現在のフェーズ</td>
+                    <td>AIが判定した現在の作業フェーズ（例: 設計フェーズ、開発フェーズ）</td>
+                </tr>
+                <tr>
+                    <td>AIサマリーテキスト</td>
+                    <td>AIがプロジェクトの状況を自動分析して生成した要約文</td>
+                </tr>
+                <tr>
+                    <td>タスク統計</td>
+                    <td>総タスク数、完了タスク数、7日以内期限のタスク数</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>AI再生成機能</h4>
+        <p>セクションヘッダーの「🔄 AI再生成」ボタンをクリックすると、すべてのプロジェクトサマリーをAIで再生成します。</p>
+        <ul class="item-list">
+            <li><strong>自動分析</strong> - 各プロジェクトのWBSデータ、タスクステータス、期間情報を元にAIが分析</li>
+            <li><strong>進捗率計算</strong> - 完了タスク数から正確な進捗率を算出</li>
+            <li><strong>フェーズ判定</strong> - タスクの内容と進捗状況から、現在のフェーズを自動判定</li>
+            <li><strong>サマリー生成</strong> - プロジェクトの現状を簡潔に要約したテキストを生成</li>
+            <li><strong>データベース保存</strong> - 生成結果は自動的にデータベースに保存され、再読み込み時も表示される</li>
+        </ul>
+
+        <div class="tip">
+            <strong>🤖 AIサマリーの活用</strong>
+            AIサマリーは、プロジェクトの現状を客観的に評価します。特に、複数のプロジェクトを同時に管理している場合、各プロジェクトの状況を文章で把握できるため、優先順位付けに役立ちます。
+        </div>
+    </div>
+
+    <div id="subsection-3-4" class="manual-subsection">
+        <h3>3.4 AIリスクアラート</h3>
+        <p>AIが自動的に検知したリスク、問題点、改善提案を重要度別に表示します。プロジェクトの潜在的な問題を早期発見できます。</p>
+
+        <div class="feature-image" onclick="openGallery('dashboard-alerts-img')">
+            <img id="dashboard-alerts-img" 
+                 src="../image/web-admin/dashboard-alerts.png" 
+                 alt="AIリスクアラート" 
+                 loading="lazy" />
+        </div>
+
+        <h4>アラートの重要度レベル</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>重要度</th>
+                    <th>表示色</th>
+                    <th>説明</th>
+                    <th>具体例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>高（High）</td>
+                    <td>赤色</td>
+                    <td>緊急対応が必要な重大なリスク</td>
+                    <td>納期遅延の可能性が高い、クリティカルパス上のタスクが遅延</td>
+                </tr>
+                <tr>
+                    <td>中（Medium）</td>
+                    <td>オレンジ色</td>
+                    <td>注意が必要な潜在的リスク</td>
+                    <td>リソース不足の懸念、スキル不足のメンバーへの割り当て</td>
+                </tr>
+                <tr>
+                    <td>低（Low）</td>
+                    <td>青色</td>
+                    <td>改善提案や軽微な問題</td>
+                    <td>タスクの説明が不足、より効率的な方法の提案</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>AI再生成機能</h4>
+        <p>「🔄 AI再生成」ボタンをクリックすると、全プロジェクトのリスク分析を実行します。</p>
+        <ul class="item-list">
+            <li><strong>差分更新方式</strong> - 前回のアラート実行時から変更があったプロジェクトのみを分析（効率的）</li>
+            <li><strong>自動リスク検知</strong> - 納期リスク、リソースリスク、品質リスク、依存関係リスクなど複数の観点で評価</li>
+            <li><strong>解決済みアラートの処理</strong> - 既に問題が解消されたアラートは自動的に「解決済み」ステータスに変更</li>
+            <li><strong>新規アラート生成</strong> - 新たに発見されたリスクはデータベースに保存され、一覧に追加</li>
+            <li><strong>推奨アクション付き</strong> - 各アラートには、AIが提案する具体的な対処方法が含まれる</li>
+        </ul>
+
+        <h4>アラート表示内容</h4>
+        <p>各アラートには以下の情報が表示されます：</p>
+        <ul class="item-list">
+            <li><strong>重要度バッジ</strong> - High / Medium / Low の3段階で視覚的に表示</li>
+            <li><strong>アラートメッセージ</strong> - 問題の内容を簡潔に説明</li>
+            <li><strong>対象プロジェクト</strong> - アラートが発生しているプロジェクト名（該当する場合）</li>
+            <li><strong>生成日時</strong> - アラートが検知された日時</li>
+        </ul>
+
+        <div class="note">
+            <strong>⚠️ アラートの活用方法</strong>
+            高重要度のアラートは、優先的に対処する必要があります。定期的にAI再生成を実行し、新しいリスクが発生していないか確認してください。
+        </div>
+    </div>
+
+    <div id="subsection-3-5" class="manual-subsection">
+        <h3>3.5 チームコンディション</h3>
+        <p>チームメンバーの稼働状況と負荷レベルを視覚的に表示します。過負荷のメンバーを早期発見し、適切なタスク配分を支援します。</p>
+
+        <div class="feature-image" onclick="openGallery('dashboard-team-img')">
+            <img id="dashboard-team-img" 
+                 src="../image/web-admin/dashboard-team.png" 
+                 alt="チームコンディション" 
+                 loading="lazy" />
+        </div>
+
+        <h4>表示される情報</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>メンバー名</td>
+                    <td>フルネームまたはユーザー名で表示</td>
+                </tr>
+                <tr>
+                    <td>負荷スコア</td>
+                    <td>0～120の数値でメンバーの稼働率を表示。100を超えると過負荷状態</td>
+                </tr>
+                <tr>
+                    <td>負荷バー</td>
+                    <td>負荷スコアを横棒グラフで視覚化。色はリスクレベルに応じて変化</td>
+                </tr>
+                <tr>
+                    <td>ステータスラベル</td>
+                    <td>「余裕あり」「適正」「高稼働」「過負荷」の4段階で状態を表示</td>
+                </tr>
+                <tr>
+                    <td>アクティブタスク数</td>
+                    <td>現在進行中のタスク数</td>
+                </tr>
+                <tr>
+                    <td>今週期限タスク数</td>
+                    <td>7日以内に期限を迎えるタスク数</td>
+                </tr>
+                <tr>
+                    <td>今週完了タスク数</td>
+                    <td>今週完了したタスク数</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>負荷スコアの計算方法</h4>
+        <p>負荷スコアは以下の要素から自動計算されます：</p>
+        <ul class="item-list">
+            <li><strong>アクティブタスク数</strong> - 各タスクが15ポイント加算</li>
+            <li><strong>今週期限タスク数</strong> - 各タスクが10ポイント加算（緊急度が高い）</li>
+            <li><strong>完了タスク数</strong> - 各タスクが2ポイント減算（達成感による負荷軽減）</li>
+            <li><strong>ベースライン</strong> - 基本値として30ポイントを加算</li>
+            <li><strong>個人差調整</strong> - ユーザーIDに基づく擬似ランダム値で微調整（0～30ポイント）</li>
+        </ul>
+
+        <h4>リスクレベルの判定</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>負荷スコア</th>
+                    <th>リスクレベル</th>
+                    <th>ステータス</th>
+                    <th>バーの色</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0～49</td>
+                    <td>余裕（Balanced）</td>
+                    <td>「余裕あり」</td>
+                    <td>緑色</td>
+                </tr>
+                <tr>
+                    <td>50～79</td>
+                    <td>適正（Balanced）</td>
+                    <td>「適正」</td>
+                    <td>青色</td>
+                </tr>
+                <tr>
+                    <td>80～99</td>
+                    <td>警告（Warning）</td>
+                    <td>「高稼働」</td>
+                    <td>オレンジ色</td>
+                </tr>
+                <tr>
+                    <td>100以上</td>
+                    <td>危険（Critical）</td>
+                    <td>「過負荷」</td>
+                    <td>赤色</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>💡 タスク配分の最適化</strong>
+            過負荷（赤色）のメンバーがいる場合は、タスクを他のメンバーに再割り当てすることを検討してください。一方、余裕があるメンバー（緑色）には、追加のタスクを割り当てることができます。
+        </div>
+    </div>
+
+    <div id="subsection-3-6" class="manual-subsection">
+        <h3>3.6 リアルタイム更新機能</h3>
+        <p>ダッシュボードは、WebSocket接続により、他のユーザーの操作や変更を自動的に反映します。</p>
+
+        <h4>自動更新される情報</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>更新イベント</th>
+                    <th>ダッシュボードの動作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト作成</td>
+                    <td>プロジェクトハイライトに新しいカードが追加される。メトリクスが自動更新される</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト更新</td>
+                    <td>該当するプロジェクトカードの情報が最新状態に更新される</td>
+                </tr>
+                <tr>
+                    <td>タスク追加・更新</td>
+                    <td>全体データを再読み込みし、メトリクス、プロジェクトカード、チームコンディションが更新される</td>
+                </tr>
+                <tr>
+                    <td>新しいAIアラート</td>
+                    <td>AIリスクアラートセクションに新しいアラートが即座に追加される</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>WebSocket接続状態の確認</h4>
+        <p>サイドバー下部のユーザーカードに、接続状態が表示されます：</p>
+        <ul class="item-list">
+            <li><strong>オンライン（緑色）</strong> - WebSocket接続が正常。リアルタイム更新が有効</li>
+            <li><strong>切断（赤色）</strong> - WebSocket接続が切断。自動再接続を試みます</li>
+        </ul>
+
+        <div class="note">
+            <strong>🔄 手動更新</strong>
+            WebSocket接続が切断された場合や、強制的に最新データを取得したい場合は、各セクションの「🔄 AI再生成」ボタンをクリックしてください。
+        </div>
+    </div>
+
+    <div id="subsection-3-7" class="manual-subsection">
+        <h3>3.7 操作ボタン一覧</h3>
+        <p>ダッシュボード画面には、データを更新するためのボタンが複数配置されています。</p>
+
+        <h4>プロジェクトハイライトセクション</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ボタン名</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>🔄 AI再生成</td>
+                    <td>全プロジェクトのAIサマリーを再生成。進捗率、現在のフェーズ、サマリーテキストを更新</td>
+                </tr>
+                <tr>
+                    <td>📊 データ更新</td>
+                    <td>最新のプロジェクトデータとタスクデータを取得して画面を更新</td>
+                </tr>
+                <tr>
+                    <td>🔄 一括更新</td>
+                    <td>データ更新とAI再生成を連続実行。最新データでAI分析を行う</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>AIリスクアラートセクション</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ボタン名</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>🔄 AI再生成</td>
+                    <td>全プロジェクトのリスク分析を実行。新しいアラートを検知し、解決済みアラートを更新</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>💡 推奨される更新タイミング</strong>
+            プロジェクトやタスクに大きな変更があった場合は、「一括更新」ボタンで最新データとAI分析を同時に実行することをお勧めします。
+        </div>
+    </div>
+
+    <div id="subsection-3-8" class="manual-subsection">
+        <h3>3.8 パフォーマンスとローディング</h3>
+        <p>ダッシュボードは、多くのデータを処理するため、ローディング状態を適切に表示します。</p>
+
+        <h4>ローディング状態</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>状態</th>
+                    <th>表示</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>初期ロード中</td>
+                    <td>全体にローディングスピナーが表示される</td>
+                </tr>
+                <tr>
+                    <td>AI再生成中</td>
+                    <td>該当セクションのボタンが「処理中...」に変化し、クリック不可になる</td>
+                </tr>
+                <tr>
+                    <td>アラート更新中</td>
+                    <td>AIリスクアラートセクションにスピナーが表示される</td>
+                </tr>
+                <tr>
+                    <td>エラー発生時</td>
+                    <td>エラーメッセージが赤いテキストで表示される（例: 「AIアラートの更新に失敗しました。接続環境をご確認ください。」）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>パフォーマンス最適化</h4>
+        <ul class="item-list">
+            <li><strong>並列処理</strong> - プロジェクト、タスク、ユーザーデータを同時に取得（Promise.all）</li>
+            <li><strong>差分更新</strong> - AIアラート再生成は、変更があったプロジェクトのみを分析</li>
+            <li><strong>キャッシュ活用</strong> - AIサマリーとアラートはデータベースに保存され、再読み込み時も高速表示</li>
+            <li><strong>WebSocketによる選択的更新</strong> - 変更があった部分のみを更新し、不要な再描画を回避</li>
+        </ul>
+    </div>
+</section>

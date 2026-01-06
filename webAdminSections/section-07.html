@@ -1,0 +1,665 @@
+<!-- セッション 7: 見積もり管理 -->
+<section id="section-7" class="manual-section">
+    <h2>7. 見積もり管理（/estimates）</h2>
+    <p>AI効率化見積もり機能を使用して、プロジェクトの工数・期間・コストを自動計算する画面です。12種類の見積もりパターンとAI対話機能により、精度の高い見積もりを短時間で作成できます。</p>
+
+    <div id="subsection-7-1" class="manual-subsection">
+        <h3>7.1 概要</h3>
+        <p>見積もり管理画面では、新規見積もりの作成、既存見積もりの確認、編集、削除が行えます。すべての見積もりはカード形式で表示され、ステータスやパターンタイプが一目で分かります。</p>
+        
+        <div class="feature-image" onclick="openGallery('estimates-overview-img')">
+            <img id="estimates-overview-img" 
+                 src="../image/web-admin/estimates-overview.png" 
+                 alt="見積もり一覧画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>主要な機能</h4>
+        <ul class="item-list">
+            <li><strong>カード形式表示</strong> - 各見積もりの概要を視覚的に表示</li>
+            <li><strong>12種類の見積パターン</strong> - プロジェクトの状況に応じた最適なパターン選択</li>
+            <li><strong>AIとの対話形式</strong> - 質問に答えるだけで見積もりが完成</li>
+            <li><strong>AI効率化率算出</strong> - AI活用による工数削減効果を自動計算</li>
+            <li><strong>WBSエクスポート</strong> - 見積もり結果をWBSプロジェクトとして展開</li>
+            <li><strong>ステータス管理</strong> - 下書き、作業中、完了の3状態で管理</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 見積もりの位置づけ</strong>
+            見積もり機能は、プロジェクト開始前の計画段階で使用します。完成した見積もりは「WBSにエクスポート」機能を使って、実際のプロジェクト管理画面に展開できます。これにより、見積もりから実行へシームレスに移行できます。
+        </div>
+    </div>
+
+    <div id="subsection-7-2" class="manual-subsection">
+        <h3>7.2 12種類の見積もりパターン</h3>
+        <p>TsutaAIでは、プロジェクトの制約条件や特性に応じて12種類の見積もりパターンから最適なものを選択できます。各パターンは異なる計算ロジックとAIプロンプトを使用し、最も精度の高い結果を導き出します。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-patterns-img')">
+            <img id="estimates-patterns-img" 
+                 src="../image/web-admin/estimates-patterns.png" 
+                 alt="見積もりパターン選択画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>基本的な見積もりパターン（4種類）</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>パターン</th>
+                    <th>アイコン</th>
+                    <th>適用ケース</th>
+                    <th>主な算出内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>期間未定型</strong></td>
+                    <td>⏱️</td>
+                    <td>プロジェクトの開始日や終了日が未定の場合</td>
+                    <td>必要工数（人日）、推奨期間（営業日）、必要人数</td>
+                </tr>
+                <tr>
+                    <td><strong>期間固定型</strong></td>
+                    <td>📅</td>
+                    <td>納期が決まっており、その期間内で完了させる必要がある場合</td>
+                    <td>必要人数、各フェーズの配分、リスク評価</td>
+                </tr>
+                <tr>
+                    <td><strong>タスクベース型</strong></td>
+                    <td>📋</td>
+                    <td>実施するタスクや機能が明確に定義されている場合</td>
+                    <td>タスク別工数、クリティカルパス、総工数・期間</td>
+                </tr>
+                <tr>
+                    <td><strong>予算固定型</strong></td>
+                    <td>💰</td>
+                    <td>予算が決まっており、その範囲内で実施可能な内容を決める場合</td>
+                    <td>実施可能な機能範囲、優先順位付け、削減候補</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>プロジェクト特性別パターン（4種類）</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>パターン</th>
+                    <th>アイコン</th>
+                    <th>適用ケース</th>
+                    <th>主な算出内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>MVP型</strong></td>
+                    <td>🚀</td>
+                    <td>最小限の価値で市場投入するためのコア機能を優先する場合</td>
+                    <td>コア機能の特定、段階的リリース計画、初期投資最小化</td>
+                </tr>
+                <tr>
+                    <td><strong>フェーズベース型</strong></td>
+                    <td>📊</td>
+                    <td>要件定義・設計・開発などのフェーズ別に段階的に見積もる場合</td>
+                    <td>フェーズ別工数、各フェーズのマイルストーン、段階的予算配分</td>
+                </tr>
+                <tr>
+                    <td><strong>アジャイル型</strong></td>
+                    <td>🔄</td>
+                    <td>スプリントベースの反復開発におけるベロシティを予測する場合</td>
+                    <td>スプリント数、スプリント別ベロシティ、イテレーション計画</td>
+                </tr>
+                <tr>
+                    <td><strong>リスクベース型</strong></td>
+                    <td>⚠️</td>
+                    <td>不確実性やリスクを考慮し、現実的なバッファを含める場合</td>
+                    <td>リスク評価、コンティンジェンシー計画、バッファ配分</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>高度な見積もりパターン（4種類）</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>パターン</th>
+                    <th>アイコン</th>
+                    <th>適用ケース</th>
+                    <th>主な算出内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>スキルベース型</strong></td>
+                    <td>🎓</td>
+                    <td>チームメンバーのスキルレベルを考慮して工数を調整する場合</td>
+                    <td>スキル別生産性、研修期間、最適なチーム編成</td>
+                </tr>
+                <tr>
+                    <td><strong>類似プロジェクト型</strong></td>
+                    <td>📚</td>
+                    <td>過去の類似プロジェクトデータを参考にする場合</td>
+                    <td>類似度分析、実績ベース工数、調整係数適用</td>
+                </tr>
+                <tr>
+                    <td><strong>ハイブリッド型</strong></td>
+                    <td>🔀</td>
+                    <td>複数のアプローチを組み合わせて最適な見積もりを行う場合</td>
+                    <td>複合的な計算、多角的リスク評価、柔軟な調整</td>
+                </tr>
+                <tr>
+                    <td><strong>保守・運用型</strong></td>
+                    <td>🔧</td>
+                    <td>システムの保守・運用フェーズの工数を見積もる場合</td>
+                    <td>月次保守工数、障害対応バッファ、機能追加枠</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>💡 パターン選択のポイント</strong>
+            最適なパターンは、プロジェクトの「最も重要な制約条件」で決まります。納期厳守なら「期間固定型」、予算制約が最優先なら「予算固定型」、スタートアップの初期リリースなら「MVP型」を選択してください。不明な場合は「フェーズベース型」が最も汎用的です。
+        </div>
+    </div>
+
+    <div id="subsection-7-3" class="manual-subsection">
+        <h3>7.3 新規見積もり作成</h3>
+        <p>新規見積もりは、パターン選択 → タイトル入力 → AI対話の3ステップで作成します。AIが質問を投げかけるので、それに答えていくだけで自動的に見積もりが完成します。</p>
+
+        <h4>ステップ1: パターン選択</h4>
+        <p>「新規見積もり」ボタンをクリックすると、12種類のパターンがカテゴリ別にカード形式で表示されます。プロジェクトの制約条件に最も適したパターンを選択してください。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-new-pattern-img')">
+            <img id="estimates-new-pattern-img" 
+                 src="../image/web-admin/estimates-new-pattern.png" 
+                 alt="パターン選択画面" 
+                 loading="lazy" />
+        </div>
+
+        <ul class="item-list">
+            <li><strong>パターンカード</strong> - アイコン、名前、説明文でパターンの特徴を表示</li>
+            <li><strong>カテゴリ分類</strong> - 基本見積もり、プロジェクト計画などでグループ化</li>
+            <li><strong>クリック選択</strong> - カードをクリックすると選択状態になり、フォームへ進む</li>
+        </ul>
+
+        <h4>ステップ2: タイトル・説明入力</h4>
+        <p>見積もりのタイトルと説明（任意）を入力します。タイトルは後から見積もりを識別するための重要な情報です。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-new-form-img')">
+            <img id="estimates-new-form-img" 
+                 src="../image/web-admin/estimates-new-form.png" 
+                 alt="タイトル入力フォーム" 
+                 loading="lazy" />
+        </div>
+
+        <ul class="item-list">
+            <li><strong>見積もりタイトル（必須）</strong> - 例: 新規ECサイト開発プロジェクト</li>
+            <li><strong>説明（任意）</strong> - 見積もりの目的や背景を記述</li>
+            <li><strong>選択パターン表示</strong> - 選択したパターンがアイコンと名前で確認できる</li>
+            <li><strong>パターン選択に戻る</strong> - 選択したパターンを変更可能</li>
+        </ul>
+
+        <h4>ステップ3: AI対話による見積もり作成</h4>
+        <p>「見積もりを開始」ボタンをクリックすると、AI対話画面に遷移します。AIが必要な情報を順番に質問するので、それに答えていきます。</p>
+
+        <div class="tip">
+            <strong>💬 対話のコツ</strong>
+            AIの質問には具体的に答えると、より精度の高い見積もりが得られます。「だいたい」「おそらく」ではなく、数値や具体例を示すことを心がけてください。不明な点は「分からない」と答えれば、AIが標準的な値を提案します。
+        </div>
+    </div>
+
+    <div id="subsection-7-4" class="manual-subsection">
+        <h3>7.4 AI対話画面</h3>
+        <p>見積もり詳細画面の中心となるのがAI対話パネルです。ここでAIと会話しながら、プロジェクトの詳細情報を提供し、見積もりを段階的に作成していきます。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-chat-img')">
+            <img id="estimates-chat-img" 
+                 src="../image/web-admin/estimates-chat.png" 
+                 alt="AI対話画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>対話の流れ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>段階</th>
+                    <th>AIの質問内容</th>
+                    <th>ユーザーの回答例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. 概要把握</strong></td>
+                    <td>プロジェクトの目的、ターゲットユーザー、主要機能</td>
+                    <td>「ECサイトの構築。BtoC向け。商品検索、カート、決済機能」</td>
+                </tr>
+                <tr>
+                    <td><strong>2. 技術要件</strong></td>
+                    <td>使用技術、プラットフォーム、既存システムとの連携</td>
+                    <td>「Webアプリケーション。モバイル対応必須。既存の在庫管理システムとAPI連携」</td>
+                </tr>
+                <tr>
+                    <td><strong>3. チーム構成</strong></td>
+                    <td>チームの規模、スキルレベル、役割分担</td>
+                    <td>「PM1名、開発3名、デザイナー1名、QA1名。全員中級以上のスキル」</td>
+                </tr>
+                <tr>
+                    <td><strong>4. 制約条件</strong></td>
+                    <td>納期、予算、品質基準、リスク</td>
+                    <td>「6ヶ月以内。予算は2000万円。高いセキュリティ要求」</td>
+                </tr>
+                <tr>
+                    <td><strong>5. AI活用範囲</strong></td>
+                    <td>どの工程でAIを活用するか、期待する削減効果</td>
+                    <td>「コーディング、テスト、ドキュメント作成にAI活用。30%削減を期待」</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>対話機能の特徴</h4>
+        <ul class="item-list">
+            <li><strong>自然言語処理</strong> - 自由な文章で回答可能（箇条書きでも文章でも可）</li>
+            <li><strong>文脈理解</strong> - 前の回答を覚えており、矛盾や不足を指摘</li>
+            <li><strong>深掘り質問</strong> - 曖昧な回答には追加質問で詳細を確認</li>
+            <li><strong>提案機能</strong> - 標準的な値や業界平均を提示して選択を支援</li>
+            <li><strong>進捗表示</strong> - 対話の進行状況をパーセンテージで表示</li>
+        </ul>
+
+        <div class="tip">
+            <strong>🤖 AIの賢さ</strong>
+            AIは単なる質問応答システムではありません。プロジェクト管理の知識を持っており、矛盾や非現実的な値を検出すると警告します。例えば「2週間で100機能」と答えると、「それは非現実的です。優先度の高い機能に絞ることを推奨します」と提案します。
+        </div>
+    </div>
+
+    <div id="subsection-7-5" class="manual-subsection">
+        <h3>7.5 フェーズ管理</h3>
+        <p>AI対話が進むと、左サイドパネルにプロジェクトのフェーズが自動的に作成されます。各フェーズの工数、期間、人数が表示され、手動で調整も可能です。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-phases-img')">
+            <img id="estimates-phases-img" 
+                 src="../image/web-admin/estimates-phases.png" 
+                 alt="フェーズ一覧パネル" 
+                 loading="lazy" />
+        </div>
+
+        <h4>自動生成されるフェーズ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>フェーズ</th>
+                    <th>内容</th>
+                    <th>工数割合（目安）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>要件定義</strong></td>
+                    <td>機能要件・非機能要件の洗い出しと文書化</td>
+                    <td>10-15%</td>
+                </tr>
+                <tr>
+                    <td><strong>基本設計</strong></td>
+                    <td>システム全体のアーキテクチャ設計</td>
+                    <td>10-15%</td>
+                </tr>
+                <tr>
+                    <td><strong>詳細設計</strong></td>
+                    <td>モジュールごとの詳細仕様設計</td>
+                    <td>15-20%</td>
+                </tr>
+                <tr>
+                    <td><strong>実装</strong></td>
+                    <td>コーディング、単体テスト</td>
+                    <td>30-40%</td>
+                </tr>
+                <tr>
+                    <td><strong>テスト</strong></td>
+                    <td>結合テスト、システムテスト、受入テスト</td>
+                    <td>15-20%</td>
+                </tr>
+                <tr>
+                    <td><strong>リリース準備</strong></td>
+                    <td>本番環境構築、データ移行、研修</td>
+                    <td>5-10%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>フェーズの手動調整</h4>
+        <ul class="item-list">
+            <li><strong>工数変更</strong> - スライダーまたは数値入力で調整</li>
+            <li><strong>期間調整</strong> - 並行作業度を考慮して期間を最適化</li>
+            <li><strong>人数調整</strong> - フェーズごとの必要人数を指定</li>
+            <li><strong>AI活用設定</strong> - フェーズ単位でAI活用のON/OFF切替</li>
+            <li><strong>削除・追加</strong> - フェーズの削除や新規追加も可能</li>
+        </ul>
+    </div>
+
+    <div id="subsection-7-6" class="manual-subsection">
+        <h3>7.6 AI効率化率の算出</h3>
+        <p>TsutaAIの最大の特徴は、AI活用による工数削減効果を自動計算する機能です。各フェーズで「AI活用あり」を選択すると、効率化率が適用されます。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-ai-efficiency-img')">
+            <img id="estimates-ai-efficiency-img" 
+                 src="../image/web-admin/estimates-ai-efficiency.png" 
+                 alt="AI効率化率表示" 
+                 loading="lazy" />
+        </div>
+
+        <h4>フェーズ別のAI効率化率</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>フェーズ</th>
+                    <th>AI活用可能な作業</th>
+                    <th>標準削減率</th>
+                    <th>最大削減率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>要件定義</strong></td>
+                    <td>要件文書の自動生成、矛盾検出</td>
+                    <td>15%</td>
+                    <td>25%</td>
+                </tr>
+                <tr>
+                    <td><strong>基本設計</strong></td>
+                    <td>アーキテクチャ提案、設計書自動生成</td>
+                    <td>20%</td>
+                    <td>30%</td>
+                </tr>
+                <tr>
+                    <td><strong>詳細設計</strong></td>
+                    <td>クラス図自動生成、API仕様書作成</td>
+                    <td>25%</td>
+                    <td>35%</td>
+                </tr>
+                <tr>
+                    <td><strong>実装</strong></td>
+                    <td>コード自動生成、リファクタリング、コードレビュー</td>
+                    <td>30%</td>
+                    <td>50%</td>
+                </tr>
+                <tr>
+                    <td><strong>テスト</strong></td>
+                    <td>テストケース自動生成、バグ検出</td>
+                    <td>25%</td>
+                    <td>40%</td>
+                </tr>
+                <tr>
+                    <td><strong>リリース準備</strong></td>
+                    <td>手順書自動生成、マニュアル作成</td>
+                    <td>20%</td>
+                    <td>30%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>効率化率の計算ロジック</h4>
+        <ul class="item-list">
+            <li><strong>基礎削減率</strong> - フェーズごとの標準値（上表参照）</li>
+            <li><strong>チームスキル補正</strong> - AI活用スキルが高いチームは+5-10%</li>
+            <li><strong>プロジェクト規模補正</strong> - 大規模プロジェクトほど効率化効果大</li>
+            <li><strong>AI成熟度補正</strong> - AI活用経験が豊富な組織は+10-15%</li>
+            <li><strong>複雑度補正</strong> - 複雑なプロジェクトは効率化率が低下</li>
+        </ul>
+
+        <div class="tip">
+            <strong>📊 現実的な数値</strong>
+            AI効率化率は、実際のプロジェクトデータと業界調査に基づいています。過度に楽観的な数値ではなく、達成可能な範囲を示しています。ただし、AI活用の習熟度により効果は変動するため、最初のプロジェクトでは控えめな削減率を適用することを推奨します。
+        </div>
+    </div>
+
+    <div id="subsection-7-7" class="manual-subsection">
+        <h3>7.7 見積もり結果の確認</h3>
+        <p>すべてのフェーズが確定したら、「見積もり計算」ボタンで最終結果を算出します。3つのシナリオ（楽観、標準、悲観）で結果が表示されます。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-results-img')">
+            <img id="estimates-results-img" 
+                 src="../image/web-admin/estimates-results.png" 
+                 alt="見積もり結果画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>3点見積もり</h4>
+        <p>TsutaAIは、リスクを考慮した3点見積もりを自動生成します。これにより、プロジェクトの不確実性を定量化できます。</p>
+
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>シナリオ</th>
+                    <th>説明</th>
+                    <th>確率</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>楽観シナリオ</strong></td>
+                    <td>すべてが順調に進んだ場合（AI効率化が最大限発揮）</td>
+                    <td>約10%</td>
+                </tr>
+                <tr>
+                    <td><strong>標準シナリオ</strong></td>
+                    <td>通常の進行を想定（標準的なAI効率化率を適用）</td>
+                    <td>約70%</td>
+                </tr>
+                <tr>
+                    <td><strong>悲観シナリオ</strong></td>
+                    <td>想定外の問題が発生（AI効率化が半減、バッファ追加）</td>
+                    <td>約20%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>結果に含まれる情報</h4>
+        <ul class="item-list">
+            <li><strong>総工数</strong> - AI活用あり/なしの両方を表示（人日単位）</li>
+            <li><strong>総期間</strong> - プロジェクト開始から完了までの営業日数</li>
+            <li><strong>必要人数</strong> - ピーク時に必要なチーム人数</li>
+            <li><strong>削減効果</strong> - AI活用による工数削減の絶対値とパーセンテージ</li>
+            <li><strong>コスト試算</strong> - 人月単価を入力すると総コストを算出</li>
+            <li><strong>リスク評価</strong> - 各シナリオの発生確率と対策提案</li>
+        </ul>
+
+        <h4>グラフ表示機能</h4>
+        <ul class="item-list">
+            <li><strong>フェーズ別工数分布</strong> - 円グラフで各フェーズの割合を表示</li>
+            <li><strong>AI削減効果比較</strong> - 棒グラフでAIあり/なしを比較</li>
+            <li><strong>期間ガントチャート</strong> - 各フェーズの開始・終了時期を視覚化</li>
+            <li><strong>リソース配分</strong> - 時期別の必要人数の推移を折れ線グラフで表示</li>
+        </ul>
+    </div>
+
+    <div id="subsection-7-8" class="manual-subsection">
+        <h3>7.8 WBSへのエクスポート</h3>
+        <p>完成した見積もりは、「WBSにエクスポート」機能を使って実際のプロジェクトとして展開できます。これにより、計画から実行へシームレスに移行できます。</p>
+
+        <div class="feature-image" onclick="openGallery('estimates-export-img')">
+            <img id="estimates-export-img" 
+                 src="../image/web-admin/estimates-export.png" 
+                 alt="WBSエクスポート画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>エクスポートの流れ</h4>
+        <ol class="item-list">
+            <li><strong>ボタンクリック</strong> - 「WBSにエクスポート」ボタンをクリック</li>
+            <li><strong>プロジェクト情報入力</strong> - プロジェクト名、開始日、メンバー選択</li>
+            <li><strong>シナリオ選択</strong> - 楽観/標準/悲観のいずれかを選択</li>
+            <li><strong>詳細度設定</strong> - タスク分割の細かさを指定</li>
+            <li><strong>エクスポート実行</strong> - WBSプロジェクトとして自動生成</li>
+            <li><strong>WBS画面へ遷移</strong> - 生成されたプロジェクトのWBS管理画面に移動</li>
+        </ol>
+
+        <h4>エクスポート設定項目</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>説明</th>
+                    <th>選択肢</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>プロジェクト名</strong></td>
+                    <td>作成するプロジェクトの名前（必須）</td>
+                    <td>自由入力</td>
+                </tr>
+                <tr>
+                    <td><strong>開始日</strong></td>
+                    <td>プロジェクトの実開始日（必須）</td>
+                    <td>カレンダー選択</td>
+                </tr>
+                <tr>
+                    <td><strong>使用シナリオ</strong></td>
+                    <td>どの見積もり結果を使用するか</td>
+                    <td>楽観/標準/悲観</td>
+                </tr>
+                <tr>
+                    <td><strong>タスク分割レベル</strong></td>
+                    <td>WBSの階層深さ</td>
+                    <td>フェーズのみ/中タスク/詳細タスク</td>
+                </tr>
+                <tr>
+                    <td><strong>担当者割り当て</strong></td>
+                    <td>自動割り当ての有無</td>
+                    <td>自動/手動/未割り当て</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>生成されるWBSの構造</h4>
+        <ul class="item-list">
+            <li><strong>フェーズ（大分類）</strong> - 要件定義、設計、実装など</li>
+            <li><strong>サブフェーズ（中分類）</strong> - 画面設計、API設計など</li>
+            <li><strong>タスク（小分類）</strong> - 具体的な作業単位（1-5日程度）</li>
+            <li><strong>期間設定</strong> - 各タスクに開始日・終了日を自動設定</li>
+            <li><strong>依存関係</strong> - フェーズ間の前後関係を自動設定</li>
+        </ul>
+
+        <div class="tip">
+            <strong>🚀 即座に実行開始</strong>
+            エクスポートされたWBSは、すぐにプロジェクト管理に使用できます。メンバーへのタスク割り当て、進捗トラッキング、リスケジュールなど、すべての機能が利用可能です。見積もり段階で作成したフェーズ構成がそのまま活かされるため、スムーズに実行フェーズへ移行できます。
+        </div>
+    </div>
+
+    <div id="subsection-7-9" class="manual-subsection">
+        <h3>7.9 見積もりの編集・削除</h3>
+        <p>作成済みの見積もりは、ステータスに応じて編集や削除が可能です。完了済みの見積もりも再編集モードに戻すことができます。</p>
+
+        <h4>ステータス別の操作</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ステータス</th>
+                    <th>利用可能な操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>下書き</strong></td>
+                    <td>AI対話継続、フェーズ編集、計算、削除</td>
+                </tr>
+                <tr>
+                    <td><strong>作業中</strong></td>
+                    <td>AI対話継続、フェーズ編集、再計算、完了、削除</td>
+                </tr>
+                <tr>
+                    <td><strong>完了</strong></td>
+                    <td>参照、再編集、WBSエクスポート、削除</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>編集機能</h4>
+        <ul class="item-list">
+            <li><strong>AI対話の追加</strong> - 新しい情報を追加で入力可能</li>
+            <li><strong>フェーズ調整</strong> - 工数・期間・人数の手動変更</li>
+            <li><strong>AI効率化率変更</strong> - フェーズごとのON/OFF切替</li>
+            <li><strong>再計算</strong> - 変更後に見積もり結果を再計算</li>
+        </ul>
+
+        <h4>削除機能</h4>
+        <ul class="item-list">
+            <li><strong>確認ダイアログ</strong> - 誤削除を防ぐため確認メッセージを表示</li>
+            <li><strong>完全削除</strong> - 見積もりと関連するすべてのデータを削除</li>
+            <li><strong>削除後の遷移</strong> - 一覧画面に自動的に戻る</li>
+        </ul>
+
+        <div class="tip">
+            <strong>⚠️ 削除の注意点</strong>
+            見積もりを削除しても、そこからエクスポートしたWBSプロジェクトは削除されません。見積もりとプロジェクトは独立して管理されています。見積もりは「計画の記録」として残しておくことを推奨します。
+        </div>
+    </div>
+
+    <div id="subsection-7-10" class="manual-subsection">
+        <h3>7.10 活用シーンとベストプラクティス</h3>
+        <p>見積もり機能を最大限活用するためのシーン別ガイドとベストプラクティスを紹介します。</p>
+
+        <h4>シーン1: 新規案件の初期見積もり</h4>
+        <p><strong>推奨パターン:</strong> 期間未定型 または タスクベース型</p>
+        <ul class="item-list">
+            <li>まずはタスクベース型で機能一覧から工数を積み上げ</li>
+            <li>次に期間未定型で全体像を確認</li>
+            <li>両方を比較して妥当性を検証</li>
+            <li>標準シナリオの結果を顧客提案に使用</li>
+        </ul>
+
+        <h4>シーン2: 納期が決まっているプロジェクト</h4>
+        <p><strong>推奨パターン:</strong> 期間固定型</p>
+        <ul class="item-list">
+            <li>納期を入力して必要人数を算出</li>
+            <li>現実的な人数で実施可能か確認</li>
+            <li>不可能な場合は機能削減やフェーズ分割を提案</li>
+            <li>悲観シナリオでバッファを確認</li>
+        </ul>
+
+        <h4>シーン3: 予算制約が厳しいプロジェクト</h4>
+        <p><strong>推奨パターン:</strong> 予算固定型</p>
+        <ul class="item-list">
+            <li>予算額と人月単価から実施可能工数を算出</li>
+            <li>その工数で実現できる機能を優先順位付け</li>
+            <li>MVPアプローチで最小限の機能に絞る</li>
+            <li>AI活用で工数削減し、機能範囲を拡大</li>
+        </ul>
+
+        <h4>ベストプラクティス</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>推奨事項</th>
+                    <th>理由</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>複数パターンで見積もり</strong></td>
+                    <td>異なる角度から検証し、精度を向上</td>
+                </tr>
+                <tr>
+                    <td><strong>AI対話は具体的に</strong></td>
+                    <td>曖昧な回答は精度を下げる原因</td>
+                </tr>
+                <tr>
+                    <td><strong>悲観シナリオを重視</strong></td>
+                    <td>リスクバッファの確保が成功の鍵</td>
+                </tr>
+                <tr>
+                    <td><strong>AI効率化率は控えめに</strong></td>
+                    <td>初回は低めに設定し、実績で調整</td>
+                </tr>
+                <tr>
+                    <td><strong>定期的な見直し</strong></td>
+                    <td>プロジェクト開始後も実績と比較</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>📚 学習効果</strong>
+            見積もり機能を繰り返し使用することで、自組織の標準値やAI効率化率が明確になってきます。過去の見積もりと実績を比較し、パラメータをチューニングすることで、精度は確実に向上します。TsutaAIは、使えば使うほど賢くなるシステムです。
+        </div>
+    </div>
+</section>

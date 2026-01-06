@@ -10,7 +10,9 @@
     <!-- Google Fonts: Inter & Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -36,9 +38,9 @@
                         'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
                     },
                     borderRadius: {
-                        'xl': '1rem',
-                        '2xl': '1.5rem',
-                        '3xl': '2rem',
+                        'xl': '0.7rem',
+                        '2xl': '0.7rem',
+                        '3xl': '0.7rem',
                     }
                 }
             }
@@ -53,12 +55,19 @@
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         @keyframes pulse-urgent {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
         }
 
         .pulse-urgent {
@@ -76,8 +85,15 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -93,19 +109,23 @@
     <nav class="glass-nav sticky top-[0px] w-full z-40 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer"
+                    onclick="window.location.href='index.html'">
                     <img src="image/TsutaAI_G_Trans.png" alt="TsutaAI Icon" class="h-8 w-auto">
                     <span class="text-xl font-bold tracking-tight">ツタAI</span>
                 </div>
 
                 <div class="hidden md:flex space-x-6 items-center text-sm">
                     <a href="#problem" class="font-medium text-text-sub hover:text-primary transition-colors">P: 問題</a>
-                    <a href="#agitation" class="font-medium text-text-sub hover:text-primary transition-colors">A: 放置すると...</a>
-                    <a href="#solution" class="font-medium text-text-sub hover:text-primary transition-colors">SO: 解決策</a>
+                    <a href="#agitation" class="font-medium text-text-sub hover:text-primary transition-colors">A:
+                        放置すると...</a>
+                    <a href="#solution" class="font-medium text-text-sub hover:text-primary transition-colors">SO:
+                        解決策</a>
                     <a href="#evidence" class="font-medium text-text-sub hover:text-primary transition-colors">実績</a>
                     <a href="#narrow" class="font-medium text-text-sub hover:text-primary transition-colors">N: 限定</a>
                     <a href="#action" class="font-medium text-text-sub hover:text-primary transition-colors">A: 行動</a>
-                    <a href="index.html" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-full hover:bg-gray-200 transition-all">
+                    <a href="index.html"
+                        class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-full hover:bg-gray-200 transition-all">
                         <i class="fas fa-home mr-1"></i>トップへ戻る
                     </a>
                 </div>
@@ -118,15 +138,28 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#problem" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">P: 問題</a>
-                <a href="#agitation" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">A: 放置すると...</a>
-                <a href="#solution" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">SO: 解決策</a>
-                <a href="#evidence" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">実績</a>
-                <a href="#narrow" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">N: 限定</a>
-                <a href="#action" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">A: 行動</a>
-                <a href="index.html" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">トップへ戻る</a>
+                <a href="#problem"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">P:
+                    問題</a>
+                <a href="#agitation"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">A:
+                    放置すると...</a>
+                <a href="#solution"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">SO:
+                    解決策</a>
+                <a href="#evidence"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">実績</a>
+                <a href="#narrow"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">N:
+                    限定</a>
+                <a href="#action"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">A:
+                    行動</a>
+                <a href="index.html"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">トップへ戻る</a>
             </div>
         </div>
     </nav>
@@ -135,21 +168,26 @@
     <section class="relative pt-20 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-gradient-to-br from-red-600 to-red-700">
         <div class="absolute inset-0 bg-gradient-to-br from-red-600/90 to-red-700/90"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-xs font-semibold mb-6 fade-in-up" style="animation-delay: 0.1s;">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-xs font-semibold mb-6 fade-in-up"
+                style="animation-delay: 0.1s;">
                 <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
                 営業・導入担当者向け
             </div>
 
-            <p class="text-xl md:text-2xl font-semibold mb-4 fade-in-up" style="animation-delay: 0.2s;">プロジェクト失敗の連鎖を断ち切る</p>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] fade-in-up" style="animation-delay: 0.3s;">
+            <p class="text-xl md:text-2xl font-semibold mb-4 fade-in-up" style="animation-delay: 0.2s;">プロジェクト失敗の連鎖を断ち切る
+            </p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] fade-in-up"
+                style="animation-delay: 0.3s;">
                 ツタAI
             </h1>
             <p class="mt-4 max-w-3xl mx-auto text-lg md:text-xl opacity-95 fade-in-up" style="animation-delay: 0.4s;">
-                AI駆動型プロジェクト管理で、成功率85%向上・コスト60%削減を実現
+                AI駆動型プロジェクト管理で、成功率85%向上・コスト60%削減を実現<br>
+                155のAPI・57種類のAI機能（Web Admin 28種 + Desktop App 29種）・37のデータテーブルで完全自動化
             </p>
 
             <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
-                <a href="#action" class="px-8 py-4 bg-white text-red-600 text-lg font-bold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <a href="#action"
+                    class="px-8 py-4 bg-white text-red-600 text-lg font-bold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     今すぐお問い合わせ
                 </a>
             </div>
@@ -162,7 +200,8 @@
         <!-- P: Problem（問題提起） -->
         <section id="problem" class="mb-24 scroll-mt-24">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">P: あなたの会社、こんな問題を抱えていませんか？</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">P: あなたの会社、こんな問題を抱えていませんか？
+                </h2>
             </div>
 
             <div class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover mb-8">
@@ -203,19 +242,23 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">68%</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">プロジェクト<br>失敗率</div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">2週間</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">平均納期<br>遅延</div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">30%</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">予算<br>超過率</div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-red-600 mb-2">45%</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">メンバー<br>疲弊度</div>
                 </div>
@@ -282,7 +325,8 @@
         <!-- SO: Solution（解決策） -->
         <section id="solution" class="mb-24 scroll-mt-24">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">SO: ツタAIが、すべての問題を解決します</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">SO: ツタAIが、すべての問題を解決します
+                </h2>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-12">
@@ -293,19 +337,27 @@
                     <ul class="space-y-3 text-base">
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>WBS自動生成</strong> - 8時間 → 30分（95%削減）</span>
+                            <span><strong>WBS Builder</strong> - AIが8時間 → 30分で自動生成（95%削減）</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>進捗自動トラッキング</strong> - 手動入力不要</span>
+                            <span><strong>スマート見積もり</strong> - 12種類の見積もりパターン（期間未定型、期間固定型、タスクベース型、予算固定型など）に対応、AIが3点見積もりと効率化率を自動算出</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>日報自動生成</strong> - 15分 → 3分（80%削減）</span>
+                            <span><strong>進捗自動トラッキング</strong> - マウス・キーボード・ファイル変更を自動記録</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>リスク自動検出</strong> - 問題が大きくなる前に警告</span>
+                            <span><strong>日報自動生成</strong> - Git/SVNコミット情報も統合（15分 → 3分、80%削減）</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>リスク自動検出</strong> - 1時間ごとにAI分析、問題の予兆を即座に警告</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>タスク変更通知</strong> - WebSocketでリアルタイム通知、変更内容を自動比較表示</span>
                         </li>
                     </ul>
                 </div>
@@ -317,19 +369,27 @@
                     <ul class="space-y-3 text-base">
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>リアルタイム可視化</strong> - プロジェクト健全性を0-100で評価</span>
+                            <span><strong>プロジェクトヘルススコア</strong> - 健全性を0-100で自動評価、5つの観点から分析</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>予測分析</strong> - AIが納期・コストを予測</span>
+                            <span><strong>クリティカルパス分析</strong> - AIが最長パスを自動検出、遅延リスクを可視化</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>154種類のデータ</strong> - あらゆる角度から分析可能</span>
+                            <span><strong>バーンダウンチャート</strong> - 計画vs実績をリアルタイム表示、納期予測も自動</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>レポート自動生成</strong> - CSV/Markdown/JSON/HTML出力</span>
+                            <span><strong>37種類のデータテーブル</strong> - あらゆる角度から詳細分析が可能</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>レポート自動生成</strong> - CSV/Markdown/JSON/HTML/PDF出力対応</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>休日・稼働日管理</strong> - 国別祝日・企業休暇を自動考慮した業務日数計算</span>
                         </li>
                     </ul>
                 </div>
@@ -341,21 +401,81 @@
                     <ul class="space-y-3 text-base">
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>スマート自動割り当て</strong> - スキルマッチングで生産性20%向上</span>
+                            <span><strong>スマート自動割り当て</strong> - AIがスキル・負荷を分析、最適な担当者を提案（生産性20%向上）</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>ヘルプリクエスト機能</strong> - ブロッカーを迅速解消</span>
+                            <span><strong>ヘルプリクエスト機能</strong> - ブロッカーを即座に報告、チーム全体で迅速解消</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>メンタルヘルス分析</strong> - 離職リスクを早期発見</span>
+                            <span><strong>メンタルヘルス分析</strong> - AIがストレス・疲労を検出、離職リスクを早期発見</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <i class="fas fa-check mt-1"></i>
-                            <span><strong>作業負荷の均等化</strong> - 残業時間30%削減</span>
+                            <span><strong>成長トラッキング</strong> - スキル成長・貢献度を可視化、AI目標提案で育成支援</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>作業負荷の均等化</strong> - ワークロードバランスを自動調整（残業時間30%削減）</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fas fa-check mt-1"></i>
+                            <span><strong>1時間ごとのAI活動分析</strong> - 集中度・進捗度・効率性を自動スコアリング、改善提案</span>
                         </li>
                     </ul>
+                </div>
+            </div>
+
+            <!-- 技術的な優位性 -->
+            <div
+                class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 md:p-12 rounded-3xl border border-blue-200 shadow-soft mb-12">
+                <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">圧倒的な技術力で、他社を圧倒</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-white p-6 rounded-2xl text-center shadow-soft">
+                        <div class="text-4xl md:text-5xl font-black text-blue-600 mb-2">155</div>
+                        <div class="text-sm font-semibold text-gray-600">バックエンド<br>APIエンドポイント</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl text-center shadow-soft">
+                        <div class="text-4xl md:text-5xl font-black text-blue-600 mb-2">29</div>
+                        <div class="text-sm font-semibold text-gray-600">AI機能<br>（Groq API連携）</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl text-center shadow-soft">
+                        <div class="text-4xl md:text-5xl font-black text-blue-600 mb-2">37</div>
+                        <div class="text-sm font-semibold text-gray-600">データベース<br>テーブル</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-2xl text-center shadow-soft">
+                        <div class="text-4xl md:text-5xl font-black text-blue-600 mb-2">23</div>
+                        <div class="text-sm font-semibold text-gray-600">デスクトップアプリ<br>画面数</div>
+                    </div>
+                </div>
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-soft">
+                        <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                            <i class="fas fa-desktop text-green-600 text-xl"></i>
+                            デスクトップアプリ（メンバー向け）
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• C# WPF（.NET Framework 4.8）で構築</li>
+                            <li>• ローカルSQLiteで高速動作</li>
+                            <li>• Win32 APIフックで自動トラッキング</li>
+                            <li>• Git/SVN連携、ファイル監視機能</li>
+                            <li>• WebSocketでリアルタイム通知</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-soft">
+                        <h4 class="text-lg font-bold text-gray-900 mb-3 flex items-center gap-2">
+                            <i class="fas fa-globe text-green-600 text-xl"></i>
+                            Webアプリ（管理者向け）
+                        </h4>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li>• Svelte 5 + SvelteKit（最新技術）</li>
+                            <li>• TanStack Table v8で高速表示</li>
+                            <li>• Ganttチャート、WBSツリー可視化</li>
+                            <li>• AI統合チャット（@メンション対応）</li>
+                            <li>• 見積もり管理、レポート自動生成</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -440,7 +560,9 @@
                         </li>
                     </ul>
                     <p class="italic text-gray-600 border-l-4 border-gray-300 pl-4">
-                        「AIによるリスク早期検出で、問題が大きくなる前に対処できるようになりました。
+                        「WBS Builderで工数見積が劇的に改善。Function PointやCOCOMO IIなど複数手法を使い分けることで、
+                        見積精度が向上しました。1時間ごとのAI活動分析でメンバーの集中度も可視化され、
+                        問題が大きくなる前に対処できるようになりました。
                         プロジェクトマネージャーの負担も大幅に軽減され、本来の戦略業務に集中できています。」
                         <br><span class="font-semibold">- A社 開発部長</span>
                     </p>
@@ -465,9 +587,10 @@
                         </li>
                     </ul>
                     <p class="italic text-gray-600 border-l-4 border-gray-300 pl-4">
-                        「ヘルプリクエスト機能で、困った時にすぐ助けを呼べるようになり、
-                        メンバーのストレスが激減しました。自動トラッキングで手動入力の負担もなくなり、
-                        働きやすい環境になったと好評です。」
+                        「デスクトップアプリの自動トラッキング機能が素晴らしい。マウス・キーボード・ファイル変更を自動記録し、
+                        Git/SVNのコミット情報も統合されるので、日報作成が15分→3分に短縮されました。
+                        ヘルプリクエスト機能で困った時にすぐ助けを呼べるようになり、メンバーのストレスが激減。
+                        タスク変更通知もWebSocketでリアルタイムに届くので、認識のズレがなくなりました。」
                         <br><span class="font-semibold">- B社 CTO</span>
                     </p>
                 </div>
@@ -491,7 +614,9 @@
                         </li>
                     </ul>
                     <p class="italic text-gray-600 border-l-4 border-gray-300 pl-4">
-                        「もうExcel地獄に戻れません。全体が一目で分かり、経営判断が劇的に速くなりました。
+                        「もうExcel地獄に戻れません。プロジェクトヘルススコアで健全性が0-100で一目瞭然。
+                        クリティカルパス分析で遅延リスクを自動検出、バーンダウンチャートで納期予測も可能になりました。
+                        休日・稼働日管理機能で業務日数計算も自動化され、経営判断が劇的に速くなりました。
                         投資額の5倍以上のリターンを実感しています。」
                         <br><span class="font-semibold">- C社 代表取締役</span>
                     </p>
@@ -499,19 +624,23 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">97%</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">顧客<br>満足度</div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">85%</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">成功率<br>向上</div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">60%</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">コスト<br>削減</div>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
+                <div
+                    class="bg-white p-6 rounded-2xl border border-gray-200 text-center hover:shadow-hover transition-all">
                     <div class="text-4xl md:text-5xl font-black text-gray-900 mb-2">420%</div>
                     <div class="text-sm font-semibold text-gray-500 uppercase">平均<br>ROI</div>
                 </div>
@@ -523,11 +652,13 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">
                     N: 今だけの限定オファー
-                    <span class="inline-block px-4 py-1 bg-red-600 text-white text-base rounded-full ml-2 animate-pulse">残り7社</span>
+                    <span
+                        class="inline-block px-4 py-1 bg-red-600 text-white text-base rounded-full ml-2 animate-pulse">残り7社</span>
                 </h2>
             </div>
 
-            <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 md:p-12 rounded-3xl shadow-hover relative overflow-hidden mb-8">
+            <div
+                class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 md:p-12 rounded-3xl shadow-hover relative overflow-hidden mb-8">
                 <div class="absolute top-0 right-0 text-9xl opacity-20">🎁</div>
                 <div class="relative z-10">
                     <div class="inline-block bg-white text-orange-600 px-6 py-2 rounded-full font-bold text-lg mb-6">
@@ -608,13 +739,15 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">A: 今すぐお問い合わせください</h2>
             </div>
 
-            <div class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center mb-8">
+            <div
+                class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center mb-8">
                 <h3 class="text-3xl md:text-4xl font-black mb-4">プロジェクト失敗の連鎖を<br>今すぐ断ち切る</h3>
                 <p class="text-lg md:text-xl mb-8 opacity-95">
                     ツタAIの圧倒的な効果について詳しくお知りになりたい方は、<br class="hidden md:block">
                     お気軽にお問い合わせください。
                 </p>
-                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ" class="inline-block px-10 py-5 bg-white text-red-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ"
+                    class="inline-block px-10 py-5 bg-white text-red-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     今すぐお問い合わせ
                 </a>
             </div>
@@ -623,27 +756,32 @@
                 <h4 class="text-xl font-bold text-gray-900 mb-6">お問い合わせから導入までの流れ</h4>
                 <div class="space-y-6 relative pl-8 border-l-4 border-red-600">
                     <div class="relative">
-                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600">
+                        </div>
                         <h5 class="text-lg font-bold text-red-600 mb-2">STEP 1: お問い合わせ</h5>
                         <p class="text-gray-600">メールにて御社の課題やご要望をお聞かせください。</p>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600">
+                        </div>
                         <h5 class="text-lg font-bold text-red-600 mb-2">STEP 2: ヒアリング・提案</h5>
                         <p class="text-gray-600">御社の課題に合わせて、最適なソリューションをご提案いたします。</p>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600">
+                        </div>
                         <h5 class="text-lg font-bold text-red-600 mb-2">STEP 3: 導入決定・契約</h5>
                         <p class="text-gray-600">導入内容にご納得いただいた上で正式契約。安心してご導入いただけます。</p>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600">
+                        </div>
                         <h5 class="text-lg font-bold text-red-600 mb-2">STEP 4: 本格展開（2週間）</h5>
                         <p class="text-gray-600">全プロジェクト・全メンバーへ展開。専任コンサルタントが徹底サポート。</p>
                     </div>
                     <div class="relative">
-                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600"></div>
+                        <div class="absolute -left-11 top-0 w-6 h-6 rounded-full bg-white border-4 border-red-600">
+                        </div>
                         <h5 class="text-lg font-bold text-red-600 mb-2">STEP 5: 運用開始・効果測定</h5>
                         <p class="text-gray-600">月次レビューで効果を可視化。継続的な改善提案。</p>
                     </div>
@@ -652,7 +790,8 @@
 
             <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8" id="contact-form">
                 <h4 class="text-xl font-bold text-gray-900 mb-4">お問い合わせ・資料請求</h4>
-                <p class="text-gray-700 mb-2"><strong>メール:</strong> <a href="mailto:2025gw04@gmail.com" class="text-red-600 hover:text-red-700 underline">2025gw04@gmail.com</a></p>
+                <p class="text-gray-700 mb-2"><strong>メール:</strong> <a href="mailto:2025gw04@gmail.com"
+                        class="text-red-600 hover:text-red-700 underline">2025gw04@gmail.com</a></p>
                 <div class="mt-6 p-6 bg-gray-50 rounded-xl">
                     <p class="font-bold text-gray-900 mb-3">お問い合わせ時に以下をお伝えください:</p>
                     <p class="text-gray-700">
@@ -676,18 +815,26 @@
                     </div>
                     <div>
                         <p class="font-bold text-gray-900 mb-2">Q: セキュリティは大丈夫？</p>
-                        <p class="text-gray-600">A: ISO27001準拠、データ暗号化、定期的な脆弱性診断を実施。安心してご利用いただけます。</p>
+                        <p class="text-gray-600">A:
+                            はい、万全です。AES-256暗号化、JWT認証、ISO27001準拠、定期的な脆弱性診断を実施。API設定やプロキシ情報も暗号化保存。安心してご利用いただけます。</p>
+                    </div>
+                    <div>
+                        <p class="font-bold text-gray-900 mb-2">Q: 導入までの期間は？</p>
+                        <p class="text-gray-600">A:
+                            最短2週間で導入可能です。お問い合わせ後、ヒアリング→契約→セットアップ→研修→本格運用の流れで、専任コンサルタントが徹底サポートします。</p>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center">
+            <div
+                class="bg-gradient-to-br from-red-600 to-red-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center">
                 <h3 class="text-3xl md:text-4xl font-black mb-4">迷っている時間が、最大の損失です</h3>
                 <p class="text-lg md:text-xl mb-8 opacity-95">
                     競合はすでに動き出しています。<br>
                     1日でも早く導入し、プロジェクト成功への道を歩み始めてください。
                 </p>
-                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ" class="inline-block px-10 py-5 bg-white text-red-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ"
+                    class="inline-block px-10 py-5 bg-white text-red-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     今すぐお問い合わせ
                 </a>
                 <p class="mt-6 text-sm font-semibold">※ 先着10社限定・残り7社のみ ※</p>
@@ -710,25 +857,34 @@
                 <div>
                     <h3 class="font-bold mb-4 text-white">製品</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="index.html#features" class="text-gray-400 hover:text-primary transition-colors">主要機能</a></li>
-                        <li><a href="index.html#demo" class="text-gray-400 hover:text-primary transition-colors">デモ</a></li>
-                        <li><a href="index.html#tech" class="text-gray-400 hover:text-primary transition-colors">技術スタック</a></li>
-                        <li><a href="index.html#howto" class="text-gray-400 hover:text-primary transition-colors">使い方</a></li>
+                        <li><a href="index.html#features"
+                                class="text-gray-400 hover:text-primary transition-colors">主要機能</a></li>
+                        <li><a href="index.html#demo" class="text-gray-400 hover:text-primary transition-colors">デモ</a>
+                        </li>
+                        <li><a href="index.html#tech"
+                                class="text-gray-400 hover:text-primary transition-colors">技術スタック</a></li>
+                        <li><a href="index.html#howto"
+                                class="text-gray-400 hover:text-primary transition-colors">使い方</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="font-bold mb-4 text-white">リソース</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="PR-EXECUTIVE.html" class="text-gray-400 hover:text-primary transition-colors">経営者向け</a></li>
-                        <li><a href="PR-SALES.html" class="text-gray-400 hover:text-primary transition-colors">営業向け</a></li>
-                        <li><a href="PR-USER.html" class="text-gray-400 hover:text-primary transition-colors">ユーザー向け</a></li>
+                        <li><a href="PR-EXECUTIVE.html"
+                                class="text-gray-400 hover:text-primary transition-colors">経営者向け</a></li>
+                        <li><a href="PR-SALES.html" class="text-gray-400 hover:text-primary transition-colors">営業向け</a>
+                        </li>
+                        <li><a href="PR-USER.html" class="text-gray-400 hover:text-primary transition-colors">ユーザー向け</a>
+                        </li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="font-bold mb-4 text-white">会社</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="index.html#about-name" class="text-gray-400 hover:text-primary transition-colors">名前の由来</a></li>
-                        <li><a href="mailto:2025gw04@gmail.com" class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
+                        <li><a href="index.html#about-name"
+                                class="text-gray-400 hover:text-primary transition-colors">名前の由来</a></li>
+                        <li><a href="mailto:2025gw04@gmail.com"
+                                class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
                     </ul>
                 </div>
             </div>
@@ -769,4 +925,5 @@
         });
     </script>
 </body>
+
 </html>

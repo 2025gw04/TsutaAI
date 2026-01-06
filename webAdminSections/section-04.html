@@ -1,0 +1,396 @@
+<!-- セッション 4: レポート出力 -->
+<section id="section-4" class="manual-section">
+    <h2>4. レポート出力（/reports）</h2>
+    <p>プロジェクトやユーザーの活動状況を、様々な形式でレポートとして出力できる機能です。AIアシスタント機能により、自然言語でレポートを生成・カスタマイズできます。</p>
+
+    <div id="subsection-4-1" class="manual-subsection">
+        <h3>4.1 概要</h3>
+        <p>レポート出力画面では、5種類のレポートテンプレートから選択し、プロジェクトまたはユーザー単位でレポートを生成できます。生成されたレポートは、PDF、Excel、JSON形式でエクスポート可能です。</p>
+        
+        <div class="feature-image" onclick="openGallery('reports-overview-img')">
+            <img id="reports-overview-img" 
+                 src="../image/web-admin/reports-overview.png" 
+                 alt="レポート出力画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>主要な機能</h4>
+        <ul class="item-list">
+            <li><strong>5種類のレポートテンプレート</strong> - プロジェクトサマリー、進捗レポート、工数レポート、全プロジェクトサマリー、ユーザー作業レポート</li>
+            <li><strong>AIアシスタント</strong> - 自然言語でレポートの生成・カスタマイズが可能</li>
+            <li><strong>複数フォーマット対応</strong> - PDF、Excel、JSON形式でエクスポート</li>
+            <li><strong>リアルタイムプレビュー</strong> - レポート内容を画面上で即座に確認</li>
+            <li><strong>フィルター機能</strong> - 期間指定、ステータスフィルター、メンバーフィルターなど</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 AIアシスタントの活用</strong>
+            画面右上の「AIアシスタント」ボタンをクリックすると、自然言語でレポートをカスタマイズできます。例: 「先月完了したタスクのみを表示」「高リスクのタスクを強調表示」
+        </div>
+    </div>
+
+    <div id="subsection-4-2" class="manual-subsection">
+        <h3>4.2 レポート種類の選択</h3>
+        <p>画面上部のセレクターパネルで、レポートの種類と対象を選択します。</p>
+
+        <div class="feature-image" onclick="openGallery('reports-selector-img')">
+            <img id="reports-selector-img" 
+                 src="../image/web-admin/reports-selector.png" 
+                 alt="レポート選択パネル" 
+                 loading="lazy" />
+        </div>
+
+        <h4>レポート種類一覧</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>レポート名</th>
+                    <th>タイプ</th>
+                    <th>説明</th>
+                    <th>含まれる情報</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクトサマリー</td>
+                    <td>プロジェクト単位</td>
+                    <td>プロジェクトの全体的な状況、リスク、AIインサイトを含む要約レポート</td>
+                    <td>進捗率、タスク統計、リスクアラート、AIサマリー、クリティカルパス</td>
+                </tr>
+                <tr>
+                    <td>進捗レポート</td>
+                    <td>プロジェクト単位</td>
+                    <td>タスクの完了状況と進捗詳細に焦点を当てたレポート</td>
+                    <td>タスク一覧、完了率、遅延タスク、ガントチャート、マイルストーン達成状況</td>
+                </tr>
+                <tr>
+                    <td>工数レポート</td>
+                    <td>プロジェクト単位</td>
+                    <td>作業ログとチームの工数実績を中心としたレポート</td>
+                    <td>メンバー別工数、タスク別工数、日別工数グラフ、予実比較</td>
+                </tr>
+                <tr>
+                    <td>全プロジェクトサマリー</td>
+                    <td>全プロジェクト</td>
+                    <td>全プロジェクトの主要メトリクスとアラートの概況</td>
+                    <td>プロジェクト一覧、ステータス分布、リスク分布、総工数、総タスク数</td>
+                </tr>
+                <tr>
+                    <td>ユーザー作業レポート</td>
+                    <td>ユーザー単位</td>
+                    <td>特定ユーザーのタスク実行状況と作業履歴</td>
+                    <td>担当タスク一覧、完了率、作業時間、スキル活用状況、パフォーマンス評価</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>対象選択</h4>
+        <p>レポートタイプに応じて、対象のプロジェクトまたはユーザーを選択します：</p>
+        <ul class="item-list">
+            <li><strong>プロジェクト単位</strong> - プロジェクト選択ドロップダウンが表示され、対象プロジェクトを選択</li>
+            <li><strong>全プロジェクト</strong> - 対象選択は不要（全プロジェクトが自動的に対象）</li>
+            <li><strong>ユーザー単位</strong> - ユーザー選択ドロップダウンが表示され、対象ユーザーを選択</li>
+        </ul>
+    </div>
+
+    <div id="subsection-4-3" class="manual-subsection">
+        <h3>4.3 レポート生成</h3>
+        <p>レポート種類と対象を選択すると、自動的にレポートが生成され、プレビュー表示されます。</p>
+
+        <div class="feature-image" onclick="openGallery('reports-preview-img')">
+            <img id="reports-preview-img" 
+                 src="../image/web-admin/reports-preview.png" 
+                 alt="レポートプレビュー" 
+                 loading="lazy" />
+        </div>
+
+        <h4>レポート生成の流れ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ステップ</th>
+                    <th>処理内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. データ取得</td>
+                    <td>選択されたプロジェクトまたはユーザーに関連するデータをAPIから取得</td>
+                </tr>
+                <tr>
+                    <td>2. データ集計</td>
+                    <td>タスク統計、工数集計、進捗率計算などを実行</td>
+                </tr>
+                <tr>
+                    <td>3. AI分析（オプション）</td>
+                    <td>プロジェクトサマリーの場合、AIによる分析とインサイト生成を実行</td>
+                </tr>
+                <tr>
+                    <td>4. レポート構成</td>
+                    <td>テンプレートに基づいてレポートのHTMLを生成</td>
+                </tr>
+                <tr>
+                    <td>5. プレビュー表示</td>
+                    <td>画面上にレポート内容を表示し、ユーザーが確認可能</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>プレビュー画面の操作</h4>
+        <ul class="item-list">
+            <li><strong>スクロール</strong> - レポート全体を上下にスクロールして内容を確認</li>
+            <li><strong>エクスポートボタン</strong> - PDF、Excel、JSONのいずれかの形式でダウンロード</li>
+            <li><strong>印刷ボタン</strong> - ブラウザの印刷機能を使用して紙媒体に出力</li>
+            <li><strong>再生成ボタン</strong> - 最新データで再度レポートを生成</li>
+        </ul>
+    </div>
+
+    <div id="subsection-4-4" class="manual-subsection">
+        <h3>4.4 AIアシスタント機能</h3>
+        <p>画面右上の「AIアシスタント」ボタンをクリックすると、AIアシスタントパネルが表示されます。自然言語でレポートをカスタマイズできる強力な機能です。</p>
+
+        <div class="feature-image" onclick="openGallery('reports-ai-assistant-img')">
+            <img id="reports-ai-assistant-img" 
+                 src="../image/web-admin/reports-ai-assistant.png" 
+                 alt="AIアシスタントパネル" 
+                 loading="lazy" />
+        </div>
+
+        <h4>AIアシスタントでできること</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>機能</th>
+                    <th>説明</th>
+                    <th>使用例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>フィルター指定</td>
+                    <td>特定の条件でタスクやデータを絞り込む</td>
+                    <td>「先月完了したタスクのみ表示」「高優先度のタスクだけ」</td>
+                </tr>
+                <tr>
+                    <td>集計方法変更</td>
+                    <td>データの集計・表示方法を変更</td>
+                    <td>「メンバー別に工数を集計」「週単位で進捗を表示」</td>
+                </tr>
+                <tr>
+                    <td>グラフ追加</td>
+                    <td>レポートに新しいグラフや図を追加</td>
+                    <td>「タスクステータスの円グラフを追加」「工数の棒グラフを作成」</td>
+                </tr>
+                <tr>
+                    <td>セクション追加</td>
+                    <td>レポートに新しいセクションを追加</td>
+                    <td>「リスク分析セクションを追加」「推奨アクションを含める」</td>
+                </tr>
+                <tr>
+                    <td>カスタマイズ</td>
+                    <td>レポートの見た目や構成を変更</td>
+                    <td>「タイトルを変更」「重要な項目を強調表示」</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>AIアシスタントの使い方</h4>
+        <ul class="item-list">
+            <li><strong>ステップ1</strong> - 「AIアシスタント」ボタンをクリックしてパネルを開く</li>
+            <li><strong>ステップ2</strong> - テキスト入力欄に自然言語で指示を入力（例: 「遅延しているタスクを赤色で強調表示してください」）</li>
+            <li><strong>ステップ3</strong> - 「送信」ボタンをクリックまたはEnterキーを押す</li>
+            <li><strong>ステップ4</strong> - AIが指示を解析し、レポートを自動的に更新</li>
+            <li><strong>ステップ5</strong> - 更新されたレポートをプレビューで確認</li>
+        </ul>
+
+        <div class="tip">
+            <strong>🤖 AI指示の例</strong>
+            <ul>
+                <li>「今週完了したタスクのみを表示してください」</li>
+                <li>「メンバー別の工数を棒グラフで追加してください」</li>
+                <li>「期限超過タスクを赤色で強調表示してください」</li>
+                <li>「リスクレベルが高いタスクだけをリスト化してください」</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="subsection-4-5" class="manual-subsection">
+        <h3>4.5 エクスポート機能</h3>
+        <p>生成されたレポートは、3種類の形式でエクスポートできます。</p>
+
+        <div class="feature-image" onclick="openGallery('reports-export-img')">
+            <img id="reports-export-img" 
+                 src="../image/web-admin/reports-export.png" 
+                 alt="エクスポートボタン" 
+                 loading="lazy" />
+        </div>
+
+        <h4>エクスポート形式</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>形式</th>
+                    <th>説明</th>
+                    <th>用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PDF</td>
+                    <td>レポートをPDF形式で出力。レイアウトが固定され、印刷に最適</td>
+                    <td>印刷、メール添付、アーカイブ保存</td>
+                </tr>
+                <tr>
+                    <td>Excel</td>
+                    <td>レポートデータをExcel形式（.xlsx）で出力。データの加工・分析が可能</td>
+                    <td>データ分析、グラフ作成、他システムへのインポート</td>
+                </tr>
+                <tr>
+                    <td>JSON</td>
+                    <td>レポートデータをJSON形式で出力。プログラムでの処理に最適</td>
+                    <td>API連携、自動化スクリプト、データ移行</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>エクスポート手順</h4>
+        <ul class="item-list">
+            <li><strong>ステップ1</strong> - レポートプレビュー画面で内容を確認</li>
+            <li><strong>ステップ2</strong> - 画面上部または下部の「エクスポート」ボタンエリアから希望の形式を選択</li>
+            <li><strong>ステップ3</strong> - ブラウザのダウンロード機能により、ファイルが自動的にダウンロードされる</li>
+            <li><strong>ステップ4</strong> - ダウンロードしたファイルを開いて内容を確認</li>
+        </ul>
+
+        <div class="note">
+            <strong>📄 ファイル名の形式</strong>
+            エクスポートされるファイル名は、「レポート種類_対象名_日付.拡張子」の形式で自動生成されます。例: 「プロジェクトサマリー_Webサイトリニューアル_20260107.pdf」
+        </div>
+    </div>
+
+    <div id="subsection-4-6" class="manual-subsection">
+        <h3>4.6 プロジェクトサマリーレポート</h3>
+        <p>プロジェクトサマリーレポートは、最も包括的なレポートで、プロジェクトの全体状況を一目で把握できます。</p>
+
+        <h4>含まれる主要セクション</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>セクション名</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト概要</td>
+                    <td>プロジェクト名、期間、参加メンバー、現在のステータス</td>
+                </tr>
+                <tr>
+                    <td>進捗サマリー</td>
+                    <td>進捗率、総タスク数、完了タスク数、残タスク数、進捗グラフ</td>
+                </tr>
+                <tr>
+                    <td>AIインサイト</td>
+                    <td>AIが生成したプロジェクトの現状分析、リスク評価、推奨アクション</td>
+                </tr>
+                <tr>
+                    <td>タスク統計</td>
+                    <td>ステータス別タスク数、優先度別タスク数、メンバー別タスク数</td>
+                </tr>
+                <tr>
+                    <td>リスクアラート</td>
+                    <td>AIが検知した高・中・低リスクのアラート一覧と対処方法</td>
+                </tr>
+                <tr>
+                    <td>クリティカルパス</td>
+                    <td>プロジェクト完了に最も重要なタスクの連鎖を視覚化</td>
+                </tr>
+                <tr>
+                    <td>マイルストーン</td>
+                    <td>主要なマイルストーンと達成状況</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-4-7" class="manual-subsection">
+        <h3>4.7 進捗レポート</h3>
+        <p>進捗レポートは、タスクの完了状況と進捗の詳細に特化したレポートです。</p>
+
+        <h4>含まれる主要セクション</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>セクション名</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>進捗概要</td>
+                    <td>全体進捗率、完了タスク数、進行中タスク数、未着手タスク数</td>
+                </tr>
+                <tr>
+                    <td>タスク一覧</td>
+                    <td>全タスクの詳細リスト（名前、担当者、ステータス、期限、進捗率）</td>
+                </tr>
+                <tr>
+                    <td>遅延タスク</td>
+                    <td>期限超過しているタスクのリストと遅延日数</td>
+                </tr>
+                <tr>
+                    <td>今週完了タスク</td>
+                    <td>今週完了したタスクのリスト</td>
+                </tr>
+                <tr>
+                    <td>ガントチャート</td>
+                    <td>タスクのスケジュールを時系列で視覚化したガントチャート</td>
+                </tr>
+                <tr>
+                    <td>バーンダウンチャート</td>
+                    <td>残タスク数の推移を示すグラフ（理想線と実績線）</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-4-8" class="manual-subsection">
+        <h3>4.8 工数レポート</h3>
+        <p>工数レポートは、チームメンバーの作業時間と工数実績に焦点を当てたレポートです。</p>
+
+        <h4>含まれる主要セクション</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>セクション名</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>工数サマリー</td>
+                    <td>総工数、予定工数、実績工数、予実比較</td>
+                </tr>
+                <tr>
+                    <td>メンバー別工数</td>
+                    <td>各メンバーの作業時間と工数の詳細</td>
+                </tr>
+                <tr>
+                    <td>タスク別工数</td>
+                    <td>各タスクにかかった工数の詳細</td>
+                </tr>
+                <tr>
+                    <td>日別工数グラフ</td>
+                    <td>日ごとの工数推移を示す折れ線グラフ</td>
+                </tr>
+                <tr>
+                    <td>作業ログ</td>
+                    <td>デスクトップアプリから送信された作業ログの一覧</td>
+                </tr>
+                <tr>
+                    <td>効率分析</td>
+                    <td>メンバーごとの作業効率と生産性の分析</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

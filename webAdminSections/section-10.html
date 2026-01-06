@@ -1,0 +1,578 @@
+<!-- セッション 10: 進捗トラッキング -->
+<section id="section-10" class="manual-section">
+    <h2>10. 進捗トラッキング（/progress-tracking）</h2>
+    <p>プロジェクトとタスクの進捗状況をリアルタイムで監視・管理する画面です。</p>
+
+    <!-- 10.1 画面概要 -->
+    <div id="subsection-10-1" class="manual-subsection">
+        <h3>10.1 画面概要</h3>
+        <div class="description-box">
+            <p>進捗トラッキング画面は、プロジェクトマネージャーが全プロジェクトの進捗状況を一目で把握できる統合ダッシュボードです。高リスクタスク、遅延タスク、進行中プロジェクトの数をサマリーカードで表示し、リスクレベル別にタスクを絞り込んで詳細を確認できます。各タスクにはAI提案やボトルネック分析が付随し、問題の早期発見と解決策の提示を実現します。プロジェクト別に進捗サマリーを表示し、リスク分布も可視化することで、的確な意思決定をサポートします。リアルタイムで更新されるデータにより、常に最新の状況を把握できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('progress-tracking-overview')">
+            <img id="progress-tracking-overview" src="../image/web-admin/800x500.png" alt="進捗トラッキング画面全体">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>機能カテゴリ</th>
+                    <th>提供する情報</th>
+                    <th>主な用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>サマリー統計</strong></td>
+                    <td>高リスクタスク数、遅延タスク数、進行中プロジェクト数</td>
+                    <td>全体の健全性を瞬時に判断</td>
+                </tr>
+                <tr>
+                    <td><strong>リスクレベル別タスク</strong></td>
+                    <td>高・中・低リスクタスクの詳細情報とAI提案</td>
+                    <td>リスクの早期発見と対策</td>
+                </tr>
+                <tr>
+                    <td><strong>遅延タスク</strong></td>
+                    <td>納期を過ぎたタスクの進捗、完了確率、ボトルネック分析</td>
+                    <td>遅延原因の特定と改善</td>
+                </tr>
+                <tr>
+                    <td><strong>プロジェクト別進捗</strong></td>
+                    <td>各プロジェクトのタスク数、完了率、リスク分布</td>
+                    <td>プロジェクト単位での状況把握</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>定期的な確認がカギ:</strong>
+                毎朝この画面を開いて全体の状況を把握することで、問題が深刻化する前に対処できます。特に高リスクタスクと遅延タスクの数が増えている場合は、早急な対応が必要です。</p>
+        </div>
+    </div>
+
+    <!-- 10.2 サマリーカード -->
+    <div id="subsection-10-2" class="manual-subsection">
+        <h3>10.2 サマリーカード</h3>
+        <div class="description-box">
+            <p>画面上部に3つのサマリーカードが表示され、全プロジェクトの重要指標を一目で把握できます。「高リスクタスク」カードは赤色で強調表示され、注意が必要なタスクの数を示します。「遅延タスク」カードは黄色で表示され、納期を過ぎたタスクの総数を表示します。「進行中プロジェクト」カードは緑色で、現在アクティブなプロジェクトの数を示します。各カードにはアイコンと大きな数値が表示され、視覚的に理解しやすいデザインになっています。カードをホバーすると軽く浮き上がるアニメーションがあり、クリックすると詳細セクションにスクロールします。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('summary-cards')">
+            <img id="summary-cards" src="../image/web-admin/800x500.png" alt="サマリーカード">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>カード名</th>
+                    <th>表示内容</th>
+                    <th>色とアイコン</th>
+                    <th>判断基準</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>高リスクタスク</strong></td>
+                    <td>リスクレベルが「高」のタスク数</td>
+                    <td>赤色 / <i class="bi bi-exclamation-triangle-fill"></i></td>
+                    <td>5個以上で要警戒、10個以上で緊急対応</td>
+                </tr>
+                <tr>
+                    <td><strong>遅延タスク</strong></td>
+                    <td>納期を過ぎたタスク数</td>
+                    <td>黄色 / <i class="bi bi-clock-history"></i></td>
+                    <td>3個以上で要注意、7個以上で深刻</td>
+                </tr>
+                <tr>
+                    <td><strong>進行中プロジェクト</strong></td>
+                    <td>ステータスが「in_progress」または「active」のプロジェクト数</td>
+                    <td>緑色 / <i class="bi bi-play-circle-fill"></i></td>
+                    <td>チームリソースと照らし合わせて判断</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>動的なカウント:</strong>
+                サマリーカードの数値は、リスクレベル選択やプロジェクト選択に応じて動的に更新されません。常に全体の統計を表示します。個別のフィルタリングは各セクションで行います。</p>
+        </div>
+    </div>
+
+    <!-- 10.3 リスクレベル選択タブ -->
+    <div id="subsection-10-3" class="manual-subsection">
+        <h3>10.3 リスクレベル選択タブ</h3>
+        <div class="description-box">
+            <p>リスクレベル別タスクセクションでは、3つのタブ（高リスク・中リスク・低リスク）でタスクを切り替えて表示できます。デフォルトでは「高リスク」タブが選択されており、最も注意が必要なタスクが最初に表示されます。タブをクリックすると、APIから該当するリスクレベルのタスクが取得され、タスクリストが更新されます。選択中のタブはグラデーション背景で強調表示され、アイコンも色が変わります。各タブには対応するアイコン（高リスク:
+                <i class="bi bi-exclamation-circle-fill"></i>、中リスク: <i class="bi bi-dash-circle-fill"></i>、低リスク: <i
+                    class="bi bi-check-circle-fill"></i>）が付いています。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('risk-tabs')">
+            <img id="risk-tabs" src="../image/web-admin/800x500.png" alt="リスクレベル選択タブ">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>リスクレベル</th>
+                    <th>対象タスク</th>
+                    <th>表示順序</th>
+                    <th>推奨アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge-high">高リスク</span></td>
+                    <td>完了確率が低い、遅延の可能性が高いタスク</td>
+                    <td>デフォルト表示（最優先）</td>
+                    <td>即座に状況確認、リソース追加を検討</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-medium">中リスク</span></td>
+                    <td>一定のリスクがあるが、管理可能なタスク</td>
+                    <td>2番目の優先度</td>
+                    <td>定期的な進捗確認、必要に応じて支援</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-low">低リスク</span></td>
+                    <td>順調に進行中、問題が少ないタスク</td>
+                    <td>3番目の優先度</td>
+                    <td>週次確認で十分、自走可能</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>リスク判定の仕組み:</strong>
+                AIが以下の要素を総合的に分析してリスクレベルを判定します：①現在の進捗率と残り期間のバランス、②担当者の過去のパフォーマンス、③タスクの複雑度、④依存関係の数、⑤ブロッカーの有無。これらを0-100点でスコアリングし、リスクレベルを決定します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 10.4 リスクタスクカード -->
+    <div id="subsection-10-4" class="manual-subsection">
+        <h3>10.4 リスクタスクカード</h3>
+        <div class="description-box">
+            <p>リスクタスクカードには、各タスクの詳細情報が構造化されて表示されます。カード上部にタスク名とリスクバッジが表示され、視覚的にリスクレベルを識別できます。カード本体には、担当者名、現在の進捗率（色分けされた%表示）、予測完了日、完了確率、納期の5つの重要情報が整理されています。進捗率は80%以上が緑、50-79%が黄、50%未満が赤で色分けされ、一目で状況を判断できます。完了確率はAIが算出した0-100%の数値で、納期までにタスクが完了する可能性を示します。カードをホバーすると軽く浮き上がり、ボーダーが紫色に変わります。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('risk-task-card')">
+            <img id="risk-task-card" src="../image/web-admin/800x500.png" alt="リスクタスクカード">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>表示項目</th>
+                    <th>データソース</th>
+                    <th>表示形式</th>
+                    <th>意味</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><i class="bi bi-person"></i> <strong>担当者</strong></td>
+                    <td>user_full_name</td>
+                    <td>テキスト（N/Aの場合も表示）</td>
+                    <td>タスクの責任者</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-graph-up"></i> <strong>現在の進捗</strong></td>
+                    <td>current_progress</td>
+                    <td>%表示（色分け：緑/黄/赤）</td>
+                    <td>完了した作業の割合</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-calendar-check"></i> <strong>予測完了日</strong></td>
+                    <td>predicted_completion_date</td>
+                    <td>日付（YYYY/MM/DD形式）</td>
+                    <td>AIが予測する実際の完了日</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-percent"></i> <strong>完了確率</strong></td>
+                    <td>completion_probability</td>
+                    <td>%表示（小数点以下切り捨て）</td>
+                    <td>納期までに完了する可能性</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-calendar-event"></i> <strong>納期</strong></td>
+                    <td>due_date</td>
+                    <td>日付（YYYY/MM/DD形式）</td>
+                    <td>設定された期限</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>予測完了日が納期を超過している場合:</strong>
+                このタスクは現在のペースでは納期に間に合いません。完了確率も低い値になっているはずです。担当者との面談、リソース追加、スコープ削減、納期延長のいずれかを検討してください。</p>
+        </div>
+    </div>
+
+    <!-- 10.5 AI提案ボックス -->
+    <div id="subsection-10-5" class="manual-subsection">
+        <h3>10.5 AI提案ボックス</h3>
+        <div class="description-box">
+            <p>リスクタスクカードの下部に、AIが生成した具体的な提案が表示されます（ai_suggestionフィールドが存在する場合のみ）。AI提案ボックスは紫色のグラデーション背景で強調表示され、ロボットアイコンと「AI提案」ヘッダーが付きます。提案内容は自然言語で記述され、「担当者のスキルレベルを考慮して、より簡単なタスクに分割することをお勧めします」「依存関係にあるタスクが遅延しているため、先にそちらの解消を優先してください」などの実用的なアドバイスが含まれます。提案は過去のプロジェクトデータ、メンバーのパフォーマンス履歴、現在の負荷状況を分析して生成されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('ai-suggestion')">
+            <img id="ai-suggestion" src="../image/web-admin/800x500.png" alt="AI提案ボックス">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>提案タイプ</th>
+                    <th>具体例</th>
+                    <th>根拠データ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>タスク分割提案</strong></td>
+                    <td>「このタスクは粒度が大きすぎます。3-5個のサブタスクに分割することで進捗が可視化されます」</td>
+                    <td>タスクの見積もり時間、複雑度</td>
+                </tr>
+                <tr>
+                    <td><strong>担当者変更提案</strong></td>
+                    <td>「現在の担当者は他のタスクで負荷が高い状態です。スキルマッチする別のメンバーへの再割り当てを検討してください」</td>
+                    <td>メンバーの負荷状況、スキルレベル</td>
+                </tr>
+                <tr>
+                    <td><strong>優先度調整提案</strong></td>
+                    <td>「依存関係にあるタスクAが未完了です。そちらを先に完了させることで、このタスクの着手がスムーズになります」</td>
+                    <td>タスク間の依存関係</td>
+                </tr>
+                <tr>
+                    <td><strong>スコープ削減提案</strong></td>
+                    <td>「納期までの残り時間を考慮すると、機能XとYを次フェーズに延期することをお勧めします」</td>
+                    <td>残り時間、作業量見積もり</td>
+                </tr>
+                <tr>
+                    <td><strong>リソース追加提案</strong></td>
+                    <td>「このタスクは複雑度が高く、1人での対応は困難です。ペアプログラミングやレビュアーの追加を検討してください」</td>
+                    <td>タスクの複雑度、担当者のスキル</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>AI提案の活用方法:</strong>
+                AI提案は必ず実行すべきものではなく、あくまで参考情報です。プロジェクトの特性、チームの状況、ビジネス要件を総合的に判断して採用するかどうかを決めてください。ただし、同じような提案が複数のタスクで出ている場合は、構造的な問題がある可能性が高いため、真剣に検討すべきです。
+            </p>
+        </div>
+    </div>
+
+    <!-- 10.6 遅延タスクセクション -->
+    <div id="subsection-10-6" class="manual-subsection">
+        <h3>10.6 遅延タスクセクション</h3>
+        <div class="description-box">
+            <p>遅延タスクセクションは、納期を過ぎたタスクの一覧を表示します。遅延タスクが1件以上存在する場合のみ表示され、セクションヘッダーには「遅延タスク
+                (X)」と件数が表示されます。各遅延タスクカードは赤いボーダーで強調表示され、ステータスバッジに「遅延」と表示されます。カードには担当者、進捗率、完了確率が表示され、リスクタスクカードと同様の構造になっています。特に重要な違いは、遅延タスクにはAI提案の代わりに「ボトルネック分析」が表示される点です。ボトルネック分析では、遅延の具体的な原因（例：依存タスクの未完了、リソース不足、技術的困難）が特定され、解決策が示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('delayed-tasks')">
+            <img id="delayed-tasks" src="../image/web-admin/800x500.png" alt="遅延タスクセクション">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>表示項目</th>
+                    <th>説明</th>
+                    <th>判断基準</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>遅延バッジ</strong></td>
+                    <td>タスクが遅延していることを視覚的に強調</td>
+                    <td>納期(due_date) < 現在日時</td>
+                </tr>
+                <tr>
+                    <td><strong>担当者</strong></td>
+                    <td>遅延タスクの責任者名</td>
+                    <td>面談が必要かどうかの判断材料</td>
+                </tr>
+                <tr>
+                    <td><strong>進捗率</strong></td>
+                    <td>現在どこまで完了しているか</td>
+                    <td>50%未満なら深刻、80%以上ならもうすぐ完了</td>
+                </tr>
+                <tr>
+                    <td><strong>完了確率</strong></td>
+                    <td>このタスクが最終的に完了する可能性</td>
+                    <td>30%未満なら中止・延期を検討</td>
+                </tr>
+                <tr>
+                    <td><strong>ボトルネック分析</strong></td>
+                    <td>遅延の具体的な原因と解決策</td>
+                    <td>対策の優先順位付けに使用</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>遅延タスクの放置は厳禁:</strong>
+                遅延タスクが増え続けると、プロジェクト全体が崩壊するリスクがあります。遅延タスクを発見したら、その日のうちに以下のいずれかのアクションを取ってください：①担当者と面談してブロッカーを特定、②リソース追加、③タスクの再割り当て、④スコープ削減、⑤納期の正式な延期申請。
+            </p>
+        </div>
+    </div>
+
+    <!-- 10.7 ボトルネック分析 -->
+    <div id="subsection-10-7" class="manual-subsection">
+        <h3>10.7 ボトルネック分析</h3>
+        <div class="description-box">
+            <p>ボトルネック分析は、遅延タスクの根本原因を特定するAI機能です。遅延タスクカードの下部に紫色のグラデーション背景で表示され、ファネルアイコンと「ボトルネック分析」ヘッダーが付きます。分析内容は自然言語で記述され、「依存タスクBが未完了のため着手できていません」「必要なライブラリの選定に時間がかかっています」「担当者が別プロジェクトで多忙のため作業時間が確保できていません」など、具体的な原因が示されます。AIは以下のデータソースを分析してボトルネックを特定します：①タスクの依存関係、②担当者の作業ログ、③ブロッカー登録履歴、④コメント履歴、⑤他タスクの負荷状況。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('bottleneck-analysis')">
+            <img id="bottleneck-analysis" src="../image/web-admin/800x500.png" alt="ボトルネック分析">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>ボトルネックタイプ</th>
+                    <th>具体例</th>
+                    <th>推奨対策</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>依存関係ブロック</strong></td>
+                    <td>「タスクAが未完了のため、このタスクに着手できません」</td>
+                    <td>依存タスクの優先度を上げる、並行作業可能な部分を先行</td>
+                </tr>
+                <tr>
+                    <td><strong>リソース不足</strong></td>
+                    <td>「担当者が他3件のタスクで手一杯の状態です」</td>
+                    <td>タスクの再割り当て、メンバー追加</td>
+                </tr>
+                <tr>
+                    <td><strong>技術的困難</strong></td>
+                    <td>「必要な技術スキルが不足しており、調査に時間がかかっています」</td>
+                    <td>熟練者のサポート、ペアプログラミング</td>
+                </tr>
+                <tr>
+                    <td><strong>要件不明確</strong></td>
+                    <td>「仕様が曖昧で、何度も確認が必要になっています」</td>
+                    <td>仕様書の詳細化、ステークホルダーとの定例ミーティング</td>
+                </tr>
+                <tr>
+                    <td><strong>外部依存</strong></td>
+                    <td>「外部APIの仕様変更待ちで作業が止まっています」</td>
+                    <td>モック実装で先行、並行タスクへの切り替え</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>ボトルネック分析の読み解き方:</strong>
+                ボトルネック分析には必ず「原因」と「影響」が記載されています。原因部分を読んで何が問題なのかを理解し、影響部分を読んでどの程度深刻なのかを判断してください。複数のボトルネックが同時に存在する場合もあるため、すべての原因を解消する必要があります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 10.8 プロジェクト別進捗サマリー -->
+    <div id="subsection-10-8" class="manual-subsection">
+        <h3>10.8 プロジェクト別進捗サマリー</h3>
+        <div class="description-box">
+            <p>プロジェクト別進捗セクションでは、進行中の全プロジェクトがカード形式で一覧表示されます。各プロジェクトカードには、フォルダアイコン、プロジェクト名、開始日-終了日が表示されます。カードをクリックすると、そのプロジェクトの詳細な進捗サマリーが下部に展開されます。サマリーには、総タスク数、完了タスク数、進行中タスク数、未着手タスク数、平均進捗率、遅延タスク数の6つの指標が表示されます。さらに、リスク分布セクションでは高・中・低リスクのタスク数が視覚的に表示され、プロジェクト全体の健全性を一目で把握できます。選択中のプロジェクトカードは紫色の背景で強調表示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('project-summary')">
+            <img id="project-summary" src="../image/web-admin/800x500.png" alt="プロジェクト別進捗サマリー">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>表示項目</th>
+                    <th>データソース</th>
+                    <th>意味</th>
+                    <th>健全な値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><i class="bi bi-list-task"></i> <strong>総タスク数</strong></td>
+                    <td>projectSummary.totalTasks</td>
+                    <td>プロジェクトの全タスク数</td>
+                    <td>プロジェクト規模による</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-check-square"></i> <strong>完了タスク</strong></td>
+                    <td>projectSummary.completedTasks</td>
+                    <td>完了したタスク数</td>
+                    <td>プロジェクト進行度に応じて増加</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-arrow-repeat"></i> <strong>進行中</strong></td>
+                    <td>projectSummary.inProgressTasks</td>
+                    <td>現在作業中のタスク数</td>
+                    <td>メンバー数と同程度が理想</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-circle"></i> <strong>未着手</strong></td>
+                    <td>projectSummary.todoTasks</td>
+                    <td>まだ着手していないタスク数</td>
+                    <td>プロジェクト初期は多い、後半は少ない</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-speedometer"></i> <strong>平均進捗率</strong></td>
+                    <td>projectSummary.avgProgress</td>
+                    <td>全タスクの平均進捗率</td>
+                    <td>スケジュール消化率と同程度が理想</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-exclamation-triangle"></i> <strong>遅延タスク</strong></td>
+                    <td>projectSummary.delayedTasks</td>
+                    <td>納期を過ぎたタスク数</td>
+                    <td>0件が理想、3件以上は要警戒</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>リスク分布の読み方:</strong> リスク分布セクションでは、高・中・低リスクのタスク数が表示されます。健全なプロジェクトでは「低リスク > 中リスク >
+                高リスク」の順で数が多くなります。高リスクタスクが全体の30%を超えている場合は、プロジェクト計画の見直しや大幅なリソース追加が必要です。</p>
+        </div>
+    </div>
+
+    <!-- 10.9 更新ボタンとローディング -->
+    <div id="subsection-10-9" class="manual-subsection">
+        <h3>10.9 更新ボタンとローディング</h3>
+        <div class="description-box">
+            <p>画面右上には「更新」ボタンが配置されており、クリックすると全データを再取得してダッシュボードをリフレッシュできます。更新中はボタンが「更新中...」に変わり、クリックできなくなります。データ取得中は画面全体に半透明の白いオーバーレイが表示され、中央に紫色のスピナーアニメーションと「データを読み込んでいます...」というメッセージが表示されます。データ取得が完了するとオーバーレイがフェードアウトし、最新のデータが表示されます。エラーが発生した場合は、画面上部に赤いエラーメッセージが表示され、具体的なエラー内容が示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('loading-refresh')">
+            <img id="loading-refresh" src="../image/web-admin/800x500.png" alt="更新ボタンとローディング">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>UI要素</th>
+                    <th>通常状態</th>
+                    <th>ローディング状態</th>
+                    <th>エラー状態</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>更新ボタン</strong></td>
+                    <td>「更新」と表示、クリック可能</td>
+                    <td>「更新中...」と表示、無効化</td>
+                    <td>「更新」に戻る、再度クリック可能</td>
+                </tr>
+                <tr>
+                    <td><strong>ローディングオーバーレイ</strong></td>
+                    <td>非表示</td>
+                    <td>半透明の白背景 + スピナー表示</td>
+                    <td>非表示</td>
+                </tr>
+                <tr>
+                    <td><strong>エラーメッセージ</strong></td>
+                    <td>非表示</td>
+                    <td>非表示</td>
+                    <td>赤い背景でエラー内容を表示</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>自動更新の活用:</strong>
+                進捗トラッキング画面は常に最新の情報を表示することが重要です。朝一番に開いたら、まず更新ボタンをクリックして最新データを取得しましょう。また、長時間画面を開きっぱなしにしている場合は、1時間ごとに更新することをお勧めします。
+            </p>
+        </div>
+    </div>
+
+    <!-- 10.10 活用シーンとベストプラクティス -->
+    <div id="subsection-10-10" class="manual-subsection">
+        <h3>10.10 活用シーンとベストプラクティス</h3>
+        <div class="description-box">
+            <p>進捗トラッキング画面は、プロジェクトマネージャーの日常業務において最も頻繁に使用される画面の一つです。毎朝のスタンドアップミーティング前にこの画面を確認し、高リスクタスクと遅延タスクをチェックすることで、チームに対して的確な指示を出せます。週次の進捗報告では、プロジェクト別サマリーを活用して経営層に現状を報告します。AI提案とボトルネック分析を活用することで、問題の早期発見と迅速な対策が可能になり、プロジェクトの成功率が大幅に向上します。この画面を効果的に活用することで、プロジェクトマネージャーはより戦略的な意思決定に時間を使えるようになります。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('best-practices')">
+            <img id="best-practices" src="../image/web-admin/800x500.png" alt="活用シーンとベストプラクティス">
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <h6><i class="bi bi-1-circle-fill"></i> 毎朝のルーチン（8:30-8:45）</h6>
+                <p>出社後すぐに進捗トラッキング画面を開き、サマリーカードで全体の状況を把握します。高リスクタスクが前日より増えていないか、遅延タスクが新たに発生していないかを確認します。問題があればスタンドアップで議題に上げます。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-2-circle-fill"></i> スタンドアップミーティング（9:00-9:15）</h6>
+                <p>高リスクタスクと遅延タスクの担当者に状況をヒアリングします。AI提案とボトルネック分析の内容を元に、具体的な支援策を提示します。必要に応じて、タスクの再割り当てやリソース追加を決定します。</p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-3-circle-fill"></i> 日中の定期確認（12:00, 15:00, 17:00）</h6>
+                <p>1日3回程度、進捗トラッキング画面を更新して状況変化を確認します。新たなリスクタスクが発生した場合は即座に担当者にチャットで連絡し、状況を確認します。</p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-4-circle-fill"></i> 週次報告会（金曜16:00）</h6>
+                <p>プロジェクト別進捗サマリーを活用して、各プロジェクトの健全性を報告します。リスク分布グラフをスクリーンショットして資料に添付し、視覚的に状況を伝えます。遅延タスクの原因と対策も併せて報告します。</p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-5-circle-fill"></i> 月次レビュー（月末最終営業日）</h6>
+                <p>1ヶ月間の進捗トラッキングデータを振り返り、高リスクタスクの発生傾向を分析します。特定のメンバーに高リスクタスクが集中している場合は、スキル育成やタスク割り当ての見直しを検討します。</p>
+            </div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>ベストプラクティス</th>
+                    <th>具体的なアクション</th>
+                    <th>期待効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>毎朝の習慣化</strong></td>
+                    <td>出社後、メールを開く前に進捗トラッキング画面を確認</td>
+                    <td>問題の早期発見、1日の優先順位付けが明確になる</td>
+                </tr>
+                <tr>
+                    <td><strong>AI提案の記録</strong></td>
+                    <td>AI提案をスプレッドシートにコピーして実施状況を追跡</td>
+                    <td>AI提案の有効性を検証、改善サイクルの確立</td>
+                </tr>
+                <tr>
+                    <td><strong>ボトルネックのパターン分析</strong></td>
+                    <td>同じ種類のボトルネックが繰り返し発生していないか月次でレビュー</td>
+                    <td>構造的な問題の特定、プロセス改善</td>
+                </tr>
+                <tr>
+                    <td><strong>チームとの共有</strong></td>
+                    <td>週次ミーティングで進捗トラッキング画面を画面共有しながら議論</td>
+                    <td>透明性の向上、チームの当事者意識向上</td>
+                </tr>
+                <tr>
+                    <td><strong>閾値の設定</strong></td>
+                    <td>高リスクタスク5件以上、遅延タスク3件以上で経営層にエスカレーション</td>
+                    <td>重大問題の見逃し防止、迅速な意思決定</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>よくある失敗パターン:</strong>
+                ①進捗トラッキング画面を見るだけで満足し、アクションを取らない、②AI提案を無視して自己判断だけで対処する、③遅延タスクを放置してさらに悪化させる、④データの更新頻度が低く、常に古い情報で判断している、⑤プロジェクト別サマリーを見ずに個別タスクだけに注目する。これらを避けることで、進捗トラッキング画面の真価を発揮できます。
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>上級者向けテクニック:</strong>
+                進捗トラッキング画面のデータをスプレッドシートにエクスポートし、時系列で記録することで、プロジェクトの健全性トレンドを可視化できます。「高リスクタスク数の推移グラフ」「遅延タスク数の週次変化」などを作成し、プロジェクトの改善度合いを定量的に把握しましょう。これにより、マネジメントの効果を数値で証明できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- ギャラリーモーダル -->
+</section>

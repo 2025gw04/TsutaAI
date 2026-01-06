@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <title>TsutaAI - Web Admin 詳細マニュアル</title>
+    <link rel="stylesheet" href="webAdminUi-components.css">
+    <link rel="stylesheet" href="webAdminStyle.css">
+
+</head>
+
+<body>
+    <div class="page-container">
+        <aside class="sidebar" id="sidebar">
+            <div style="padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color);">
+                <a href="#"
+                    style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-main);">
+                    <img src="../image/TsutaAI_G_Trans.png" alt="TsutaAI" style="height: 32px; width: auto;">
+                    <span style="font-weight: 600; font-size: 1.1rem;">ツタAI</span>
+                </a>
+            </div>
+            <div class="sidebar-header">目次</div>
+            <nav class="toc" id="toc"></nav>
+        </aside>
+        <div class="overlay" id="overlay"></div>
+
+        <div class="main-wrapper" id="main-wrapper">
+            <header class="top-header">
+                <button class="hamburger-menu" id="hamburger-menu">☰</button>
+                <div class="top-header-title">Web Admin 詳細マニュアル</div>
+            </header>
+            <main class="main-content" id="main-content-area">
+                <div class="manual-page-header">
+                    <h1>Web Admin 詳細マニュアル</h1>
+                    <p>TsutaAI Web Admin システムの完全ガイド - 全16セクション、160+サブセクション、29のAI機能を網羅</p>
+                </div>
+                <!-- Sections will be loaded here -->
+            </main>
+        </div>
+    </div>
+
+    <div class="gallery-modal" id="galleryModal">
+        <button class="gallery-close">&times;</button>
+        <div class="gallery-content">
+            <img src="" alt="ギャラリー画像" class="gallery-image" id="galleryImage" />
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <div class="loading-text" id="loading-text">セクションを読み込み中...</div>
+            <div class="loading-progress-container">
+                <div class="loading-progress-bar" id="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="webAdminMain.js"></script>
+</body>
+
+</html>

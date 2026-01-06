@@ -1,0 +1,483 @@
+<!-- セッション 2: ログイン画面 -->
+<section id="section-2" class="manual-section">
+    <h2>2. ログイン画面（/）</h2>
+    <p>TsutaAI Web管理画面にアクセスするための認証画面です。ユーザー名とパスワードを入力してシステムにログインします。</p>
+
+    <div id="subsection-2-1" class="manual-subsection">
+        <h3>2.1 概要</h3>
+        <p>ログイン画面は、セキュアな認証機能を提供し、許可されたユーザーのみがシステムにアクセスできるように設計されています。美しいグラデーション背景とアニメーション効果により、視覚的に魅力的なデザインとなっています。</p>
+        
+        <div class="feature-image" onclick="openGallery('login-overview-img')">
+            <img id="login-overview-img" 
+                 src="../image/web-admin/login-overview.png" 
+                 alt="ログイン画面全体" 
+                 loading="lazy" />
+        </div>
+
+        <h4>主要な機能</h4>
+        <ul class="item-list">
+            <li><strong>安全な認証</strong> - ユーザー名とパスワードによる認証。認証情報はバックエンドAPIで検証されます</li>
+            <li><strong>自動リダイレクト</strong> - ログイン成功後、自動的にダッシュボード画面（/dashboard）に遷移します</li>
+            <li><strong>エラーハンドリング</strong> - 認証失敗時は分かりやすいエラーメッセージを表示</li>
+            <li><strong>既存セッション確認</strong> - 既にログイン済みの場合は自動的にダッシュボードにリダイレクト</li>
+            <li><strong>レスポンシブデザイン</strong> - デスクトップ、タブレット、モバイルすべてに最適化</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 デフォルトアカウント</strong>
+            初期状態では、ユーザー名「admin」でログインできます。デモ環境では自動的にadminアカウントが設定されています。
+        </div>
+    </div>
+
+    <div id="subsection-2-2" class="manual-subsection">
+        <h3>2.2 画面構成</h3>
+        <p>ログイン画面は、中央に配置されたログインカードと、動的なグラデーション背景で構成されています。</p>
+
+        <div class="feature-image" onclick="openGallery('login-card-img')">
+            <img id="login-card-img" 
+                 src="../image/web-admin/login-card.png" 
+                 alt="ログインカード" 
+                 loading="lazy" />
+        </div>
+
+        <h4>ログインカードの要素</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ロゴ</td>
+                    <td>TsutaAIのブランドロゴ（80x80px）。ドロップシャドウ効果でカードから浮き上がって見える</td>
+                </tr>
+                <tr>
+                    <td>システム名</td>
+                    <td>「ツタAI」のテキスト。Zen Maru Gothicフォントで日本的な雰囲気を演出</td>
+                </tr>
+                <tr>
+                    <td>ユーザー名入力欄</td>
+                    <td>人物アイコン付きの入力フィールド。プレースホルダーは「Username」</td>
+                </tr>
+                <tr>
+                    <td>パスワード入力欄</td>
+                    <td>鍵アイコン付きの入力フィールド。入力文字は自動的にマスク表示される</td>
+                </tr>
+                <tr>
+                    <td>LOGINボタン</td>
+                    <td>紫系のグラデーションボタン。ホバー時に浮き上がるアニメーション効果</td>
+                </tr>
+                <tr>
+                    <td>エラー表示エリア</td>
+                    <td>認証失敗時に赤いエラーメッセージを表示（通常時は非表示）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>カードデザインの特徴</h4>
+        <ul class="item-list">
+            <li><strong>半透明背景</strong> - 背景のグラデーションが透けて見える半透明の白色背景</li>
+            <li><strong>バックドロップブラー</strong> - 背景をぼかす効果により、奥行き感とモダンな雰囲気を演出</li>
+            <li><strong>角丸デザイン</strong> - 16pxの角丸で柔らかい印象を与える</li>
+            <li><strong>シャドウ効果</strong> - カード全体に柔らかい影を付けて浮遊感を表現</li>
+        </ul>
+    </div>
+
+    <div id="subsection-2-3" class="manual-subsection">
+        <h3>2.3 背景デザイン</h3>
+        <p>ログイン画面の背景は、複数のアニメーションする光の球体により、動的で美しいビジュアルを実現しています。</p>
+
+        <div class="feature-image" onclick="openGallery('login-background-img')">
+            <img id="login-background-img" 
+                 src="../image/web-admin/login-background.png" 
+                 alt="背景アニメーション" 
+                 loading="lazy" />
+        </div>
+
+        <h4>背景グラデーション</h4>
+        <p>画面全体に135度の対角線グラデーションが適用されており、以下の色が順に変化します：</p>
+        <ul class="item-list">
+            <li><strong>緑系</strong> - 左上から開始（#5a7c5e）</li>
+            <li><strong>紫・ピンク系</strong> - 中央部分（#6b5b60 → #8b5a7c → #a15683）</li>
+            <li><strong>青系</strong> - 右下で終了（#6b5b95 → #3d5a80）</li>
+        </ul>
+
+        <h4>アニメーション光球（5個）</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>光球</th>
+                    <th>位置</th>
+                    <th>サイズ</th>
+                    <th>アニメーション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>光球1</td>
+                    <td>左上（-10%, 10%）</td>
+                    <td>500x500px</td>
+                    <td>20秒周期で右下→左上→右下に移動</td>
+                </tr>
+                <tr>
+                    <td>光球2</td>
+                    <td>右下（-5%, 5%）</td>
+                    <td>600x600px</td>
+                    <td>25秒周期で拡大縮小しながら移動</td>
+                </tr>
+                <tr>
+                    <td>光球3</td>
+                    <td>中央右（30%, 60%）</td>
+                    <td>450x450px</td>
+                    <td>30秒周期で斜め移動</td>
+                </tr>
+                <tr>
+                    <td>光球4</td>
+                    <td>左下（60%, 5%）</td>
+                    <td>400x400px</td>
+                    <td>22秒周期で円運動</td>
+                </tr>
+                <tr>
+                    <td>光球5</td>
+                    <td>右上（15%, 15%）</td>
+                    <td>350x350px</td>
+                    <td>28秒周期で上下移動</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            <strong>💡 視覚効果</strong>
+            各光球には100pxのぼかし効果と「screen」ブレンドモードが適用されており、重なり合うことで幻想的な光の表現を実現しています。
+        </div>
+    </div>
+
+    <div id="subsection-2-4" class="manual-subsection">
+        <h3>2.4 入力フィールド</h3>
+        <p>ユーザー名とパスワードの入力欄は、アイコン付きのモダンなデザインで、使いやすさと視認性を両立しています。</p>
+
+        <div class="feature-image" onclick="openGallery('login-inputs-img')">
+            <img id="login-inputs-img" 
+                 src="../image/web-admin/login-inputs.png" 
+                 alt="入力フィールド" 
+                 loading="lazy" />
+        </div>
+
+        <h4>入力フィールドの特徴</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>詳細</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ユーザー名入力</td>
+                    <td>👤アイコン付き。プレースホルダー「Username」。テキスト入力タイプ</td>
+                </tr>
+                <tr>
+                    <td>パスワード入力</td>
+                    <td>🔒アイコン付き。プレースホルダー「Password」。パスワードタイプ（入力文字は●で表示）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>入力フィールドの状態</h4>
+        <ul class="item-list">
+            <li><strong>通常状態</strong> - 半透明の白背景、薄いグレーの枠線。アイコンはグレー色で表示</li>
+            <li><strong>フォーカス状態</strong> - 背景がより不透明な白に変化。青い光彩効果（3pxのシャドウ）が表示され、入力中であることを明確に示す</li>
+            <li><strong>エラー状態</strong> - 認証失敗時は入力欄の上部に赤いエラーメッセージが表示される</li>
+        </ul>
+
+        <h4>バリデーション</h4>
+        <p>両方の入力欄には<code>required</code>属性が設定されており、空欄のまま送信することはできません。未入力の状態でLOGINボタンを押すと、ブラウザの標準バリデーションメッセージが表示されます。</p>
+    </div>
+
+    <div id="subsection-2-5" class="manual-subsection">
+        <h3>2.5 LOGINボタン</h3>
+        <p>認証を実行するためのメインボタンです。視覚的なフィードバックとアニメーション効果により、クリック操作が快適になっています。</p>
+
+        <div class="feature-image" onclick="openGallery('login-button-img')">
+            <img id="login-button-img" 
+                 src="../image/web-admin/login-button.png" 
+                 alt="LOGINボタン" 
+                 loading="lazy" />
+        </div>
+
+        <h4>ボタンの状態</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>状態</th>
+                    <th>表示</th>
+                    <th>動作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>通常状態</td>
+                    <td>「LOGIN」テキスト。紫系グラデーション背景</td>
+                    <td>クリック可能。ホバー時に上方向に2px浮き上がり、シャドウが強調される</td>
+                </tr>
+                <tr>
+                    <td>認証中</td>
+                    <td>「認証中...」テキスト。透明度50%</td>
+                    <td>クリック不可（disabled状態）。二重送信を防止</td>
+                </tr>
+                <tr>
+                    <td>クリック時</td>
+                    <td>通常状態と同じ</td>
+                    <td>一瞬元の位置に戻るアニメーション（押下フィードバック）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>デザインの特徴</h4>
+        <ul class="item-list">
+            <li><strong>グラデーション背景</strong> - 左上から右下へ紫→ピンクのグラデーション（#667eea → #764ba2）</li>
+            <li><strong>立体的なシャドウ</strong> - 通常時は4pxの柔らかい影、ホバー時は6pxの強い影で浮遊感を演出</li>
+            <li><strong>大文字表記</strong> - 「LOGIN」はすべて大文字で表示され、視覚的に強調</li>
+            <li><strong>レタースペーシング</strong> - 0.1emの字間により、可読性と高級感を向上</li>
+        </ul>
+    </div>
+
+    <div id="subsection-2-6" class="manual-subsection">
+        <h3>2.6 認証フロー</h3>
+        <p>ログインボタンをクリックしてから、ダッシュボード画面に遷移するまでの処理の流れを説明します。</p>
+
+        <div class="feature-image" onclick="openGallery('login-flow-img')">
+            <img id="login-flow-img" 
+                 src="../image/web-admin/login-flow.png" 
+                 alt="認証フロー図" 
+                 loading="lazy" />
+        </div>
+
+        <h4>認証処理の流れ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ステップ</th>
+                    <th>処理内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. 入力検証</td>
+                    <td>ユーザー名とパスワードが入力されているか確認（ブラウザの標準バリデーション）</td>
+                </tr>
+                <tr>
+                    <td>2. 送信開始</td>
+                    <td>LOGINボタンが「認証中...」に変化し、disabled状態になる</td>
+                </tr>
+                <tr>
+                    <td>3. API呼び出し</td>
+                    <td>バックエンドAPI（<code>/api/users/login</code>）にユーザー名とパスワードを送信</td>
+                </tr>
+                <tr>
+                    <td>4. 認証処理</td>
+                    <td>バックエンドでパスワードのハッシュ値を検証し、一致すればJWTトークンを生成</td>
+                </tr>
+                <tr>
+                    <td>5. レスポンス受信</td>
+                    <td>成功時: ユーザー情報とトークンを受信<br>失敗時: エラーメッセージを受信</td>
+                </tr>
+                <tr>
+                    <td>6a. 成功時の処理</td>
+                    <td>認証情報をストアに保存し、ダッシュボード（/dashboard）へ自動リダイレクト</td>
+                </tr>
+                <tr>
+                    <td>6b. 失敗時の処理</td>
+                    <td>エラーメッセージを画面に表示し、ボタンを再び有効化</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>💡 セキュリティ</strong>
+            パスワードは平文で保存されず、bcryptによるハッシュ化が行われています。また、認証成功時に発行されるJWTトークンは、以降のすべてのAPI呼び出しで使用されます。
+        </div>
+    </div>
+
+    <div id="subsection-2-7" class="manual-subsection">
+        <h3>2.7 エラーハンドリング</h3>
+        <p>認証に失敗した場合、ユーザーに分かりやすいエラーメッセージが表示されます。</p>
+
+        <div class="feature-image" onclick="openGallery('login-error-img')">
+            <img id="login-error-img" 
+                 src="../image/web-admin/login-error.png" 
+                 alt="エラー表示" 
+                 loading="lazy" />
+        </div>
+
+        <h4>表示されるエラーメッセージの例</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>エラー状況</th>
+                    <th>メッセージ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ユーザー名が存在しない</td>
+                    <td>「ユーザーが見つかりません」または「認証に失敗しました。」</td>
+                </tr>
+                <tr>
+                    <td>パスワードが間違っている</td>
+                    <td>「パスワードが正しくありません」または「認証に失敗しました。」</td>
+                </tr>
+                <tr>
+                    <td>サーバーエラー</td>
+                    <td>「認証に失敗しました。」（ネットワークエラーやサーバー障害）</td>
+                </tr>
+                <tr>
+                    <td>ネットワーク切断</td>
+                    <td>ブラウザのエラーメッセージまたは「認証に失敗しました。」</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>エラー表示のデザイン</h4>
+        <ul class="item-list">
+            <li><strong>赤いエラーボックス</strong> - 薄いピンク色の背景に赤い枠線とテキスト</li>
+            <li><strong>入力欄の上に表示</strong> - エラーメッセージは入力フィールドの上部に表示され、見落としにくい</li>
+            <li><strong>再試行可能</strong> - エラー表示後もすぐに修正して再送信できる（ボタンが再度有効化される）</li>
+        </ul>
+
+        <div class="note">
+            <strong>⚠️ セキュリティ上の配慮</strong>
+            エラーメッセージは、セキュリティのため、ユーザー名の存在有無を明確に区別しない場合があります。これは、攻撃者が有効なユーザー名を特定できないようにするためです。
+        </div>
+    </div>
+
+    <div id="subsection-2-8" class="manual-subsection">
+        <h3>2.8 自動リダイレクト機能</h3>
+        <p>既にログイン済みのユーザーがログイン画面にアクセスした場合、自動的にダッシュボードにリダイレクトされます。</p>
+
+        <h4>リダイレクトの動作</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>状況</th>
+                    <th>動作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>未ログイン状態でアクセス</td>
+                    <td>ログイン画面が表示される（通常動作）</td>
+                </tr>
+                <tr>
+                    <td>既にログイン済み</td>
+                    <td>画面が表示される前に自動的に/dashboardへリダイレクト</td>
+                </tr>
+                <tr>
+                    <td>ログイン成功直後</td>
+                    <td>認証情報をストアに保存後、即座に/dashboardへ遷移</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>💡 UX向上</strong>
+            この機能により、ユーザーは既にログイン済みの場合、無駄にログイン画面を見る必要がなく、スムーズにシステムを利用できます。
+        </div>
+    </div>
+
+    <div id="subsection-2-9" class="manual-subsection">
+        <h3>2.9 レスポンシブデザイン</h3>
+        <p>ログイン画面は、デスクトップ、タブレット、モバイル端末のすべてで最適な表示とユーザー体験を提供します。</p>
+
+        <div class="feature-image" onclick="openGallery('login-responsive-img')">
+            <img id="login-responsive-img" 
+                 src="../image/web-admin/login-responsive.png" 
+                 alt="レスポンシブ表示" 
+                 loading="lazy" />
+        </div>
+
+        <h4>画面サイズ別の最適化</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面サイズ</th>
+                    <th>カード幅</th>
+                    <th>ロゴサイズ</th>
+                    <th>フォントサイズ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>デスクトップ（768px以上）</td>
+                    <td>380px固定</td>
+                    <td>80x80px</td>
+                    <td>システム名: 24px</td>
+                </tr>
+                <tr>
+                    <td>タブレット（481px～768px）</td>
+                    <td>100%（最大380px）</td>
+                    <td>70x70px</td>
+                    <td>システム名: 24px</td>
+                </tr>
+                <tr>
+                    <td>モバイル（480px以下）</td>
+                    <td>100%</td>
+                    <td>60x60px</td>
+                    <td>システム名: 22px</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>モバイル固有の最適化</h4>
+        <ul class="item-list">
+            <li><strong>入力フィールドのフォントサイズ</strong> - 16px以上に設定され、iOSで自動ズームが発生しないように調整</li>
+            <li><strong>タッチターゲットサイズ</strong> - ボタンとリンクは最低44x44pxを確保し、指でタップしやすいサイズ</li>
+            <li><strong>パディング調整</strong> - 小さい画面では余白を縮小し、コンテンツ表示領域を最大化</li>
+            <li><strong>背景アニメーション</strong> - すべての画面サイズで美しく表示されるよう、光球の配置が調整される</li>
+        </ul>
+    </div>
+
+    <div id="subsection-2-10" class="manual-subsection">
+        <h3>2.10 セキュリティ機能</h3>
+        <p>ログイン画面には、システムを保護するための複数のセキュリティ機能が実装されています。</p>
+
+        <h4>実装されているセキュリティ対策</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>対策</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>パスワードハッシュ化</td>
+                    <td>パスワードはbcryptでハッシュ化され、平文では保存されない</td>
+                </tr>
+                <tr>
+                    <td>JWTトークン認証</td>
+                    <td>ログイン成功時にJSON Web Token（JWT）が発行され、以降のAPI呼び出しで使用される</td>
+                </tr>
+                <tr>
+                    <td>HTTPS通信</td>
+                    <td>本番環境では、すべての通信がHTTPSで暗号化される（証明書設定が必要）</td>
+                </tr>
+                <tr>
+                    <td>二重送信防止</td>
+                    <td>認証中はボタンがdisabled状態になり、重複した送信を防止</td>
+                </tr>
+                <tr>
+                    <td>セッション管理</td>
+                    <td>認証情報はブラウザのストアに安全に保管され、ページリロード後も維持される</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            <strong>🔒 本番環境での注意事項</strong>
+            デモ環境ではHTTP通信を使用していますが、本番環境では必ずHTTPSを有効化し、強力なパスワードポリシーを設定してください。また、定期的なパスワード変更を推奨します。
+        </div>
+    </div>
+</section>

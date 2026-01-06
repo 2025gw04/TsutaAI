@@ -10,7 +10,9 @@
     <!-- Google Fonts: Inter & Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -36,9 +38,9 @@
                         'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
                     },
                     borderRadius: {
-                        'xl': '1rem',
-                        '2xl': '1.5rem',
-                        '3xl': '2rem',
+                        'xl': '0.7rem',
+                        '2xl': '0.7rem',
+                        '3xl': '0.7rem',
                     }
                 }
             }
@@ -53,12 +55,19 @@
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         @keyframes pulse-urgent {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
         }
 
         .pulse-urgent {
@@ -76,8 +85,15 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -88,19 +104,26 @@
     <nav class="glass-nav sticky top-[0px] w-full z-40 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer"
+                    onclick="window.location.href='index.html'">
                     <img src="image/TsutaAI_G_Trans.png" alt="TsutaAI Icon" class="h-8 w-auto">
                     <span class="text-xl font-bold tracking-tight">ツタAI</span>
                 </div>
 
                 <div class="hidden md:flex space-x-6 items-center text-sm">
-                    <a href="#introduction" class="font-medium text-text-sub hover:text-primary transition-colors">ツタAIとは？</a>
+                    <a href="#introduction"
+                        class="font-medium text-text-sub hover:text-primary transition-colors">ツタAIとは？</a>
                     <a href="#benefits" class="font-medium text-text-sub hover:text-primary transition-colors">メリット</a>
-                    <a href="#desktop-app" class="font-medium text-text-sub hover:text-primary transition-colors">デスクトップアプリ</a>
-                    <a href="#ai-features" class="font-medium text-text-sub hover:text-primary transition-colors">AI機能</a>
-                    <a href="#help-request" class="font-medium text-text-sub hover:text-primary transition-colors">ヘルプ機能</a>
-                    <a href="#daily-workflow" class="font-medium text-text-sub hover:text-primary transition-colors">1日の流れ</a>
-                    <a href="index.html" class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-full hover:bg-gray-200 transition-all">
+                    <a href="#desktop-app"
+                        class="font-medium text-text-sub hover:text-primary transition-colors">デスクトップアプリ</a>
+                    <a href="#web-features"
+                        class="font-medium text-text-sub hover:text-primary transition-colors">Web機能</a>
+                    <a href="#ai-features"
+                        class="font-medium text-text-sub hover:text-primary transition-colors">AI機能</a>
+                    <a href="#daily-workflow"
+                        class="font-medium text-text-sub hover:text-primary transition-colors">1日の流れ</a>
+                    <a href="index.html"
+                        class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-full hover:bg-gray-200 transition-all">
                         <i class="fas fa-home mr-1"></i>トップへ戻る
                     </a>
                 </div>
@@ -113,30 +136,42 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#introduction" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">ツタAIとは？</a>
-                <a href="#benefits" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">メリット</a>
-                <a href="#desktop-app" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">デスクトップアプリ</a>
-                <a href="#ai-features" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">AI機能</a>
-                <a href="#help-request" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">ヘルプ機能</a>
-                <a href="#daily-workflow" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">1日の流れ</a>
-                <a href="index.html" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">トップへ戻る</a>
+                <a href="#introduction"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">ツタAIとは？</a>
+                <a href="#benefits"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">メリット</a>
+                <a href="#desktop-app"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">デスクトップアプリ</a>
+                <a href="#web-features"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">Web機能</a>
+                <a href="#ai-features"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">AI機能</a>
+                <a href="#daily-workflow"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">1日の流れ</a>
+                <a href="index.html"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">トップへ戻る</a>
             </div>
         </div>
     </nav>
 
     <!-- ヒーローセクション -->
-    <section class="relative pt-20 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-gradient-to-br from-purple-600 to-purple-700">
+    <section
+        class="relative pt-20 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-gradient-to-br from-purple-600 to-purple-700">
         <div class="absolute inset-0 bg-gradient-to-br from-purple-600/90 to-purple-700/90"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center text-white">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-xs font-semibold mb-6 fade-in-up" style="animation-delay: 0.1s;">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 text-xs font-semibold mb-6 fade-in-up"
+                style="animation-delay: 0.1s;">
                 <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
                 ユーザー向け
             </div>
 
-            <p class="text-xl md:text-2xl font-semibold mb-4 fade-in-up" style="animation-delay: 0.2s;">あなたの仕事をサポートするAIアシスタント</p>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] fade-in-up" style="animation-delay: 0.3s;">
+            <p class="text-xl md:text-2xl font-semibold mb-4 fade-in-up" style="animation-delay: 0.2s;">
+                あなたの仕事をサポートするAIアシスタント</p>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1] fade-in-up"
+                style="animation-delay: 0.3s;">
                 ツタAI
             </h1>
             <p class="mt-4 max-w-3xl mx-auto text-lg md:text-xl opacity-95 fade-in-up" style="animation-delay: 0.4s;">
@@ -144,7 +179,8 @@
             </p>
 
             <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
-                <a href="#introduction" class="px-8 py-4 bg-white text-purple-600 text-lg font-bold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <a href="#introduction"
+                    class="px-8 py-4 bg-white text-purple-600 text-lg font-bold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     詳しく見る
                 </a>
             </div>
@@ -160,7 +196,8 @@
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">ツタAIとは？</h2>
             </div>
 
-            <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 md:p-12 rounded-3xl shadow-hover mb-8">
+            <div
+                class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 md:p-12 rounded-3xl shadow-hover mb-8">
                 <h3 class="text-2xl md:text-3xl font-bold mb-6">✨ 面倒な作業はAIにお任せ！</h3>
                 <p class="text-lg mb-4">
                     ツタAIは、<strong>あなたの日々の仕事を楽にするAI搭載のプロジェクト管理ツール</strong>です。
@@ -172,20 +209,23 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-soft hover:shadow-hover transition-all duration-300">
+                <div
+                    class="bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-soft hover:shadow-hover transition-all duration-300">
                     <div class="text-5xl mb-4">⏱️</div>
                     <h4 class="text-xl font-bold text-gray-900 mb-3">時間を節約</h4>
                     <p class="text-gray-600 text-sm">日報作成や進捗入力が自動化され、毎日30分以上の時間を節約</p>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-soft hover:shadow-hover transition-all duration-300">
+                <div
+                    class="bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-soft hover:shadow-hover transition-all duration-300">
                     <div class="text-5xl mb-4">🤝</div>
                     <h4 class="text-xl font-bold text-gray-900 mb-3">困った時すぐ助けが来る</h4>
                     <p class="text-gray-600 text-sm">ヘルプボタン1つで、最適な助っ人を自動で見つけてくれる</p>
                 </div>
-                <div class="bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-soft hover:shadow-hover transition-all duration-300">
+                <div
+                    class="bg-white border border-gray-200 rounded-3xl p-8 text-center shadow-soft hover:shadow-hover transition-all duration-300">
                     <div class="text-5xl mb-4">📊</div>
                     <h4 class="text-xl font-bold text-gray-900 mb-3">自動で記録</h4>
-                    <p class="text-gray-600 text-sm">作業時間が自動で記録され、手動入力の手間がゼロ</p>
+                    <p class="text-gray-600 text-sm">作業時間、ファイル変更、コミット履歴が自動で記録され、手動入力の手間がゼロ</p>
                 </div>
             </div>
         </section>
@@ -201,13 +241,16 @@
                     <h4 class="text-xl font-bold text-purple-600 mb-4">1. 面倒な入力作業が不要に</h4>
                     <ul class="space-y-2 mb-4">
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
-                            <strong class="text-purple-600">作業時間の自動記録</strong> - デスクトップアプリが作業を自動トラッキング
+                            <strong class="text-purple-600">作業時間の自動記録</strong> - マウス・キーボード操作、アクティブ時間を自動トラッキング
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            <strong class="text-purple-600">ファイル変更の自動検知</strong> - 指定フォルダ内のファイル修正を自動感知、追加・削除行数も記録
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            <strong class="text-purple-600">Git/SVN連携</strong> - コミット情報を自動収集、日報に統合
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
                             <strong class="text-purple-600">日報の自動生成</strong> - AIが今日の作業を要約して日報を作成
-                        </li>
-                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
-                            <strong class="text-purple-600">進捗の自動更新</strong> - タスク完了ボタンを押すだけ
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
                             毎日の報告作業が<strong>30分→5分</strong>に短縮！
@@ -228,7 +271,10 @@
                             <strong class="text-purple-600">問題の自動要約</strong> - あなたの状況をAIが整理して伝えてくれる
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
-                            ブロックされた時の不安が解消！
+                            <strong class="text-purple-600">回答通知</strong> - デスクトップアプリに回答が届いたら即通知
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            ブロックされた時間が<strong>平均2日→0.5日</strong>に短縮！
                         </li>
                     </ul>
                 </div>
@@ -261,6 +307,9 @@
                             <strong class="text-purple-600">パフォーマンス分析</strong> - 自分の強み・弱みが分かる
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            <strong class="text-purple-600">成長機会の提案</strong> - AIがあなたに最適な成長プランを提案
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
                             <strong class="text-purple-600">チーム内での貢献度</strong> - 頑張りが数値で見える
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
@@ -273,16 +322,37 @@
                     <h4 class="text-xl font-bold text-purple-600 mb-4">5. ストレスが軽減される</h4>
                     <ul class="space-y-2 mb-4">
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
-                            <strong class="text-purple-600">メンタルヘルス分析</strong> - 心の健康状態をAIが見守る
+                            <strong class="text-purple-600">メンタルヘルスチェック</strong> - 気分・ストレス・エネルギーレベルを記録
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
-                            <strong class="text-purple-600">適切なアドバイス</strong> - ストレスが高い時にサポート提案
+                            <strong class="text-purple-600">AIアドバイス</strong> - ストレスが高い時に具体的なサポート提案
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
-                            <strong class="text-purple-600">作業リズムの最適化</strong> - 無理のないスケジュールに調整
+                            <strong class="text-purple-600">活動分析</strong> - 1時間ごとの作業を分析し、集中度・効率性を評価
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            <strong class="text-purple-600">作業リズムの最適化</strong> - 低スコア時にアラートと改善提案
                         </li>
                         <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
                             健康的に働ける環境へ！
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-xl font-bold text-purple-600 mb-4">6. タスクの変更をリアルタイムで把握</h4>
+                    <ul class="space-y-2 mb-4">
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            <strong class="text-purple-600">タスク変更通知</strong> - 管理者がタスクを更新したら即通知
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            <strong class="text-purple-600">赤い●マーク</strong> - ウィジェットに通知マークが表示され、変更内容を確認可能
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            <strong class="text-purple-600">変更履歴</strong> - 期間変更、コメント追加など、何が変わったか一目瞭然
+                        </li>
+                        <li class="bg-gray-50 p-3 rounded-lg border-l-4 border-purple-500">
+                            手戻りや認識齟齬を防止！
                         </li>
                     </ul>
                 </div>
@@ -293,14 +363,17 @@
         <section id="desktop-app" class="mb-24 scroll-mt-24">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">デスクトップアプリ</h2>
+                <p class="text-lg text-text-sub">Windows専用の常駐型アシスタント</p>
             </div>
 
             <p class="text-lg text-text-sub mb-8 leading-relaxed">
-                <strong>デスクトップに常駐する、あなた専用のアシスタント</strong>です。
+                <strong>デスクトップに常駐する、あなた専用のアシスタント</strong>です。<br>
+                作業を自動でトラッキングし、AIが賢くサポートします。
             </p>
 
             <div class="text-center mb-12">
-                <img src="image/3_2.png" alt="デスクトップアプリのスクリーンショット" class="max-w-full border-2 border-gray-200 rounded-3xl shadow-hover mx-auto">
+                <img src="image/3_2.png" alt="デスクトップアプリのスクリーンショット"
+                    class="max-w-full border-2 border-gray-200 rounded-3xl shadow-hover mx-auto">
                 <p class="text-sm text-gray-500 mt-4">（右下に常駐し、今日のタスクと進捗を表示）</p>
             </div>
 
@@ -308,43 +381,70 @@
                 <h3 class="text-2xl font-bold text-gray-900 mb-6">使い方は簡単！</h3>
                 <div class="space-y-6">
                     <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">1</div>
+                        <div
+                            class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                            1</div>
                         <div>
                             <h4 class="text-xl font-bold text-purple-600 mb-2">朝、ログインする</h4>
                             <p class="text-gray-600">ユーザー名とパスワードでログイン。今日のタスク一覧が自動で表示されます。</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">2</div>
+                        <div
+                            class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                            2</div>
                         <div>
                             <h4 class="text-xl font-bold text-purple-600 mb-2">やるタスクを選んで「開始」</h4>
                             <p class="text-gray-600">チェックボックスでタスクを選択し、「作業開始」ボタンをクリック。</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">3</div>
+                        <div
+                            class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                            3</div>
                         <div>
                             <h4 class="text-xl font-bold text-purple-600 mb-2">作業が自動で記録される</h4>
+                            <p class="text-gray-600 mb-2">
+                                手動入力は一切不要！以下が自動で記録されます：
+                            </p>
+                            <ul class="space-y-1 text-sm text-gray-600">
+                                <li>• マウス・キーボード操作回数</li>
+                                <li>• アクティブ時間、アイドル時間</li>
+                                <li>• 指定フォルダ内のファイル変更（追加・削除行数）</li>
+                                <li>• Git/SVNコミット情報（コミットメッセージ、変更ファイル一覧）</li>
+                                <li>• CPU・メモリ使用率</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-6">
+                        <div
+                            class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                            4</div>
+                        <div>
+                            <h4 class="text-xl font-bold text-purple-600 mb-2">1時間ごとにAI分析</h4>
                             <p class="text-gray-600">
-                                マウス・キーボード操作、作業時間が自動で記録されます。
-                                さらに、指定フォルダ内のファイル修正やGit/SVNへのプッシュも自動感知。
-                                手動で時間を入力する必要はありません！
+                                作業データから集中度・進捗度・効率性を自動評価。
+                                低スコア時にはウィジェットに通知と改善提案が表示されます。
                             </p>
                         </div>
                     </div>
                     <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">4</div>
+                        <div
+                            class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                            5</div>
                         <div>
                             <h4 class="text-xl font-bold text-purple-600 mb-2">タスク完了ボタンを押す</h4>
                             <p class="text-gray-600">タスクが終わったら「完了」ボタンを押すだけ。進捗が自動で更新されます。</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">5</div>
+                        <div
+                            class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">
+                            6</div>
                         <div>
                             <h4 class="text-xl font-bold text-purple-600 mb-2">日報がAIで自動生成される</h4>
                             <p class="text-gray-600">
-                                夕方、今日の作業ログからAIが自動で日報を作成。
+                                夕方、今日の作業ログ（ファイル変更、コミット情報含む）からAIが自動で日報を作成。
                                 内容を確認して送信するだけ！
                             </p>
                         </div>
@@ -352,30 +452,220 @@
                 </div>
             </div>
 
-            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8">
                 <h4 class="text-2xl font-bold text-gray-900 mb-6">デスクトップアプリの便利機能</h4>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
                         <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">常駐ウィジェット</strong> - 画面右下に常駐し、進捗を常に表示</span>
-                    </li>
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <div>
+                            <strong class="text-purple-600">常駐ウィジェット</strong>
+                            <p class="text-sm text-gray-600">画面右下に常駐し、進捗を常に表示</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
                         <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">一時停止機能</strong> - 休憩時は一時停止ボタンで記録を止める</span>
-                    </li>
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <div>
+                            <strong class="text-purple-600">一時停止機能</strong>
+                            <p class="text-sm text-gray-600">休憩時は一時停止ボタンで記録を止める</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
                         <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">カンバンボード</strong> - 個人タスクをドラッグ&ドロップで整理</span>
-                    </li>
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <div>
+                            <strong class="text-purple-600">カンバンボード</strong>
+                            <p class="text-sm text-gray-600">個人タスクをドラッグ&ドロップで整理</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
                         <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">自動作業検知</strong> - Git/SVNプッシュや指定フォルダ内のファイル修正を自動感知</span>
-                    </li>
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <div>
+                            <strong class="text-purple-600">ファイル監視</strong>
+                            <p class="text-sm text-gray-600">指定フォルダのファイル変更を自動検知</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
                         <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">ヘルプボタン</strong> - 困った時はすぐに助けを依頼</span>
-                    </li>
-                </ul>
+                        <div>
+                            <strong class="text-purple-600">Git/SVN連携</strong>
+                            <p class="text-sm text-gray-600">コミット情報を自動収集して日報に統合</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <i class="fas fa-check text-purple-600 mt-1"></i>
+                        <div>
+                            <strong class="text-purple-600">タスク変更通知</strong>
+                            <p class="text-sm text-gray-600">管理者の更新を赤い●マークで通知</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <i class="fas fa-check text-purple-600 mt-1"></i>
+                        <div>
+                            <strong class="text-purple-600">AI活動分析</strong>
+                            <p class="text-sm text-gray-600">1時間ごとに集中度・効率性を評価</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <i class="fas fa-check text-purple-600 mt-1"></i>
+                        <div>
+                            <strong class="text-purple-600">成長トラッキング</strong>
+                            <p class="text-sm text-gray-600">スキル成長履歴とパフォーマンス分析</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <i class="fas fa-check text-purple-600 mt-1"></i>
+                        <div>
+                            <strong class="text-purple-600">メンタルヘルスチェック</strong>
+                            <p class="text-sm text-gray-600">気分・ストレス記録とAIアドバイス</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                        <i class="fas fa-check text-purple-600 mt-1"></i>
+                        <div>
+                            <strong class="text-purple-600">ヘルプボタン</strong>
+                            <p class="text-sm text-gray-600">困った時はすぐに助けを依頼</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Web機能 -->
+        <section id="web-features" class="mb-24 scroll-mt-24">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">Web管理画面</h2>
+                <p class="text-lg text-text-sub">どこからでもアクセス可能な管理画面</p>
+            </div>
+
+            <p class="text-lg text-text-sub mb-8 leading-relaxed">
+                スマホ・タブレット・PCのブラウザから、いつでもどこでもプロジェクトを確認・管理できます。
+            </p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">📋 WBS（作業分解構成図）</h4>
+                    <p class="text-gray-600 mb-4">
+                        プロジェクトのタスクを階層構造で管理。
+                    </p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>ツリー表示</strong> - タスクの親子関係が一目瞭然</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>ガントチャート</strong> - タイムラインで進捗を可視化</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>ドラッグ&ドロップ</strong> - タスクの順序変更が簡単</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>インポート/エクスポート</strong> - Excel/CSV形式で一括編集可能</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">🤖 AI会話アシスタント</h4>
+                    <p class="text-gray-600 mb-4">
+                        WBS画面で直接AIと対話して、タスクを効率的に管理。
+                    </p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>@メンション機能</strong> - @タスク名でタスクを指定して質問</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>自然な会話</strong> - 「このタスクの期間を3日に変更して」と話すだけ</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>変更プレビュー</strong> - AIの提案を確認してから適用</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>一括操作</strong> - 複数タスクを一度に変更可能</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">📊 見積もり機能</h4>
+                    <p class="text-gray-600 mb-4">
+                        AIが過去データを分析して、正確な工数見積もりを提供。
+                    </p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>タスク名から自動見積もり</strong> - AIが類似タスクから工数を予測</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>メンバー別見積もり</strong> - スキルレベルに応じた個別予測</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>信頼度表示</strong> - 見積もりの確度を5段階で表示</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>履歴管理</strong> - 過去の見積もりと実績を比較</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">📈 プロジェクトダッシュボード</h4>
+                    <p class="text-gray-600 mb-4">
+                        プロジェクトの健康状態を一目で把握。
+                    </p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>ヘルススコア</strong> - 総合評価（0-100点）とAI分析</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>バーンダウンチャート</strong> - 予定vs実績を可視化</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>クリティカルパス分析</strong> - プロジェクト遅延リスクを検出</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600"><strong>スプリント管理</strong> - アジャイル開発に対応</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 rounded-3xl shadow-hover">
+                <h4 class="text-2xl font-bold mb-4">💡 こんな時に便利</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-xl mt-1"></i>
+                        <span>外出先からスマホでタスク確認</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-xl mt-1"></i>
+                        <span>会議中にタブレットで進捗共有</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-xl mt-1"></i>
+                        <span>自宅PCからプロジェクト管理</span>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-check-circle text-xl mt-1"></i>
+                        <span>AIと対話しながらタスク整理</span>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -383,18 +673,15 @@
         <section id="ai-features" class="mb-24 scroll-mt-24">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">AIがサポートする機能</h2>
+                <p class="text-lg text-text-sub">57種類のAI機能（Web Admin 28種 + Desktop App 29種）があなたの仕事を賢くサポート</p>
             </div>
 
-            <p class="text-lg text-text-sub mb-8 leading-relaxed">
-                ツタAIには<strong>29種類のAI機能</strong>が搭載されています。
-                あなたの仕事を賢くサポートします。
-            </p>
-
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
-                    <h4 class="text-2xl font-bold text-purple-600 mb-4">日報の自動生成</h4>
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">📝 日報の自動生成</h4>
                     <p class="text-gray-600 mb-4">
-                        今日の作業ログから、AIが自動で日報を作成します。
+                        今日の作業ログ（ファイル変更、コミット情報含む）から、AIが自動で日報を作成します。
                     </p>
                     <ul class="space-y-2 mb-4">
                         <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
@@ -407,132 +694,205 @@
                         </li>
                         <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
                             <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
-                            <span class="text-gray-600">遭遇した課題</span>
+                            <span class="text-gray-600">ファイル変更統計（追加・削除行数）</span>
                         </li>
                         <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
                             <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
-                            <span class="text-gray-600">明日の予定</span>
+                            <span class="text-gray-600">Git/SVNコミット情報</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">遭遇した課題と明日の予定</span>
                         </li>
                     </ul>
                     <p class="text-lg font-bold text-purple-600">所要時間: 15分 → 3分</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
-                    <h4 class="text-2xl font-bold text-purple-600 mb-4">タスク説明の自動生成</h4>
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">🏗️ WBSの自動生成</h4>
+                    <p class="text-gray-600 mb-4">
+                        プロジェクト名と説明を入力するだけで、AIが階層構造のタスク一覧を自動生成。
+                    </p>
+                    <ul class="space-y-2 mb-4">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">フェーズ分割（要件定義→設計→実装→テスト）</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">タスクの依存関係を自動設定</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">見積工数を自動算出</span>
+                        </li>
+                    </ul>
+                    <p class="text-lg font-bold text-purple-600">所要時間: 2時間 → 10分</p>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">💡 タスク説明の自動生成</h4>
                     <p class="text-gray-600">
                         タスク名だけ入力すれば、AIが詳細な説明文（800文字）を自動生成。
                         何をすべきか迷いません。
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
-                    <h4 class="text-2xl font-bold text-purple-600 mb-4">最適なタスクの提案</h4>
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">🎯 最適なタスクの提案</h4>
                     <p class="text-gray-600">
                         あなたのスキル、経験、現在の作業負荷を考慮して、
                         今やるべきタスクをAIが提案します。
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
-                    <h4 class="text-2xl font-bold text-purple-600 mb-4">リスクの早期発見</h4>
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">👥 自動タスク割り当て</h4>
+                    <p class="text-gray-600 mb-4">
+                        未割り当てタスクを検出し、メンバーのスキル、負荷、過去のパフォーマンスを分析して最適な割り当てを提案。
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">スキルマッチング</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">ワークロードバランス</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">⚠️ リスクの早期発見</h4>
+                    <p class="text-gray-600 mb-4">
+                        AIがプロジェクトを常時監視し、リスクを自動検出。
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">3日間進捗がないタスクを検出</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">期限遅延リスクの予測</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">リソース不足の警告</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">😊 センチメント分析</h4>
                     <p class="text-gray-600">
-                        3日間進捗がないタスクを自動検出し、アラートを送信。
-                        問題が大きくなる前に対処できます。
+                        過去7日間のチームのコメントを分析し、総合スコア（0-10点）を算出。
+                        ポジティブ/ネガティブキーワードを抽出し、チームの士気を可視化します。
                     </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
-                    <h4 class="text-2xl font-bold text-purple-600 mb-4">メンタルヘルスのサポート</h4>
-                    <p class="text-gray-600">
-                        作業ログや日報の内容から、ストレス状態をAIが分析。
-                        必要に応じてアドバイスや休暇を提案します。
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">💪 強み分析と成長提案</h4>
+                    <p class="text-gray-600 mb-4">
+                        過去6ヶ月のデータから、あなたの強みを3-5個抽出し、成長機会を2-4個提案。
                     </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">スキルレベル・パフォーマンスから強みを特定</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">弱点・市場需要から成長機会を提案</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">SMART原則に基づいた目標設定</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">🧠 メンタルヘルスのサポート</h4>
+                    <p class="text-gray-600 mb-4">
+                        作業ログや日報の内容、気分スコアからストレス状態をAIが分析。
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">気分・ストレス・エネルギーレベルの記録</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">具体的な改善提案（休憩、運動、相談など）</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">リソースの推奨（記事、ツール、サポート）</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
+                    <h4 class="text-2xl font-bold text-purple-600 mb-4">📊 1時間ごとの活動分析</h4>
+                    <p class="text-gray-600 mb-4">
+                        作業データを1時間ごとに自動集計し、AI分析を実行。
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">集中度スコア（0-100点）</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">進捗度スコア（0-100点）</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">効率性スコア（0-100点）</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">低スコア時に通知と改善提案</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </section>
 
-        <!-- ヘルプリクエスト -->
-        <section id="help-request" class="mb-24 scroll-mt-24">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">困った時のヘルプ機能</h2>
-            </div>
-
-            <p class="text-lg text-text-sub mb-8 leading-relaxed">
-                <strong>作業で詰まった時、ボタン1つで助けを呼べる機能</strong>です。
-            </p>
-
-            <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 rounded-3xl mb-8 shadow-hover">
-                <h4 class="text-2xl font-bold mb-4">🆘 こんな時に使おう</h4>
-                <p class="text-lg leading-relaxed">
-                    ・エラーが解決できない<br>
-                    ・技術的な質問がある<br>
-                    ・タスクの進め方が分からない<br>
-                    ・3日間進捗がない<br>
-                </p>
-            </div>
-
-            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft mb-8">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6">使い方</h3>
-                <div class="space-y-6">
-                    <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">1</div>
-                        <div>
-                            <h4 class="text-xl font-bold text-purple-600 mb-2">ヘルプボタンを押す</h4>
-                            <p class="text-gray-600">デスクトップアプリまたはWeb画面の「ヘルプを依頼する」ボタンをクリック。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">2</div>
-                        <div>
-                            <h4 class="text-xl font-bold text-purple-600 mb-2">困っている内容を入力</h4>
-                            <p class="text-gray-600">
-                                タスクを選択し、何に困っているか簡単に入力。
-                                AIが自動で状況を整理してくれます。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">3</div>
-                        <div>
-                            <h4 class="text-xl font-bold text-purple-600 mb-2">AIが最適なヘルパーを推奨</h4>
-                            <p class="text-gray-600">
-                                チームメンバーの中から、スキル、経験、空き状況を考慮して、
-                                最も適した助っ人を自動で見つけます。
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-6">
-                        <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl font-bold flex-shrink-0">4</div>
-                        <div>
-                            <h4 class="text-xl font-bold text-purple-600 mb-2">ヘルパーに通知が届く</h4>
-                            <p class="text-gray-600">
-                                推奨されたメンバーに通知が届き、あなたを助けに来てくれます。
-                            </p>
-                        </div>
-                    </div>
+            <div
+                class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 rounded-3xl shadow-hover text-center">
+                <h4 class="text-2xl font-bold mb-4">その他にも多数のAI機能（Web Admin 28種 + Desktop App 29種で合計57種類）</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                    <div>プロジェクトサマリー</div>
+                    <div>バーンダウン分析</div>
+                    <div>クリティカルパス検出</div>
+                    <div>スプリント最適化</div>
+                    <div>工数見積もり</div>
+                    <div>納期予測</div>
+                    <div>リソース配分</div>
+                    <div>タスク優先度付け</div>
+                    <div>依存関係分析</div>
+                    <div>ボトルネック検出</div>
+                    <div>コスト予測</div>
+                    <div>品質予測</div>
+                    <div>レポート自動生成</div>
+                    <div>会議議事録作成</div>
+                    <div>ドキュメント要約</div>
+                    <div>技術提案</div>
+                    <div>コードレビュー補助</div>
+                    <div>テストケース生成</div>
+                    <div>バグ原因分析</div>
                 </div>
-            </div>
-
-            <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
-                <h4 class="text-2xl font-bold text-gray-900 mb-6">ヘルプ機能のメリット</h4>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
-                        <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">遠慮なく助けを求められる</strong> - システムが自動で最適な人を選んでくれるので気が楽</span>
-                    </li>
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
-                        <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">問題が早く解決</strong> - 適切な人にすぐ相談できるので、数日悩むことがなくなる</span>
-                    </li>
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
-                        <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">チーム内の知識共有</strong> - 誰が何に詳しいかが自然と分かる</span>
-                    </li>
-                    <li class="flex items-start gap-3 p-4 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
-                        <i class="fas fa-check text-purple-600 mt-1"></i>
-                        <span class="text-gray-600"><strong class="text-purple-600">ブロックされた時間が減る</strong> - 平均2日 → 0.5日に短縮！</span>
-                    </li>
-                </ul>
             </div>
         </section>
 
@@ -555,6 +915,10 @@
                             <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
                             <span class="text-gray-600">気分や体調に応じて、やるタスクを選んでチェック</span>
                         </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">タスクに変更があれば赤い●マークで通知</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -573,6 +937,21 @@
                         <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
                             <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
                             <span class="text-gray-600">進捗バーで「あとどれくらい？」が分かる</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">10:00 - 1時間経過、AI分析</h4>
+                    <p class="text-gray-600 mb-4">1時間ごとに活動データをAIが自動分析。</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">集中度・進捗度・効率性スコアを算出</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">低スコア時はウィジェットに通知と改善提案が表示</span>
                         </li>
                     </ul>
                 </div>
@@ -598,12 +977,23 @@
 
                 <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
                     <h4 class="text-2xl font-bold text-gray-900 mb-4">12:00 - ランチ休憩</h4>
-                    <p class="text-gray-600">常駐ウィジェットの「一時停止」ボタンを押して休憩。</p>
+                    <p class="text-gray-600">常駐ウィジェットの「一時停止」ボタンを押して休憩。メンタルヘルスチェックで今日の気分を記録。</p>
                 </div>
 
                 <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
                     <h4 class="text-2xl font-bold text-gray-900 mb-4">13:00 - 午後の作業</h4>
-                    <p class="text-gray-600">「再開」ボタンを押して作業継続。次のタスクに移ります。</p>
+                    <p class="text-gray-600 mb-4">「再開」ボタンを押して作業継続。次のタスクに移ります。</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">ファイル修正が自動で検知され、追加・削除行数を記録</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-2xl font-bold text-gray-900 mb-4">15:00 - スマホでタスク確認</h4>
+                    <p class="text-gray-600">外出中、スマホからWeb管理画面にアクセス。進捗を確認し、次のタスクを確認。</p>
                 </div>
 
                 <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
@@ -617,6 +1007,10 @@
                         <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
                             <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
                             <span class="text-gray-600">次のタスクが自動で表示される</span>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">スキル成長が自動で記録される</span>
                         </li>
                     </ul>
                 </div>
@@ -633,12 +1027,16 @@
                             <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
                             <span class="text-gray-600">手動で書くと15分かかっていたのが大幅短縮</span>
                         </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 border-l-4 border-purple-500 rounded-lg">
+                            <i class="fas fa-circle text-purple-600 text-xs mt-2"></i>
+                            <span class="text-gray-600">ファイル変更統計、コミット情報も自動で含まれる</span>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
                     <h4 class="text-2xl font-bold text-gray-900 mb-4">18:00 - 退社</h4>
-                    <p class="text-gray-600">お疲れ様でした！明日のタスクは自動で準備されています。</p>
+                    <p class="text-gray-600">お疲れ様でした！明日のタスクは自動で準備されています。成長トラッキング画面で今日の成果を確認。</p>
                 </div>
             </div>
         </section>
@@ -679,7 +1077,7 @@
                     <h4 class="text-xl font-bold text-gray-900 mb-3">Q4: スマホからも使えますか？</h4>
                     <p class="text-gray-600">
                         <strong class="text-purple-600">A:</strong> Web管理画面はスマホ・タブレットでもアクセス可能です。
-                        デスクトップアプリはWindows専用ですが、Web画面でタスク確認や進捗更新ができます。
+                        デスクトップアプリはWindows専用ですが、Web画面でタスク確認や進捗更新、AI会話、WBS管理ができます。
                     </p>
                 </div>
 
@@ -700,18 +1098,37 @@
                         早めに通知が来るので安心です。
                     </p>
                 </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Q7: Git/SVN連携はどう設定するの？</h4>
+                    <p class="text-gray-600">
+                        <strong class="text-purple-600">A:</strong> デスクトップアプリの設定画面で、リポジトリタイプ（Git/SVN）を選択し、
+                        リポジトリURLとローカルパスを指定するだけ。認証情報も安全に保存されます。
+                    </p>
+                </div>
+
+                <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Q8: AI会話機能で何ができるの？</h4>
+                    <p class="text-gray-600">
+                        <strong class="text-purple-600">A:</strong> Web管理画面のWBSページで、「@タスク名」でタスクを指定し、
+                        「このタスクの期間を3日に変更して」などと自然な言葉で指示できます。
+                        AIが変更内容をプレビュー表示し、確認後に一括適用できます。
+                    </p>
+                </div>
             </div>
         </section>
 
         <!-- CTA -->
         <section id="action" class="mb-24 scroll-mt-24">
-            <div class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center mb-8">
+            <div
+                class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center mb-8">
                 <h3 class="text-3xl md:text-4xl font-black mb-4">さあ、ツタAIで快適な仕事を始めよう！</h3>
                 <p class="text-lg md:text-xl mb-8 opacity-95">
                     面倒な作業はAIにお任せ。あなたは本来の仕事に集中できます。<br>
                     困った時はすぐにヘルプを呼べる、安心の環境です。
                 </p>
-                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ" class="inline-block px-10 py-5 bg-white text-purple-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ"
+                    class="inline-block px-10 py-5 bg-white text-purple-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     今すぐお問い合わせ
                 </a>
             </div>
@@ -739,25 +1156,34 @@
                 <div>
                     <h3 class="font-bold mb-4 text-white">製品</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="index.html#features" class="text-gray-400 hover:text-primary transition-colors">主要機能</a></li>
-                        <li><a href="index.html#demo" class="text-gray-400 hover:text-primary transition-colors">デモ</a></li>
-                        <li><a href="index.html#tech" class="text-gray-400 hover:text-primary transition-colors">技術スタック</a></li>
-                        <li><a href="index.html#howto" class="text-gray-400 hover:text-primary transition-colors">使い方</a></li>
+                        <li><a href="index.html#features"
+                                class="text-gray-400 hover:text-primary transition-colors">主要機能</a></li>
+                        <li><a href="index.html#demo" class="text-gray-400 hover:text-primary transition-colors">デモ</a>
+                        </li>
+                        <li><a href="index.html#tech"
+                                class="text-gray-400 hover:text-primary transition-colors">技術スタック</a></li>
+                        <li><a href="index.html#howto"
+                                class="text-gray-400 hover:text-primary transition-colors">使い方</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="font-bold mb-4 text-white">リソース</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="PR-EXECUTIVE.html" class="text-gray-400 hover:text-primary transition-colors">経営者向け</a></li>
-                        <li><a href="PR-SALES.html" class="text-gray-400 hover:text-primary transition-colors">営業向け</a></li>
-                        <li><a href="PR-USER.html" class="text-gray-400 hover:text-primary transition-colors">ユーザー向け</a></li>
+                        <li><a href="PR-EXECUTIVE.html"
+                                class="text-gray-400 hover:text-primary transition-colors">経営者向け</a></li>
+                        <li><a href="PR-SALES.html" class="text-gray-400 hover:text-primary transition-colors">営業向け</a>
+                        </li>
+                        <li><a href="PR-USER.html" class="text-gray-400 hover:text-primary transition-colors">ユーザー向け</a>
+                        </li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="font-bold mb-4 text-white">会社</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="index.html#about-name" class="text-gray-400 hover:text-primary transition-colors">名前の由来</a></li>
-                        <li><a href="mailto:2025gw04@gmail.com" class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
+                        <li><a href="index.html#about-name"
+                                class="text-gray-400 hover:text-primary transition-colors">名前の由来</a></li>
+                        <li><a href="mailto:2025gw04@gmail.com"
+                                class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
                     </ul>
                 </div>
             </div>
@@ -768,7 +1194,8 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center;">
+    <button id="backToTop"
+        style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); z-index: 1000; display: flex; align-items: center; justify-content: center;">
         <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -822,4 +1249,5 @@
         });
     </script>
 </body>
+
 </html>

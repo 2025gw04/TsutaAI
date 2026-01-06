@@ -1,0 +1,631 @@
+<!-- セッション 12: メンバー管理 -->
+<section id="section-12" class="manual-section">
+    <h2>12. メンバー管理（/members）</h2>
+    <p>チームメンバーの情報、スキル、稼働状況を一元管理する画面です。</p>
+
+    <!-- 12.1 画面概要 -->
+    <div id="subsection-12-1" class="manual-subsection">
+        <h3>12.1 画面概要</h3>
+        <div class="description-box">
+            <p>メンバー管理画面は、チームメンバーの基本情報、保有スキル、担当プロンプト、稼働状況、担当タスクを一元的に管理する画面です。各メンバーはカード形式で表示され、カードには稼働スコア、稼働中タスク数、今週期限のタスク数、今週完了したタスク数の4つの統計情報が含まれます。稼働スコアはリスクレベル（critical/warning/balanced）で色分けされ、過負荷状態のメンバーを一目で識別できます。スキルセクションでは各メンバーの技術スキルとレベル（1-10段階）がプログレスバーで視覚的に表示されます。担当プロンプトセクションでは、AIプロンプトの責任者を割り当て・管理できます。成長レポートへのリンクもあり、メンバーの長期的な成長を追跡できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('members-overview')">
+            <img id="members-overview" src="../image/web-admin/800x500.png" alt="メンバー管理画面全体">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>機能カテゴリ</th>
+                    <th>提供する情報</th>
+                    <th>主な用途</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>基本情報管理</strong></td>
+                    <td>氏名、ユーザー名、メールアドレス、ロール</td>
+                    <td>メンバーの登録・編集・削除</td>
+                </tr>
+                <tr>
+                    <td><strong>稼働状況管理</strong></td>
+                    <td>稼働スコア、稼働中タスク数、期限タスク数、完了数</td>
+                    <td>リソース配分、過負荷の早期発見</td>
+                </tr>
+                <tr>
+                    <td><strong>スキル管理</strong></td>
+                    <td>技術スキル名、スキルレベル（1-10）</td>
+                    <td>タスク割り当ての最適化、育成計画</td>
+                </tr>
+                <tr>
+                    <td><strong>プロンプト管理</strong></td>
+                    <td>担当プロンプト名、責任範囲、メモ</td>
+                    <td>AI機能の責任者管理</td>
+                </tr>
+                <tr>
+                    <td><strong>タスク管理</strong></td>
+                    <td>担当タスク、プロジェクト、ステータス、期限</td>
+                    <td>個別の作業状況確認</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>定期的な確認がカギ:</strong>
+                メンバー管理画面は週1回定期的に確認し、稼働スコアがcritical（赤色）になっているメンバーがいないかチェックしましょう。過負荷のメンバーには早急にタスクの再配分や支援を提供することで、バーンアウトを防げます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 12.2 メンバーカードの構造 -->
+    <div id="subsection-12-2" class="manual-subsection">
+        <h3>12.2 メンバーカードの構造</h3>
+        <div class="description-box">
+            <p>メンバーカードは、各メンバーの情報を視覚的に整理したカード形式のUIです。カードヘッダーには氏名、ユーザー名（@付き）、ロールバッジ、メールアドレスが表示されます。ロールは3種類（admin/project_manager/member）で、それぞれ赤・黄・青の色分けされたバッジで表示されます。カードヘッダー右側には成長レポートボタン、編集ボタン、削除ボタンの3つのアクションボタンが配置されています。カード本体には統計グリッド、スキルセクション、担当プロンプトセクション、担当タスクセクションの4つのセクションが縦に並んでいます。全体は白い背景に灰色のボーダーで囲まれ、ホバー時に軽く浮き上がるアニメーションがあります。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('member-card')">
+            <img id="member-card" src="../image/web-admin/800x500.png" alt="メンバーカードの構造">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>セクション</th>
+                    <th>表示内容</th>
+                    <th>データソース</th>
+                    <th>特徴</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>カードヘッダー</strong></td>
+                    <td>氏名、ユーザー名、ロール、メール</td>
+                    <td>fullName, username, role, email</td>
+                    <td>ロールバッジは色分け表示</td>
+                </tr>
+                <tr>
+                    <td><strong>アクションボタン</strong></td>
+                    <td>成長レポート、編集、削除</td>
+                    <td>-</td>
+                    <td>アイコン付きボタン、削除は確認ダイアログ</td>
+                </tr>
+                <tr>
+                    <td><strong>統計グリッド</strong></td>
+                    <td>4つの稼働統計</td>
+                    <td>stats (activeTasks, dueSoonTasks, completedThisWeek, loadScore)</td>
+                    <td>稼働スコアはリスクレベルで色分け</td>
+                </tr>
+                <tr>
+                    <td><strong>スキルセクション</strong></td>
+                    <td>技術スキルとレベル</td>
+                    <td>skills (name, level)</td>
+                    <td>プログレスバーで視覚化</td>
+                </tr>
+                <tr>
+                    <td><strong>プロンプトセクション</strong></td>
+                    <td>担当プロンプト一覧</td>
+                    <td>prompts (promptName, responsibility, notes)</td>
+                    <td>編集・削除ボタン付き</td>
+                </tr>
+                <tr>
+                    <td><strong>タスクセクション</strong></td>
+                    <td>担当タスク一覧</td>
+                    <td>tasks (name, projectName, status, priority, dueDate)</td>
+                    <td>テーブル形式で表示</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>ロールの種類:</strong> ロールは3種類あり、それぞれ異なる権限と責任を持ちます。<span
+                    class="role-badge-admin">admin</span>はシステム全体の管理者、<span
+                    class="role-badge-manager">project_manager</span>はプロジェクト管理者、<span
+                    class="role-badge-member">member</span>は一般メンバーです。ロールによってアクセスできる機能が異なります。</p>
+        </div>
+    </div>
+
+    <!-- 12.3 稼働状況統計 -->
+    <div id="subsection-12-3" class="manual-subsection">
+        <h3>12.3 稼働状況統計</h3>
+        <div class="description-box">
+            <p>稼働状況統計は、各メンバーの現在の作業負荷を4つの指標で示します。稼働スコアは0-100の数値で、メンバーの総合的な負荷状態を表します。スコアが80以上の場合は「critical（過負荷）」として赤色表示、60-79は「warning（注意）」として黄色表示、59以下は「balanced（バランス良好）」として緑色表示されます。稼働中タスクは現在進行中のタスク数、今週期限は今週中に期限が来るタスク数、今週完了は今週完了したタスク数を示します。これらの統計はリアルタイムで更新され、メンバーの現在の状況を正確に反映します。統計グリッドはレスポンシブデザインで、画面サイズに応じて2列または1列に自動調整されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('workload-stats')">
+            <img id="workload-stats" src="../image/web-admin/800x500.png" alt="稼働状況統計">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>統計項目</th>
+                    <th>意味</th>
+                    <th>計算方法</th>
+                    <th>判断基準</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>稼働スコア</strong></td>
+                    <td>総合的な負荷レベル</td>
+                    <td>タスク数、期限、難易度などから算出</td>
+                    <td>80+: critical（赤）、60-79: warning（黄）、59以下: balanced（緑）</td>
+                </tr>
+                <tr>
+                    <td><strong>稼働中タスク</strong></td>
+                    <td>現在進行中のタスク数</td>
+                    <td>ステータスが「in_progress」のタスクをカウント</td>
+                    <td>5個以上で要注意、10個以上で過多</td>
+                </tr>
+                <tr>
+                    <td><strong>今週期限</strong></td>
+                    <td>今週中に期限が来るタスク数</td>
+                    <td>due_dateが今週内のタスクをカウント</td>
+                    <td>3個以上で要注意、5個以上で要支援</td>
+                </tr>
+                <tr>
+                    <td><strong>今週完了</strong></td>
+                    <td>今週完了したタスク数</td>
+                    <td>今週中にステータスが「done」になったタスクをカウント</td>
+                    <td>多いほど生産性が高い</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>リスクレベル</th>
+                    <th>スコア範囲</th>
+                    <th>表示色</th>
+                    <th>推奨アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge-critical">Critical（過負荷）</span></td>
+                    <td>80-100</td>
+                    <td>赤色背景</td>
+                    <td>即座にタスクの再配分、リソース追加、期限延長を検討</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-warning">Warning（注意）</span></td>
+                    <td>60-79</td>
+                    <td>黄色背景</td>
+                    <td>定期的なモニタリング、必要に応じて支援提供</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-balanced">Balanced（良好）</span></td>
+                    <td>0-59</td>
+                    <td>緑色背景</td>
+                    <td>現状維持、新規タスク割り当て可能</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>過負荷の放置は厳禁:</strong>
+                稼働スコアがcriticalレベル（80以上）のメンバーを放置すると、バーンアウト、品質低下、離職のリスクが急激に高まります。critical状態のメンバーを発見したら、その日のうちに面談を設定し、具体的な負荷軽減策（タスクの再配分、期限延長、追加リソース）を実施してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 12.4 スキル管理 -->
+    <div id="subsection-12-4" class="manual-subsection">
+        <h3>12.4 スキル管理</h3>
+        <div class="description-box">
+            <p>スキル管理セクションでは、各メンバーが保有する技術スキルとそのレベルを管理します。スキルは名前とレベル（1-10段階）で構成され、レベルはプログレスバーで視覚的に表示されます。レベル1-3は初級、4-6は中級、7-9は上級、10はエキスパートと解釈されます。スキルバッジは2列のグリッドレイアウトで表示され、各バッジにはスキル名、レベルバー、数値（X/10）が含まれます。スキル情報はメンバーモーダルで編集でき、複数のスキルを同時に管理できます。スキルデータはタスク自動割り当て機能で活用され、メンバーのスキルレベルに応じて最適なタスクが割り当てられます。スキルが未登録のメンバーには「スキルが登録されていません」というメッセージが表示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('skills-management')">
+            <img id="skills-management" src="../image/web-admin/800x500.png" alt="スキル管理">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>スキルレベル</th>
+                    <th>数値範囲</th>
+                    <th>解釈</th>
+                    <th>タスク割り当て</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>初級</strong></td>
+                    <td>1-3</td>
+                    <td>基礎知識あり、指導が必要</td>
+                    <td>簡単なタスク、ペアワーク推奨</td>
+                </tr>
+                <tr>
+                    <td><strong>中級</strong></td>
+                    <td>4-6</td>
+                    <td>自立して作業可能</td>
+                    <td>通常の難易度のタスク、単独作業可</td>
+                </tr>
+                <tr>
+                    <td><strong>上級</strong></td>
+                    <td>7-9</td>
+                    <td>高度な問題解決が可能</td>
+                    <td>複雑なタスク、他メンバーの支援も可</td>
+                </tr>
+                <tr>
+                    <td><strong>エキスパート</strong></td>
+                    <td>10</td>
+                    <td>チーム内の専門家</td>
+                    <td>最高難度のタスク、技術リーダー</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>スキルレベルの定期更新:</strong>
+                スキルレベルは3ヶ月ごとに見直すことをお勧めします。メンバーが新しいスキルを習得したり、既存スキルのレベルが向上したりした場合は、速やかにスキル情報を更新してください。正確なスキル情報により、タスク自動割り当ての精度が向上します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 12.5 担当プロンプト管理 -->
+    <div id="subsection-12-5" class="manual-subsection">
+        <h3>12.5 担当プロンプト管理</h3>
+        <div class="description-box">
+            <p>担当プロンプト管理セクションでは、各メンバーが責任を持つAIプロンプトを管理します。TsutaAIには29種類のAI機能があり、それぞれにプロンプトテンプレートが存在します。プロンプトの品質維持と継続的な改善のため、各プロンプトに責任者を割り当てます。プロンプトアイテムには、プロンプト名、責任範囲（任意）、メモ（任意）が表示されます。責任範囲には「主担当」「レビュアー」「更新担当」などの役割を記述できます。メモには改善履歴や注意事項を記録できます。プロンプトの割り当ては「割り当て」ボタンから行い、プロンプトカタログから選択して割り当てます。編集・削除も可能で、柔軟にプロンプト管理を運用できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('prompt-management')">
+            <img id="prompt-management" src="../image/web-admin/800x500.png" alt="担当プロンプト管理">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>フィールド</th>
+                    <th>説明</th>
+                    <th>必須</th>
+                    <th>例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>プロンプト名</strong></td>
+                    <td>AIプロンプトの名称（カタログから選択）</td>
+                    <td>必須</td>
+                    <td>WBS自動生成、タスク分解、健全性チェック</td>
+                </tr>
+                <tr>
+                    <td><strong>責任範囲</strong></td>
+                    <td>担当者の役割・責任</td>
+                    <td>任意</td>
+                    <td>主担当、レビュアー、更新担当</td>
+                </tr>
+                <tr>
+                    <td><strong>メモ</strong></td>
+                    <td>改善履歴、注意事項など</td>
+                    <td>任意</td>
+                    <td>2025/01/05: 精度向上のためプロンプト改善実施</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>プロンプト責任者の役割:</strong>
+                プロンプト責任者は、割り当てられたプロンプトの品質を監視し、出力結果が不適切な場合にプロンプトテンプレートを改善する責任を持ちます。月1回程度、担当プロンプトの出力品質をレビューし、必要に応じてプロンプトテンプレートを更新してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 12.6 担当タスク一覧 -->
+    <div id="subsection-12-6" class="manual-subsection">
+        <h3>12.6 担当タスク一覧</h3>
+        <div class="description-box">
+            <p>担当タスク一覧セクションでは、各メンバーが現在担当している全タスクがテーブル形式で表示されます。テーブルには、タスク名、プロジェクト名、ステータス、優先度、期限の5列が含まれます。タスクはプロジェクトをまたいで全て表示され、メンバーの全体的な作業負荷を一目で把握できます。プロジェクト名が「未割り当て」の場合は、プロジェクトに属さない独立タスクです。ステータスは「todo」「in_progress」「done」などの値が表示されます。優先度は「high」「medium」「low」で表示され、期限は日本語形式の日付（YYYY/MM/DD）で表示されます。テーブルはレスポンシブデザインで、モバイル画面ではカード形式に自動変換されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('assigned-tasks')">
+            <img id="assigned-tasks" src="../image/web-admin/800x500.png" alt="担当タスク一覧">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>列名</th>
+                    <th>データソース</th>
+                    <th>表示形式</th>
+                    <th>意味</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>タスク名</strong></td>
+                    <td>task.name</td>
+                    <td>テキスト</td>
+                    <td>タスクの名称</td>
+                </tr>
+                <tr>
+                    <td><strong>プロジェクト</strong></td>
+                    <td>task.projectName</td>
+                    <td>テキスト（nullの場合は「未割り当て」）</td>
+                    <td>タスクが所属するプロジェクト</td>
+                </tr>
+                <tr>
+                    <td><strong>ステータス</strong></td>
+                    <td>task.status</td>
+                    <td>テキスト</td>
+                    <td>タスクの進行状態</td>
+                </tr>
+                <tr>
+                    <td><strong>優先度</strong></td>
+                    <td>task.priority</td>
+                    <td>テキスト</td>
+                    <td>タスクの重要度</td>
+                </tr>
+                <tr>
+                    <td><strong>期限</strong></td>
+                    <td>task.dueDate</td>
+                    <td>日付（YYYY/MM/DD形式、nullの場合は「未設定」）</td>
+                    <td>タスクの締切日</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>担当タスク数の目安:</strong>
+                一般的に、1人のメンバーが同時に進行中（in_progress）にできるタスク数は3-5個が適正です。10個を超える場合は、タスクの粒度が細かすぎるか、過負荷の可能性があります。期限が今週中のタスクが5個を超える場合も、優先順位の見直しやリソース追加を検討すべきです。
+            </p>
+        </div>
+    </div>
+
+    <!-- 12.7 メンバーモーダル -->
+    <div id="subsection-12-7" class="manual-subsection">
+        <h3>12.7 メンバーモーダル（追加・編集）</h3>
+        <div class="description-box">
+            <p>メンバーモーダルは、新規メンバーの追加または既存メンバー情報の編集を行うモーダルウィンドウです。モーダルには基本情報セクションとスキルセクションの2つがあります。基本情報セクションでは、ユーザー名、氏名、メールアドレス、ロールを入力します。ユーザー名は一意である必要があり、英数字とアンダースコアのみ使用可能です。ロールは「admin」「project_manager」「member」から選択します。スキルセクションでは、複数のスキルを追加・編集・削除できます。各スキルにはスキル名（テキスト入力）とスキルレベル（1-10のスライダー）を設定します。モーダル下部には「キャンセル」と「保存」ボタンがあり、保存ボタンをクリックすると入力内容がバリデーションされ、問題なければサーバーに送信されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('member-modal')">
+            <img id="member-modal" src="../image/web-admin/800x500.png" alt="メンバーモーダル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>フィールド</th>
+                    <th>入力形式</th>
+                    <th>バリデーション</th>
+                    <th>編集モードでの扱い</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ユーザー名</strong></td>
+                    <td>テキスト入力</td>
+                    <td>必須、英数字とアンダースコアのみ、一意</td>
+                    <td>変更不可（グレーアウト）</td>
+                </tr>
+                <tr>
+                    <td><strong>氏名</strong></td>
+                    <td>テキスト入力</td>
+                    <td>必須</td>
+                    <td>変更可</td>
+                </tr>
+                <tr>
+                    <td><strong>メールアドレス</strong></td>
+                    <td>email型入力</td>
+                    <td>必須、メール形式</td>
+                    <td>変更可</td>
+                </tr>
+                <tr>
+                    <td><strong>ロール</strong></td>
+                    <td>ドロップダウン選択</td>
+                    <td>必須、admin/project_manager/memberから選択</td>
+                    <td>変更可</td>
+                </tr>
+                <tr>
+                    <td><strong>スキル</strong></td>
+                    <td>動的リスト（追加・削除可）</td>
+                    <td>スキル名: 必須、レベル: 1-10</td>
+                    <td>変更可（追加・編集・削除）</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5>📘 Note</h5>
+            <p><strong>新規作成と編集の違い:</strong>
+                新規作成モードでは全フィールドが入力可能ですが、編集モードではユーザー名は変更不可です。これは、ユーザー名がシステム内で一意の識別子として使用されているためです。ユーザー名を変更する必要がある場合は、新しいユーザーを作成し、古いユーザーを削除してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 12.8 プロンプトモーダル -->
+    <div id="subsection-12-8" class="manual-subsection">
+        <h3>12.8 プロンプトモーダル（割り当て・編集）</h3>
+        <div class="description-box">
+            <p>プロンプトモーダルは、メンバーにAIプロンプトの責任を割り当てる、または既存の割り当てを編集するためのモーダルウィンドウです。割り当てモードでは、プロンプトカタログからプロンプトを選択し、責任範囲とメモを入力します。プロンプトカタログは、システムに登録されている全29種類のAIプロンプトのリストです。各プロンプトには名前とプレビュー（簡単な説明）が含まれています。編集モードでは、プロンプト名は変更不可（グレーアウト）で、責任範囲とメモのみ編集できます。責任範囲には「主担当」「副担当」「レビュアー」などの役割を記述し、メモには改善履歴や注意事項を記録します。モーダル下部には「キャンセル」と「保存」ボタンがあります。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('prompt-modal')">
+            <img id="prompt-modal" src="../image/web-admin/800x500.png" alt="プロンプトモーダル">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>フィールド</th>
+                    <th>入力形式</th>
+                    <th>割り当てモード</th>
+                    <th>編集モード</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>プロンプト名</strong></td>
+                    <td>ドロップダウン選択</td>
+                    <td>カタログから選択（必須）</td>
+                    <td>変更不可（表示のみ）</td>
+                </tr>
+                <tr>
+                    <td><strong>責任範囲</strong></td>
+                    <td>テキスト入力</td>
+                    <td>任意</td>
+                    <td>変更可</td>
+                </tr>
+                <tr>
+                    <td><strong>メモ</strong></td>
+                    <td>テキストエリア</td>
+                    <td>任意</td>
+                    <td>変更可</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>プロンプト割り当ての戦略:</strong> 各プロンプトには必ず主担当1名を割り当てることをお勧めします。複数人で管理する場合は、主担当（responsibility:
+                "主担当"）とレビュアー（responsibility: "レビュアー"）を明確に区別してください。プロンプトの品質が改善された場合は、メモに改善内容と日付を記録し、ナレッジとして蓄積しましょう。</p>
+        </div>
+    </div>
+
+    <!-- 12.9 成長レポート -->
+    <div id="subsection-12-9" class="manual-subsection">
+        <h3>12.9 成長レポート</h3>
+        <div class="description-box">
+            <p>成長レポートは、各メンバーの長期的な成長を追跡・分析する専用ページです。メンバーカードの「成長レポート」ボタンをクリックすると、そのメンバー専用の成長レポートページ（/members/{memberId}/growth）に遷移します。成長レポートページでは、過去6ヶ月間の日報データ、作業ログデータ、タスク完了履歴などを分析し、メンバーの強み、成長機会、推奨目標をAIが自動生成します。強み分析では、メンバーが特に優れている領域（例：コーディング速度、問題解決能力、コミュニケーション）を3-5個抽出します。成長機会では、スキルギャップや改善すべき領域を2-4個提示します。推奨目標では、SMART原則に基づいた具体的な目標を2-3個提案します。このレポートは1on1ミーティングや評価面談で活用できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('growth-report')">
+            <img id="growth-report" src="../image/web-admin/800x500.png" alt="成長レポート">
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>セクション</th>
+                    <th>分析内容</th>
+                    <th>データソース</th>
+                    <th>活用方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>強み分析</strong></td>
+                    <td>メンバーが特に優れている3-5個の領域</td>
+                    <td>日報の評価指標、タスク完了速度、品質</td>
+                    <td>強みを活かしたタスク配分、称賛</td>
+                </tr>
+                <tr>
+                    <td><strong>成長機会</strong></td>
+                    <td>改善すべき2-4個の領域</td>
+                    <td>スキルギャップ、低評価項目</td>
+                    <td>育成計画の策定、研修の提案</td>
+                </tr>
+                <tr>
+                    <td><strong>推奨目標</strong></td>
+                    <td>SMART原則に基づいた2-3個の目標</td>
+                    <td>強み、成長機会、プロジェクト要件</td>
+                    <td>次期の目標設定、OKR策定</td>
+                </tr>
+                <tr>
+                    <td><strong>1on1資料</strong></td>
+                    <td>面談用の議論ポイント</td>
+                    <td>全セクションの統合</td>
+                    <td>1on1ミーティングの準備</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>成長レポートの活用頻度:</strong>
+                成長レポートは月1回程度の頻度で確認することをお勧めします。1on1ミーティングの前日に成長レポートを確認し、議論すべきポイントを準備しましょう。また、四半期ごとの評価面談では、3ヶ月分の成長レポートを並べて比較することで、メンバーの成長トレンドを可視化できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 12.10 活用シーンとベストプラクティス -->
+    <div id="subsection-12-10" class="manual-subsection">
+        <h3>12.10 活用シーンとベストプラクティス</h3>
+        <div class="description-box">
+            <p>メンバー管理画面は、チームマネジメントの中心的なツールです。週次のリソース会議では、各メンバーの稼働スコアを確認し、過負荷のメンバーにはタスクの再配分を行います。新メンバーの受け入れ時には、メンバーモーダルで基本情報とスキルを登録し、適切なタスクを割り当てます。スキルマトリクスの作成時には、全メンバーのスキル情報をエクスポートし、チーム全体のスキル分布を可視化します。プロンプト品質管理では、各プロンプトの責任者に定期的なレビューを依頼し、プロンプトの継続的な改善を実現します。評価面談では、成長レポートを活用してメンバーの成長を客観的に評価し、次期の目標を設定します。これらの活動により、チーム全体のパフォーマンスと満足度が向上します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('best-practices')">
+            <img id="best-practices" src="../image/web-admin/800x500.png" alt="活用シーンとベストプラクティス">
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <h6><i class="bi bi-1-circle-fill"></i> 週次リソース会議（月曜9:00）</h6>
+                <p>メンバー管理画面を画面共有しながら、各メンバーの稼働スコアを確認します。critical（赤）のメンバーがいれば、その場でタスクの再配分を決定します。今週期限のタスクが5個以上のメンバーには、優先順位の確認と必要に応じた期限延長を検討します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-2-circle-fill"></i> 新メンバー受け入れ（随時）</h6>
+                <p>新メンバーが入社したら、メンバー追加ボタンから基本情報を登録します。スキルセクションでは、初期のスキルレベルを控えめに設定し（例：経験者でも6-7から開始）、3ヶ月後に再評価します。初日にはオリエンテーションタスクを割り当て、システムの使い方を学んでもらいます。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-3-circle-fill"></i> スキルマトリクス作成（四半期ごと）</h6>
+                <p>四半期の終わりに、全メンバーのスキル情報を集計してスキルマトリクス（技術 × メンバー
+                    の表）を作成します。チーム全体で不足しているスキルを特定し、次期の研修計画や採用計画に反映します。特定のスキルを持つメンバーが1人しかいない場合は、属人化リスクとして認識し、知識共有を促進します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-4-circle-fill"></i> プロンプト品質レビュー（月次）</h6>
+                <p>月初に、各プロンプト責任者に担当プロンプトのレビューを依頼します。AIの出力品質が低下している、または改善の余地がある場合は、プロンプトテンプレートの修正を行います。改善内容はメモに記録し、チームで共有します。優れた改善事例は全体ミーティングで共有し、横展開を促進します。
+                </p>
+            </div>
+
+            <div class="workflow-step">
+                <h6><i class="bi bi-5-circle-fill"></i> 評価面談（四半期ごと）</h6>
+                <p>評価面談の1週間前に、対象メンバーの成長レポートを確認します。強み、成長機会、推奨目標を元に面談の議題を準備します。面談では、データに基づいた客観的な評価を行い、メンバーの主観的な感想と照らし合わせます。次期の目標設定では、推奨目標を参考にしつつ、メンバーの希望も取り入れます。
+                </p>
+            </div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>ベストプラクティス</th>
+                    <th>具体的なアクション</th>
+                    <th>期待効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>定期的な稼働確認</strong></td>
+                    <td>毎週月曜日にメンバー管理画面を確認し、稼働スコアをチェック</td>
+                    <td>過負荷の早期発見、バーンアウト防止</td>
+                </tr>
+                <tr>
+                    <td><strong>スキル情報の定期更新</strong></td>
+                    <td>3ヶ月ごとにスキルレベルを見直し、成長を反映</td>
+                    <td>タスク自動割り当ての精度向上</td>
+                </tr>
+                <tr>
+                    <td><strong>プロンプト責任の明確化</strong></td>
+                    <td>全プロンプトに主担当を割り当て、責任範囲を明記</td>
+                    <td>AI機能の品質維持、継続的改善</td>
+                </tr>
+                <tr>
+                    <td><strong>成長レポートの活用</strong></td>
+                    <td>1on1や評価面談で成長レポートを議論の出発点として活用</td>
+                    <td>客観的な評価、具体的な目標設定</td>
+                </tr>
+                <tr>
+                    <td><strong>チーム全体の可視化</strong></td>
+                    <td>スキルマトリクス、稼働状況サマリーを定期的に作成・共有</td>
+                    <td>チーム全体の状況把握、戦略的な意思決定</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>注意すべき点:</strong>
+                ①稼働スコアがcriticalのメンバーを放置しない、②スキルレベルを過大評価しない（実力以上のタスクを割り当てると失敗リスクが高まる）、③プロンプト責任者を頻繁に変更しない（知識の蓄積が重要）、④成長レポートを評価の唯一の材料にしない（あくまで参考情報として活用）、⑤メンバー情報を不適切に共有しない（プライバシーに配慮）。
+            </p>
+        </div>
+
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>上級者向けテクニック:</strong>
+                メンバー管理画面のデータをスプレッドシートにエクスポートし、時系列で記録することで、チームの成長トレンドを可視化できます。「月別の平均稼働スコア」「スキルレベルの推移」「タスク完了数の変動」などをグラフ化し、チーム全体のパフォーマンス改善度合いを定量的に把握しましょう。これにより、マネジメントの効果を数値で証明できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- ギャラリーモーダル -->
+</section>

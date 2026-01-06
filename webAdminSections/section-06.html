@@ -1,0 +1,843 @@
+<!-- セッション 6: プロジェクト一覧 -->
+<section id="section-6" class="manual-section">
+    <h2>6. プロジェクト一覧（/projects）</h2>
+    <p>システムに登録されているすべてのプロジェクトを一覧表示し、管理する画面です。新規プロジェクトの作成、既存プロジェクトの詳細確認、WBS管理、削除などが行えます。</p>
+
+    <div id="subsection-6-1" class="manual-subsection">
+        <h3>6.1 概要</h3>
+        <p>プロジェクト一覧画面は、組織内のすべてのプロジェクトを俯瞰し、適切に管理するための中心的な画面です。カード形式でプロジェクトが表示され、視覚的に把握しやすい設計になっています。</p>
+        
+        <div class="feature-image" onclick="openGallery('projects-overview-img')">
+            <img id="projects-overview-img" 
+                 src="../image/web-admin/projects-overview.png" 
+                 alt="プロジェクト一覧画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>主要な機能</h4>
+        <ul class="item-list">
+            <li><strong>カード形式表示</strong> - 各プロジェクトがカードで表示され、重要情報を一目で確認可能</li>
+            <li><strong>新規作成</strong> - 「新規作成」ボタンから新しいプロジェクトを作成</li>
+            <li><strong>インポート機能</strong> - 外部ファイル（JSON、Excel）からプロジェクトをインポート</li>
+            <li><strong>プロジェクト削除</strong> - 不要なプロジェクトを削除（関連タスクも一括削除）</li>
+            <li><strong>詳細画面へ遷移</strong> - 各カードの「詳細を見る」ボタンからプロジェクト詳細画面に移動</li>
+            <li><strong>レスポンシブデザイン</strong> - デスクトップ、タブレット、モバイルに完全対応</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 表示レイアウト</strong>
+            プロジェクトカードは、画面サイズに応じて自動的にレイアウトが調整されます。デスクトップ（1024px以上）では3カラム、タブレット（640px-1023px）では2カラム、モバイル（639px以下）では1カラムで表示されます。
+        </div>
+    </div>
+
+    <div id="subsection-6-2" class="manual-subsection">
+        <h3>6.2 プロジェクトカード</h3>
+        <p>各プロジェクトはカード形式で表示されます。カードには重要な情報が集約されており、ホバー時には浮き上がるアニメーション効果で視覚的なフィードバックを提供します。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-card-img')">
+            <img id="projects-card-img" 
+                 src="../image/web-admin/projects-card.png" 
+                 alt="プロジェクトカード" 
+                 loading="lazy" />
+        </div>
+
+        <h4>カードの構成要素</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト名</td>
+                    <td>プロジェクトのタイトル。太字で大きく表示され、カードヘッダーに配置</td>
+                </tr>
+                <tr>
+                    <td>削除ボタン</td>
+                    <td>カードヘッダー右上の🗑️アイコン。ホバー時に赤色が濃くなり、クリックでプロジェクトを削除</td>
+                </tr>
+                <tr>
+                    <td>説明文</td>
+                    <td>プロジェクトの概要説明（未登録の場合は「説明は登録されていません。」と表示）</td>
+                </tr>
+                <tr>
+                    <td>期間</td>
+                    <td>「開始日 〜 終了日」の形式で表示（例: 2026-01-01 〜 2026-12-31）</td>
+                </tr>
+                <tr>
+                    <td>状態</td>
+                    <td>プロジェクトの現在のステータス（Planning、In Progress、Active、Completed など）</td>
+                </tr>
+                <tr>
+                    <td>詳細を見るボタン</td>
+                    <td>紫のグラデーションボタン。クリックでプロジェクト詳細画面（/projects/[id]）へ遷移</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>カードのデザイン特徴</h4>
+        <ul class="item-list">
+            <li><strong>白い背景</strong> - クリーンで見やすい白色背景</li>
+            <li><strong>角丸デザイン</strong> - 20pxの大きな角丸で柔らかい印象</li>
+            <li><strong>シャドウ効果</strong> - 通常時は柔らかい影、ホバー時は強い影で浮遊感を演出</li>
+            <li><strong>ホバーアニメーション</strong> - マウスを乗せると4px上方向に浮き上がる</li>
+            <li><strong>情報の階層化</strong> - プロジェクト名が最も目立ち、詳細情報は控えめに表示</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-3" class="manual-subsection">
+        <h3>6.3 アクションボタン</h3>
+        <p>画面上部には、プロジェクトを管理するためのアクションボタンが配置されています。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-actions-img')">
+            <img id="projects-actions-img" 
+                 src="../image/web-admin/projects-actions.png" 
+                 alt="アクションボタン" 
+                 loading="lazy" />
+        </div>
+
+        <h4>利用可能なアクション</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ボタン名</th>
+                    <th>アイコン</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>インポート</td>
+                    <td>📥</td>
+                    <td>外部ファイル（JSON、Excel）からプロジェクトとタスクを一括インポート。/projects/importに遷移</td>
+                </tr>
+                <tr>
+                    <td>新規作成</td>
+                    <td>➕</td>
+                    <td>新しいプロジェクトを作成。/projects/newに遷移。紫のグラデーションボタンで強調表示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>ボタンの動作</h4>
+        <ul class="item-list">
+            <li><strong>ホバー効果</strong> - マウスを乗せると2px上方向に浮き上がり、シャドウが強調される</li>
+            <li><strong>配置</strong> - 画面右上に横並びで配置（モバイルでは縦並びに変化）</li>
+            <li><strong>アイコン付き</strong> - 絵文字アイコンで視覚的に機能を識別しやすい</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-4" class="manual-subsection">
+        <h3>6.4 新規プロジェクト作成（/projects/new）</h3>
+        <p>「新規作成」ボタンをクリックすると、新規プロジェクト作成画面に移動します。AI自動生成機能により、最小限の入力で包括的なプロジェクト情報を作成できます。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-new-img')">
+            <img id="projects-new-img" 
+                 src="../image/web-admin/projects-new.png" 
+                 alt="新規プロジェクト作成画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>入力項目</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目名</th>
+                    <th>必須/任意</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト名</td>
+                    <td>必須</td>
+                    <td>プロジェクトのタイトル。AI自動生成の起点となる</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト目標</td>
+                    <td>任意</td>
+                    <td>プロジェクトの目的や達成したいゴール。AI生成時に考慮される</td>
+                </tr>
+                <tr>
+                    <td>説明</td>
+                    <td>必須</td>
+                    <td>プロジェクトの概要説明。AIが自動生成可能</td>
+                </tr>
+                <tr>
+                    <td>主要成果物</td>
+                    <td>任意</td>
+                    <td>プロジェクトで作成する主要な成果物</td>
+                </tr>
+                <tr>
+                    <td>マイルストーン</td>
+                    <td>任意</td>
+                    <td>プロジェクトの重要なマイルストーン</td>
+                </tr>
+                <tr>
+                    <td>開始日</td>
+                    <td>必須</td>
+                    <td>プロジェクトの開始日。AIが自動提案可能</td>
+                </tr>
+                <tr>
+                    <td>終了日</td>
+                    <td>必須</td>
+                    <td>プロジェクトの終了日。AIが自動提案可能</td>
+                </tr>
+                <tr>
+                    <td>ステータス</td>
+                    <td>必須</td>
+                    <td>初期ステータス（デフォルト: planning）</td>
+                </tr>
+                <tr>
+                    <td>チームメンバー</td>
+                    <td>任意</td>
+                    <td>参加メンバーを複数選択。AIが推奨メンバーを自動選定可能</td>
+                </tr>
+                <tr>
+                    <td>制約条件</td>
+                    <td>任意</td>
+                    <td>予算、リソース、技術的制約など。AI生成時に考慮される</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>AI自動生成機能</h4>
+        <p>「🤖 AI自動生成」ボタンをクリックすると、AIがプロジェクト名や入力済み情報を元に、すべてのフィールドを包括的に生成します。</p>
+        <ul class="item-list">
+            <li><strong>説明文の生成</strong> - プロジェクト名と目標から詳細な説明を自動作成</li>
+            <li><strong>期間の提案</strong> - プロジェクトの規模から適切な開始日・終了日を提案</li>
+            <li><strong>推奨メンバーの選定</strong> - チームメンバーのスキル情報を分析し、最適なメンバーを自動選択</li>
+            <li><strong>ロール割り当て</strong> - 各メンバーにPM、開発者、QAなどのロールを自動割り当て</li>
+            <li><strong>選定理由の表示</strong> - なぜそのメンバーが推奨されたかの理由を提示</li>
+        </ul>
+
+        <div class="tip">
+            <strong>🤖 AI生成の活用方法</strong>
+            プロジェクト名だけを入力して「AI自動生成」ボタンをクリックすれば、残りのフィールドがすべて自動的に埋まります。生成後、必要に応じて内容を修正してください。
+        </div>
+    </div>
+
+    <div id="subsection-6-5" class="manual-subsection">
+        <h3>6.5 フェーズごとに作成（/projects/new/wbs-builder）</h3>
+        <p>新規作成画面の「フェーズごとに作成を開始」ボタンをクリックすると、段階的にWBSを構築できるウィザード形式の画面に移動します。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-wbs-builder-img')">
+            <img id="projects-wbs-builder-img" 
+                 src="../image/web-admin/projects-wbs-builder.png" 
+                 alt="WBSビルダー画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>段階的WBS構築の流れ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ステップ</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. プロジェクト情報入力</td>
+                    <td>プロジェクト名、目標、期間などの基本情報を入力</td>
+                </tr>
+                <tr>
+                    <td>2. フェーズ定義</td>
+                    <td>プロジェクトを複数のフェーズ（設計、開発、テストなど）に分割</td>
+                </tr>
+                <tr>
+                    <td>3. フェーズごとのタスク生成</td>
+                    <td>各フェーズに対してAIがタスクを自動生成</td>
+                </tr>
+                <tr>
+                    <td>4. タスクの確認と調整</td>
+                    <td>生成されたタスクを確認し、必要に応じて追加・削除・編集</td>
+                </tr>
+                <tr>
+                    <td>5. 担当者とスケジュール設定</td>
+                    <td>各タスクに担当者を割り当て、開始日・終了日を設定</td>
+                </tr>
+                <tr>
+                    <td>6. WBS確定</td>
+                    <td>最終確認後、WBSをデータベースに保存</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>AIアシスタンス機能</h4>
+        <p>各ステップで以下のAI支援機能が利用できます：</p>
+        <ul class="item-list">
+            <li><strong>フェーズ提案</strong> - プロジェクトタイプから標準的なフェーズを提案</li>
+            <li><strong>タスク自動生成</strong> - フェーズ名から関連するタスクを自動生成</li>
+            <li><strong>依存関係の自動設定</strong> - タスク間の論理的な依存関係を自動検出</li>
+            <li><strong>期間の自動算出</strong> - タスクの規模から適切な作業期間を計算</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-6" class="manual-subsection">
+        <h3>6.6 プロジェクトインポート（/projects/import）</h3>
+        <p>「インポート」ボタンをクリックすると、外部ファイルからプロジェクトをインポートできます。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-import-img')">
+            <img id="projects-import-img" 
+                 src="../image/web-admin/projects-import.png" 
+                 alt="プロジェクトインポート画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>対応ファイル形式</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>形式</th>
+                    <th>拡張子</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>JSON</td>
+                    <td>.json</td>
+                    <td>TsutaAI標準フォーマット。プロジェクト情報とタスクを一括インポート</td>
+                </tr>
+                <tr>
+                    <td>Excel</td>
+                    <td>.xlsx</td>
+                    <td>Excelファイル。シート構造に従ってプロジェクトとタスクをインポート</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>インポート手順</h4>
+        <ul class="item-list">
+            <li><strong>ステップ1</strong> - 「ファイルを選択」ボタンをクリックして、インポートするファイルを選択</li>
+            <li><strong>ステップ2</strong> - ファイル形式が自動検出され、プレビューが表示される</li>
+            <li><strong>ステップ3</strong> - インポート設定（既存プロジェクトとの重複処理など）を確認</li>
+            <li><strong>ステップ4</strong> - 「インポート実行」ボタンをクリックしてインポート開始</li>
+            <li><strong>ステップ5</strong> - 完了後、インポートされたプロジェクトが一覧に表示される</li>
+        </ul>
+
+        <div class="note">
+            <strong>📋 JSONフォーマット</strong>
+            TsutaAI標準のJSONフォーマットは、プロジェクト詳細画面のエクスポート機能で出力されるものと同じ形式です。
+        </div>
+    </div>
+
+    <div id="subsection-6-7" class="manual-subsection">
+        <h3>6.7 プロジェクト詳細画面（/projects/[id]）</h3>
+        <p>プロジェクトカードの「詳細を見る」ボタンをクリックすると、プロジェクト詳細画面に移動します。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-detail-img')">
+            <img id="projects-detail-img" 
+                 src="../image/web-admin/projects-detail.png" 
+                 alt="プロジェクト詳細画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>表示される情報</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>セクション</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト情報</td>
+                    <td>名前、説明、期間、ステータス、主要成果物、マイルストーン</td>
+                </tr>
+                <tr>
+                    <td>タスク一覧</td>
+                    <td>このプロジェクトに紐づく全タスクを表示（リストビューまたはボードビュー）</td>
+                </tr>
+                <tr>
+                    <td>進捗状況</td>
+                    <td>完了タスク数、進捗率、残りタスク数</td>
+                </tr>
+                <tr>
+                    <td>チームメンバー</td>
+                    <td>参加メンバーの一覧とロール</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>アクションボタン</h4>
+        <ul class="item-list">
+            <li><strong>エクスポート</strong> - プロジェクトをJSON、Markdown、CSV形式でエクスポート</li>
+            <li><strong>WBS編集</strong> - WBS管理画面（/projects/[id]/wbs）に移動</li>
+            <li><strong>プロジェクト開始</strong> - プロジェクトステータスを「Active」に変更し、デスクトップアプリでタスクが表示されるようになる</li>
+        </ul>
+
+        <h4>ビュー切り替え</h4>
+        <p>タスク表示は2種類のビューを切り替えられます：</p>
+        <ul class="item-list">
+            <li><strong>リストビュー</strong> - タスクを一覧表形式で表示</li>
+            <li><strong>ボードビュー</strong> - カンバンボード形式（Todo、In Progress、Done）で表示。ドラッグ&ドロップでステータス変更可能</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-8" class="manual-subsection">
+        <h3>6.8 プロジェクト削除</h3>
+        <p>プロジェクト一覧画面の各カードにある削除ボタン（🗑️）をクリックすると、プロジェクトを削除できます。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-delete-img')">
+            <img id="projects-delete-img" 
+                 src="../image/web-admin/projects-delete.png" 
+                 alt="プロジェクト削除確認" 
+                 loading="lazy" />
+        </div>
+
+        <h4>削除の流れ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ステップ</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. 削除ボタンクリック</td>
+                    <td>カードの削除ボタン（🗑️）をクリック</td>
+                </tr>
+                <tr>
+                    <td>2. 確認ダイアログ表示</td>
+                    <td>「本当に削除しますか？」の確認メッセージが表示される</td>
+                </tr>
+                <tr>
+                    <td>3. 警告表示</td>
+                    <td>「このプロジェクトに関連するタスクもすべて削除されます。この操作は取り消せません。」と警告</td>
+                </tr>
+                <tr>
+                    <td>4. 削除実行</td>
+                    <td>OKをクリックすると、プロジェクトと関連タスクがデータベースから削除される</td>
+                </tr>
+                <tr>
+                    <td>5. 画面更新</td>
+                    <td>削除後、プロジェクト一覧が自動的に再読み込みされ、削除されたカードが消える</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>削除の注意事項</h4>
+        <ul class="item-list">
+            <li><strong>取り消し不可</strong> - 削除したデータは復元できません</li>
+            <li><strong>関連データの一括削除</strong> - プロジェクトに紐づくすべてのタスク、サブタスク、作業ログ、コメントなども削除される</li>
+            <li><strong>確認ダイアログ</strong> - 誤削除を防ぐため、必ず確認ダイアログが表示される</li>
+            <li><strong>権限確認</strong> - 管理者権限を持つユーザーのみが削除可能</li>
+        </ul>
+
+        <div class="note">
+            <strong>⚠️ 重要な警告</strong>
+            プロジェクト削除は完全に不可逆的な操作です。削除前に、本当に削除して良いか、バックアップが必要ないか十分に確認してください。
+        </div>
+    </div>
+
+    <div id="subsection-6-9" class="manual-subsection">
+        <h3>6.9 レスポンシブデザイン</h3>
+        <p>プロジェクト一覧画面は、あらゆる画面サイズに最適化されており、デスクトップからモバイルまでシームレスに利用できます。</p>
+
+        <div class="feature-image" onclick="openGallery('projects-responsive-img')">
+            <img id="projects-responsive-img" 
+                 src="../image/web-admin/projects-responsive.png" 
+                 alt="レスポンシブデザイン" 
+                 loading="lazy" />
+        </div>
+
+        <h4>画面サイズ別のレイアウト</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面サイズ</th>
+                    <th>カラム数</th>
+                    <th>その他の変更点</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>デスクトップ（1024px以上）</td>
+                    <td>3カラム</td>
+                    <td>通常のレイアウト。ヘッダーは非表示</td>
+                </tr>
+                <tr>
+                    <td>タブレット（640px-1023px）</td>
+                    <td>2カラム</td>
+                    <td>カード幅が広がる。アクションボタンが大きくなる</td>
+                </tr>
+                <tr>
+                    <td>モバイル（480px-639px）</td>
+                    <td>1カラム</td>
+                    <td>アクションボタンが縦並び。カードの余白が縮小</td>
+                </tr>
+                <tr>
+                    <td>小型モバイル（480px未満）</td>
+                    <td>1カラム</td>
+                    <td>すべての要素が最大限縮小。タッチターゲットサイズ確保（最低44x44px）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>モバイル固有の最適化</h4>
+        <ul class="item-list">
+            <li><strong>ページヘッダー表示</strong> - モバイル（960px以下）では、ダークブルーのヘッダーが表示され、画面タイトルを常時確認できる</li>
+            <li><strong>タッチターゲット</strong> - すべてのボタンが最低44x44pxのサイズを確保し、指でタップしやすい</li>
+            <li><strong>フルワイドボタン</strong> - アクションボタンが画面幅いっぱいに広がり、タップしやすくなる</li>
+            <li><strong>削除ボタン拡大</strong> - モバイルでは削除ボタンが44x44pxに拡大され、誤タップを防ぐ</li>
+            <li><strong>カード間隔調整</strong> - モバイルではカード間の余白が縮小され、一度により多くの情報を表示</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-10" class="manual-subsection">
+        <h3>6.10 エラーハンドリング</h3>
+        <p>プロジェクト一覧画面では、エラーが発生した場合に適切なメッセージが表示されます。</p>
+
+        <h4>表示されるエラー</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>状況</th>
+                    <th>エラーメッセージ</th>
+                    <th>対処方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>バックエンド接続失敗</td>
+                    <td>「バックエンドサーバーに接続できません。サーバーが起動しているか確認してください。」</td>
+                    <td>バックエンドAPIが起動しているか確認</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト取得失敗</td>
+                    <td>「プロジェクト取得に失敗しました。」</td>
+                    <td>ページをリロードするか、ネットワーク接続を確認</td>
+                </tr>
+                <tr>
+                    <td>削除失敗</td>
+                    <td>「削除エラー: [詳細メッセージ]」</td>
+                    <td>権限を確認するか、関連データの整合性を確認</td>
+                </tr>
+                <tr>
+                    <td>プロジェクトが存在しない</td>
+                    <td>空の一覧画面（エラーメッセージなし）</td>
+                    <td>正常な状態。「新規作成」ボタンからプロジェクトを作成</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>ローディング状態</h4>
+        <p>データ読み込み中は、以下の表示がされます：</p>
+        <ul class="item-list">
+            <li><strong>初回読み込み</strong> - 「読み込み中です…」のテキストが表示される</li>
+            <li><strong>削除処理中</strong> - 削除ボタンがdisabled状態になり、複数回クリックを防止</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-6" class="manual-subsection">
+        <h3>6.6 WBS管理画面（/projects/[id]/wbs）</h3>
+        <p>プロジェクトのWBS（Work Breakdown Structure）を総合的に管理する最も重要な画面です。4つのビューモード、20以上のツールバー機能、AIによる高度な支援機能を備えています。</p>
+        
+        <div class="feature-image" onclick="openGallery('wbs-overview-img')">
+            <img id="wbs-overview-img" 
+                 src="../image/web-admin/wbs-overview.png" 
+                 alt="WBS管理画面全体" 
+                 loading="lazy" />
+        </div>
+
+        <h4>画面の基本構成</h4>
+        <ul class="item-list">
+            <li><strong>ツールバー</strong> - 20以上の機能ボタンをグループ別に配置</li>
+            <li><strong>ビュー切替</strong> - ツリー、ガント、ボード、カレンダーの4表示モード</li>
+            <li><strong>メインエリア</strong> - 選択したビューに応じたタスク表示</li>
+            <li><strong>タスク詳細パネル</strong> - 右サイドバーで選択タスクの詳細編集</li>
+            <li><strong>フィルタパネル</strong> - 検索、フィルタ、ソート機能</li>
+        </ul>
+
+        <div class="tip">
+            <strong>🎯 最重要画面</strong>
+            WBS管理画面はTsutaAIシステムの心臓部です。ここですべてのタスク計画、進捗管理、AI支援機能が統合されています。プロジェクトの成否はこの画面での操作品質に大きく依存します。
+        </div>
+    </div>
+
+    <div id="subsection-6-7" class="manual-subsection">
+        <h3>6.7 ツールバー機能詳細</h3>
+        <p>WBS管理画面のツールバーは、機能ごとにグループ化された20以上のボタンで構成されています。各ボタンはアイコンとテキストで直感的に操作できます。</p>
+
+        <div class="feature-image" onclick="openGallery('wbs-toolbar-img')">
+            <img id="wbs-toolbar-img" 
+                 src="../image/web-admin/wbs-toolbar.png" 
+                 alt="WBSツールバー詳細" 
+                 loading="lazy" />
+        </div>
+
+        <h4>主要アクショングループ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>グループ</th>
+                    <th>ボタン</th>
+                    <th>機能説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">基本操作</td>
+                    <td><strong>AIでWBS生成</strong></td>
+                    <td>プロジェクト情報からAIが全タスクを自動生成</td>
+                </tr>
+                <tr>
+                    <td><strong>ルートタスク追加</strong></td>
+                    <td>新しい最上位レベルのタスクを手動追加</td>
+                </tr>
+                <tr>
+                    <td><strong>データ操作</strong></td>
+                    <td>インポート、エクスポート、AI編集機能</td>
+                </tr>
+                <tr>
+                    <td rowspan="4">AI機能</td>
+                    <td><strong>AIアシスタント</strong></td>
+                    <td>チャット形式でWBSを操作・編集</td>
+                </tr>
+                <tr>
+                    <td><strong>リスケジュール提案</strong></td>
+                    <td>遅延検知と最適な再スケジュール案提示</td>
+                </tr>
+                <tr>
+                    <td><strong>AI自動割り当て</strong></td>
+                    <td>スキルと負荷を考慮した最適担当者配置</td>
+                </tr>
+                <tr>
+                    <td><strong>AI期間設定</strong></td>
+                    <td>複雑度と依存関係から最適期間を算出</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">操作系</td>
+                    <td><strong>元に戻す/やり直し</strong></td>
+                    <td>無制限のアンドゥ・リドゥ機能</td>
+                </tr>
+                <tr>
+                    <td><strong>履歴</strong></td>
+                    <td>変更履歴パネルを表示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>その他メニュー機能</h4>
+        <ul class="item-list">
+            <li><strong>アーカイブ表示切替</strong> - 削除済みタスクの表示/非表示</li>
+            <li><strong>AI健全性チェック</strong> - WBS全体の問題点を9項目で診断</li>
+            <li><strong>工数再計算</strong> - 営業日ベースで工数を自動再計算</li>
+            <li><strong>テンプレート保存/読込</strong> - WBSをテンプレートとして保存</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-8" class="manual-subsection">
+        <h3>6.8 4つのビューモード</h3>
+        <p>WBS管理画面では、目的に応じて4つの異なるビューモードを切り替えて使用できます。各ビューはタスク管理の異なる側面を最適化して表示します。</p>
+
+        <h4>ツリービュー</h4>
+        <p>階層構造でタスクを表示する最も基本的なビューです。親子関係が明確にわかり、WBSの全体構造を把握するのに適しています。</p>
+        
+        <div class="feature-image" onclick="openGallery('wbs-tree-view-img')">
+            <img id="wbs-tree-view-img" 
+                 src="../image/web-admin/wbs-tree-view.png" 
+                 alt="ツリービュー" 
+                 loading="lazy" />
+        </div>
+
+        <ul class="item-list">
+            <li><strong>階層表示</strong> - インデントで親子関係を視覚化</li>
+            <li><strong>展開/折りたたみ</strong> - 各ノードで子タスクの表示切替</li>
+            <li><strong>ドラッグ&ドロップ</strong> - タスクの移動と階層変更</li>
+            <li><strong>インライン編集</strong> - ダブルクリックで直接編集</li>
+        </ul>
+
+        <h4>ガントチャートビュー</h4>
+        <p>タスクを時系列で表示し、プロジェクトのスケジュールを視覚的に管理します。クリティカルパスの自動表示やドラッグによる期間調整が可能です。</p>
+        
+        <div class="feature-image" onclick="openGallery('wbs-gantt-view-img')">
+            <img id="wbs-gantt-view-img" 
+                 src="../image/web-admin/wbs-gantt-view.png" 
+                 alt="ガントチャートビュー" 
+                 loading="lazy" />
+        </div>
+
+        <ul class="item-list">
+            <li><strong>タイムライン表示</strong> - 日付軸でのタスク配置</li>
+            <li><strong>クリティカルパス</strong> - 赤色で重要経路を自動表示</li>
+            <li><strong>週末・祝日ハイライト</strong> - 営業日でない日を色分け</li>
+            <li><strong>ドラッグ期間調整</strong> - タスクバーの端をドラッグで期間変更</li>
+            <li><strong>依存関係表示</strong> - 矢印でタスク間の依存を可視化</li>
+        </ul>
+
+        <h4>ボードビュー（カンバン）</h4>
+        <p>タスクをステータス別の列で表示し、進捗管理を直感的に行います。ドラッグ&ドロップでステータス変更が可能です。</p>
+        
+        <div class="feature-image" onclick="openGallery('wbs-board-view-img')">
+            <img id="wbs-board-view-img" 
+                 src="../image/web-admin/wbs-board-view.png" 
+                 alt="ボードビュー" 
+                 loading="lazy" />
+        </div>
+
+        <ul class="item-list">
+            <li><strong>ステータス列</strong> - 未着手、進行中、完了などで分類</li>
+            <li><strong>WIP制限</strong> - 各列のタスク数上限を設定可能</li>
+            <li><strong>ドラッグ&ドロップ</strong> - タスクを列間で移動</li>
+            <li><strong>列管理</strong> - カスタム列の追加・削除・順序変更</li>
+        </ul>
+
+        <h4>カレンダービュー</h4>
+        <p>タスクをカレンダー形式で表示し、期限の管理やリソースの平準化に使用します。月表示と週表示を切り替え可能です。</p>
+        
+        <div class="feature-image" onclick="openGallery('wbs-calendar-view-img')">
+            <img id="wbs-calendar-view-img" 
+                 src="../image/web-admin/wbs-calendar-view.png" 
+                 alt="カレンダービュー" 
+                 loading="lazy" />
+        </div>
+
+        <ul class="item-list">
+            <li><strong>月/週表示切替</strong> - 表示期間を柔軟に変更</li>
+            <li><strong>期限タスク表示</strong> - 各日付に期限タスクを配置</li>
+            <li><strong>タスク過密表示</strong> - タスクが多い日を色で警告</li>
+            <li><strong>ナビゲーション</strong> - 前後の月/週へ簡単移動</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-9" class="manual-subsection">
+        <h3>6.9 タスク詳細パネル</h3>
+        <p>右サイドバーに表示されるタスク詳細パネルでは、選択したタスクのすべての情報を編集できます。4つのタブで情報を整理しています。</p>
+
+        <div class="feature-image" onclick="openGallery('wbs-detail-panel-img')">
+            <img id="wbs-detail-panel-img" 
+                 src="../image/web-admin/wbs-detail-panel.png" 
+                 alt="タスク詳細パネル" 
+                 loading="lazy" />
+        </div>
+
+        <h4>詳細タブ</h4>
+        <ul class="item-list">
+            <li><strong>基本情報</strong> - タスク名、説明、担当者、優先度</li>
+            <li><strong>期間設定</strong> - 開始日、終了日、工数日数</li>
+            <li><strong>進捗管理</strong> - ステータス、進捗率、実績期間</li>
+            <li><strong>成果物</strong> - デリバラブルの詳細情報</li>
+            <li><strong>マークダウン対応</strong> - 説明文でリッチテキスト使用可能</li>
+        </ul>
+
+        <h4>コメントタブ</h4>
+        <ul class="item-list">
+            <li><strong>タイムライン表示</strong> - コメントを時系列で表示</li>
+            <li><strong>リアルタイム更新</strong> - WebSocketで即時反映</li>
+            <li><strong>メンション機能</strong> - @ユーザー名でメンバーを通知</li>
+            <li><strong>リッチテキスト</strong> - マークダウンで整形可能</li>
+        </ul>
+
+        <h4>添付ファイルタブ</h4>
+        <ul class="item-list">
+            <li><strong>ファイルアップロード</strong> - ドラッグ&ドロップで添付</li>
+            <li><strong>プレビュー表示</strong> - 画像、PDFの即時プレビュー</li>
+            <li><strong>ダウンロード</strong> - 一クリックでファイル取得</li>
+            <li><strong>バージョン管理</strong> - 同名ファイルの上書き履歴</li>
+        </ul>
+
+        <h4>アクティビティタブ</h4>
+        <ul class="item-list">
+            <li><strong>変更履歴</strong> - タスクのすべての変更を記録</li>
+            <li><strong>操作者表示</strong> - 誰がいつ変更したかを表示</li>
+            <li><strong>変更内容</strong> - 前後の値を比較表示</li>
+            <li><strong>フィルタ機能</strong> - 変更種類で履歴を絞り込み</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-10" class="manual-subsection">
+        <h3>6.10 AI機能一覧</h3>
+        <p>WBS管理画面には、プロジェクト管理を高度に支援する10種類のAI機能が統合されています。各機能は専門的なタスクを自動化し、管理負荷を大幅に軽減します。</p>
+
+        <h4>WBS生成・編集系AI</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>機能</th>
+                    <th>説明</th>
+                    <th>利用シーン</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>AI WBS生成</strong></td>
+                    <td>プロジェクト概要から全タスクを対話形式で生成</td>
+                    <td>新規プロジェクトの計画時</td>
+                </tr>
+                <tr>
+                    <td><strong>AIアシスタント</strong></td>
+                    <td>自然言語でWBSを操作・変更プレビュー付き</td>
+                    <td>日常的なタスク管理操作</td>
+                </tr>
+                <tr>
+                    <td><strong>タスク分解</strong></td>
+                    <td>大きなタスクを適切なサブタスクに自動分割</td>
+                    <td>タスクが大きすぎると判断した時</td>
+                </tr>
+                <tr>
+                    <td><strong>タスク改善</strong></td>
+                    <td>タスク名や説明をより具体的・実行可能に改善</td>
+                    <td>タスクの品質を向上させたい時</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>スケジューリング系AI</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>機能</th>
+                    <th>説明</th>
+                    <th>利用シーン</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>リスケジュール提案</strong></td>
+                    <td>遅延や変更を検知し、最適な再スケジュールを提案</td>
+                    <td>タスク遅延が発生した時</td>
+                </tr>
+                <tr>
+                    <td><strong>自動割り当て</strong></td>
+                    <td>スキル・負荷を考慮した最適な担当者を自動配置</td>
+                    <td>担当者が未設定のタスクがある時</td>
+                </tr>
+                <tr>
+                    <td><strong>自動期間設定</strong></td>
+                    <td>複雑度と依存関係から最適な期間を自動算出</td>
+                    <td>期間が未設定のタスクがある時</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>品質管理系AI</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>機能</th>
+                    <th>説明</th>
+                    <th>診断項目</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>健全性チェック</strong></td>
+                    <td>WBS全体の問題点を9項目で自動検出・改善提案</td>
+                    <td>期間設定、担当者割り当て、依存関係、工数配分、リスクタスク、孤立タスク、過負荷メンバー、クリティカルパス、品質基準</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>🤖 AI機能の連携</strong>
+            各AI機能は独立して動作するだけでなく、相互に連携しています。例えば、健全性チェックで検出された問題を、リスケジュール提案や自動割り当てで自動的に解決することも可能です。
+        </div>
+    </div>
+</section>

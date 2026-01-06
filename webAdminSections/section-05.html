@@ -1,0 +1,404 @@
+<!-- セッション 5: AIアラート -->
+<section id="section-5" class="manual-section">
+    <h2>5. AIアラート（/alerts）</h2>
+    <p>AIが自動的に検知したプロジェクトのリスク、警告、改善提案を管理する画面です。重要度・種類・既読/未読でフィルタリングでき、詳細な対処方法を確認できます。</p>
+
+    <div id="subsection-5-1" class="manual-subsection">
+        <h3>5.1 概要</h3>
+        <p>AIアラート画面では、システムがプロジェクトやタスクを継続的に監視し、リスクや問題点を自動検知した結果を一覧表示します。管理者はアラートを確認し、適切な対処を行うことで、プロジェクトの成功確率を高めることができます。</p>
+        
+        <div class="feature-image" onclick="openGallery('alerts-overview-img')">
+            <img id="alerts-overview-img" 
+                 src="../image/web-admin/alerts-overview.png" 
+                 alt="AIアラート画面" 
+                 loading="lazy" />
+        </div>
+
+        <h4>主要な機能</h4>
+        <ul class="item-list">
+            <li><strong>AI自動検知</strong> - プロジェクトの状況を継続的に分析し、リスクや問題を自動的に検知</li>
+            <li><strong>3段階の重要度</strong> - 高・中・低の3段階で重要度を分類し、優先順位を明確化</li>
+            <li><strong>3種類のアラートタイプ</strong> - リスク、警告、改善提案の3種類を色分けして表示</li>
+            <li><strong>既読/未読管理</strong> - アラートの既読状態を管理し、未対応のアラートを把握</li>
+            <li><strong>詳細モーダル</strong> - 各アラートの詳細情報と推奨アクションを表示</li>
+            <li><strong>AI更新機能</strong> - 最新のプロジェクト状況でアラートを再生成</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 定期的な確認を推奨</strong>
+            AIアラートは、プロジェクトの早期警告システムです。毎日または週次で確認し、高重要度のアラートは優先的に対処してください。
+        </div>
+    </div>
+
+    <div id="subsection-5-2" class="manual-subsection">
+        <h3>5.2 アラート一覧</h3>
+        <p>画面の中央部分には、すべてのアラートがカード形式で一覧表示されます。</p>
+
+        <div class="feature-image" onclick="openGallery('alerts-list-img')">
+            <img id="alerts-list-img" 
+                 src="../image/web-admin/alerts-list.png" 
+                 alt="アラート一覧" 
+                 loading="lazy" />
+        </div>
+
+        <h4>アラートカードの構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>重要度バッジ</td>
+                    <td>「高」「中」「低」を色分けして表示（赤・オレンジ・青）</td>
+                </tr>
+                <tr>
+                    <td>タイプバッジ</td>
+                    <td>「リスク」「警告」「改善提案」の種類を表示</td>
+                </tr>
+                <tr>
+                    <td>既読/未読インジケーター</td>
+                    <td>未読の場合は青い点が表示される</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト名</td>
+                    <td>アラートが発生したプロジェクト名（全般アラートの場合は「全般」と表示）</td>
+                </tr>
+                <tr>
+                    <td>タイトル</td>
+                    <td>アラートの要約タイトル（オプション）</td>
+                </tr>
+                <tr>
+                    <td>メッセージ</td>
+                    <td>アラートの内容を説明する本文テキスト</td>
+                </tr>
+                <tr>
+                    <td>関連タスク</td>
+                    <td>アラートに関連するタスク名（ある場合）</td>
+                </tr>
+                <tr>
+                    <td>生成日時</td>
+                    <td>アラートが検知された日時</td>
+                </tr>
+                <tr>
+                    <td>既読ボタン</td>
+                    <td>アラートを既読/未読に切り替えるボタン</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>カードの操作</h4>
+        <ul class="item-list">
+            <li><strong>クリック</strong> - カードをクリックすると、詳細モーダルが開き、より詳しい情報と推奨アクションが表示される</li>
+            <li><strong>既読ボタン</strong> - 目のアイコンボタンをクリックすると、既読/未読を切り替え</li>
+            <li><strong>ホバー効果</strong> - カードにマウスを乗せると、わずかに浮き上がり、クリック可能であることを示す</li>
+        </ul>
+    </div>
+
+    <div id="subsection-5-3" class="manual-subsection">
+        <h3>5.3 フィルター機能</h3>
+        <p>画面上部のフィルターパネルで、表示するアラートを絞り込むことができます。</p>
+
+        <div class="feature-image" onclick="openGallery('alerts-filters-img')">
+            <img id="alerts-filters-img" 
+                 src="../image/web-admin/alerts-filters.png" 
+                 alt="フィルターパネル" 
+                 loading="lazy" />
+        </div>
+
+        <h4>フィルター項目</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>フィルター名</th>
+                    <th>選択肢</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>重要度</td>
+                    <td>全て / 高 / 中 / 低</td>
+                    <td>アラートの重要度で絞り込み。「高」のみを表示すれば、緊急対応が必要なアラートを素早く確認できる</td>
+                </tr>
+                <tr>
+                    <td>種類</td>
+                    <td>全て / リスク / 警告 / 改善提案</td>
+                    <td>アラートの種類で絞り込み。「リスク」のみを表示すれば、重大な問題に集中できる</td>
+                </tr>
+                <tr>
+                    <td>既読/未読</td>
+                    <td>全て / 未読のみ / 既読のみ</td>
+                    <td>既読状態で絞り込み。「未読のみ」を選択すれば、まだ確認していないアラートのみを表示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>フィルターの使い方</h4>
+        <ul class="item-list">
+            <li><strong>ステップ1</strong> - 各ドロップダウンから希望の条件を選択</li>
+            <li><strong>ステップ2</strong> - 選択すると即座にアラート一覧が更新される（自動適用）</li>
+            <li><strong>ステップ3</strong> - 複数のフィルターを組み合わせて使用可能（例: 重要度「高」 + 種類「リスク」 + 既読「未読のみ」）</li>
+            <li><strong>リセット</strong> - 「フィルターをリセット」ボタンをクリックすると、すべてのフィルターが解除される</li>
+        </ul>
+
+        <div class="note">
+            <strong>📌 推奨フィルター設定</strong>
+            日次チェックでは「重要度: 高」+「既読: 未読のみ」の組み合わせがお勧めです。緊急対応が必要な未確認アラートを素早く確認できます。
+        </div>
+    </div>
+
+    <div id="subsection-5-4" class="manual-subsection">
+        <h3>5.4 重要度レベル</h3>
+        <p>アラートは重要度に応じて3段階に分類され、色分けされて表示されます。</p>
+
+        <h4>重要度の定義</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>重要度</th>
+                    <th>表示色</th>
+                    <th>対応優先度</th>
+                    <th>典型的な例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>高（High）</td>
+                    <td>赤色</td>
+                    <td>即座に対応が必要</td>
+                    <td>納期遅延の高い可能性、クリティカルパス上のタスク遅延、リソース不足による進行不可、重大な品質リスク</td>
+                </tr>
+                <tr>
+                    <td>中（Medium）</td>
+                    <td>オレンジ色</td>
+                    <td>数日以内に対応</td>
+                    <td>リソース配分の偏り、スキル不足メンバーへの割り当て、依存関係の問題、軽度の進捗遅れ</td>
+                </tr>
+                <tr>
+                    <td>低（Low）</td>
+                    <td>青色</td>
+                    <td>時間があれば対応</td>
+                    <td>タスク説明の不足、ドキュメント不備、より効率的な方法の提案、ベストプラクティスの提示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>重要度の自動判定基準</h4>
+        <p>AIは以下の要素を総合的に評価して重要度を自動判定します：</p>
+        <ul class="item-list">
+            <li><strong>納期への影響度</strong> - プロジェクト全体の納期に与える影響が大きいほど重要度が高い</li>
+            <li><strong>クリティカルパス上か</strong> - クリティカルパス上のタスクに関するアラートは重要度が高くなる</li>
+            <li><strong>リスクの深刻度</strong> - 品質、コスト、スコープへの影響が大きいほど重要度が高い</li>
+            <li><strong>対処の緊急性</strong> - 放置すると状況が悪化する可能性が高いほど重要度が高い</li>
+        </ul>
+    </div>
+
+    <div id="subsection-5-5" class="manual-subsection">
+        <h3>5.5 アラートタイプ</h3>
+        <p>アラートは性質に応じて3種類に分類されます。</p>
+
+        <h4>タイプの定義</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>タイプ</th>
+                    <th>表示色</th>
+                    <th>説明</th>
+                    <th>典型的な例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>リスク</td>
+                    <td>赤系</td>
+                    <td>プロジェクトの成功を脅かす潜在的な問題</td>
+                    <td>納期リスク、リソース不足リスク、品質リスク、技術的リスク、依存関係リスク</td>
+                </tr>
+                <tr>
+                    <td>警告</td>
+                    <td>オレンジ系</td>
+                    <td>注意が必要な状況や軽度の問題</td>
+                    <td>タスクの説明不足、ドキュメント不備、軽度の進捗遅れ、コミュニケーション不足</td>
+                </tr>
+                <tr>
+                    <td>改善提案</td>
+                    <td>青系</td>
+                    <td>より良い方法や効率化の提案</td>
+                    <td>タスク分割の提案、リソース再配分の提案、ツール活用の提案、ベストプラクティスの提示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>タイプと重要度の関係</h4>
+        <p>アラートのタイプと重要度は独立した軸です：</p>
+        <ul class="item-list">
+            <li><strong>リスク（高）</strong> - 緊急対応が必要な重大リスク</li>
+            <li><strong>リスク（中）</strong> - 監視が必要な潜在的リスク</li>
+            <li><strong>警告（中）</strong> - 改善が望ましい問題</li>
+            <li><strong>改善提案（低）</strong> - 参考にすべき最適化案</li>
+        </ul>
+    </div>
+
+    <div id="subsection-5-6" class="manual-subsection">
+        <h3>5.6 詳細モーダル</h3>
+        <p>アラートカードをクリックすると、詳細モーダルが表示され、より詳しい情報と推奨アクションが確認できます。</p>
+
+        <div class="feature-image" onclick="openGallery('alerts-detail-modal-img')">
+            <img id="alerts-detail-modal-img" 
+                 src="../image/web-admin/alerts-detail-modal.png" 
+                 alt="アラート詳細モーダル" 
+                 loading="lazy" />
+        </div>
+
+        <h4>詳細モーダルの構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>セクション</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ヘッダー</td>
+                    <td>重要度バッジ、タイプバッジ、タイトル、プロジェクト名</td>
+                </tr>
+                <tr>
+                    <td>基本情報</td>
+                    <td>生成日時、関連タスク、既読状態</td>
+                </tr>
+                <tr>
+                    <td>メッセージ</td>
+                    <td>アラートの詳細な説明文</td>
+                </tr>
+                <tr>
+                    <td>詳細情報</td>
+                    <td>問題の背景、影響範囲、根本原因などの追加情報</td>
+                </tr>
+                <tr>
+                    <td>推奨アクション</td>
+                    <td>AIが提案する具体的な対処方法のリスト</td>
+                </tr>
+                <tr>
+                    <td>関連リンク</td>
+                    <td>関連するタスク、プロジェクト、ドキュメントへのリンク</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>詳細モーダルの操作</h4>
+        <ul class="item-list">
+            <li><strong>閉じる</strong> - 右上の×ボタン、またはモーダル外をクリックして閉じる</li>
+            <li><strong>既読にする</strong> - 詳細モーダルを開くと自動的に既読状態に変更される</li>
+            <li><strong>関連タスクへ移動</strong> - 「タスクを表示」ボタンをクリックすると、関連するタスクの詳細画面に移動</li>
+            <li><strong>プロジェクトへ移動</strong> - プロジェクト名をクリックすると、そのプロジェクトの詳細画面に移動</li>
+        </ul>
+    </div>
+
+    <div id="subsection-5-7" class="manual-subsection">
+        <h3>5.7 AI更新機能</h3>
+        <p>画面上部の「AI更新」ボタンをクリックすると、最新のプロジェクトデータでアラートを再生成します。</p>
+
+        <div class="feature-image" onclick="openGallery('alerts-refresh-img')">
+            <img id="alerts-refresh-img" 
+                 src="../image/web-admin/alerts-refresh.png" 
+                 alt="AI更新ボタン" 
+                 loading="lazy" />
+        </div>
+
+        <h4>AI更新の処理内容</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ステップ</th>
+                    <th>処理内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. データ取得</td>
+                    <td>最新のプロジェクト、タスク、メンバー情報をAPIから取得</td>
+                </tr>
+                <tr>
+                    <td>2. 差分検出</td>
+                    <td>前回のAI分析時から変更があったプロジェクトを特定（効率化）</td>
+                </tr>
+                <tr>
+                    <td>3. AI分析実行</td>
+                    <td>変更があったプロジェクトのみをAIで分析し、リスクを検知</td>
+                </tr>
+                <tr>
+                    <td>4. 新規アラート生成</td>
+                    <td>新たに発見されたリスクをデータベースに保存</td>
+                </tr>
+                <tr>
+                    <td>5. 解決済み判定</td>
+                    <td>既存のアラートで問題が解消されたものを「解決済み」ステータスに変更</td>
+                </tr>
+                <tr>
+                    <td>6. 画面更新</td>
+                    <td>アラート一覧を再読み込みし、最新の状態を表示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>AI更新の実行タイミング</h4>
+        <p>以下のタイミングでAI更新を実行することを推奨します：</p>
+        <ul class="item-list">
+            <li><strong>定期的な確認時</strong> - 毎日または週次でアラートを確認する際</li>
+            <li><strong>プロジェクト大幅変更後</strong> - タスクの大幅な追加・削除、スケジュール変更後</li>
+            <li><strong>新しいフェーズ開始時</strong> - プロジェクトが新しいフェーズに移行した時</li>
+            <li><strong>問題発生時</strong> - 何か問題が発生し、新たなリスクが生じている可能性がある時</li>
+        </ul>
+
+        <div class="note">
+            <strong>⏱️ 処理時間</strong>
+            AI更新は、プロジェクト数とタスク数に応じて数秒～数分かかる場合があります。処理中はボタンが「更新中...」に変化し、クリック不可になります。
+        </div>
+    </div>
+
+    <div id="subsection-5-8" class="manual-subsection">
+        <h3>5.8 既読/未読管理</h3>
+        <p>アラートの既読状態を管理することで、未対応のアラートを見逃さないようにできます。</p>
+
+        <h4>既読/未読の切り替え方法</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>操作</th>
+                    <th>結果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>詳細モーダルを開く</td>
+                    <td>自動的に既読状態になる</td>
+                </tr>
+                <tr>
+                    <td>既読ボタンをクリック</td>
+                    <td>既読⇔未読を手動で切り替え</td>
+                </tr>
+                <tr>
+                    <td>「全て既読にする」ボタン</td>
+                    <td>表示中のすべてのアラートを既読にする</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>未読インジケーター</h4>
+        <p>未読のアラートには以下の視覚的な手がかりが表示されます：</p>
+        <ul class="item-list">
+            <li><strong>青い点</strong> - アラートカードの左上に青い点が表示される</li>
+            <li><strong>太字テキスト</strong> - タイトルとメッセージが太字で強調表示される</li>
+            <li><strong>背景色</strong> - わずかに背景色が変化し、未読であることを示す</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 未読管理のベストプラクティス</strong>
+            アラートを確認したら、対処が完了するまで未読のままにしておくことをお勧めします。対処完了後に既読にすることで、未対応のアラートを明確に管理できます。
+        </div>
+    </div>
+</section>

@@ -1,0 +1,801 @@
+<!-- セッション 16: 設定 -->
+<section id="section-16" class="manual-section">
+    <h2>16. 設定（/settings）</h2>
+    <p>システム全体の設定を管理します。LLM API、祝日、ユーザー、プロンプト、バージョン情報の5つのタブで構成されています。</p>
+
+    <p class="page-subtitle">システム全般の設定を5つのタブで一元管理し、LLM API、祝日、ユーザー、プロンプト、バージョン情報を包括的に制御します。</p>
+
+    <!-- 16.1 画面概要 -->
+    <div id="subsection-16-1" class="manual-subsection">
+        <h3>16.1 画面概要</h3>
+        <div class="description-box">
+            <p>
+                設定画面は、TsutaAI Web Adminシステムの中枢機能として、5つのタブ（LLM
+                API設定、祝日設定、ユーザー管理、プロンプト管理、バージョン情報）で構成される包括的な管理インターフェースです。管理者のみがアクセス可能なこの画面では、AI機能の根幹を成すLLMプロバイダーの選択（Groq/OpenAI/Claude/Ollama/カスタム）、プロキシ設定、スケジュール計算に必要な祝日データのインポート、システムユーザーの追加・編集・削除、29種類のAI機能で使用されるプロンプトのカスタマイズ、デスクトップアプリのダウンロードとバージョン履歴の確認という、すべてのシステム設定を一元管理できます。各タブは独立して機能し、横スクロール可能なタブバーでモバイルにも最適化されています。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('settings-overview')">
+            <img id="settings-overview" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">タブ名</th>
+                    <th style="width: 15%;">アイコン</th>
+                    <th style="width: 30%;">主要機能</th>
+                    <th style="width: 35%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>LLM API設定</strong></td>
+                    <td><i class="bi bi-robot" style="font-size: 1.5rem; color: #667eea;"></i></td>
+                    <td>プロバイダー選択、APIキー、エンドポイント、モデル、Temperature、プロキシ設定</td>
+                    <td>5つのプロバイダー（Groq、OpenAI、Claude、Ollama、カスタム）から選択し、AI機能の動作環境を設定</td>
+                </tr>
+                <tr>
+                    <td><strong>祝日設定</strong></td>
+                    <td><i class="bi bi-calendar-event" style="font-size: 1.5rem; color: #667eea;"></i></td>
+                    <td>祝日一覧、追加、削除、日本の祝日インポート</td>
+                    <td>スケジュール計算に必要な祝日データを管理。japanese-holidaysライブラリで最大20年分を一括インポート可能</td>
+                </tr>
+                <tr>
+                    <td><strong>ユーザー管理</strong></td>
+                    <td><i class="bi bi-people" style="font-size: 1.5rem; color: #667eea;"></i></td>
+                    <td>ユーザー一覧、追加、編集、削除、権限切り替え</td>
+                    <td>システムユーザーを管理。admin（管理者）とmember（メンバー）の2つの権限レベルを設定</td>
+                </tr>
+                <tr>
+                    <td><strong>プロンプト管理</strong></td>
+                    <td><i class="bi bi-chat-text" style="font-size: 1.5rem; color: #667eea;"></i></td>
+                    <td>29種類のプロンプト一覧、編集、デフォルトに戻す</td>
+                    <td>AI機能で使用されるプロンプトをカスタマイズ。変数は{変数名}形式で記述</td>
+                </tr>
+                <tr>
+                    <td><strong>バージョン情報</strong></td>
+                    <td><i class="bi bi-info-circle" style="font-size: 1.5rem; color: #667eea;"></i></td>
+                    <td>現在のバージョン、デスクトップアプリダウンロード、CHANGELOG</td>
+                    <td>システムバージョンと変更履歴を確認。デスクトップアプリのZIPファイルをダウンロード可能</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>管理者権限が必要：</strong> 設定画面は管理者権限（role='admin'）を持つユーザーのみがアクセスできます。メンバー権限でアクセスしようとすると、403
+                Forbiddenエラーまたはログイン画面にリダイレクトされます。また、LLM API設定やプロンプト管理の変更は、システム全体のAI機能に影響を与えるため、慎重に行ってください。</p>
+        </div>
+    </div>
+
+    <!-- 16.2 LLM API設定タブ -->
+    <div id="subsection-16-2" class="manual-subsection">
+        <h3>16.2 LLM API設定タブ</h3>
+        <div class="description-box">
+            <p>
+                LLM API設定タブは、TsutaAIの29種類のAI機能すべてが依存する大規模言語モデル（LLM）プロバイダーを選択し、接続情報を設定する最重要タブです。5つのプロバイダー（①Groq -
+                高速推論、②OpenAI - GPT-5系、③Claude - Anthropic、④Ollama - ローカルLLM、⑤カスタム -
+                OpenAI互換）から選択でき、プロバイダー変更時にはエンドポイントとモデルがデフォルト値に自動設定されます。各プロバイダーには複数のモデル選択肢があり（例:
+                Groqはgpt-oss-20b/120b/llama-3.1-8b、OpenAIはGPT-5.2/5/5-mini/5-nano、ClaudeはOpus4.5/Sonnet4.5）、Temperature（0.0-1.0、スライダー）と最大トークン数（1024-131072）も調整可能です。さらに、企業ネットワーク環境向けにプロキシ設定（URL、ユーザー名、パスワード）も提供されています。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('llm-api-settings')">
+            <img id="llm-api-settings" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">設定項目</th>
+                    <th style="width: 20%;">入力タイプ</th>
+                    <th style="width: 30%;">デフォルト値（例）</th>
+                    <th style="width: 30%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>LLMプロバイダー</strong></td>
+                    <td>ドロップダウン（5選択肢）</td>
+                    <td>Groq (高速推論)</td>
+                    <td>使用するLLMサービスを選択。変更時にエンドポイントとモデルが自動更新</td>
+                </tr>
+                <tr>
+                    <td><strong>APIキー</strong></td>
+                    <td>パスワード入力</td>
+                    <td>（非表示）</td>
+                    <td>プロバイダーのAPIキー。Ollamaは不要</td>
+                </tr>
+                <tr>
+                    <td><strong>エンドポイント</strong></td>
+                    <td>テキスト入力（URL）</td>
+                    <td>https://api.groq.com/openai/v1/chat/completions</td>
+                    <td>API呼び出し先URL。プロバイダーごとに異なる</td>
+                </tr>
+                <tr>
+                    <td><strong>モデル</strong></td>
+                    <td>ドロップダウン（プロバイダー依存）</td>
+                    <td>gpt-oss-20b（Groq）、GPT-5.2（OpenAI）</td>
+                    <td>使用するLLMモデル。カスタムの場合はテキスト入力</td>
+                </tr>
+                <tr>
+                    <td><strong>Temperature</strong></td>
+                    <td>スライダー（0.0-1.0、0.1刻み）</td>
+                    <td>0.3</td>
+                    <td>AI応答のランダム性。低い値=決定論的、高い値=創造的</td>
+                </tr>
+                <tr>
+                    <td><strong>最大トークン数</strong></td>
+                    <td>数値入力（1024-131072、1024刻み）</td>
+                    <td>65536</td>
+                    <td>AI応答の最大長。長いプロンプトには大きな値が必要</td>
+                </tr>
+                <tr>
+                    <td><strong>プロキシを使用する</strong></td>
+                    <td>チェックボックス</td>
+                    <td>OFF</td>
+                    <td>企業ネットワーク環境でプロキシ経由でAPI接続する場合にON</td>
+                </tr>
+                <tr>
+                    <td><strong>プロキシURL</strong></td>
+                    <td>テキスト入力（URL）</td>
+                    <td>http://proxy.example.com:8080</td>
+                    <td>プロキシサーバーのアドレスとポート番号</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">プロバイダー</th>
+                    <th style="width: 40%;">利用可能なモデル</th>
+                    <th style="width: 40%;">特徴</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge-provider">Groq</span></td>
+                    <td>gpt-oss-20b、gpt-oss-120b、llama-3.1-8b-instant</td>
+                    <td>高速推論に特化。コストパフォーマンスが高い</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-provider">OpenAI</span></td>
+                    <td>GPT-5.2、GPT-5、GPT-5 mini、GPT-5 nano</td>
+                    <td>最新のGPT-5シリーズ。最高品質の応答を提供</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-provider">Claude</span></td>
+                    <td>Claude Opus 4.5、Claude Sonnet 4.5</td>
+                    <td>Anthropic社の最新モデル。長文理解が得意</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-provider">Ollama</span></td>
+                    <td>llama3.2、llama3.1、mistral、codellama、gemma2</td>
+                    <td>ローカル実行。APIキー不要。オフライン環境で利用可能</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-provider">カスタム</span></td>
+                    <td>（任意のモデル名を入力）</td>
+                    <td>OpenAI互換のカスタムエンドポイント。社内LLMサーバーに接続可能</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>設定を保存した後、変更を反映するには**バックエンドAPIの再起動が必要**です。設定値はデータベースの`settings`テーブルに保存されますが、バックエンドAPIは起動時にこのテーブルを読み込むため、再起動しないと新しい設定が適用されません。再起動方法は、バックエンドAPIのターミナルで`Ctrl+C`で停止し、`npm
+                run dev`で再起動してください。</p>
+        </div>
+    </div>
+
+    <!-- 16.3 祝日設定タブ -->
+    <div id="subsection-16-3" class="manual-subsection">
+        <h3>16.3 祝日設定タブ</h3>
+        <div class="description-box">
+            <p>
+                祝日設定タブは、プロジェクトスケジュール計算において営業日を正確に判定するための祝日データを管理します。年度セレクター（前年・翌年ボタン）で表示年を切り替え、その年の祝日一覧を表形式（日付、祝日名、種類、備考、操作の5列）で表示します。祝日種類は3種類（①国民の祝日
+                - 青バッジ、②会社休日 - グレーバッジ、③その他 -
+                水色バッジ）に分類され、視覚的に区別されます。手動で祝日を追加するモーダルと、日本の祝日を一括インポートするモーダルの2つの登録方法があり、後者では`japanese-holidays`ライブラリを使用して内閣府公式データに基づく祝日（ハッピーマンデー、春分・秋分、振替休日を含む）を最大20年分まとめてインポートできます。既存の祝日はスキップされるため、重複の心配はありません。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('holiday-settings')">
+            <img id="holiday-settings" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">機能</th>
+                    <th style="width: 35%;">操作方法</th>
+                    <th style="width: 40%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>年度切り替え</strong></td>
+                    <td>「前年」「翌年」ボタンをクリック</td>
+                    <td>表示年を±1年変更し、その年の祝日一覧を再読み込み</td>
+                </tr>
+                <tr>
+                    <td><strong>祝日を手動追加</strong></td>
+                    <td>「祝日を追加」ボタン → モーダルで日付・名前・種類・繰り返し・備考を入力</td>
+                    <td>会社独自の休日（創立記念日など）を登録可能。「毎年繰り返す」をONにすると翌年以降も自動適用</td>
+                </tr>
+                <tr>
+                    <td><strong>日本の祝日を一括インポート</strong></td>
+                    <td>「デフォルト祝日をインポート」ボタン → 開始年と終了年を入力 → インポート</td>
+                    <td>japanese-holidaysライブラリで最大20年分の日本の祝日を一括登録。既存データはスキップ</td>
+                </tr>
+                <tr>
+                    <td><strong>祝日を削除</strong></td>
+                    <td>各行の「削除」ボタン → 確認ダイアログでOK</td>
+                    <td>誤登録や不要になった祝日を削除</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">祝日種類</th>
+                    <th style="width: 15%;">バッジ色</th>
+                    <th style="width: 30%;">用途例</th>
+                    <th style="width: 30%;">インポート対象</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>国民の祝日</strong></td>
+                    <td><span
+                            style="background: #3b82f6; color: white; padding: 4px 12px; border-radius: 6px;">国民の祝日</span>
+                    </td>
+                    <td>元日、建国記念の日、天皇誕生日、春分の日、昭和の日、憲法記念日など</td>
+                    <td>日本の祝日インポートで自動登録</td>
+                </tr>
+                <tr>
+                    <td><strong>会社休日</strong></td>
+                    <td><span
+                            style="background: #6b7280; color: white; padding: 4px 12px; border-radius: 6px;">会社休日</span>
+                    </td>
+                    <td>創立記念日、夏季休暇、年末年始特別休暇など</td>
+                    <td>手動で追加する必要がある</td>
+                </tr>
+                <tr>
+                    <td><strong>その他</strong></td>
+                    <td><span
+                            style="background: #3b82f6; color: white; padding: 4px 12px; border-radius: 6px;">その他</span>
+                    </td>
+                    <td>イベント日、メンテナンス日など</td>
+                    <td>手動で追加する必要がある</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>初回セットアップの推奨手順：</strong> ①まず「デフォルト祝日をインポート」で今年から5年後までの日本の祝日を一括登録（例:
+                2025-2030年）。②次に、会社独自の休日（創立記念日、夏季休暇など）を「祝日を追加」で手動登録。③「毎年繰り返す」をONにすると、翌年以降も自動的に適用されるため、年度ごとに再登録する手間が省けます。この3ステップで、最大5年分のスケジュール計算が正確になります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 16.4 ユーザー管理タブ -->
+    <div id="subsection-16-4" class="manual-subsection">
+        <h3>16.4 ユーザー管理タブ</h3>
+        <div class="description-box">
+            <p>
+                ユーザー管理タブは、システムにアクセスできるユーザーアカウントを追加・編集・削除し、権限（admin/member）を管理する中核機能です。ユーザー一覧テーブルは6列（ID、ユーザー名、氏名、メールアドレス、権限、操作）で構成され、権限列のバッジボタンをクリックすることで、admin（管理者
+                - 赤バッジ）とmember（メンバー -
+                グレーバッジ）を即座に切り替えられます。新規ユーザー作成モーダルでは、5つのフィールド（ユーザー名、氏名、メールアドレス、権限、パスワード）を入力し、ユーザー名は一度設定すると変更不可です。編集モーダルでは、ユーザー名以外のすべてのフィールドを変更でき、パスワードは空欄の場合は変更されません。削除時には確認ダイアログが表示され、誤削除を防ぎます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('user-management')">
+            <img id="user-management" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">操作</th>
+                    <th style="width: 35%;">手順</th>
+                    <th style="width: 40%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ユーザーを追加</strong></td>
+                    <td>「ユーザーを追加」ボタン → モーダルで5フィールド入力 → 作成</td>
+                    <td>新規ユーザーを作成。ユーザー名、氏名、メールアドレス、パスワードは必須</td>
+                </tr>
+                <tr>
+                    <td><strong>ユーザーを編集</strong></td>
+                    <td>各行の「編集」ボタン → モーダルで情報変更 → 更新</td>
+                    <td>既存ユーザーの氏名、メールアドレス、権限を変更。パスワードは空欄で変更なし</td>
+                </tr>
+                <tr>
+                    <td><strong>権限を切り替え</strong></td>
+                    <td>権限列のバッジボタン（「管理者」または「メンバー」）をクリック → 確認ダイアログでOK</td>
+                    <td>admin⇔memberを即座に切り替え。設定画面へのアクセス権が変更される</td>
+                </tr>
+                <tr>
+                    <td><strong>ユーザーを削除</strong></td>
+                    <td>各行の「削除」ボタン → 確認ダイアログでOK</td>
+                    <td>ユーザーアカウントを削除。関連データ（タスク、コメントなど）も削除される可能性がある</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">権限レベル</th>
+                    <th style="width: 15%;">バッジ</th>
+                    <th style="width: 35%;">アクセス可能な機能</th>
+                    <th style="width: 30%;">制限される機能</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>admin（管理者）</strong></td>
+                    <td><span class="badge-admin">管理者</span></td>
+                    <td>すべての画面・機能にアクセス可能。設定画面、ユーザー管理、プロンプト管理、祝日設定を含む</td>
+                    <td>制限なし</td>
+                </tr>
+                <tr>
+                    <td><strong>member（メンバー）</strong></td>
+                    <td><span class="badge-member">メンバー</span></td>
+                    <td>ダッシュボード、プロジェクト、WBS、レポート、AI機能、メンタルヘルスなど、ほとんどの機能にアクセス可能</td>
+                    <td>設定画面、ユーザー管理、プロンプト管理にはアクセス不可（403エラー）</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>ユーザー削除の注意点：</strong>
+                ユーザーを削除すると、そのユーザーに関連するデータ（作成したタスク、コメント、作業報告など）が削除される、または孤立する可能性があります。削除前に、そのユーザーが担当しているタスクがないか、重要なデータが紐づいていないかを確認してください。また、管理者権限を持つユーザーが1名しかいない状態で、そのユーザーを削除またはメンバーに降格すると、設定画面にアクセスできなくなるため、必ず複数の管理者を確保してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 16.5 プロンプト管理タブ -->
+    <div id="subsection-16-5" class="manual-subsection">
+        <h3>16.5 プロンプト管理タブ</h3>
+        <div class="description-box">
+            <p>
+                プロンプト管理タブは、TsutaAIの29種類のAI機能（WBS生成、タスク分解、自動割り当て、リスク検知、日報生成など）で使用されるプロンプトテンプレートをカスタマイズできる高度な機能です。プロンプト一覧テーブルは4列（プロンプト名、説明、サイズ、操作）で構成され、各プロンプト名はcode形式で表示されます（例:
+                `wbs-generation.txt`、`task-allocation.txt`）。編集ボタンをクリックすると、大きなモーダル（modal-lg）が開き、20行のテキストエリアでプロンプト内容を編集できます。プロンプト内では変数を`{変数名}`形式で記述し（例:
+                `{project_name}`、`{task_title}`）、実行時に実際の値に置き換えられます。「デフォルトに戻す」ボタンで、カスタマイズ前の元のプロンプトに復元できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('prompt-management')">
+            <img id="prompt-management" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">プロンプト名（例）</th>
+                    <th style="width: 40%;">用途</th>
+                    <th style="width: 30%;">主要変数（例）</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>wbs-generation.txt</code></td>
+                    <td>プロジェクト概要からWBSを自動生成</td>
+                    <td>{project_name}, {description}, {start_date}, {end_date}</td>
+                </tr>
+                <tr>
+                    <td><code>task-breakdown.txt</code></td>
+                    <td>大きなタスクを小タスクに分解</td>
+                    <td>{task_title}, {description}, {estimated_hours}</td>
+                </tr>
+                <tr>
+                    <td><code>task-allocation.txt</code></td>
+                    <td>スキルと負荷を考慮して自動割り当て</td>
+                    <td>{task_list}, {member_skills}, {workload}</td>
+                </tr>
+                <tr>
+                    <td><code>risk-detection.txt</code></td>
+                    <td>プロジェクトのリスクを早期検知</td>
+                    <td>{project_status}, {delays}, {budget}</td>
+                </tr>
+                <tr>
+                    <td><code>daily-report-generation.txt</code></td>
+                    <td>作業ログから日報を自動生成</td>
+                    <td>{work_logs}, {git_commits}, {files_changed}</td>
+                </tr>
+                <tr>
+                    <td><code>hourly-activity-analysis.txt</code></td>
+                    <td>1時間ごとの作業を分析し評価</td>
+                    <td>{mouse_clicks}, {keyboard_strokes}, {active_window}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>プロンプトの変数は、バックエンドAPIが実行時に実際のデータに置き換えます。例えば、`{project_name}`は「ECサイトリニューアル」というプロジェクト名に、`{task_title}`は「ログイン機能の実装」というタスク名に置き換えられます。変数名は大文字小文字を区別し、スペルミスがあると置換されないため、編集時には既存の変数名を参考にしてください。また、プロンプトの変更は即座に反映されますが、バックエンドAPIのプロンプトキャッシュがある場合は再起動が必要な場合があります。
+            </p>
+        </div>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>プロンプト変更の影響範囲：</strong>
+                プロンプトを変更すると、そのAI機能の動作が大きく変わる可能性があります。例えば、`wbs-generation.txt`のプロンプトを「タスクを細かく分解してください」から「大まかなタスクのみ生成してください」に変更すると、生成されるWBSの粒度が変わります。本番環境でプロンプトを変更する前に、テスト環境で動作を確認することを強く推奨します。また、変更前のプロンプトをテキストファイルとして別途保存しておくことで、問題が発生した場合に手動で元に戻すことができます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 16.6 バージョン情報タブ -->
+    <div id="subsection-16-6" class="manual-subsection">
+        <h3>16.6 バージョン情報タブ</h3>
+        <div class="description-box">
+            <p>
+                バージョン情報タブは、現在のシステムバージョン、デスクトップアプリのダウンロード、変更履歴（CHANGELOG）を一元的に表示する情報提供タブです。画面上部には大きな見出しで現在のバージョン（例:
+                v1.0.0）とシステム名（TsutaAI Web
+                Admin）が表示され、最新リリース日も記載されます。中央部にはデスクトップアプリのダウンロードカードがあり、「デスクトップアプリをダウンロード」ボタンをクリックすると、`/DesktopApp.zip`ファイルがダウンロードされます。下部には変更履歴が時系列で表示され、各バージョンごとに「追加（緑）」「変更（黄）」「修正（青）」「削除（赤）」という4つのカテゴリーでリスト化されます。過去のすべてのバージョンの変更内容を確認でき、システムの進化過程を追跡できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('version-info')">
+            <img id="version-info" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">表示項目</th>
+                    <th style="width: 35%;">内容</th>
+                    <th style="width: 40%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>現在のバージョン</strong></td>
+                    <td>v1.0.0（大きな見出しで表示）</td>
+                    <td>現在実行中のシステムバージョン。セマンティックバージョニング（Major.Minor.Patch）形式</td>
+                </tr>
+                <tr>
+                    <td><strong>システム名</strong></td>
+                    <td>TsutaAI Web Admin</td>
+                    <td>システムの正式名称</td>
+                </tr>
+                <tr>
+                    <td><strong>最新リリース日</strong></td>
+                    <td>2025-12-30（例）</td>
+                    <td>最新バージョンのリリース日</td>
+                </tr>
+                <tr>
+                    <td><strong>デスクトップアプリダウンロード</strong></td>
+                    <td>ボタンをクリックでZIPファイルをダウンロード</td>
+                    <td>Windows用デスクトップアプリの最新版。ダウンロード後、ZIPを解凍して実行</td>
+                </tr>
+                <tr>
+                    <td><strong>CHANGELOG</strong></td>
+                    <td>各バージョンの変更履歴をリスト表示</td>
+                    <td>追加・変更・修正・削除の4カテゴリーで過去のすべての変更を記録</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">変更カテゴリー</th>
+                    <th style="width: 15%;">アイコン・色</th>
+                    <th style="width: 35%;">意味</th>
+                    <th style="width: 30%;">例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>追加（Added）</strong></td>
+                    <td><i class="bi bi-plus-circle" style="color: #22c55e; font-size: 1.5rem;"></i> 緑</td>
+                    <td>新機能、新画面、新APIエンドポイントの追加</td>
+                    <td>メンタルヘルス画面を追加、ヘルプリクエスト機能を追加</td>
+                </tr>
+                <tr>
+                    <td><strong>変更（Changed）</strong></td>
+                    <td><i class="bi bi-exclamation-circle" style="color: #eab308; font-size: 1.5rem;"></i> 黄</td>
+                    <td>既存機能の改善、UI変更、パフォーマンス向上</td>
+                    <td>ガントチャートのドラッグ操作を改善、ダッシュボードのレイアウトを変更</td>
+                </tr>
+                <tr>
+                    <td><strong>修正（Fixed）</strong></td>
+                    <td><i class="bi bi-bug" style="color: #3b82f6; font-size: 1.5rem;"></i> 青</td>
+                    <td>バグ修正、不具合解消</td>
+                    <td>タスク削除時のエラーを修正、日付フォーマットの不具合を解消</td>
+                </tr>
+                <tr>
+                    <td><strong>削除（Removed）</strong></td>
+                    <td><i class="bi bi-x-circle" style="color: #ef4444; font-size: 1.5rem;"></i> 赤</td>
+                    <td>非推奨機能の削除、廃止された機能</td>
+                    <td>旧バージョンのAPI互換性を削除、未使用のコンポーネントを削除</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>デスクトップアプリの配布方法：</strong>
+                デスクトップアプリのZIPファイルは、Web管理画面の`public`フォルダ（または静的ファイル配信ディレクトリ）に`DesktopApp.zip`という名前で配置することで、この画面からダウンロード可能になります。新しいバージョンをリリースする際は、ZIPファイルを上書きし、バージョン情報タブのCHANGELOGを更新してください。これにより、メンバーは常に最新版のデスクトップアプリを入手できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 16.7 モーダルの種類と操作 -->
+    <div id="subsection-16-7" class="manual-subsection">
+        <h3>16.7 モーダルの種類と操作</h3>
+        <div class="description-box">
+            <p>
+                設定画面では、5種類のモーダル（祝日追加、祝日インポート、ユーザー追加・編集、プロンプト編集）が使用されます。すべてのモーダルは、画面中央に表示され、背景が暗くなるオーバーレイ効果（rgba(0,0,0,0.5)）を持ちます。モーダルの共通操作として、①右上の「×」ボタン、②「キャンセル」ボタン、③背景のオーバーレイをクリック、という3つの方法で閉じることができます。また、Escキーでも閉じられます（実装されている場合）。モーダル内のフォームは、必須フィールドが未入力の場合、エラーメッセージが表示され、送信ボタンが無効化されます。プロンプト編集モーダルのみ、サイズが大きい（modal-lg）ため、20行のテキストエリアを快適に編集できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('modals')">
+            <img id="modals" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">モーダル名</th>
+                    <th style="width: 20%;">サイズ</th>
+                    <th style="width: 30%;">フィールド数</th>
+                    <th style="width: 25%;">送信ボタンテキスト</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>祝日を追加</strong></td>
+                    <td>通常（modal-dialog）</td>
+                    <td>5フィールド（日付、祝日名、種類、繰り返し、備考）</td>
+                    <td>「追加」</td>
+                </tr>
+                <tr>
+                    <td><strong>日本の祝日をインポート</strong></td>
+                    <td>通常（modal-dialog）</td>
+                    <td>2フィールド（開始年、終了年）</td>
+                    <td>「インポート」</td>
+                </tr>
+                <tr>
+                    <td><strong>ユーザーを追加</strong></td>
+                    <td>通常（modal-dialog）</td>
+                    <td>5フィールド（ユーザー名、氏名、メール、権限、パスワード）</td>
+                    <td>「作成」</td>
+                </tr>
+                <tr>
+                    <td><strong>ユーザーを編集</strong></td>
+                    <td>通常（modal-dialog）</td>
+                    <td>5フィールド（ユーザー名は無効化、他4つは編集可能）</td>
+                    <td>「更新」</td>
+                </tr>
+                <tr>
+                    <td><strong>プロンプト編集</strong></td>
+                    <td>大（modal-lg）</td>
+                    <td>2フィールド（プロンプト名は無効化、内容は20行テキストエリア）</td>
+                    <td>「保存」</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>モバイル環境（画面幅768px以下）では、モーダルが全画面表示に切り替わり、スクロール可能になります。これにより、小さな画面でも快適にフォーム入力ができます。また、モーダル内のフォームバリデーションは、HTML5のrequired属性を使用しているため、ブラウザ標準のエラーメッセージが表示されます。より詳細なエラーメッセージが必要な場合は、JavaScriptでカスタムバリデーションを実装してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 16.8 セキュリティとアクセス制御 -->
+    <div id="subsection-16-8" class="manual-subsection">
+        <h3>16.8 セキュリティとアクセス制御</h3>
+        <div class="description-box">
+            <p>
+                設定画面は、システムの中枢機能を管理するため、厳格なアクセス制御が適用されています。バックエンドAPIでは、すべての設定関連エンドポイント（`/settings/*`, `/users/*`,
+                `/prompts/*`,
+                `/holidays/*`）に対して、JWT認証ミドルウェアと権限チェックミドルウェアが適用され、admin権限を持つユーザーのみがアクセスできます。member権限でアクセスしようとすると、403
+                Forbiddenエラーが返されます。フロントエンド側では、設定画面へのルーティングガード（ナビゲーションガード）が実装されており、ログイン状態と権限をチェックし、条件を満たさない場合はログイン画面またはダッシュボードにリダイレクトします。また、パスワードフィールドはすべてtype="password"で保護され、APIキーも同様にマスキング表示されます。
+            </p>
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">セキュリティ機能</th>
+                    <th style="width: 35%;">実装内容</th>
+                    <th style="width: 35%;">効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>JWT認証</strong></td>
+                    <td>すべてのAPIリクエストにJWTトークンを含め、バックエンドで検証</td>
+                    <td>未認証ユーザーのアクセスを完全にブロック</td>
+                </tr>
+                <tr>
+                    <td><strong>権限チェック（RBAC）</strong></td>
+                    <td>ミドルウェアでユーザーのroleフィールドを確認し、adminのみ許可</td>
+                    <td>member権限ユーザーは設定画面にアクセス不可（403エラー）</td>
+                </tr>
+                <tr>
+                    <td><strong>パスワードハッシュ化</strong></td>
+                    <td>bcryptライブラリでパスワードをハッシュ化してDB保存</td>
+                    <td>DBが漏洩してもパスワードは解読不可</td>
+                </tr>
+                <tr>
+                    <td><strong>APIキーマスキング</strong></td>
+                    <td>設定画面でAPIキーをtype="password"で表示</td>
+                    <td>画面キャプチャや第三者の視認からAPIキーを保護</td>
+                </tr>
+                <tr>
+                    <td><strong>ルーティングガード</strong></td>
+                    <td>フロントエンドで権限をチェックし、不正アクセスをリダイレクト</td>
+                    <td>URLを直接入力してもアクセス不可</td>
+                </tr>
+                <tr>
+                    <td><strong>削除確認ダイアログ</strong></td>
+                    <td>ユーザー・祝日削除時に確認ダイアログを表示</td>
+                    <td>誤削除を防止</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>管理者権限の慎重な付与：</strong>
+                admin権限を持つユーザーは、すべてのシステム設定を変更でき、他のユーザーを削除することもできます。そのため、admin権限は信頼できる人物にのみ付与してください。また、管理者が退職や異動で不在になる場合は、事前に後任の管理者を任命し、権限を移譲してください。管理者が1名もいない状態になると、設定画面にアクセスできなくなり、システム管理が不可能になります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 16.9 設定変更の反映とトラブルシューティング -->
+    <div id="subsection-16-9" class="manual-subsection">
+        <h3>16.9 設定変更の反映とトラブルシューティング</h3>
+        <div class="description-box">
+            <p>
+                設定画面で行った変更は、種類によって反映タイミングが異なります。①LLM
+                API設定とプロキシ設定は、バックエンドAPIの再起動が必要です（設定保存後、画面上部に青い情報メッセージで通知されます）。②祝日設定は即座に反映され、スケジュール計算APIを呼び出すと新しい祝日データが使用されます。③ユーザー管理の変更（追加・編集・削除）も即座に反映され、次回ログイン時から新しい情報が適用されます。④プロンプト管理の変更は即座に反映されますが、バックエンドAPIがプロンプトをキャッシュしている場合は再起動が必要な場合があります。トラブルシューティングとして、変更が反映されない場合は、①ブラウザのキャッシュをクリア、②バックエンドAPIを再起動、③ログアウト→再ログインという3つの手順を試してください。
+            </p>
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">設定種類</th>
+                    <th style="width: 25%;">反映タイミング</th>
+                    <th style="width: 25%;">再起動要否</th>
+                    <th style="width: 25%;">確認方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>LLM API設定</strong></td>
+                    <td>バックエンドAPI起動時</td>
+                    <td><span style="color: #ef4444; font-weight: bold;">要再起動</span></td>
+                    <td>AI機能（WBS生成など）を実行し、新しいモデルで応答が返るか確認</td>
+                </tr>
+                <tr>
+                    <td><strong>プロキシ設定</strong></td>
+                    <td>バックエンドAPI起動時</td>
+                    <td><span style="color: #ef4444; font-weight: bold;">要再起動</span></td>
+                    <td>バックエンドログでプロキシ経由の接続が確認できるか確認</td>
+                </tr>
+                <tr>
+                    <td><strong>祝日設定</strong></td>
+                    <td>即座</td>
+                    <td><span style="color: #22c55e; font-weight: bold;">不要</span></td>
+                    <td>スケジュール計算（ガントチャート、期間自動設定）で祝日が考慮されるか確認</td>
+                </tr>
+                <tr>
+                    <td><strong>ユーザー管理</strong></td>
+                    <td>即座（次回ログイン時）</td>
+                    <td><span style="color: #22c55e; font-weight: bold;">不要</span></td>
+                    <td>ログアウト→再ログインで新しい情報が反映されるか確認</td>
+                </tr>
+                <tr>
+                    <td><strong>プロンプト管理</strong></td>
+                    <td>即座（キャッシュあれば再起動）</td>
+                    <td><span style="color: #eab308; font-weight: bold;">場合による</span></td>
+                    <td>AI機能を実行し、新しいプロンプトで応答が生成されるか確認</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>バックエンドAPIの再起動手順：</strong> ①バックエンドAPIが実行されているターミナルを開く → ②`Ctrl+C`（Windowsの場合）または`Cmd+C`（Macの場合）で停止
+                → ③`npm run dev`コマンドで再起動 → ④ターミナルに「Server running on port
+                3000」というメッセージが表示されれば成功。再起動には通常5-10秒かかります。本番環境では、PM2やDockerなどのプロセスマネージャーを使用している場合、`pm2 restart
+                backend-api`や`docker-compose restart backend-api`などのコマンドで再起動してください。</p>
+        </div>
+    </div>
+
+    <!-- 16.10 活用シーンとベストプラクティス -->
+    <div id="subsection-16-10" class="manual-subsection">
+        <h3>16.10 活用シーンとベストプラクティス</h3>
+        <div class="description-box">
+            <p>
+                設定画面を効果的に活用するためのベストプラクティスとして、5つのワークフローを推奨します。①初回セットアップ（システム導入時、1回のみ）でLLM
+                API、祝日、初期ユーザーを設定、②定期メンテナンス（月次、四半期ごと）で祝日データの更新とユーザー情報の見直し、③AI機能のカスタマイズ（必要に応じて）でプロンプトを業務に最適化、④セキュリティ監査（半年ごと）で不要なユーザーの削除と権限の見直し、⑤バージョン管理（リリースごと）でCHANGELOGの更新とデスクトップアプリの配布という5段階のサイクルを確立することで、システムを常に最新・最適な状態に保つことができます。特に重要なのは、管理者権限を持つユーザーを複数確保し、単一障害点（SPOF）を作らないことです。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('best-practices-settings')">
+            <img id="best-practices-settings" src="../image/web-admin/800x500.png" />
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <i class="bi bi-1-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>初回セットアップ（システム導入時、1回のみ）</h6>
+                    <p>
+                        <strong>目的：</strong> システムを本番環境で使用可能な状態にする<br>
+                        <strong>手順：</strong> ①LLM API設定タブでGroq（または利用可能なプロバイダー）を選択し、APIキーを入力 →
+                        ②Temperature=0.3、最大トークン数=65536を設定（デフォルト値） → ③プロキシが必要な場合は設定をONにし、URL・認証情報を入力 → ④バックエンドAPIを再起動 →
+                        ⑤祝日設定タブで「デフォルト祝日をインポート」から今年～5年後の日本の祝日を一括登録 → ⑥ユーザー管理タブで管理者アカウントを2名以上作成（冗長性確保） →
+                        ⑦デスクトップアプリをダウンロードし、メンバーに配布<br>
+                        <strong>所要時間：</strong> 30-45分<br>
+                        <strong>成功指標：</strong> AI機能（WBS生成など）が正常に動作し、スケジュール計算で祝日が考慮される
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-2-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>定期メンテナンス（月次、四半期ごと）</h6>
+                    <p>
+                        <strong>目的：</strong> 祝日データとユーザー情報を最新状態に保つ<br>
+                        <strong>手順：</strong> ①毎月1日に祝日設定タブを開き、翌月の祝日が登録されているか確認 → ②会社休日（創立記念日、夏季休暇など）が追加された場合、「祝日を追加」で手動登録
+                        → ③四半期ごと（3ヶ月ごと）にユーザー管理タブを開き、退職者や異動者のアカウントを削除または無効化 → ④新入社員や異動者のアカウントを追加 →
+                        ⑤管理者権限を持つユーザーが2名以上いることを確認<br>
+                        <strong>所要時間：</strong> 15-20分<br>
+                        <strong>成功指標：</strong> 祝日データが1年先まで登録され、不要なユーザーアカウントがゼロ
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-3-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>AI機能のカスタマイズ（必要に応じて）</h6>
+                    <p>
+                        <strong>目的：</strong> AI機能を自社の業務プロセスに最適化する<br>
+                        <strong>手順：</strong> ①プロンプト管理タブを開き、カスタマイズしたいAI機能のプロンプトを選択（例: `wbs-generation.txt`） →
+                        ②「編集」ボタンをクリックし、プロンプト内容を確認 → ③自社の開発プロセスに合わせてプロンプトを修正（例: 「ウォーターフォール方式でタスクを分解してください」を追加） →
+                        ④「保存」ボタンで変更を保存 → ⑤テスト環境でAI機能を実行し、期待通りの応答が返るか確認 → ⑥問題がなければ本番環境に反映（バックエンドAPIを再起動）<br>
+                        <strong>所要時間：</strong> 1-2時間（テスト含む）<br>
+                        <strong>成功指標：</strong> AI機能が自社の業務プロセスに合致した応答を生成する
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-4-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>セキュリティ監査（半年ごと）</h6>
+                    <p>
+                        <strong>目的：</strong> 不要なアクセス権限を削除し、セキュリティリスクを低減<br>
+                        <strong>手順：</strong> ①ユーザー管理タブで全ユーザーをリストアップ → ②過去6ヶ月間ログインしていないユーザーを特定（ログ分析ツールを使用） →
+                        ③該当ユーザーに連絡し、今後も使用するか確認 → ④使用しない場合はアカウントを削除 → ⑤admin権限を持つユーザーが本当に管理者として適切か見直し →
+                        ⑥不要にadmin権限を持っているユーザーをmemberに降格 → ⑦APIキーが漏洩していないか確認（GitHub、社内チャットなどを検索）<br>
+                        <strong>所要時間：</strong> 2-3時間<br>
+                        <strong>成功指標：</strong> 不要なユーザーアカウントがゼロ、admin権限が最小限
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-5-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>バージョン管理（リリースごと）</h6>
+                    <p>
+                        <strong>目的：</strong> システムの変更履歴を記録し、メンバーに最新版を配布<br>
+                        <strong>手順：</strong> ①新しいバージョンをリリースする際、バージョン情報タブのCHANGELOGを更新 → ②追加・変更・修正・削除の4カテゴリーに分けて変更内容を記載 →
+                        ③デスクトップアプリの新しいZIPファイルを作成し、`/public/DesktopApp.zip`に配置 → ④バージョン情報タブの「現在のバージョン」を更新（例: v1.0.0 →
+                        v1.1.0） → ⑤全メンバーにSlackやメールで新バージョンリリースを通知し、ダウンロードを促す<br>
+                        <strong>所要時間：</strong> 30-45分<br>
+                        <strong>成功指標：</strong> 全メンバーが最新版のデスクトップアプリを使用している
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>管理者権限の冗長性確保：</strong>
+                管理者権限を持つユーザーは、最低でも2名、できれば3名以上確保してください。1名のみの場合、その人が休暇や病欠で不在の際に緊急の設定変更ができなくなります。また、管理者が退職する場合は、後任の管理者を事前に任命し、引き継ぎ期間を設けることで、スムーズな権限移譲が可能になります。
+            </p>
+        </div>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>本番環境での設定変更の注意点：</strong> LLM
+                API設定やプロンプト管理の変更は、システム全体のAI機能に影響を与えるため、本番環境で直接変更することは避けてください。まずテスト環境で変更を試し、期待通りの動作を確認した上で、本番環境に反映してください。また、変更前には必ずバックアップ（設定値のスクリーンショット、プロンプトのコピーなど）を取り、問題が発生した場合に元に戻せるようにしてください。
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- ギャラリーモーダル -->
+    <div id="galleryModal" class="gallery-modal" onclick="closeGallery()">
+        <span class="close-modal">&times;</span>
+        <img id="galleryImage" src="" alt="拡大画像">
+</section>

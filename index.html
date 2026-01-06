@@ -10,7 +10,9 @@
     <!-- Google Fonts: Inter & Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -36,10 +38,15 @@
                         'hover': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.01)',
                     },
                     borderRadius: {
-                        'xl': '1rem',
-                        '2xl': '1.5rem',
-                        '3xl': '2rem',
+                        'xl': '0.7rem',
+                        '2xl': '0.7rem',
+                        '3xl': '0.7rem',
                     }
+                    // borderRadius: {
+                    //     'xl': '1rem',
+                    //     '2xl': '1.5rem',
+                    //     '3xl': '2rem',
+                    // }
                 }
             }
         }
@@ -50,12 +57,12 @@
             font-feature-settings: "palt";
             letter-spacing: 0.02em;
         }
-        
+
         /* グラデーション背景の微調整 */
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         /* カルーセル用 */
@@ -64,6 +71,7 @@
             width: 100%;
             height: 100%;
         }
+
         .carousel-image {
             position: absolute;
             top: 0;
@@ -74,6 +82,7 @@
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
         }
+
         .carousel-image.active {
             opacity: 1;
         }
@@ -89,6 +98,7 @@
             background: rgba(0, 0, 0, 0.9);
             z-index: 10000;
         }
+
         .gallery-modal.active {
             display: flex;
             align-items: center;
@@ -124,10 +134,17 @@
             opacity: 0;
             transform: translateY(20px);
         }
-        
+
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Bento Grid用の背景パターン */
@@ -152,13 +169,20 @@
 
                 <!-- デスクトップメニュー -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#problem" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">課題</a>
-                    <a href="#solution" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">ソリューション</a>
-                    <a href="#features" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">機能</a>
-                    <a href="#demo" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">デモ</a>
-                    <a href="#tech" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">技術</a>
-                    <a href="#about-name" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">名前の由来</a>
-                    <a href="#resources" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">詳細資料</a>
+                    <a href="#problem"
+                        class="text-sm font-medium text-text-sub hover:text-primary transition-colors">課題</a>
+                    <a href="#solution"
+                        class="text-sm font-medium text-text-sub hover:text-primary transition-colors">ソリューション</a>
+                    <a href="#features"
+                        class="text-sm font-medium text-text-sub hover:text-primary transition-colors">機能</a>
+                    <a href="#demo"
+                        class="text-sm font-medium text-text-sub hover:text-primary transition-colors">デモ</a>
+                    <a href="#tech"
+                        class="text-sm font-medium text-text-sub hover:text-primary transition-colors">技術</a>
+                    <a href="#about-name"
+                        class="text-sm font-medium text-text-sub hover:text-primary transition-colors">名前の由来</a>
+                    <a href="#resources"
+                        class="text-sm font-medium text-text-sub hover:text-primary transition-colors">詳細資料</a>
                     <!-- <a href="mailto:2025gw04@gmail.com" class="px-5 py-2.5 bg-black text-white text-sm font-bold rounded-full hover:bg-gray-800 transition-all hover:shadow-lg transform hover:-translate-y-0.5">
                         お問い合わせ
                     </a> -->
@@ -174,17 +198,27 @@
         </div>
 
         <!-- モバイルメニュー -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
             <div class="px-4 pt-2 pb-6 space-y-1">
-                <a href="#hero" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">ホーム</a>
-                <a href="#problem" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">課題</a>
-                <a href="#solution" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">ソリューション</a>
-                <a href="#features" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">機能</a>
-                <a href="#demo" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">デモ</a>
-                <a href="#howto" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">使い方</a>
-                <a href="#tech" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">技術</a>
-                <a href="#about-name" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">名前の由来</a>
-                <a href="#resources" class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">詳細資料</a>
+                <a href="#hero"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">ホーム</a>
+                <a href="#problem"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">課題</a>
+                <a href="#solution"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">ソリューション</a>
+                <a href="#features"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">機能</a>
+                <a href="#demo"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">デモ</a>
+                <a href="#howto"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">使い方</a>
+                <a href="#tech"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">技術</a>
+                <a href="#about-name"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">名前の由来</a>
+                <a href="#resources"
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">詳細資料</a>
             </div>
         </div>
     </nav>
@@ -193,27 +227,35 @@
     <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-white">
         <!-- 背景装飾（控えめなグラデーション） -->
         <div class="absolute top-0 left-1/2 w-full -translate-x-1/2 h-full z-0 pointer-events-none">
-             <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl mix-blend-multiply opacity-70"></div>
-             <div class="absolute top-20 right-1/4 w-96 h-96 bg-blue-100 rounded-full blur-3xl mix-blend-multiply opacity-70"></div>
+            <div
+                class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl mix-blend-multiply opacity-70">
+            </div>
+            <div
+                class="absolute top-20 right-1/4 w-96 h-96 bg-blue-100 rounded-full blur-3xl mix-blend-multiply opacity-70">
+            </div>
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-xs font-semibold text-gray-600 mb-8 fade-in-up" style="animation-delay: 0.1s;">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-xs font-semibold text-gray-600 mb-8 fade-in-up"
+                style="animation-delay: 0.1s;">
                 <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                 AI駆動型プロジェクト管理システム
             </div>
-            
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-text-main mb-6 leading-[1.1] fade-in-up" style="animation-delay: 0.2s;">
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-text-main mb-6 leading-[1.1] fade-in-up"
+                style="animation-delay: 0.2s;">
                 プロジェクト管理の未来へ、<br class="hidden md:block">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-dark to-primary">AIと共に</span>
             </h1>
-            
-            <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-text-sub fade-in-up" style="animation-delay: 0.3s;">
-                29種類のAI機能で、開発プロジェクトのQCD（品質・コスト・納期）を革新的に改善。<br class="hidden md:block">もう、残業と遅延に悩まされることはありません。
+
+            <p class="mt-4 max-w-2xl mx-auto text-lg md:text-xl text-text-sub fade-in-up"
+                style="animation-delay: 0.3s;">
+                29種類のAI機能、4つの視覚化ビュー、23種類のデスクトップアプリ画面で、<br class="hidden md:block">開発プロジェクトのQCD（品質・コスト・納期）を革新的に改善。
             </p>
 
             <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.4s;">
-                <a href="mailto:2025gw04@gmail.com" class="px-8 py-4 bg-primary text-black text-lg font-bold rounded-full shadow-lg hover:bg-[#62d654] hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <a href="mailto:2025gw04@gmail.com"
+                    class="px-8 py-4 bg-primary text-black text-lg font-bold rounded-full shadow-lg hover:bg-[#62d654] hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     今すぐ相談する
                 </a>
                 <!-- <a href="#demo" class="px-8 py-4 bg-white text-gray-700 border border-gray-200 text-lg font-bold rounded-full shadow-sm hover:bg-gray-50 hover:border-gray-300 transition-all duration-300">
@@ -233,22 +275,34 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                 <!-- Card 1 -->
-                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-soft hover:shadow-hover transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">⏰</div>
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-100 shadow-soft hover:shadow-hover transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        ⏰</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">納期遅延の悪夢</h3>
-                    <p class="text-gray-600 leading-relaxed">タスクの見積もりが甘く、気づけば納期は目前。深夜残業と休日出勤の連続で、チームは疲弊しています。顧客からのプレッシャーも日に日に増していきます...</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        タスクの見積もりが甘く、気づけば納期は目前。深夜残業と休日出勤の連続で、チームは疲弊しています。クリティカルパスも把握できず、どこから手をつければいいのか...</p>
                 </div>
                 <!-- Card 2 -->
-                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-soft hover:shadow-hover transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">💸</div>
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-100 shadow-soft hover:shadow-hover transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        💸</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">予算超過の恐怖</h3>
-                    <p class="text-gray-600 leading-relaxed">当初の見積もりを大幅に超える工数。追加の人員投入でコストは膨らむばかり。プロジェクトの収益性は悪化し、会社の利益を圧迫しています...</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        当初の見積もりを大幅に超える工数。タスクの依存関係が複雑で、誰が何をしているのか把握できない。リソース配分の最適化ができず、コストは膨らむばかり...</p>
                 </div>
                 <!-- Card 3 -->
-                <div class="bg-white p-8 rounded-3xl border border-gray-100 shadow-soft hover:shadow-hover transition-all duration-300 group">
-                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">😰</div>
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-100 shadow-soft hover:shadow-hover transition-all duration-300 group">
+                    <div
+                        class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        😰</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3">メンバーの疲弊</h3>
-                    <p class="text-gray-600 leading-relaxed">終わりの見えない残業、積み上がるタスク、プレッシャー。メンバーのモチベーションは低下し、離職のリスクも高まっています。このままでは...</p>
+                    <p class="text-gray-600 leading-relaxed">
+                        終わりの見えない残業、積み上がるタスク、プレッシャー。メンタルヘルスの把握もできず、燃え尽き症候群のリスクも。スキル成長の機会もなく離職が...</p>
                 </div>
             </div>
 
@@ -281,8 +335,10 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Solution 1 -->
-                <div class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors duration-300">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6">🤖</div>
+                <div
+                    class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors duration-300">
+                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6">
+                        🤖</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-4">AIによる完全自動化</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
@@ -304,47 +360,51 @@
                 </div>
 
                 <!-- Solution 2 -->
-                <div class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors duration-300">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6">📊</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">リアルタイム管理</h3>
+                <div
+                    class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors duration-300">
+                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6">
+                        📊</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">4つのビューで完全把握</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> 4つのビュー（ツリー・ガント・ボード・カレンダー）
+                            <i class="fas fa-check text-primary mt-1"></i> ツリービュー - 階層構造とドラッグ&ドロップ
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> WebSocketでのライブ更新
+                            <i class="fas fa-check text-primary mt-1"></i> ガントチャート - クリティカルパス自動表示
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> デスクトップアプリで作業自動追跡
+                            <i class="fas fa-check text-primary mt-1"></i> カンバンボード - WIP制限とスイムレーン
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> 進捗の可視化とボトルネック検出
+                            <i class="fas fa-check text-primary mt-1"></i> カレンダービュー - 休日考慮の営業日計算
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> 自動リスケジュール提案
+                            <i class="fas fa-check text-primary mt-1"></i> WebSocketリアルタイム同期
                         </li>
                     </ul>
                 </div>
 
                 <!-- Solution 3 -->
-                <div class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors duration-300">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6">💚</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-4">メンバーケア</h3>
+                <div
+                    class="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-primary/30 transition-colors duration-300">
+                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl mb-6">
+                        💚</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">メンバーケアと成長支援</h3>
                     <ul class="space-y-3">
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> 気分・ストレストラッキング
+                            <i class="fas fa-check text-primary mt-1"></i> 1時間ごとのAI活動分析（集中度・効率性）
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> AIによるメンタルヘルスアドバイス
+                            <i class="fas fa-check text-primary mt-1"></i> メンタルヘルスダッシュボード
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> ヘルプリクエスト機能
+                            <i class="fas fa-check text-primary mt-1"></i> スキル成長トラッキングと強み分析
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> 作業負荷の自動バランシング
+                            <i class="fas fa-check text-primary mt-1"></i> AIヘルプマッチング - 最適な支援者を自動選定
                         </li>
                         <li class="flex items-start gap-3 text-gray-600 text-sm">
-                            <i class="fas fa-check text-primary mt-1"></i> 燃え尽き症候群の予防
+                            <i class="fas fa-check text-primary mt-1"></i> 休暇影響分析 - スケジュールへの影響を自動予測
                         </li>
                     </ul>
                 </div>
@@ -362,7 +422,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Feature 1: AI自動WBS生成 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col">
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col">
                     <div class="h-64 relative bg-gray-100 group cursor-pointer" data-carousel="carousel-1">
                         <div class="carousel-container">
                             <img src="image/1_1.png" alt="AI WBS 1" class="carousel-image active">
@@ -370,14 +431,18 @@
                             <img src="image/1_3.png" alt="AI WBS 3" class="carousel-image">
                             <img src="image/1_4.png" alt="AI WBS 4" class="carousel-image">
                         </div>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
-                            <span class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
+                            <span
+                                class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
                         </div>
                     </div>
                     <div class="p-8 flex-1">
-                        <span class="inline-block px-3 py-1 bg-primary/20 text-primary-dark text-xs font-bold rounded-full mb-4">AI自動化</span>
+                        <span
+                            class="inline-block px-3 py-1 bg-primary/20 text-primary-dark text-xs font-bold rounded-full mb-4">AI自動化</span>
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">AI自動WBS生成</h3>
-                        <p class="text-gray-600 mb-4 leading-relaxed">プロジェクト概要を入力するだけで、AIが数分で詳細なWBSを自動生成。経験豊富なPM品質を瞬時に実現。</p>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            プロジェクト概要を入力するだけで、AIが数分で詳細なWBSを自動生成。経験豊富なPM品質を瞬時に実現。</p>
                         <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-600">
                             <strong>💡 効果:</strong> WBS作成時間を95%削減。
                         </div>
@@ -385,7 +450,8 @@
                 </div>
 
                 <!-- Feature 2: スキルベース自動割り当て -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col">
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col">
                     <div class="h-64 relative bg-gray-100 group cursor-pointer" data-carousel="carousel-2">
                         <div class="carousel-container">
                             <img src="image/2_1.png" alt="Assign 1" class="carousel-image active">
@@ -393,12 +459,15 @@
                             <img src="image/2_3.png" alt="Assign 3" class="carousel-image">
                             <img src="image/2_4.png" alt="Assign 4" class="carousel-image">
                         </div>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
-                            <span class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
+                            <span
+                                class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
                         </div>
                     </div>
                     <div class="p-8 flex-1">
-                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full mb-4">最適化</span>
+                        <span
+                            class="inline-block px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full mb-4">最適化</span>
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">スキルベース自動割り当て</h3>
                         <p class="text-gray-600 mb-4 leading-relaxed">各メンバーのスキル、経験、負荷を分析し、AIが最適なタスク割り当てを提案。</p>
                         <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-600">
@@ -408,75 +477,98 @@
                 </div>
 
                 <!-- Feature 3: デスクトップ監視 -->
-                <div class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1">
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1">
                     <div class="h-64 relative bg-gray-100 group cursor-pointer" data-carousel="carousel-3">
-                         <div class="carousel-container">
+                        <div class="carousel-container">
                             <img src="image/3_1.png" alt="Desktop 1" class="carousel-image active">
                             <img src="image/3_2.png" alt="Desktop 2" class="carousel-image">
                             <img src="image/3_3.png" alt="Desktop 3" class="carousel-image">
                         </div>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
-                             <span class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
+                            <span
+                                class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
                         </div>
                     </div>
                     <div class="p-8 flex-1">
-                        <span class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full mb-4">分析</span>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-3">デスクトップ監視 & AI活動分析</h3>
-                        <p class="text-gray-600 mb-4 leading-relaxed">作業中のアクティビティを自動トラッキング。1時間ごとにAIが進捗度や効率性を分析し改善提案。</p>
-                         <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-600">
-                            <strong>💡 効果:</strong> 生産性20%向上。Git/SVN連携も自動。
+                        <span
+                            class="inline-block px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full mb-4">分析</span>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">デスクトップアプリ & AI活動分析</h3>
+                        <p class="text-gray-600 mb-4 leading-relaxed">Win32
+                            APIによる作業自動トラッキング。マウス、キーボード、ウィンドウ、ファイル変更を監視し、1時間ごとにAIが集中度・進捗度・効率性を0-100点でスコアリング。</p>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-600">
+                            <strong>💡 効果:</strong> 生産性20%向上。15画面・17サービス搭載。
                         </div>
                     </div>
                 </div>
 
-                 <!-- Feature 4: 自動日報生成 -->
-                 <div class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1">
+                <!-- Feature 4: 自動日報生成 -->
+                <div
+                    class="bg-white rounded-3xl overflow-hidden border border-gray-200 shadow-soft hover:shadow-hover transition-all duration-300 flex flex-col md:col-span-2 lg:col-span-1">
                     <div class="h-64 relative bg-gray-100 group cursor-pointer" data-carousel="carousel-4">
-                         <div class="carousel-container">
+                        <div class="carousel-container">
                             <img src="image/4_1.png" alt="Report 1" class="carousel-image active">
                             <img src="image/4_2.png" alt="Report 2" class="carousel-image">
                             <img src="image/4_3.png" alt="Report 3" class="carousel-image">
                         </div>
-                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
-                             <span class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
+                        <div
+                            class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
+                            <span
+                                class="opacity-0 group-hover:opacity-100 bg-white/90 px-4 py-2 rounded-full text-sm font-bold shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all">プレビューを見る</span>
                         </div>
                     </div>
                     <div class="p-8 flex-1">
-                        <span class="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full mb-4">時短</span>
+                        <span
+                            class="inline-block px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded-full mb-4">時短</span>
                         <h3 class="text-2xl font-bold text-gray-900 mb-3">AI自動日報生成</h3>
                         <p class="text-gray-600 mb-4 leading-relaxed">作業ログやGitコミットからAIが自動的に日報を生成。報告作業は「確認して送信」だけ。</p>
-                         <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-600">
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 text-sm text-gray-600">
                             <strong>💡 効果:</strong> 日報作成時間ゼロへ。
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <!-- Additional Features Row -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                 <!-- Feature 5 -->
-                 <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-soft flex flex-col">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-soft flex flex-col">
                     <h3 class="text-xl font-bold text-gray-900 mb-2">リアルタイムガントチャート</h3>
-                    <p class="text-gray-600 text-sm mb-4">変更は即座に全員に反映。依存関係とクリティカルパスを自動計算。</p>
-                     <div class="h-48 rounded-xl bg-gray-100 overflow-hidden relative group cursor-pointer" data-carousel="carousel-5">
-                         <div class="carousel-container">
+                    <p class="text-gray-600 text-sm mb-4">変更は即座に全員に反映。依存関係とクリティカルパスを自動計算。営業日ベースの正確なスケジューリング。</p>
+                    <div class="h-48 rounded-xl bg-gray-100 overflow-hidden relative group cursor-pointer"
+                        data-carousel="carousel-5">
+                        <div class="carousel-container">
                             <img src="image/5_1.png" alt="Gantt 1" class="carousel-image active">
                             <img src="image/5_2.png" alt="Gantt 2" class="carousel-image">
                             <img src="image/5_3.png" alt="Gantt 3" class="carousel-image">
-                             <img src="image/5_4.png" alt="Gantt 4" class="carousel-image">
+                            <img src="image/5_4.png" alt="Gantt 4" class="carousel-image">
                         </div>
                     </div>
                 </div>
-                 <!-- Feature 6 -->
-                 <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-soft flex flex-col">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">メンタルヘルスケア</h3>
-                    <p class="text-gray-600 text-sm mb-4">気分とストレスレベルを記録し、AIが燃え尽き症候群を予防。</p>
-                     <div class="h-48 rounded-xl bg-gray-100 overflow-hidden relative group cursor-pointer" data-carousel="carousel-6">
-                         <div class="carousel-container">
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-soft flex flex-col">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">メンタルヘルスダッシュボード</h3>
+                    <p class="text-gray-600 text-sm mb-4">気分・ストレス・睡眠を記録。チーム全体の健康状態を可視化し、AIが燃え尽き症候群を予防。</p>
+                    <div class="h-48 rounded-xl bg-gray-100 overflow-hidden relative group cursor-pointer"
+                        data-carousel="carousel-6">
+                        <div class="carousel-container">
                             <img src="image/6_1.png" alt="Mental 1" class="carousel-image active">
                             <img src="image/6_2.png" alt="Mental 2" class="carousel-image">
-                             <img src="image/6_3.png" alt="Mental 3" class="carousel-image">
-                             <img src="image/6_4.png" alt="Mental 4" class="carousel-image">
+                            <img src="image/6_3.png" alt="Mental 3" class="carousel-image">
+                            <img src="image/6_4.png" alt="Mental 4" class="carousel-image">
+                        </div>
+                    </div>
+                </div>
+                <!-- Feature 7: NEW - 見積もりフレームワーク -->
+                <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-soft flex flex-col">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">12種類の見積もりパターン</h3>
+                    <p class="text-gray-600 text-sm mb-4">期間未定・予算固定・フェーズベース・アジャイル等、あらゆるプロジェクトに対応。AIが3点見積もりと効率化率を自動算出。
+                    </p>
+                    <div class="h-48 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
+                        <div class="text-center">
+                            <i class="fas fa-calculator text-5xl mb-3"></i>
+                            <p class="text-sm font-semibold">見積もり機能</p>
                         </div>
                     </div>
                 </div>
@@ -484,56 +576,225 @@
 
             <!-- AI Features List -->
             <div class="mt-16 bg-white rounded-3xl p-8 border border-gray-200">
-                <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">29種類のAI機能</h3>
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">29種類のAI機能</h3>
+                <p class="text-gray-600 text-center mb-8">プロジェクト計画から実行、成長支援まで、あらゆるフェーズでAIがサポート</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- WBS生成・編集 -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">🎯 WBS自動生成</strong>
-                        <span class="text-gray-500 text-xs">プロジェクト概要から全タスクを自動生成</span>
+                        <span class="text-gray-500 text-xs">プロジェクト概要から全タスクを対話形式で生成</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">📋 タスク分解</strong>
                         <span class="text-gray-500 text-xs">大きなタスクを小さなサブタスクに自動分割</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">✨ タスク改善</strong>
                         <span class="text-gray-500 text-xs">タスク名や説明をより具体的に改善</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">🔍 健全性チェック</strong>
-                        <span class="text-gray-500 text-xs">WBS全体の問題点を自動検出</span>
+                        <span class="text-gray-500 text-xs">WBS全体の問題点を9項目で自動検出</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">💬 AIチャット操作</strong>
+                        <span class="text-gray-500 text-xs">自然言語でWBSを編集・変更プレビュー付き</span>
+                    </div>
+
+                    <!-- スケジューリング -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">👥 自動割り当て</strong>
-                        <span class="text-gray-500 text-xs">スキルを考慮した最適な担当者配置</span>
+                        <span class="text-gray-500 text-xs">スキル・負荷を考慮した最適な担当者配置</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">⏱️ 期間自動設定</strong>
-                        <span class="text-gray-500 text-xs">クリティカルパスを考慮した期間設定</span>
+                        <span class="text-gray-500 text-xs">依存関係と営業日を考慮した期間設定</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
-                        <strong class="block text-gray-900 mb-1">📊 活動分析</strong>
-                        <span class="text-gray-500 text-xs">1時間ごとの作業データを分析</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
-                        <strong class="block text-gray-900 mb-1">📝 日報自動生成</strong>
-                        <span class="text-gray-500 text-xs">作業ログから日報を自動作成</span>
-                    </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">🔄 リスケジュール</strong>
                         <span class="text-gray-500 text-xs">遅延や変更に応じた最適スケジュール提案</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">🏖️ 休暇影響分析</strong>
+                        <span class="text-gray-500 text-xs">休暇によるスケジュール影響を自動予測</span>
+                    </div>
+
+                    <!-- 見積もり -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📐 3点見積もり</strong>
+                        <span class="text-gray-500 text-xs">楽観・標準・悲観の3パターンで自動算出</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📊 効率化率算出</strong>
+                        <span class="text-gray-500 text-xs">AIによる工数削減効果を0-100%で算出</span>
+                    </div>
+
+                    <!-- 活動分析 -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📊 1時間活動分析</strong>
+                        <span class="text-gray-500 text-xs">集中度・進捗度・効率性を0-100点で評価</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📝 日報自動生成</strong>
+                        <span class="text-gray-500 text-xs">作業ログ・Git履歴から日報を自動作成</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📈 プロジェクトサマリー</strong>
+                        <span class="text-gray-500 text-xs">プロジェクトの現状を自動要約</span>
+                    </div>
+
+                    <!-- リスク・アラート -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">⚠️ リスク検知</strong>
-                        <span class="text-gray-500 text-xs">プロジェクトリスクの早期発見</span>
+                        <span class="text-gray-500 text-xs">納期・リソース・品質リスクの早期発見</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">🚨 自動アラート</strong>
+                        <span class="text-gray-500 text-xs">重要度別に推奨アクション付きで通知</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">💯 ヘルススコア</strong>
+                        <span class="text-gray-500 text-xs">5つの評価軸でプロジェクト健康度を0-100点で算出</span>
+                    </div>
+
+                    <!-- チーム・メンバー -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">💬 センチメント分析</strong>
-                        <span class="text-gray-500 text-xs">メンバーの感情状態を分析</span>
+                        <span class="text-gray-500 text-xs">コメントからチームの士気を0-10で評価</span>
                     </div>
-                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
                         <strong class="block text-gray-900 mb-1">🎯 タスク提案</strong>
-                        <span class="text-gray-500 text-xs">メンバーに最適なタスクを提案</span>
+                        <span class="text-gray-500 text-xs">メンバーに最適な次のタスクを提案</span>
                     </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">💚 メンタルヘルスアドバイス</strong>
+                        <span class="text-gray-500 text-xs">気分・ストレス状態に応じた具体的な助言</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">🆘 ヘルプマッチング</strong>
+                        <span class="text-gray-500 text-xs">スキル・負荷から最適な支援者を自動選定</span>
+                    </div>
+
+                    <!-- 成長支援 -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">💪 強み分析</strong>
+                        <span class="text-gray-500 text-xs">6ヶ月のデータから3-5個の強みを抽出</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">🌱 成長機会提案</strong>
+                        <span class="text-gray-500 text-xs">スキルギャップから2-4個の成長機会を提示</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">🎯 目標生成</strong>
+                        <span class="text-gray-500 text-xs">SMART原則に基づいた2-3個の目標を自動提案</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📋 1on1資料生成</strong>
+                        <span class="text-gray-500 text-xs">成長データから面談用資料を自動作成</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📊 評価シート作成</strong>
+                        <span class="text-gray-500 text-xs">パフォーマンスデータから評価資料を生成</span>
+                    </div>
+
+                    <!-- その他 -->
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📄 プロジェクト説明生成</strong>
+                        <span class="text-gray-500 text-xs">プロジェクト名から詳細な説明文を自動作成</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">📑 レポート生成</strong>
+                        <span class="text-gray-500 text-xs">プロジェクト・メンバー別の詳細レポート作成</span>
+                    </div>
+                    <div
+                        class="p-4 rounded-xl bg-gray-50 border border-gray-100 text-sm hover:border-primary/30 transition-colors">
+                        <strong class="block text-gray-900 mb-1">🔎 コンテキスト生成</strong>
+                        <span class="text-gray-500 text-xs">ヘルプリクエストの背景情報を自動生成</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 統計セクション -->
+    <section class="py-24 bg-gradient-to-br from-primary/5 via-white to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">圧倒的な実装規模</h2>
+                <p class="text-lg text-gray-600">エンタープライズグレードの完全な機能セット</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-primary mb-2">29</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">AI機能</div>
+                    <div class="text-xs text-gray-500 mt-1">フル機能搭載</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-primary mb-2">4</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">ビューモード</div>
+                    <div class="text-xs text-gray-500 mt-1">ツリー・ガント・ボード・カレンダー</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-primary mb-2">23</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">画面構成</div>
+                    <div class="text-xs text-gray-500 mt-1">Web管理画面</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-primary mb-2">23</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">デスクトップ画面</div>
+                    <div class="text-xs text-gray-500 mt-1">15メイン + 8ダイアログ</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-12">
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-gray-900 mb-2">155+</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">APIエンドポイント</div>
+                    <div class="text-xs text-gray-500 mt-1">21モジュール</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-gray-900 mb-2">50+</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">UIコンポーネント</div>
+                    <div class="text-xs text-gray-500 mt-1">再利用可能</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-gray-900 mb-2">12</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">見積もりパターン</div>
+                    <div class="text-xs text-gray-500 mt-1">あらゆる手法に対応</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl md:text-6xl font-black text-gray-900 mb-2">17</div>
+                    <div class="text-sm font-bold text-gray-600 uppercase">サービスクラス</div>
+                    <div class="text-xs text-gray-500 mt-1">デスクトップアプリ</div>
                 </div>
             </div>
         </div>
@@ -547,20 +808,23 @@
                 <p class="text-gray-600 mt-2">実際の動作をデモ動画でご確認ください</p>
             </div>
 
-            <div class="relative w-full aspect-video min-h-[400px] md:min-h-0 rounded-3xl overflow-hidden bg-gray-900 shadow-2xl group cursor-pointer">
+            <div
+                class="relative w-full aspect-video min-h-[400px] md:min-h-0 rounded-3xl overflow-hidden bg-gray-900 shadow-2xl group cursor-pointer">
                 <!-- Video Placeholder styling -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-white z-10 bg-gradient-to-tr from-gray-900 to-gray-800 px-6">
-                     <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div
+                    class="absolute inset-0 flex flex-col items-center justify-center text-white z-10 bg-gradient-to-tr from-gray-900 to-gray-800 px-6">
+                    <div
+                        class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                         <i class="fas fa-play text-2xl md:text-3xl ml-1 md:ml-2 text-white"></i>
-                     </div>
-                     <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">🎬 デモ動画（作成予定）</h3>
-                     <p class="text-gray-400 text-xs md:text-sm text-center max-w-md leading-relaxed">
+                    </div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">🎬 デモ動画（作成予定）</h3>
+                    <p class="text-gray-400 text-xs md:text-sm text-center max-w-md leading-relaxed">
                         ① プロジェクト作成 → AI WBS生成の流れ（30秒）<br>
                         ② ガントチャートでのスケジュール調整（20秒）<br>
                         ③ デスクトップアプリでの作業開始 → AI分析（30秒）<br>
                         ④ 自動日報生成の流れ（20秒）<br>
                         <span class="text-gray-500 text-[10px] md:text-xs mt-2 inline-block">合計: 約1分40秒の紹介動画</span>
-                     </p>
+                    </p>
                 </div>
             </div>
             <div class="mt-6 bg-gray-50 p-6 rounded-2xl border border-gray-100">
@@ -585,26 +849,37 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative z-10">
                     <!-- Step 1 -->
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-24 h-24 rounded-full bg-white border-4 border-primary text-3xl font-bold flex items-center justify-center mb-6 shadow-md">1</div>
+                        <div
+                            class="w-24 h-24 rounded-full bg-white border-4 border-primary text-3xl font-bold flex items-center justify-center mb-6 shadow-md">
+                            1</div>
                         <span class="text-primary font-bold text-sm uppercase tracking-wide mb-2">👔 管理者の操作</span>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">プロジェクト作成 & AI WBS生成</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">プロジェクト名、期間、概要を入力して「AI WBS生成」ボタンをクリック。数分で詳細なタスク分解が完了します。メンバーは自動的に最適なタスクに割り当てられ、期間も自動設定されます。</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">プロジェクト名、期間、概要を入力して「AI
+                            WBS生成」ボタンをクリック。数分で詳細なタスク分解が完了します。メンバーは自動的に最適なタスクに割り当てられ、期間も自動設定されます。</p>
                     </div>
 
                     <!-- Step 2 -->
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-24 h-24 rounded-full bg-white border-4 border-primary text-3xl font-bold flex items-center justify-center mb-6 shadow-md">2</div>
+                        <div
+                            class="w-24 h-24 rounded-full bg-white border-4 border-primary text-3xl font-bold flex items-center justify-center mb-6 shadow-md">
+                            2</div>
                         <span class="text-primary font-bold text-sm uppercase tracking-wide mb-2">👨‍💻 メンバーの操作</span>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">デスクトップアプリで作業開始</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">デスクトップアプリにログインすると、本日のタスクが表示されます。「スタート」ボタンを押すだけで作業開始。あとはいつも通り開発作業を進めるだけ。AIが裏で作業を自動トラッキングし、1時間ごとに分析してくれます。</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            デスクトップアプリにログインすると、本日のタスクが表示されます。「スタート」ボタンを押すだけで作業開始。あとはいつも通り開発作業を進めるだけ。AIが裏で作業を自動トラッキングし、1時間ごとに分析してくれます。
+                        </p>
                     </div>
 
                     <!-- Step 3 -->
                     <div class="flex flex-col items-center text-center">
-                        <div class="w-24 h-24 rounded-full bg-white border-4 border-primary text-3xl font-bold flex items-center justify-center mb-6 shadow-md">3</div>
+                        <div
+                            class="w-24 h-24 rounded-full bg-white border-4 border-primary text-3xl font-bold flex items-center justify-center mb-6 shadow-md">
+                            3</div>
                         <span class="text-primary font-bold text-sm uppercase tracking-wide mb-2">👨‍💻 メンバーの操作</span>
                         <h3 class="text-xl font-bold text-gray-900 mb-3">作業終了 & 自動日報送信</h3>
-                        <p class="text-gray-600 text-sm leading-relaxed">「作業終了」ボタンをクリックすると、AIが自動的に日報を生成。作業内容、ファイル変更、Gitコミット情報がすべて反映されています。確認して送信するだけ。日報作成に時間を取られることはもうありません。</p>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            「作業終了」ボタンをクリックすると、AIが自動的に日報を生成。作業内容、ファイル変更、Gitコミット情報がすべて反映されています。確認して送信するだけ。日報作成に時間を取られることはもうありません。
+                        </p>
                     </div>
                 </div>
             </div>
@@ -620,41 +895,75 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
+                <div
+                    class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
                     <h3 class="font-bold text-gray-900 mb-4 border-b pb-2 border-gray-200">🖥️ Web管理画面</h3>
                     <ul class="text-sm text-gray-600 space-y-2">
-                        <li>Svelte 5.39 - 高速UIフレームワーク</li>
-                        <li>SvelteKit 2.43 - フルスタック開発</li>
-                        <li>TypeScript 5.9 - 型安全な開発</li>
-                        <li>Bootstrap 5.3 - レスポンシブデザイン</li>
+                        <li><strong>Svelte 5.39</strong> - 高速UIフレームワーク</li>
+                        <li><strong>SvelteKit 2.43</strong> - フルスタック開発</li>
+                        <li><strong>TypeScript 5.9</strong> - 型安全な開発</li>
+                        <li><strong>Bootstrap 5.3</strong> - レスポンシブデザイン</li>
+                        <li><strong>Vite 7.1</strong> - 高速ビルドツール</li>
+                        <li><strong>Chart.js</strong> - データ可視化</li>
                     </ul>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
+                <div
+                    class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
                     <h3 class="font-bold text-gray-900 mb-4 border-b pb-2 border-gray-200">⚙️ バックエンドAPI</h3>
                     <ul class="text-sm text-gray-600 space-y-2">
-                        <li>Node.js 18+ - 高性能ランタイム</li>
-                        <li>Express 5.1 - Webフレームワーク</li>
-                        <li>Oracle, SQLiteなどの様々なDB対応可能</li>
-                        <li>WebSocket - リアルタイム通信</li>
+                        <li><strong>Node.js 18+</strong> - 高性能ランタイム</li>
+                        <li><strong>Express 5.1</strong> - Webフレームワーク</li>
+                        <li><strong>SQLite/Oracle</strong> - 柔軟なDB対応</li>
+                        <li><strong>WebSocket</strong> - リアルタイム通信</li>
+                        <li><strong>JWT認証</strong> - セキュア認証</li>
+                        <li><strong>暗号化</strong> - 機密情報保護</li>
                     </ul>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
+                <div
+                    class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
                     <h3 class="font-bold text-gray-900 mb-4 border-b pb-2 border-gray-200">💻 デスクトップアプリ</h3>
                     <ul class="text-sm text-gray-600 space-y-2">
-                        <li>C# 7.3 - 安定した言語</li>
-                        <li>WPF - ネイティブUI</li>
-                        <li>.NET Framework 4.8 - 信頼性の高いランタイム</li>
-                        <li>SQLite - ローカルデータ管理</li>
+                        <li><strong>C# 7.3</strong> - 安定した言語</li>
+                        <li><strong>WPF</strong> - ネイティブUI</li>
+                        <li><strong>.NET Framework 4.8</strong> - 信頼性の高いランタイム</li>
+                        <li><strong>SQLite</strong> - ローカルデータ管理</li>
+                        <li><strong>Win32 API</strong> - システム監視</li>
+                        <li><strong>WebSocket Client</strong> - リアルタイム同期</li>
                     </ul>
                 </div>
-                <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
+                <div
+                    class="p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-primary/30 transition-colors">
                     <h3 class="font-bold text-gray-900 mb-4 border-b pb-2 border-gray-200">🤖 AI連携</h3>
                     <ul class="text-sm text-gray-600 space-y-2">
-                        <li>外部LLMまたはローカルLLMも可能</li>
-                        <li>セキュリティ対策を施したAPIインターフェース</li>
-                        <li>29個のプロンプトテンプレート</li>
-                        <li>JWT認証 & RBAC権限管理</li>
+                        <li><strong>外部LLM対応</strong> - GPT/Groq/Claude等</li>
+                        <li><strong>ローカルLLM対応</strong> - オンプレミス運用可</li>
+                        <li><strong>29個のプロンプト</strong> - バージョン管理付き</li>
+                        <li><strong>暗号化API Key</strong> - セキュア保存</li>
+                        <li><strong>カスタムモデル</strong> - 温度・トークン設定</li>
+                        <li><strong>RBAC権限管理</strong> - ロールベース制御</li>
                     </ul>
+                </div>
+            </div>
+
+            <!-- 追加の技術的特徴 -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-gradient-to-br from-primary/5 to-white rounded-2xl border border-primary/20">
+                    <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <span class="text-2xl">🔒</span> セキュリティ
+                    </h4>
+                    <p class="text-sm text-gray-600">JWT認証、暗号化ストレージ、RBAC、監査ログ、SQLインジェクション対策</p>
+                </div>
+                <div class="p-6 bg-gradient-to-br from-blue-50 to-white rounded-2xl border border-blue-100">
+                    <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <span class="text-2xl">⚡</span> パフォーマンス
+                    </h4>
+                    <p class="text-sm text-gray-600">WebSocketリアルタイム同期、ページネーション、インデックス最適化、キャッシング</p>
+                </div>
+                <div class="p-6 bg-gradient-to-br from-purple-50 to-white rounded-2xl border border-purple-100">
+                    <h4 class="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                        <span class="text-2xl">🔧</span> 拡張性
+                    </h4>
+                    <p class="text-sm text-gray-600">カスタムフィールド、プロンプト編集、テンプレート、ルール自動化、プラグイン対応</p>
                 </div>
             </div>
         </div>
@@ -672,22 +981,29 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <div class="bg-white p-8 rounded-3xl border border-gray-100 text-center hover:-translate-y-1 transition-transform duration-300 shadow-soft">
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-100 text-center hover:-translate-y-1 transition-transform duration-300 shadow-soft">
                     <div class="text-4xl mb-4">💬</div>
                     <h3 class="text-lg font-bold text-gray-900 mb-3">伝え合い</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed text-left">日本語の「伝え合う」から。チームメンバー同士が情報を共有し、互いに理解し合うことの大切さを表現しています。AIが仲介役となり、スムーズなコミュニケーションを実現します。</p>
+                    <p class="text-sm text-gray-600 leading-relaxed text-left">
+                        日本語の「伝え合う」から。チームメンバー同士が情報を共有し、互いに理解し合うことの大切さを表現しています。AIが仲介役となり、スムーズなコミュニケーションを実現します。</p>
                 </div>
-                <div class="bg-white p-8 rounded-3xl border-2 border-primary/20 text-center transform scale-105 shadow-lg">
+                <div
+                    class="bg-white p-8 rounded-3xl border-2 border-primary/20 text-center transform scale-105 shadow-lg">
                     <div class="flex items-center justify-center mb-4">
                         <img src="image/TsutaAI_G_Trans.png" alt="TsutaAI" class="h-14 w-auto">
                     </div>
                     <h3 class="text-lg font-bold text-gray-900 mb-3">ツタの特性</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed text-left">植物の「ツタ」のように、プロジェクトメンバー全員をつなぎ、支え合う存在でありたい。ツタは壁を這い上がり、建物全体を覆うように成長します。同様に、ツタAIはチーム全体に広がり、組織を強くします。</p>
+                    <p class="text-sm text-gray-600 leading-relaxed text-left">
+                        植物の「ツタ」のように、プロジェクトメンバー全員をつなぎ、支え合う存在でありたい。ツタは壁を這い上がり、建物全体を覆うように成長します。同様に、ツタAIはチーム全体に広がり、組織を強くします。
+                    </p>
                 </div>
-                <div class="bg-white p-8 rounded-3xl border border-gray-100 text-center hover:-translate-y-1 transition-transform duration-300 shadow-soft">
+                <div
+                    class="bg-white p-8 rounded-3xl border border-gray-100 text-center hover:-translate-y-1 transition-transform duration-300 shadow-soft">
                     <div class="text-4xl mb-4">🤖</div>
                     <h3 class="text-lg font-bold text-gray-900 mb-3">AI技術</h3>
-                    <p class="text-sm text-gray-600 leading-relaxed text-left">最先端のAI技術を活用し、人間の能力を拡張。単なる管理ツールではなく、チームの成長を促進するインテリジェントなパートナーとして機能します。</p>
+                    <p class="text-sm text-gray-600 leading-relaxed text-left">
+                        最先端のAI技術を活用し、人間の能力を拡張。単なる管理ツールではなく、チームの成長を促進するインテリジェントなパートナーとして機能します。</p>
                 </div>
             </div>
 
@@ -707,24 +1023,53 @@
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">もっと詳しく知る</h2>
                 <p class="text-gray-600">あなたの立場に合わせた詳細資料をご用意しています</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <a href="PR-EXECUTIVE.html" class="group block p-8 rounded-3xl bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <a href="PR-EXECUTIVE.html"
+                    class="group block p-8 rounded-3xl bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
                     <div class="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">👔</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">経営者の方へ</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">経営者の方へ
+                    </h3>
                     <p class="text-sm text-gray-600 mb-6 leading-relaxed">投資対効果、ビジネスインパクト、導入メリットを詳しくご説明します</p>
-                    <span class="text-sm font-bold text-primary flex items-center gap-2">詳細を見る <i class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
+                    <span class="text-sm font-bold text-primary flex items-center gap-2">詳細を見る <i
+                            class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
                 </a>
-                <a href="PR-SALES.html" class="group block p-8 rounded-3xl bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
+                <a href="PR-SALES.html"
+                    class="group block p-8 rounded-3xl bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
                     <div class="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">📊</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">営業・導入担当者の方へ</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                        営業・導入担当者の方へ</h3>
                     <p class="text-sm text-gray-600 mb-6 leading-relaxed">機能詳細、競合比較、導入プロセスなど、提案に必要な情報をまとめています</p>
-                    <span class="text-sm font-bold text-primary flex items-center gap-2">詳細を見る <i class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
+                    <span class="text-sm font-bold text-primary flex items-center gap-2">詳細を見る <i
+                            class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
                 </a>
-                <a href="PR-USER.html" class="group block p-8 rounded-3xl bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
+                <a href="PR-USER.html"
+                    class="group block p-8 rounded-3xl bg-gray-50 hover:bg-white border border-gray-100 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
                     <div class="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">👨‍💻</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">実際に使うユーザーの方へ</h3>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
+                        実際に使うユーザーの方へ</h3>
                     <p class="text-sm text-gray-600 mb-6 leading-relaxed">日々の業務がどう変わるか、使い方のコツ、メリットを分かりやすく解説します</p>
-                    <span class="text-sm font-bold text-primary flex items-center gap-2">詳細を見る <i class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
+                    <span class="text-sm font-bold text-primary flex items-center gap-2">詳細を見る <i
+                            class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <a href="webAdminManual.html"
+                    class="group block p-8 rounded-3xl bg-gradient-to-br from-blue-50 to-white hover:from-blue-100 hover:to-blue-50 border border-blue-200 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">📖</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">Web
+                        Admin 詳細マニュアル</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">カテゴリー別メニュー、28種類のAI機能、見積もり、作業報告、進捗トラッキングなど、Web管理画面の全機能を実際の画面に沿って詳しく解説します</p>
+                    <span class="text-sm font-bold text-primary flex items-center gap-2">マニュアルを見る <i
+                            class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
+                </a>
+                <a href="desktopAppManual.html"
+                    class="group block p-8 rounded-3xl bg-gradient-to-br from-purple-50 to-white hover:from-purple-100 hover:to-purple-50 border border-purple-200 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">📱</div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">Desktop
+                        App 詳細マニュアル</h3>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">15個のウィンドウ、29種類のAI機能、日報自動生成、カンバンボード、作業監視など、デスクトップアプリの全機能を実際の画面に沿って詳しく説明します</p>
+                    <span class="text-sm font-bold text-primary flex items-center gap-2">マニュアルを見る <i
+                            class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
                 </a>
             </div>
         </div>
@@ -732,12 +1077,15 @@
 
     <!-- CTA -->
     <section class="py-24 bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden relative">
-        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
+        </div>
         <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
             <h2 class="text-3xl md:text-5xl font-bold mb-6 tracking-tight">導入のご相談はこちらから</h2>
-            <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">貴社の課題や導入イメージをヒアリングし、最適な活用方法をご提案します。デモ環境のご用意はありませんので、まずはお気軽にお問い合わせください。</p>
+            <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+                貴社の課題や導入イメージをヒアリングし、最適な活用方法をご提案します。デモ環境のご用意はありませんので、まずはお気軽にお問い合わせください。</p>
             <div class="flex justify-center gap-4">
-                <a href="mailto:2025gw04@gmail.com" class="inline-block px-10 py-5 bg-primary text-black text-xl font-bold rounded-full shadow-lg hover:bg-[#62d654] hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <a href="mailto:2025gw04@gmail.com"
+                    class="inline-block px-10 py-5 bg-primary text-black text-xl font-bold rounded-full shadow-lg hover:bg-[#62d654] hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     お問い合わせ
                 </a>
             </div>
@@ -767,19 +1115,25 @@
                 <div>
                     <h3 class="font-bold mb-4 text-white">リソース</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">ドキュメント</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">API仕様</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">サポート</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">FAQ</a></li>
+                        <li><a href="WEB_ADMIN_MANUAL.html"
+                                class="text-gray-400 hover:text-primary transition-colors">Web管理画面マニュアル</a></li>
+                        <li><a href="DESKTOP_APP_MANUAL.html"
+                                class="text-gray-400 hover:text-primary transition-colors">デスクトップアプリマニュアル</a></li>
+                        <li><a href="api-spec.html"
+                                class="text-gray-400 hover:text-primary transition-colors">API仕様概要</a></li>
+                        <li><a href="mailto:2025gw04@gmail.com"
+                                class="text-gray-400 hover:text-primary transition-colors">サポート</a></li>
                     </ul>
                 </div>
                 <div>
                     <h3 class="font-bold mb-4 text-white">会社</h3>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">会社概要</a></li>
-                        <li><a href="mailto:2025gw04@gmail.com" class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">プライバシーポリシー</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">利用規約</a></li>
+                        <li><a href="mailto:2025gw04@gmail.com"
+                                class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
+                        <li><a href="privacy.html"
+                                class="text-gray-400 hover:text-primary transition-colors">プライバシーポリシー</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-primary transition-colors">利用規約</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -791,17 +1145,24 @@
 
     <!-- ギャラリーモーダル -->
     <div class="gallery-modal backdrop-blur-md" id="galleryModal">
-        <button class="gallery-close-btn absolute top-6 right-6 w-12 h-12 bg-black/40 hover:bg-black/70 backdrop-blur-sm text-white rounded-full flex items-center justify-center text-3xl focus:outline-none focus:ring-0 transition-all border-2 border-white/40 hover:border-white/80 shadow-lg opacity-70 hover:opacity-100" onclick="closeGallery()">&times;</button>
+        <button
+            class="gallery-close-btn absolute top-6 right-6 w-12 h-12 bg-black/40 hover:bg-black/70 backdrop-blur-sm text-white rounded-full flex items-center justify-center text-3xl focus:outline-none focus:ring-0 transition-all border-2 border-white/40 hover:border-white/80 shadow-lg opacity-70 hover:opacity-100"
+            onclick="closeGallery()">&times;</button>
 
-        <button class="gallery-nav-btn absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/30 hover:bg-black/60 backdrop-blur-sm text-white rounded-full flex items-center justify-center focus:outline-none focus:ring-0 transition-all border-2 border-white/50 hover:border-white/90 shadow-lg opacity-60 hover:opacity-100 hover:scale-110" onclick="navigateGallery(-1)">
+        <button
+            class="gallery-nav-btn absolute left-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/30 hover:bg-black/60 backdrop-blur-sm text-white rounded-full flex items-center justify-center focus:outline-none focus:ring-0 transition-all border-2 border-white/50 hover:border-white/90 shadow-lg opacity-60 hover:opacity-100 hover:scale-110"
+            onclick="navigateGallery(-1)">
             <i class="fas fa-chevron-left text-2xl"></i>
         </button>
 
         <div class="max-w-5xl max-h-[80vh] px-4">
-            <img src="" alt="ギャラリー画像" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl" id="galleryImage">
+            <img src="" alt="ギャラリー画像" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                id="galleryImage">
         </div>
 
-        <button class="gallery-nav-btn absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/30 hover:bg-black/60 backdrop-blur-sm text-white rounded-full flex items-center justify-center focus:outline-none focus:ring-0 transition-all border-2 border-white/50 hover:border-white/90 shadow-lg opacity-60 hover:opacity-100 hover:scale-110" onclick="navigateGallery(1)">
+        <button
+            class="gallery-nav-btn absolute right-4 top-1/2 -translate-y-1/2 w-14 h-14 bg-black/30 hover:bg-black/60 backdrop-blur-sm text-white rounded-full flex items-center justify-center focus:outline-none focus:ring-0 transition-all border-2 border-white/50 hover:border-white/90 shadow-lg opacity-60 hover:opacity-100 hover:scale-110"
+            onclick="navigateGallery(1)">
             <i class="fas fa-chevron-right text-2xl"></i>
         </button>
     </div>
@@ -909,12 +1270,13 @@
         // タッチ操作（スワイプ）
         let touchStartX = 0;
         const galleryModal = document.getElementById('galleryModal');
-        galleryModal.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, {passive: true});
+        galleryModal.addEventListener('touchstart', e => touchStartX = e.changedTouches[0].screenX, { passive: true });
         galleryModal.addEventListener('touchend', e => {
             const touchEndX = e.changedTouches[0].screenX;
             if (touchEndX - touchStartX > 50) navigateGallery(-1);
             else if (touchEndX - touchStartX < -50) navigateGallery(1);
-        }, {passive: true});
+        }, { passive: true });
     </script>
 </body>
+
 </html>

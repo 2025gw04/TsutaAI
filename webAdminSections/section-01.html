@@ -1,0 +1,583 @@
+<!-- セッション 1: サイドバー -->
+<section id="section-1" class="manual-section">
+    <h2>1. サイドバー</h2>
+    <p>Web管理画面の左側に配置されているナビゲーションメニューです。システムの全機能にアクセスするための主要なインターフェースとして機能します。</p>
+
+    <div id="subsection-1-1" class="manual-subsection">
+        <h3>1.1 概要</h3>
+        <p>サイドバーは、プロジェクト管理からチーム管理まで、TsutaAI Web Adminの全ての機能に素早くアクセスできるように設計されています。カテゴリー別に整理されたメニュー構造により、目的の機能を直感的に見つけることができます。</p>
+        
+        <!-- <div class="feature-image" onclick="openGallery('sidebar-overview-img')">
+            <img id="sidebar-overview-img" 
+                 src="../image/web-admin/sidebar-overview.png" 
+                 alt="サイドバー全体図" 
+                 loading="lazy" />
+        </div> -->
+
+        <h4>主要な機能</h4>
+        <ul class="item-list">
+            <li><strong>カテゴリー別メニュー</strong> - 5つのカテゴリーに機能を分類（概要・分析、プロジェクト管理、進捗・タスク管理、チーム管理、システム）</li>
+            <li><strong>折りたたみ機能</strong> - サイドバー全体を折りたたんでコンテンツ領域を広げることが可能</li>
+            <li><strong>レスポンシブデザイン</strong> - モバイル端末では自動的にハンバーガーメニューに変更</li>
+            <li><strong>リアルタイム接続状態表示</strong> - WebSocket接続状態を視覚的に確認可能</li>
+            <li><strong>通知機能</strong> - ベルアイコンから未読通知をチェック</li>
+        </ul>
+    </div>
+
+    <div id="subsection-1-2" class="manual-subsection">
+        <h3>1.2 サイドバーヘッダー</h3>
+        <p>サイドバーの最上部には、ブランドロゴと折りたたみボタンが配置されています。</p>
+
+        <div class="feature-image" onclick="openGallery('sidebar-header-img')">
+            <img id="sidebar-header-img" 
+                 src="../image/web-admin/sidebar-header.png" 
+                 alt="サイドバーヘッダー" 
+                 loading="lazy" />
+        </div>
+
+        <h4>構成要素</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ブランドロゴ</td>
+                    <td>TsutaAIのロゴとシステム名「ツタAI」を表示。「Hub」バッジでWeb管理画面であることを示す</td>
+                </tr>
+                <tr>
+                    <td>折りたたみボタン</td>
+                    <td>サイドバーの展開/折りたたみを切り替え。折りたたみ時はアイコンのみ表示され、画面スペースを有効活用</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            <strong>💡 使い方のヒント</strong>
+            折りたたみボタンをクリックすると、サイドバーの幅が320pxから80pxに縮小され、コンテンツ表示領域が広がります。再度クリックすると元に戻ります。
+        </div>
+    </div>
+
+    <div id="subsection-1-3" class="manual-subsection">
+        <h3>1.3 カテゴリー別ナビゲーション</h3>
+        <p>サイドバーのメニューは、5つのカテゴリーに分類されており、各カテゴリーには関連する機能がグループ化されています。</p>
+
+        <div class="feature-image" onclick="openGallery('sidebar-categories-img')">
+            <img id="sidebar-categories-img" 
+                 src="../image/web-admin/sidebar-categories.png" 
+                 alt="カテゴリー別メニュー" 
+                 loading="lazy" />
+        </div>
+
+        <h4>カテゴリー一覧</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>カテゴリー</th>
+                    <th>アイコン</th>
+                    <th>含まれる機能</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>概要・分析</td>
+                    <td>📊 (bar-chart-line)</td>
+                    <td>ダッシュボード、レポート出力、AIアラート</td>
+                    <td>プロジェクトの全体状況とAIによる分析結果を確認する機能群</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト管理</td>
+                    <td>📁 (folder)</td>
+                    <td>プロジェクト一覧、見積もり、スプリント管理、プロジェクト健全性</td>
+                    <td>プロジェクトの計画から進捗管理まで、プロジェクト全体を管理する機能群</td>
+                </tr>
+                <tr>
+                    <td>進捗・タスク管理</td>
+                    <td>✅ (list-check)</td>
+                    <td>進捗トラッキング、作業報告</td>
+                    <td>タスクの進捗状況を把握し、作業内容を記録・報告する機能群</td>
+                </tr>
+                <tr>
+                    <td>チーム管理</td>
+                    <td>👥 (people)</td>
+                    <td>メンバー、休暇管理、メンタルヘルス、ヘルプリクエスト</td>
+                    <td>チームメンバーの管理、稼働状況、心理的健康状態を把握する機能群</td>
+                </tr>
+                <tr>
+                    <td>システム</td>
+                    <td>⚙️ (gear)</td>
+                    <td>設定</td>
+                    <td>システム全体の設定を管理する機能（LLM設定、祝日設定、ユーザー管理など）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>カテゴリーの操作方法</h4>
+        <ul class="item-list">
+            <li><strong>展開/折りたたみ</strong> - カテゴリーヘッダーをクリックすると、配下のメニューアイテムを表示/非表示できます</li>
+            <li><strong>デフォルト状態</strong> - 初期状態では全カテゴリーが展開されています</li>
+            <li><strong>視覚的フィードバック</strong> - 展開時は下向き矢印(▼)、折りたたみ時は右向き矢印(▶)で状態を表示</li>
+        </ul>
+    </div>
+
+    <div id="subsection-1-4" class="manual-subsection">
+        <h3>1.4 メニューアイテムの詳細</h3>
+        <p>各カテゴリー内のメニューアイテムには、アイコン、ラベル、説明文が表示されます。現在表示中のページは強調表示され、一目で現在位置を把握できます。</p>
+
+        <div class="feature-image" onclick="openGallery('sidebar-menu-item-img')">
+            <img id="sidebar-menu-item-img" 
+                 src="../image/web-admin/sidebar-menu-item.png" 
+                 alt="メニューアイテムの詳細" 
+                 loading="lazy" />
+        </div>
+
+        <h4>メニューアイテムの構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>アイコン</td>
+                    <td>機能を視覚的に識別するためのアイコン。32x32pxの角丸背景に青系のグラデーションで表示</td>
+                </tr>
+                <tr>
+                    <td>プライマリラベル</td>
+                    <td>機能名を示すメインテキスト（例: 「ダッシュボード」「プロジェクト一覧」）</td>
+                </tr>
+                <tr>
+                    <td>セカンダリラベル</td>
+                    <td>機能の簡潔な説明文（例: 「進捗とAIインサイト」「案件の計画と配下タスク」）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>メニューアイテムの状態</h4>
+        <ul class="item-list">
+            <li><strong>通常状態</strong> - 半透明の背景に薄い枠線。テキストは明るいグレー色</li>
+            <li><strong>ホバー状態</strong> - マウスを乗せると右に4pxスライド。青いグラデーション背景と光る枠線で強調</li>
+            <li><strong>選択状態</strong> - 現在表示中のページは青いグラデーション背景と光彩効果で常時強調表示</li>
+            <li><strong>折りたたみ時</strong> - サイドバー折りたたみ時はアイコンのみ表示。ホバー時にツールチップで機能名を表示</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 視覚的な工夫</strong>
+            選択中のメニューアイテムは、左から右へ流れる光のアニメーション効果により、ユーザーの現在位置を直感的に把握できるようになっています。
+        </div>
+    </div>
+
+    <div id="subsection-1-5" class="manual-subsection">
+        <h3>1.5 全メニューアイテム一覧</h3>
+        <p>サイドバーに表示される全てのメニューアイテムの詳細です。各アイテムには固有のパス、アイコン、説明が設定されています。</p>
+
+        <h4>1. 概要・分析カテゴリー</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>メニュー名</th>
+                    <th>パス</th>
+                    <th>アイコン</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ダッシュボード</td>
+                    <td><code>/dashboard</code></td>
+                    <td>🎯 (speedometer2)</td>
+                    <td>進捗とAIインサイト - プロジェクト全体の状況を一目で把握</td>
+                </tr>
+                <tr>
+                    <td>レポート出力</td>
+                    <td><code>/reports</code></td>
+                    <td>📄 (file-earmark-text)</td>
+                    <td>各種レポート生成 - プロジェクト、ユーザー別のレポートを作成</td>
+                </tr>
+                <tr>
+                    <td>AIアラート</td>
+                    <td><code>/alerts</code></td>
+                    <td>⚠️ (exclamation-triangle)</td>
+                    <td>リスクと提案履歴 - AIが検知したリスクと改善提案を確認</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>2. プロジェクト管理カテゴリー</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>メニュー名</th>
+                    <th>パス</th>
+                    <th>アイコン</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト一覧</td>
+                    <td><code>/projects</code></td>
+                    <td>📊 (diagram-3)</td>
+                    <td>案件の計画と配下タスク - 全プロジェクトの一覧とWBS管理</td>
+                </tr>
+                <tr>
+                    <td>見積もり</td>
+                    <td><code>/estimates</code></td>
+                    <td>🧮 (calculator)</td>
+                    <td>AI効率化見積もり - 4種類の見積もりパターンとAI支援</td>
+                </tr>
+                <tr>
+                    <td>スプリント管理</td>
+                    <td><code>/sprints</code></td>
+                    <td>📅 (calendar-check)</td>
+                    <td>スプリント目標と進捗 - アジャイル開発のスプリント管理</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト健全性</td>
+                    <td><code>/project-health</code></td>
+                    <td>💚 (heart-pulse-fill)</td>
+                    <td>健全性スコアとクリティカルパス - AIによる健全性評価</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>3. 進捗・タスク管理カテゴリー</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>メニュー名</th>
+                    <th>パス</th>
+                    <th>アイコン</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>進捗トラッキング</td>
+                    <td><code>/progress-tracking</code></td>
+                    <td>📈 (graph-up-arrow)</td>
+                    <td>AI進捗予測と分析 - リスクタスクと遅延タスクの管理</td>
+                </tr>
+                <tr>
+                    <td>作業報告</td>
+                    <td><code>/work-reports</code></td>
+                    <td>📋 (clipboard-data)</td>
+                    <td>日報と作業ログ - メンバーの作業内容と評価指標の確認</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>4. チーム管理カテゴリー</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>メニュー名</th>
+                    <th>パス</th>
+                    <th>アイコン</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>メンバー</td>
+                    <td><code>/members</code></td>
+                    <td>👥 (people)</td>
+                    <td>体制・稼働状況 - メンバー情報、スキル、稼働状況の管理</td>
+                </tr>
+                <tr>
+                    <td>休暇管理</td>
+                    <td><code>/vacations</code></td>
+                    <td>📆 (calendar-event)</td>
+                    <td>休暇予定と影響分析 - 休暇申請とプロジェクトへの影響分析</td>
+                </tr>
+                <tr>
+                    <td>メンタルヘルス</td>
+                    <td><code>/mental-health</code></td>
+                    <td>💚 (heart-pulse)</td>
+                    <td>チームの心理的安全性 - ムード・ストレストラッキングとAIアドバイス</td>
+                </tr>
+                <tr>
+                    <td>ヘルプリクエスト</td>
+                    <td><code>/help-requests</code></td>
+                    <td>❓ (question-circle)</td>
+                    <td>コンテキスト付きヘルプ - チームメンバー間の支援依頼機能</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>5. システムカテゴリー</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>メニュー名</th>
+                    <th>パス</th>
+                    <th>アイコン</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>設定</td>
+                    <td><code>/settings</code></td>
+                    <td>⚙️ (gear)</td>
+                    <td>システム設定 - LLM設定、祝日設定、ユーザー管理など5つのタブ</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-1-6" class="manual-subsection">
+        <h3>1.6 クイック操作</h3>
+        <p>よく使う機能に素早くアクセスするためのショートカットボタンが用意されています。</p>
+
+        <div class="feature-image" onclick="openGallery('sidebar-quick-actions-img')">
+            <img id="sidebar-quick-actions-img" 
+                 src="../image/web-admin/sidebar-quick-actions.png" 
+                 alt="クイック操作" 
+                 loading="lazy" />
+        </div>
+
+        <h4>現在利用可能なクイック操作</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>操作名</th>
+                    <th>アイコン</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>WBSを生成</td>
+                    <td>🤖 (robot)</td>
+                    <td>プロジェクト一覧ページを開き、AIによるWBS自動生成機能を起動</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            <strong>💡 デザインの特徴</strong>
+            クイック操作ボタンは青いピル型デザインで、ホバー時には上方向にわずかに浮き上がるアニメーションが適用されます。
+        </div>
+    </div>
+
+    <div id="subsection-1-7" class="manual-subsection">
+        <h3>1.7 ユーザーカード</h3>
+        <p>サイドバーの最下部には、現在ログイン中のユーザー情報と接続状態を表示するユーザーカードが配置されています。</p>
+
+        <div class="feature-image" onclick="openGallery('sidebar-user-card-img')">
+            <img id="sidebar-user-card-img" 
+                 src="../image/web-admin/sidebar-user-card.png" 
+                 alt="ユーザーカード" 
+                 loading="lazy" />
+        </div>
+
+        <h4>ユーザーカードの構成要素</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>通知ベル</td>
+                    <td>右上に配置された通知アイコン。クリックすると未読通知のリストが表示されます</td>
+                </tr>
+                <tr>
+                    <td>ユーザー名</td>
+                    <td>ログイン中のユーザーのフルネームを表示（例: 「山田太郎」）</td>
+                </tr>
+                <tr>
+                    <td>ロール</td>
+                    <td>ユーザーの権限レベルを表示（admin / manager / member）</td>
+                </tr>
+                <tr>
+                    <td>接続状態ピル</td>
+                    <td>WebSocket接続状態を表示。緑色の点滅インジケーターと「オンライン」テキストで接続中を示す</td>
+                </tr>
+                <tr>
+                    <td>ログアウトボタン</td>
+                    <td>赤系のボタン。クリックするとログアウトしてログイン画面に戻ります</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>接続状態の表示</h4>
+        <ul class="item-list">
+            <li><strong>オンライン（接続中）</strong> - 緑色のインジケーター + 「オンライン」テキスト。WebSocketが正常に接続されている状態</li>
+            <li><strong>切断</strong> - 赤色のインジケーター + 「切断」テキスト。WebSocket接続が切断された状態（自動再接続を試みます）</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 リアルタイム通信</strong>
+            WebSocket接続により、他のユーザーの操作やAIアラートなどがリアルタイムで通知されます。接続状態は常に監視されており、切断時には自動的に再接続を試みます。
+        </div>
+    </div>
+
+    <div id="subsection-1-8" class="manual-subsection">
+        <h3>1.8 通知機能</h3>
+        <p>ユーザーカード右上の通知ベルアイコンから、システム内の重要な更新や通知を確認できます。</p>
+
+        <div class="feature-image" onclick="openGallery('sidebar-notifications-img')">
+            <img id="sidebar-notifications-img" 
+                 src="../image/web-admin/sidebar-notifications.png" 
+                 alt="通知パネル" 
+                 loading="lazy" />
+        </div>
+
+        <h4>通知の種類</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>通知タイプ</th>
+                    <th>説明</th>
+                    <th>表示条件</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AIアラート</td>
+                    <td>AIが検知したリスクや提案に関する通知</td>
+                    <td>新しいAIアラートが生成された時</td>
+                </tr>
+                <tr>
+                    <td>タスク更新</td>
+                    <td>担当タスクのステータス変更や期限接近の通知</td>
+                    <td>タスクの状態が変化した時、または期限3日前</td>
+                </tr>
+                <tr>
+                    <td>ヘルプリクエスト</td>
+                    <td>他のメンバーからの支援依頼通知</td>
+                    <td>自分がヘルパーとして割り当てられた時</td>
+                </tr>
+                <tr>
+                    <td>システム通知</td>
+                    <td>システムメンテナンスやアップデート情報</td>
+                    <td>管理者が送信した時</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>通知パネルの機能</h4>
+        <ul class="item-list">
+            <li><strong>未読バッジ</strong> - 通知ベルアイコンに未読件数が赤いバッジで表示されます</li>
+            <li><strong>通知リスト</strong> - クリックすると最新の通知がドロップダウンで表示されます（最大10件）</li>
+            <li><strong>既読/未読管理</strong> - 通知をクリックすると既読になり、背景色が変化します</li>
+            <li><strong>リンク機能</strong> - 通知をクリックすると関連するページに自動的に移動します</li>
+            <li><strong>すべて表示</strong> - パネル下部の「すべて表示」リンクから全通知履歴を確認可能</li>
+        </ul>
+
+        <div class="note">
+            <strong>💡 リアルタイム更新</strong>
+            WebSocket接続により、通知は自動的に受信され、ページをリロードすることなく新しい通知が表示されます。
+        </div>
+    </div>
+
+    <div id="subsection-1-9" class="manual-subsection">
+        <h3>1.9 レスポンシブデザイン</h3>
+        <p>サイドバーは画面サイズに応じて自動的にレイアウトが最適化されます。デスクトップ、タブレット、モバイル端末のいずれでも快適に操作できます。</p>
+
+        <div class="feature-image" onclick="openGallery('sidebar-responsive-img')">
+            <img id="sidebar-responsive-img" 
+                 src="../image/web-admin/sidebar-responsive.png" 
+                 alt="レスポンシブデザイン" 
+                 loading="lazy" />
+        </div>
+
+        <h4>画面サイズ別の挙動</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面サイズ</th>
+                    <th>サイドバー幅</th>
+                    <th>挙動</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>デスクトップ（1200px以上）</td>
+                    <td>320px</td>
+                    <td>常時表示。折りたたみボタンで80pxまで縮小可能</td>
+                </tr>
+                <tr>
+                    <td>タブレット（960px～1200px）</td>
+                    <td>280px</td>
+                    <td>常時表示。幅がやや狭くなる</td>
+                </tr>
+                <tr>
+                    <td>モバイル（960px未満）</td>
+                    <td>320px（オーバーレイ）</td>
+                    <td>ハンバーガーメニューから開閉。画面左外に隠れており、開くとオーバーレイ表示</td>
+                </tr>
+                <tr>
+                    <td>小型モバイル（480px未満）</td>
+                    <td>画面幅100%（最大280px）</td>
+                    <td>ハンバーガーメニューから開閉。全画面オーバーレイ表示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>モバイル向け機能</h4>
+        <ul class="item-list">
+            <li><strong>ハンバーガーメニュー</strong> - 画面右上に表示される3本線アイコンをタップしてサイドバーを開閉</li>
+            <li><strong>オーバーレイ背景</strong> - サイドバーを開くと背景が半透明の黒で覆われ、タップすると閉じます</li>
+            <li><strong>自動展開</strong> - モバイル表示ではサイドバーの折りたたみ状態が強制的に展開されます</li>
+            <li><strong>メニュー選択時の自動クローズ</strong> - メニューアイテムをタップすると自動的にサイドバーが閉じます</li>
+        </ul>
+
+        <div class="tip">
+            <strong>💡 タッチ操作に最適化</strong>
+            モバイル端末では、すべてのボタンとリンクが最小44x44pxのタッチターゲットサイズを確保しており、指でタップしやすい設計になっています。
+        </div>
+    </div>
+
+    <div id="subsection-1-10" class="manual-subsection">
+        <h3>1.10 アクセシビリティ対応</h3>
+        <p>サイドバーはWCAG 2.1 AA基準に準拠したアクセシビリティ対応を行っており、すべてのユーザーが快適に利用できるよう設計されています。</p>
+
+        <h4>実装されているアクセシビリティ機能</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>機能</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ARIA属性</td>
+                    <td>サイドバーには<code>aria-label="メインナビゲーション"</code>が設定され、スクリーンリーダーで役割を識別可能</td>
+                </tr>
+                <tr>
+                    <td>キーボードナビゲーション</td>
+                    <td>Tabキーですべてのメニューアイテムを順番に移動でき、Enterキーで選択可能</td>
+                </tr>
+                <tr>
+                    <td>フォーカスインジケーター</td>
+                    <td>キーボードでフォーカスした要素は青い輪郭線で明確に表示</td>
+                </tr>
+                <tr>
+                    <td>色のコントラスト比</td>
+                    <td>テキストと背景のコントラスト比がWCAG AA基準（4.5:1以上）を満たす</td>
+                </tr>
+                <tr>
+                    <td>title属性</td>
+                    <td>折りたたみ時のアイコンにはツールチップ用のtitle属性が設定されている</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            <strong>♿ ユニバーサルデザイン</strong>
+            視覚障害、運動障害、認知障害を持つユーザーを含む、すべての人が情報にアクセスできるよう設計されています。
+        </div>
+    </div>
+</section>

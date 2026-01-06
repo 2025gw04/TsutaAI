@@ -1,0 +1,674 @@
+<!-- セッション 14: メンタルヘルス -->
+<section id="section-14" class="manual-section">
+    <h2>14. メンタルヘルス（/mental-health）</h2>
+    <p>チームメンバーの気分・ストレスレベルをトラッキングし、心理的安全性を確保します。</p>
+
+    <p class="page-subtitle">チームメンバーの心理的健康状態をモニタリングし、早期サポートを実現する包括的なメンタルヘルス管理システムです。</p>
+
+    <!-- 14.1 画面概要 -->
+    <div id="subsection-14-1" class="manual-subsection">
+        <h3>14.1 画面概要</h3>
+        <div class="description-box">
+            <p>
+                メンタルヘルス画面は、チーム全体およ個別メンバーの心理的健康状態を可視化し、早期にサポートが必要なメンバーを特定するための専門的な管理ツールです。過去7日間のチームサマリー、個別メンバーの詳細分析、AIによる異常検知機能を統合し、プロジェクトマネージャーがメンバーの心理的健康を継続的にモニタリングできる環境を提供します。気分スコア、ストレスレベル、ブロッカー報告数、サポート希望件数という4つの主要指標を中心に、データ駆動型のメンタルヘルスケアを実現します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('mental-health-overview')">
+            <img id="mental-health-overview" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">機能カテゴリ</th>
+                    <th style="width: 35%;">主要機能</th>
+                    <th style="width: 40%;">説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>チームサマリー</strong></td>
+                    <td>4つの集計カード</td>
+                    <td>平均気分、平均ストレスレベル、ブロッカー報告数、サポート希望件数を表示</td>
+                </tr>
+                <tr>
+                    <td><strong>サポート対象メンバー</strong></td>
+                    <td>注意が必要なメンバーリスト</td>
+                    <td>ストレスが高い、気分が低い、サポート希望を出しているメンバーをカード形式で表示</td>
+                </tr>
+                <tr>
+                    <td><strong>個別メンバー分析</strong></td>
+                    <td>トレンド分析・異常検知</td>
+                    <td>過去4週間のメンタルヘルストレンドと活動異常を自動分析</td>
+                </tr>
+                <tr>
+                    <td><strong>リアルタイム更新</strong></td>
+                    <td>更新ボタン</td>
+                    <td>最新のメンタルヘルスデータを即座に取得し、画面を更新</td>
+                </tr>
+                <tr>
+                    <td><strong>視覚的インジケーター</strong></td>
+                    <td>絵文字・カラーコード</td>
+                    <td>気分は絵文字（😄🙂😐😟😢）、ストレスは色（緑・オレンジ・赤）で直感的に表示</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>メンタルヘルス画面は、デスクトップアプリから送信される日次のメンタルヘルス報告データを集計して表示します。過去7日間のデータを基にチーム全体の傾向を把握し、個別メンバーには過去4週間のトレンド分析を提供します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.2 チームサマリーカード -->
+    <div id="subsection-14-2" class="manual-subsection">
+        <h3>14.2 チームサマリーカード（4種類）</h3>
+        <div class="description-box">
+            <p>
+                チームサマリーカードは、過去7日間のチーム全体のメンタルヘルス状態を4つの主要指標で可視化します。各カードはアイコン、ラベル、数値という3つの要素で構成され、グラデーション背景とホバーエフェクトにより視覚的に見やすいデザインを採用しています。平均気分カード（絵文字付き5段階評価）、平均ストレスレベルカード（色分けされた5段階評価）、ブロッカー報告数カード（報告件数の集計）、サポート希望カード（サポート希望件数の集計）という4つのカードが横並びで配置され、一目でチームの健康状態を把握できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('team-summary-cards')">
+            <img id="team-summary-cards" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">カード種類</th>
+                    <th style="width: 15%;">アイコン</th>
+                    <th style="width: 20%;">表示内容</th>
+                    <th style="width: 25%;">グラデーション色</th>
+                    <th style="width: 20%;">評価方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>平均気分</strong></td>
+                    <td><i class="bi bi-emoji-smile" style="font-size: 1.5rem; color: #667eea;"></i></td>
+                    <td>絵文字 + X.X / 5</td>
+                    <td>紫（#667eea → #764ba2）</td>
+                    <td>😄（4.5+）、🙂（3.5-4.4）、😐（2.5-3.4）、😟（1.5-2.4）、😢（1.5未満）</td>
+                </tr>
+                <tr>
+                    <td><strong>平均ストレスレベル</strong></td>
+                    <td><i class="bi bi-activity" style="font-size: 1.5rem; color: #f5576c;"></i></td>
+                    <td>X.X / 5（色付き）</td>
+                    <td>ピンク（#f093fb → #f5576c）</td>
+                    <td>赤（4.0+）、オレンジ（3.0-3.9）、緑（3.0未満）</td>
+                </tr>
+                <tr>
+                    <td><strong>ブロッカー報告</strong></td>
+                    <td><i class="bi bi-exclamation-octagon" style="font-size: 1.5rem; color: #fa709a;"></i></td>
+                    <td>X 件</td>
+                    <td>オレンジ（#fa709a → #fee140）</td>
+                    <td>報告件数をカウント</td>
+                </tr>
+                <tr>
+                    <td><strong>サポート希望</strong></td>
+                    <td><i class="bi bi-hand-thumbs-up" style="font-size: 1.5rem; color: #30cfd0;"></i></td>
+                    <td>X 件</td>
+                    <td>青紫（#30cfd0 → #330867）</td>
+                    <td>サポート希望件数をカウント</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>チームサマリーの読み方：</strong>
+                平均気分が3.5以下、平均ストレスレベルが3.0以上、ブロッカー報告が5件以上の場合はチーム全体に注意が必要です。この3つの指標が同時に悪化している場合は、プロジェクト全体のスケジュールや負荷を見直すタイミングです。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.3 サポートが必要なメンバーリスト -->
+    <div id="subsection-14-3" class="manual-subsection">
+        <h3>14.3 サポートが必要なメンバーリスト</h3>
+        <div class="description-box">
+            <p>
+                サポートが必要なメンバーリストは、過去7日間のデータから「気分が低い（3.0以下）」「ストレスが高い（3.5以上）」「サポート希望を出している」のいずれかの条件に該当するメンバーを自動抽出して表示します。各メンバーはカード形式で表示され、フルネーム、ユーザー名、平均気分（絵文字付き）、平均ストレスレベル（色分け）、サポート希望件数バッジという5つの情報を含みます。カードをクリックすると、そのメンバーの詳細分析（トレンド・異常検知）が下部に展開され、さらに深い洞察を得ることができます。該当メンバーがいない場合は、緑色の背景で「現在、サポートが必要なメンバーはいません」というポジティブメッセージが表示されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('support-members-list')">
+            <img id="support-members-list" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">表示項目</th>
+                    <th style="width: 35%;">内容</th>
+                    <th style="width: 40%;">例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>メンバー名</strong></td>
+                    <td>フルネーム + ユーザー名</td>
+                    <td>山田太郎 @yamada</td>
+                </tr>
+                <tr>
+                    <td><strong>平均気分</strong></td>
+                    <td>絵文字 + 数値（5段階）</td>
+                    <td>😟 2.3</td>
+                </tr>
+                <tr>
+                    <td><strong>平均ストレスレベル</strong></td>
+                    <td>数値（色分け）</td>
+                    <td><span style="color: red;">4.2</span></td>
+                </tr>
+                <tr>
+                    <td><strong>サポート希望バッジ</strong></td>
+                    <td>希望件数（黄色バッジ）</td>
+                    <td><span class="badge-medium">サポート希望: 2件</span></td>
+                </tr>
+                <tr>
+                    <td><strong>カード操作</strong></td>
+                    <td>クリックで詳細表示</td>
+                    <td>選択状態は紫のグラデーション背景</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>早期対応の重要性：</strong>
+                サポートが必要なメンバーリストに表示されたメンバーには、できるだけ早く1on1や面談を設定することをお勧めします。特に気分が2.0以下、ストレスが4.0以上のメンバーは、燃え尽き症候群（バーンアウト）のリスクが高いため、24時間以内に対応することが理想的です。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.4 メンバーカードの構造と操作 -->
+    <div id="subsection-14-4" class="manual-subsection">
+        <h3>14.4 メンバーカードの構造と操作</h3>
+        <div class="description-box">
+            <p>
+                メンバーカードは、サポートが必要なメンバーの基本情報を一つのカードに集約したインタラクティブなUIコンポーネントです。カードは白い背景に紫の枠線（ホバー時に濃くなる）、上部ヘッダー（メンバー名とユーザー名）、中央の統計情報エリア（気分とストレスの2つのstatブロック）、下部のサポート希望バッジという3層構造で構成されます。カードをクリックすると、選択状態となり紫のグラデーション背景が適用され、画面下部に「メンタルヘルストレンド（過去4週間）」と「アクティビティ分析（過去7日間）」の2つの詳細カードが表示されます。この2段階の情報表示により、概要から詳細へとスムーズに深掘りできるユーザー体験を提供します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('member-card-structure')">
+            <img id="member-card-structure" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">カード要素</th>
+                    <th style="width: 30%;">デザイン仕様</th>
+                    <th style="width: 30%;">インタラクション</th>
+                    <th style="width: 20%;">視覚効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>上部ヘッダー</strong></td>
+                    <td>フルネーム（太字）+ ユーザー名（グレー）</td>
+                    <td>クリック可能（全体がボタン）</td>
+                    <td>下部に紫の区切り線</td>
+                </tr>
+                <tr>
+                    <td><strong>統計エリア</strong></td>
+                    <td>2つのstatブロック（気分・ストレス）</td>
+                    <td>静的（クリック不可）</td>
+                    <td>グラデーション背景のpill形状</td>
+                </tr>
+                <tr>
+                    <td><strong>サポートバッジ</strong></td>
+                    <td>黄色グラデーション、影付き</td>
+                    <td>静的（情報表示のみ）</td>
+                    <td>浮き出る3D効果</td>
+                </tr>
+                <tr>
+                    <td><strong>ホバー状態</strong></td>
+                    <td>枠線が濃い紫に変化</td>
+                    <td>カーソルがpointerに変化</td>
+                    <td>上方向に5px浮き上がる</td>
+                </tr>
+                <tr>
+                    <td><strong>選択状態</strong></td>
+                    <td>紫のグラデーション背景</td>
+                    <td>再クリックで詳細を閉じる</td>
+                    <td>より強い影（0.3透明度）</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>効率的な確認方法：</strong>
+                メンバーカードは上から順に「最も注意が必要なメンバー」が表示されます（気分とストレスの総合評価でソート）。朝の確認時には、上位3名のカードをクリックして詳細を確認し、必要に応じてメッセージや面談を設定することで、効率的にチームケアができます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.5 メンタルヘルストレンド分析（過去4週間） -->
+    <div id="subsection-14-5" class="manual-subsection">
+        <h3>14.5 メンタルヘルストレンド分析（過去4週間）</h3>
+        <div class="description-box">
+            <p>
+                メンタルヘルストレンド分析は、選択したメンバーの過去4週間の心理的健康状態の推移をAIが自動分析する機能です。トレンドステータスとして「📈 改善中（improving）」「📉
+                悪化（worsening）」「➡️ 安定（stable）」の3種類を判定し、週ごとの気分とストレスの平均値を一覧表示します。各週は「Week 1」「Week
+                2」という形式でラベル付けされ、気分は絵文字付きの数値、ストレスは数値のみで表示されます。この時系列データにより、一時的な変動なのか、持続的な傾向なのかを判断でき、適切なサポートタイミングを見極めることができます。トレンドが「悪化」の場合は、早急な介入が推奨されます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('mental-health-trend')">
+            <img id="mental-health-trend" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">トレンド種類</th>
+                    <th style="width: 15%;">絵文字</th>
+                    <th style="width: 30%;">判定条件</th>
+                    <th style="width: 35%;">推奨アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>改善中</strong></td>
+                    <td>📈</td>
+                    <td>気分が上昇傾向、ストレスが下降傾向</td>
+                    <td>現在のサポートを継続、ポジティブフィードバックを提供</td>
+                </tr>
+                <tr>
+                    <td><strong>悪化</strong></td>
+                    <td>📉</td>
+                    <td>気分が下降傾向、ストレスが上昇傾向</td>
+                    <td><span class="badge-high">緊急</span> 24時間以内に1on1を設定、タスク負荷を軽減</td>
+                </tr>
+                <tr>
+                    <td><strong>安定</strong></td>
+                    <td>➡️</td>
+                    <td>変動が少ない、または上下が混在</td>
+                    <td>週次チェックイン、定期的な声掛けを継続</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">週番号</th>
+                    <th style="width: 35%;">表示内容</th>
+                    <th style="width: 50%;">データ例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Week 1</strong></td>
+                    <td>気分（絵文字付き）/ ストレス</td>
+                    <td>気分: 😐 3.2 / ストレス: 3.8</td>
+                </tr>
+                <tr>
+                    <td><strong>Week 2</strong></td>
+                    <td>気分（絵文字付き）/ ストレス</td>
+                    <td>気分: 😟 2.8 / ストレス: 4.1</td>
+                </tr>
+                <tr>
+                    <td><strong>Week 3</strong></td>
+                    <td>気分（絵文字付き）/ ストレス</td>
+                    <td>気分: 😢 2.1 / ストレス: 4.5</td>
+                </tr>
+                <tr>
+                    <td><strong>Week 4</strong></td>
+                    <td>気分（絵文字付き）/ ストレス</td>
+                    <td>気分: 😟 2.5 / ストレス: 4.2</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>悪化トレンドの緊急対応：</strong> トレンドが「📉 悪化」と表示され、かつ最新週（Week
+                4）の気分が2.5以下、ストレスが4.0以上の場合は、メンタルヘルス上の危機状態にある可能性があります。即座にマネージャーまたはHR担当者に連絡し、専門的なサポート（産業医、カウンセラー）の手配を検討してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.6 アクティビティ異常検知 -->
+    <div id="subsection-14-6" class="manual-subsection">
+        <h3>14.6 アクティビティ異常検知（過去7日間）</h3>
+        <div class="description-box">
+            <p>
+                アクティビティ異常検知は、選択したメンバーの過去7日間の作業ログデータ（マウス・キーボード操作、ファイル変更、アクティブウィンドウ、CPU/メモリ使用率）をAIが分析し、通常パターンからの逸脱を自動検出する機能です。異常が検知された場合は、黄色の警告ボックス内に「⚠️
+                異常検知」というタイトルと、具体的な異常内容のリストが表示されます（例：「過去7日間で作業ログが極端に少ない」「深夜・早朝の作業が増加」「集中度スコアが大幅に低下」など）。異常がない場合は「✅
+                異常は検知されていません」というポジティブメッセージが表示されます。さらに、平均アクティビティスコアとログ数という2つの統計値も表示され、メンバーの活動量を定量的に把握できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('activity-anomaly')">
+            <img id="activity-anomaly" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">異常パターン</th>
+                    <th style="width: 40%;">検知条件</th>
+                    <th style="width: 30%;">対応策</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>作業ログが極端に少ない</strong></td>
+                    <td>7日間で5ログ未満</td>
+                    <td>体調不良または離職意向の可能性、個別面談を実施</td>
+                </tr>
+                <tr>
+                    <td><strong>深夜・早朝の作業増加</strong></td>
+                    <td>22時以降または6時以前のログが全体の30%以上</td>
+                    <td>過労の兆候、ワークライフバランスの見直しを提案</td>
+                </tr>
+                <tr>
+                    <td><strong>集中度スコア大幅低下</strong></td>
+                    <td>平均集中度が過去1ヶ月平均の70%未満</td>
+                    <td>タスクの難易度、興味、環境要因を確認</td>
+                </tr>
+                <tr>
+                    <td><strong>アクティビティスコア低下</strong></td>
+                    <td>平均アクティビティスコアが50未満</td>
+                    <td>モチベーション低下、タスクの再割り当てを検討</td>
+                </tr>
+                <tr>
+                    <td><strong>ログ数の急激な増加</strong></td>
+                    <td>前週比200%以上のログ数増加</td>
+                    <td>過負荷の可能性、タスク量の調整を検討</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>アクティビティ異常検知は、デスクトップアプリが送信する作業ログデータを基に、AIが各メンバーの「通常パターン」を学習し、そこからの逸脱を検知します。過去1ヶ月のデータが蓄積されるまでは精度が低い場合があります。最低2週間のデータがあることが推奨されます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.7 気分・ストレスの評価スケール -->
+    <div id="subsection-14-7" class="manual-subsection">
+        <h3>14.7 気分・ストレスの評価スケール</h3>
+        <div class="description-box">
+            <p>
+                気分とストレスレベルは、どちらも1から5までの5段階評価で測定されますが、解釈方法が異なります。気分は「高いほど良い」指標で、5が最高（非常に良い）、1が最低（非常に悪い）です。一方、ストレスレベルは「低いほど良い」指標で、1が最低（ストレスなし）、5が最高（極度のストレス）です。気分には5つの絵文字（😄😙😐😟😢）が対応し、視覚的に状態を即座に把握できます。ストレスレベルには3つの色（緑・オレンジ・赤）が対応し、危険度を直感的に伝えます。これらのスケールは、デスクトップアプリのメンタルヘルス報告画面でメンバー自身が日次で入力し、Web管理画面ではそれらを集計・分析して表示します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('evaluation-scale')">
+            <img id="evaluation-scale" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 15%;">気分スコア</th>
+                    <th style="width: 15%;">絵文字</th>
+                    <th style="width: 35%;">状態説明</th>
+                    <th style="width: 35%;">推奨アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>4.5 - 5.0</strong></td>
+                    <td style="font-size: 2rem;">😄</td>
+                    <td>非常に良い、やる気に満ちている</td>
+                    <td>現状維持、ポジティブな要因を他メンバーに共有</td>
+                </tr>
+                <tr>
+                    <td><strong>3.5 - 4.4</strong></td>
+                    <td style="font-size: 2rem;">🙂</td>
+                    <td>良い、問題なく業務を遂行できる</td>
+                    <td>定期的なフィードバックで維持</td>
+                </tr>
+                <tr>
+                    <td><strong>2.5 - 3.4</strong></td>
+                    <td style="font-size: 2rem;">😐</td>
+                    <td>普通、やや元気がない</td>
+                    <td>週次チェックイン、気になる点を確認</td>
+                </tr>
+                <tr>
+                    <td><strong>1.5 - 2.4</strong></td>
+                    <td style="font-size: 2rem;">😟</td>
+                    <td>悪い、ストレスや不安を感じている</td>
+                    <td><span class="badge-medium">注意</span> 個別面談を設定、サポートを提供</td>
+                </tr>
+                <tr>
+                    <td><strong>1.0 - 1.4</strong></td>
+                    <td style="font-size: 2rem;">😢</td>
+                    <td>非常に悪い、深刻な問題がある可能性</td>
+                    <td><span class="badge-high">緊急</span> 即座に面談、専門家への相談を検討</td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="feature-table" style="margin-top: 2rem;">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">ストレススコア</th>
+                    <th style="width: 15%;">色コード</th>
+                    <th style="width: 35%;">状態説明</th>
+                    <th style="width: 30%;">推奨アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1.0 - 2.9</strong></td>
+                    <td><span style="color: #22c55e; font-size: 1.5rem; font-weight: bold;">●</span> 緑</td>
+                    <td>正常範囲、健康的なストレスレベル</td>
+                    <td>現状維持</td>
+                </tr>
+                <tr>
+                    <td><strong>3.0 - 3.9</strong></td>
+                    <td><span style="color: #f59e0b; font-size: 1.5rem; font-weight: bold;">●</span> オレンジ</td>
+                    <td>やや高め、継続的な注意が必要</td>
+                    <td><span class="badge-medium">注意</span> 負荷状況を確認、必要に応じて調整</td>
+                </tr>
+                <tr>
+                    <td><strong>4.0 - 5.0</strong></td>
+                    <td><span style="color: #ef4444; font-size: 1.5rem; font-weight: bold;">●</span> 赤</td>
+                    <td>高い、バーンアウトのリスクあり</td>
+                    <td><span class="badge-high">緊急</span> タスク負荷を軽減、休息を促す</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>複合評価の重要性：</strong> 気分とストレスは独立した指標として見るのではなく、組み合わせて評価することが重要です。例えば、「気分が高い（4.0）+
+                ストレスも高い（4.0）」は短期的には問題なくても、長期的にはバーンアウトのリスクがあります。逆に「気分が低い（2.0）+ ストレスも低い（2.0）」は、モチベーション低下や離職意向の可能性を示唆します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.8 更新ボタンとリアルタイム反映 -->
+    <div id="subsection-14-8" class="manual-subsection">
+        <h3>14.8 更新ボタンとリアルタイム反映</h3>
+        <div class="description-box">
+            <p>
+                メンタルヘルス画面の右上に配置された「更新」ボタンは、最新のメンタルヘルスデータを即座に取得し、画面全体を更新する機能を提供します。ボタンは紫のグラデーション背景に白文字、左側に回転矢印アイコンを持ち、クリックすると「更新中...」というテキストに変化し、ボタンが無効化されます。更新処理中はローディング状態が表示され、完了するとチームサマリーカード、サポートが必要なメンバーリスト、選択中のメンバー詳細がすべて最新データで再描画されます。更新処理は通常1-2秒で完了し、エラーが発生した場合は赤い背景の警告メッセージが画面上部に表示されます。朝礼前、定時後、緊急時など、任意のタイミングで最新状態を確認できます。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('refresh-button')">
+            <img id="refresh-button" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 20%;">ボタン状態</th>
+                    <th style="width: 25%;">表示内容</th>
+                    <th style="width: 25%;">視覚効果</th>
+                    <th style="width: 30%;">操作可否</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>通常状態</strong></td>
+                    <td><i class="bi bi-arrow-clockwise"></i> 更新</td>
+                    <td>紫グラデーション、ホバーで浮き上がる</td>
+                    <td>クリック可能</td>
+                </tr>
+                <tr>
+                    <td><strong>ローディング状態</strong></td>
+                    <td><i class="bi bi-arrow-clockwise"></i> 更新中...</td>
+                    <td>透明度60%、アイコン回転アニメーション</td>
+                    <td>クリック不可（disabled）</td>
+                </tr>
+                <tr>
+                    <td><strong>エラー状態</strong></td>
+                    <td><i class="bi bi-arrow-clockwise"></i> 更新</td>
+                    <td>通常状態に戻る、画面上部に赤いエラーメッセージ</td>
+                    <td>クリック可能（再試行可能）</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h5><i class="bi bi-info-circle-fill"></i> Note</h5>
+            <p>メンタルヘルスデータは、メンバーがデスクトップアプリから日報を送信したタイミングでバックエンドデータベースに保存されます。そのため、「更新」ボタンをクリックしても、メンバーが新しい日報を送信していない場合はデータに変化がないことがあります。通常、メンバーは1日1回（業務終了時）に日報を送信するため、朝と夕方に更新することが推奨されます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.9 メンタルヘルスデータの活用方法 -->
+    <div id="subsection-14-9" class="manual-subsection">
+        <h3>14.9 メンタルヘルスデータの活用方法</h3>
+        <div class="description-box">
+            <p>
+                メンタルヘルス画面で収集されるデータは、単なる記録ではなく、チームマネジメントの強力なツールとして活用できます。主な活用方法として、①早期サポート介入（サポートが必要なメンバーへの迅速な対応）、②プロジェクト負荷調整（チーム全体のストレスが高い場合のスケジュール見直し）、③1on1面談の準備資料（個別メンバーのトレンドを基にした対話）、④チーム施策の効果測定（新しい働き方や制度導入後の変化測定）、⑤離職リスクの早期発見（長期的な気分低下・ストレス上昇パターンの検知）という5つのシナリオが想定されます。これらのデータを定量的に活用することで、感覚的な判断ではなく、データ駆動型のチームマネジメントが実現します。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('data-utilization')">
+            <img id="data-utilization" src="../image/web-admin/800x500.png" />
+        </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">活用シナリオ</th>
+                    <th style="width: 35%;">具体的な方法</th>
+                    <th style="width: 40%;">期待される効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>早期サポート介入</strong></td>
+                    <td>毎朝、サポートが必要なメンバーリストをチェックし、上位3名に個別連絡</td>
+                    <td>バーンアウト防止、メンバーの離職率低減、信頼関係構築</td>
+                </tr>
+                <tr>
+                    <td><strong>プロジェクト負荷調整</strong></td>
+                    <td>チーム平均ストレスが3.5以上の場合、プロジェクトスケジュールを1週間延長</td>
+                    <td>品質向上、納期遅延リスク低減、チーム士気の維持</td>
+                </tr>
+                <tr>
+                    <td><strong>1on1面談の準備</strong></td>
+                    <td>面談前にメンバーの4週間トレンドを確認し、具体的な質問を準備</td>
+                    <td>深い対話の実現、メンバーの本音を引き出す、具体的な改善策の提案</td>
+                </tr>
+                <tr>
+                    <td><strong>チーム施策効果測定</strong></td>
+                    <td>リモートワーク導入前後でチーム平均気分・ストレスを比較</td>
+                    <td>施策の定量評価、改善点の発見、経営層への報告資料作成</td>
+                </tr>
+                <tr>
+                    <td><strong>離職リスク早期発見</strong></td>
+                    <td>4週間連続で気分が3.0以下かつ改善しないメンバーを抽出</td>
+                    <td>離職前のリテンション施策、キャリア相談、配置転換の検討</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>データ活用の3つのルール：</strong>
+                ①プライバシーを尊重する（個人データを第三者に共有しない）、②データだけで判断しない（必ず本人と対話して確認する）、③ポジティブな目的で使う（評価や懲戒ではなく、サポートとして活用する）。この3つのルールを守ることで、メンバーからの信頼を維持しながら、効果的なメンタルヘルスケアが実現します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 14.10 活用シーンとベストプラクティス -->
+    <div id="subsection-14-10" class="manual-subsection">
+        <h3>14.10 活用シーンとベストプラクティス</h3>
+        <div class="description-box">
+            <p>
+                メンタルヘルス画面を最大限に活用するためのベストプラクティスとして、5つの定期的なワークフローを推奨します。①毎朝の健康チェック（8:30-9:00）でサポートが必要なメンバーを確認、②週次レビュー（毎週月曜10:00）でチーム全体のトレンドを分析、③月次深掘り分析（毎月第1金曜）で長期的な変化を評価、④緊急時の即時対応（異常検知時）で危機管理、⑤四半期振り返り（3ヶ月ごと）で施策効果を測定、という5段階のサイクルを確立することで、メンタルヘルスケアを組織の文化として定着させることができます。これらのワークフローは、カレンダーに定期イベントとして登録し、チーム全体で習慣化することが成功の鍵です。
+            </p>
+        </div>
+        <div class="feature-image" onclick="openGallery('best-practices')">
+            <img id="best-practices" src="../image/web-admin/800x500.png" />
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <i class="bi bi-1-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>毎朝の健康チェック（8:30-9:00）</h6>
+                    <p>
+                        <strong>目的：</strong> 前日のメンタルヘルスデータを確認し、即座にサポートが必要なメンバーを特定<br>
+                        <strong>手順：</strong> ①メンタルヘルス画面を開く → ②「更新」ボタンをクリック → ③サポートが必要なメンバーリストの上位3名をクリック → ④トレンドと異常検知を確認
+                        → ⑤気分2.5以下またはストレス4.0以上のメンバーにSlackで「今日の調子はどうですか？」とメッセージ送信<br>
+                        <strong>所要時間：</strong> 5-10分<br>
+                        <strong>成功指標：</strong> 週次でサポートメンバー数が減少傾向
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-2-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>週次レビュー（毎週月曜10:00）</h6>
+                    <p>
+                        <strong>目的：</strong> チーム全体のメンタルヘルストレンドを把握し、プロジェクト負荷を調整<br>
+                        <strong>手順：</strong> ①チームサマリーカードを確認（平均気分・ストレス・ブロッカー・サポート件数） → ②平均ストレスが3.5以上の場合、プロジェクトスケジュールを見直し
+                        → ③サポート希望が5件以上の場合、臨時チームミーティングを開催 → ④前週との比較でトレンドを分析 → ⑤経営層への週次レポートに数値を記載<br>
+                        <strong>所要時間：</strong> 15-20分<br>
+                        <strong>成功指標：</strong> プロジェクト遅延率の低減、チーム離職率の低減
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-3-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>月次深掘り分析（毎月第1金曜15:00）</h6>
+                    <p>
+                        <strong>目的：</strong> 全メンバーの4週間トレンドを個別に確認し、長期的な課題を発見<br>
+                        <strong>手順：</strong> ①メンバーリストを取得 → ②各メンバーのメンタルヘルストレンド（4週間）を確認 → ③「📉 悪化」トレンドのメンバーをリストアップ →
+                        ④各メンバーに1on1面談を設定（翌週中） → ⑤面談で具体的な課題をヒアリングし、改善策を提案 → ⑥1ヶ月後に再度トレンドを確認し効果測定<br>
+                        <strong>所要時間：</strong> 30-45分<br>
+                        <strong>成功指標：</strong> 悪化トレンドメンバーの翌月改善率70%以上
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-4-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>緊急時の即時対応（異常検知時）</h6>
+                    <p>
+                        <strong>目的：</strong> アクティビティ異常検知やトレンド悪化を早期にキャッチし、危機を回避<br>
+                        <strong>手順：</strong> ①メンバー詳細で「⚠️ 異常検知」が表示された場合、即座にそのメンバーに連絡 → ②電話またはビデオ通話で状況を確認（メールやチャットは避ける） →
+                        ③必要に応じてタスクを他メンバーに再割り当て → ④産業医やカウンセラーへの相談を提案 → ⑤1週間後にフォローアップ面談を実施<br>
+                        <strong>所要時間：</strong> 即時対応（30分-1時間）<br>
+                        <strong>成功指標：</strong> 重大なメンタルヘルス事故ゼロ
+                    </p>
+                </div>
+            </div>
+
+            <div class="workflow-step">
+                <i class="bi bi-5-circle-fill"></i>
+                <div class="workflow-step-content">
+                    <h6>四半期振り返り（3ヶ月ごと）</h6>
+                    <p>
+                        <strong>目的：</strong> 過去3ヶ月のメンタルヘルスデータを総括し、組織施策の効果を評価<br>
+                        <strong>手順：</strong> ①過去3ヶ月の平均気分・ストレスをグラフ化 → ②改善施策（リモートワーク、フレックス制度など）の導入前後を比較 →
+                        ③サポート件数、ブロッカー件数の推移を分析 → ④離職したメンバーのメンタルヘルストレンドを振り返り → ⑤経営層へのレポートを作成し、次四半期の施策を提案<br>
+                        <strong>所要時間：</strong> 2-3時間<br>
+                        <strong>成功指標：</strong> 経営層の施策承認率、次四半期の改善率
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="warning-box">
+            <h5>⚠️ Warnings</h5>
+            <p><strong>メンタルヘルスデータの取り扱い注意：</strong>
+                メンタルヘルスデータは、個人情報保護法における「要配慮個人情報」に該当する可能性があります。データの閲覧権限は必要最小限（マネージャー、HR担当者のみ）に制限し、第三者への開示は本人の同意なく行わないでください。また、評価や懲戒の材料として使用することは絶対に避け、あくまでサポート目的でのみ活用してください。
+            </p>
+        </div>
+        <div class="tip-box">
+            <h5>💡 Tips</h5>
+            <p><strong>継続的な改善サイクル：</strong>
+                メンタルヘルスケアは、一度やって終わりではなく、PDCAサイクル（Plan-Do-Check-Act）で継続的に改善することが重要です。毎週・毎月・毎四半期のデータを比較し、施策の効果を測定し、常に改善を続けることで、チーム全体のエンゲージメントと生産性が向上します。
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- ギャラリーモーダル -->
+    <div id="galleryModal" class="gallery-modal" onclick="closeGallery()">
+        <span class="close-modal">&times;</span>
+        <img id="galleryImage" src="" alt="拡大画像">
+</section>

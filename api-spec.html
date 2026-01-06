@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ツタAI - API仕様概要</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#75EA66',
+                        'primary-dark': '#4BA262',
+                        'bg-gray': '#F9FAFB',
+                        'card-border': '#E5E7EB',
+                        text: {
+                            main: '#111827',
+                            sub: '#4B5563'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 text-text-main font-sans antialiased">
+    <!-- ナビゲーション -->
+    <nav class="bg-white border-b border-gray-200 fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- ロゴ -->
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-2">
+                    <img src="image/TsutaAI_G_Trans.png" alt="TsutaAI Icon" class="h-8 w-auto">
+                    <span class="text-xl font-bold tracking-tight">ツタAI</span>
+                </a>
+                <a href="index.html" class="text-sm font-medium text-text-sub hover:text-primary transition-colors">
+                    <i class="fas fa-arrow-left mr-1"></i> トップに戻る
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="pt-24 pb-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- ヘッダーセクション -->
+            <div class="text-center mb-12">
+                <span
+                    class="bg-primary/10 text-primary-dark font-bold px-3 py-1 rounded-full text-xs mb-4 inline-block">For
+                    Developers</span>
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">API Specification Overview</h1>
+                <p class="text-gray-600 max-w-2xl mx-auto">ツタAIのバックエンドは、堅牢なRESTful
+                    APIとリアルタイムWebSocket通信によって支えられています。拡張性とセキュリティを重視したモダンなアーキテクチャの概要をご紹介します。</p>
+            </div>
+
+            <!-- アーキテクチャ概要 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div
+                        class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-6 text-blue-600 text-2xl">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Core Architecture</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        Node.jsとExpressフレームワークを基盤とした非同期イベント駆動アーキテクチャを採用。高負荷な環境でも安定したパフォーマンスを発揮します。
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> RESTful API Design
+                        </li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> Multi-Database
+                            Support (Knex.js)</li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> Layered
+                            Architecture (Controller-Service-Model)</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <div
+                        class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-6 text-purple-600 text-2xl">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Real-time Capability</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                        WebSocketを用いた双方向通信により、タスクの更新、AIからの通知、チームメンバーの活動状況をリアルタイムに同期します。
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> WebSocket Service
+                        </li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> Event Broadcasting
+                        </li>
+                        <li class="flex items-center gap-2"><i class="fas fa-check text-primary"></i> Live Collaboration
+                            Support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- API機能マップ -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-12">
+                <div class="p-8 border-b border-gray-100">
+                    <h2 class="text-2xl font-bold text-gray-900">API Functionality Map</h2>
+                    <p class="text-gray-500 text-sm mt-2">200以上のエンドポイントが、23のモジュールに分類されています。</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                    <div class="p-8">
+                        <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <i class="fas fa-cube text-gray-400"></i> Core Resources
+                        </h4>
+                        <ul class="space-y-3 text-sm text-gray-600">
+                            <li><strong class="text-gray-900">Auth & Users</strong>: JWT認証、RBAC権限管理、プロフィール</li>
+                            <li><strong class="text-gray-900">Projects</strong>: CRUD操作、進捗管理、設定</li>
+                            <li><strong class="text-gray-900">Tasks</strong>: タスク詳細、依存関係、サブタスク</li>
+                            <li><strong class="text-gray-900">Personal Tasks</strong>: 個人ToDo管理</li>
+                        </ul>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <i class="fas fa-chart-line text-gray-400"></i> Analytics & Logs
+                        </h4>
+                        <ul class="space-y-3 text-sm text-gray-600">
+                            <li><strong class="text-gray-900">Dashboards</strong>: 統合メトリクス、KPI可視化</li>
+                            <li><strong class="text-gray-900">Worklogs</strong>: 作業時間記録、活動詳細</li>
+                            <li><strong class="text-gray-900">Reports</strong>: 日報・週報の自動生成・管理</li>
+                            <li><strong class="text-gray-900">Activity Logs</strong>: デスクトップアプリ連携ログ</li>
+                        </ul>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                            <i class="fas fa-robot text-gray-400"></i> AI & Advanced
+                        </h4>
+                        <ul class="space-y-3 text-sm text-gray-600">
+                            <li><strong class="text-gray-900">AI Integration</strong>: WBS生成、リスク分析、提案</li>
+                            <li><strong class="text-gray-900">Growth</strong>: スキル分析、成長目標管理</li>
+                            <li><strong class="text-gray-900">Mental Health</strong>: モチベーション・ストレス分析</li>
+                            <li><strong class="text-gray-900">Predictive</strong>: 進捗予測、遅延検知</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技術スタックとセキュリティ -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+                <div class="lg:col-span-2">
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Security & Reliability</h3>
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div class="space-y-6">
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0 text-green-600">
+                                    <i class="fas fa-lock"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Enterprise-Grade Security</h4>
+                                    <p class="text-sm text-gray-600 mt-1">全ての通信はHTTPSで暗号化され、APIアクセスはJWT (Json Web Token)
+                                        による厳格な認証と、ロールベースのアクセス制御 (RBAC) によって保護されています。</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0 text-blue-600">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Data Integrity</h4>
+                                    <p class="text-sm text-gray-600 mt-1">
+                                        トランザクション管理によるデータ整合性の保証と、定期的な自動バックアップ体制を構築。マルチDB対応により、企業の既存インフラに合わせたデータベース選択が可能です。
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0 text-orange-600">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900">Rate Limiting & Protection</h4>
+                                    <p class="text-sm text-gray-600 mt-1">
+                                        DDoS攻撃や過度なアクセスを防ぐためのレート制限、セキュリティヘッダー（Helmet）、SQLインジェクション対策を標準実装しています。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-6">Integration Guide</h3>
+                    <div class="bg-gray-900 text-white rounded-2xl p-6 shadow-lg h-full relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h4 class="font-bold text-lg mb-4">Starting Development</h4>
+                            <p class="text-gray-400 text-sm mb-6">APIへのアクセスキー発行や、サンドボックス環境の利用については、サポートチームまでお問い合わせください。
+                            </p>
+
+                            <div class="bg-gray-800 rounded-lg p-4 font-mono text-xs text-green-400 mb-6">
+                                GET /api/health<br>
+                                > HTTP/1.1 200 OK<br>
+                                > {"status": "ok"}
+                            </div>
+
+                            <a href="mailto:2025gw04@gmail.com"
+                                class="block w-full py-3 bg-white text-gray-900 text-center font-bold rounded-lg hover:bg-primary transition-colors">
+                                お問い合わせ
+                            </a>
+                        </div>
+                        <div class="absolute top-0 right-0 -mr-8 -mt-8 w-32 h-32 bg-primary/20 rounded-full blur-3xl">
+                        </div>
+                        <div
+                            class="absolute bottom-0 left-0 -ml-8 -mb-8 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- フッター -->
+            <div class="mt-12 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+                <p>&copy; 2025 TsutaAI開発チーム. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; 2025 ツタAI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
