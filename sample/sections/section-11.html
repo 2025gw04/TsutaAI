@@ -1,0 +1,195 @@
+<!-- Section 11 -->
+<section id="section-11" class="manual-section">
+                    <h2>11. スプリント管理画面（/sprints）の詳細機能</h2>
+
+                    <div id="subsection-11-1" class="manual-subsection">
+                        <h3>11.1 主要機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>スプリント一覧表示</strong></td>
+                                    <td>全スプリントを一覧で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>新規スプリント作成</strong></td>
+                                    <td>スプリント作成フォーム表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクトフィルター</strong></td>
+                                    <td>プロジェクトでスプリントを絞り込み</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータスフィルター</strong></td>
+                                    <td>計画中/アクティブ/完了で絞り込み</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-sprint-list')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="スプリント一覧" id="img-sprint-list" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-11-2" class="manual-subsection">
+                        <h3>11.2 スプリント作成フォーム</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>プロジェクト選択</strong></td>
+                                    <td>対象プロジェクトをドロップダウンで選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スプリント名入力</strong></td>
+                                    <td>スプリントの名前を入力</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スプリントゴール入力</strong></td>
+                                    <td>スプリントの目標を入力</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>開始日設定</strong></td>
+                                    <td>スプリント開始日を指定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>終了日設定</strong></td>
+                                    <td>スプリント終了日を指定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>目標ストーリーポイント</strong></td>
+                                    <td>目標ポイント数を入力（任意）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-sprint-form')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="スプリント作成" id="img-sprint-form" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-11-3" class="manual-subsection">
+                        <h3>11.3 スプリントカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>スプリント名表示</strong></td>
+                                    <td>スプリントの名前を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>期間表示</strong></td>
+                                    <td>開始日～終了日を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータスバッジ</strong></td>
+                                    <td>計画中/アクティブ/完了を色分け表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スプリント目標表示</strong></td>
+                                    <td>スプリントのゴールを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スプリント開始ボタン</strong></td>
+                                    <td>計画中→アクティブに変更</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スプリント完了ボタン</strong></td>
+                                    <td>アクティブ→完了に変更</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-sprint-card')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="スプリントカード" id="img-sprint-card" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-11-4" class="manual-subsection">
+                        <h3>11.4 スプリント詳細（4タブ構成）</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>タブ名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>概要タブ</strong></td>
+                                    <td>スプリント統計情報表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進捗タブ</strong></td>
+                                    <td>進捗記録・バーンダウンチャート表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>パフォーマンスタブ</strong></td>
+                                    <td>メンバーパフォーマンス表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>分析タブ</strong></td>
+                                    <td>AIによるゴール達成分析</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-sprint-detail-tabs')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="スプリント詳細タブ"
+                                id="img-sprint-detail-tabs" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-11-5" class="manual-subsection">
+                        <h3>11.5 詳細タブ機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>進捗記録ボタン</strong></td>
+                                    <td>現在の進捗をDBに記録</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>パフォーマンス記録ボタン</strong></td>
+                                    <td>メンバーパフォーマンスを記録</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ゴール分析ボタン</strong></td>
+                                    <td>AIでスプリントゴール達成度を分析</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>バーンダウンチャート表示</strong></td>
+                                    <td>理想線・実績線・残りポイントを可視化</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>モメンタム表示</strong></td>
+                                    <td>加速中/安定/減速中/停滞を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバーパフォーマンス一覧</strong></td>
+                                    <td>各メンバーの貢献度を表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-sprint-detail-content')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="スプリント詳細コンテンツ"
+                                id="img-sprint-detail-content" />
+                        </div>
+                    </div>
+                </section>

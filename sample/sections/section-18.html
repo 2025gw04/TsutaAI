@@ -1,0 +1,588 @@
+<!-- Section 18 -->
+<section id="section-18" class="manual-section">
+                    <h2>18. ヘルプリクエスト画面（/help-requests）の詳細機能</h2>
+
+                    <div id="subsection-18-1" class="manual-subsection">
+                        <h3>18.1 ページヘッダー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ページタイトル表示</strong></td>
+                                    <td>「ヘルプリクエスト管理」のタイトルを表示（bi-people-fillアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サブタイトル表示</strong></td>
+                                    <td>「チーム協力を最大化するAI駆動のヘルプマッチング」の説明文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>新規リクエスト作成ボタン</strong></td>
+                                    <td>作成フォームの表示/非表示を切り替え（bi-plus-circleアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>グラデーションヘッダー</strong></td>
+                                    <td>ピンク→黄のグラデーション背景（#fa709a → #fee140）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-help-header')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="ヘルプリクエストヘッダー"
+                                id="img-help-header" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-18-2" class="manual-subsection">
+                        <h3>18.2 エラー表示機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>エラーメッセージ表示</strong></td>
+                                    <td>API通信失敗時にエラーメッセージを赤色ボックスで表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-3" class="manual-subsection">
+                        <h3>18.3 統計ダッシュボードセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「統計ダッシュボード」タイトル（bi-graph-upアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>統計カードグリッド</strong></td>
+                                    <td>6つの統計カードをレスポンシブグリッドで表示（最小220px）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-help-stats')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="ヘルプ統計" id="img-help-stats" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-18-4" class="manual-subsection">
+                        <h3>18.4 統計カード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>総リクエスト数カード</strong></td>
+                                    <td>stats.totalをピンク黄グラデーションアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>オープンカード</strong></td>
+                                    <td>stats.openを黄色グラデーションアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>対応中カード</strong></td>
+                                    <td>stats.inProgressを青色グラデーションアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決済みカード</strong></td>
+                                    <td>stats.resolvedを緑色グラデーションアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決率カード</strong></td>
+                                    <td>resolved/totalをパーセントで紫グラデーションアイコン付き表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>平均解決日数カード</strong></td>
+                                    <td>stats.avgResolutionDaysを「X.X日」で紫グラデーションアイコン付き表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードが浮き上がりピンク色ボーダーになる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-5" class="manual-subsection">
+                        <h3>18.5 トップヘルパーセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「トップヘルパー」タイトル（bi-trophy-fillアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルパーカードグリッド</strong></td>
+                                    <td>ヘルパーをカードグリッドで表示（最小280px）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件付き表示</strong></td>
+                                    <td>トップヘルパーが1名以上の場合のみセクション表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-top-helpers')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="トップヘルパー" id="img-top-helpers" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-18-6" class="manual-subsection">
+                        <h3>18.6 ヘルパーカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ヘルパーアイコン</strong></td>
+                                    <td>bi-person-badgeアイコンをピンク黄グラデーション背景で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルパー名表示</strong></td>
+                                    <td>full_nameを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決数表示</strong></td>
+                                    <td>resolvedHelpsを「解決数: X」で表示（bi-check-circle-fillアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>総対応数表示</strong></td>
+                                    <td>totalHelpsを「総対応: X」で表示（bi-list-checkアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードが浮き上がりピンク色ボーダーになる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-7" class="manual-subsection">
+                        <h3>18.7 新規リクエスト作成フォーム機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>フォームヘッダー表示</strong></td>
+                                    <td>「新規ヘルプリクエスト作成」タイトル（bi-file-earmark-plusアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスクID入力</strong></td>
+                                    <td>タスクIDの数値入力フィールド（必須）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リクエスターID入力</strong></td>
+                                    <td>リクエスターIDの数値入力フィールド（必須）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>緊急度選択</strong></td>
+                                    <td>low/medium/high/criticalのドロップダウン選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タイトル入力</strong></td>
+                                    <td>リクエストタイトルの入力フィールド（必須）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>説明入力</strong></td>
+                                    <td>リクエスト説明のテキストエリア</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AIコンテキスト生成チェック</strong></td>
+                                    <td>generateContextのチェックボックス（デフォルト有効）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>キャンセルボタン</strong></td>
+                                    <td>フォームを閉じてリセット</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リクエスト作成ボタン</strong></td>
+                                    <td>リクエストを作成（ローディング中は「作成中...」表示）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スライドダウンアニメーション</strong></td>
+                                    <td>フォーム表示時のアニメーション効果</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-help-request-form')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="ヘルプリクエスト作成"
+                                id="img-help-request-form" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-18-8" class="manual-subsection">
+                        <h3>18.8 フィルタパネル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ステータスフィルタ</strong></td>
+                                    <td>すべて/open/assigned/in_progress/resolvedのドロップダウン選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>緊急度フィルタ</strong></td>
+                                    <td>すべて/low/medium/high/criticalのドロップダウン選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクトフィルタ</strong></td>
+                                    <td>すべて/各プロジェクトのドロップダウン選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>フィルタ即時適用</strong></td>
+                                    <td>選択変更時に即座にリストを更新</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-9" class="manual-subsection">
+                        <h3>18.9 リクエスト一覧セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「リクエスト一覧」タイトル（bi-list-ulアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディング表示</strong></td>
+                                    <td>データ読み込み中にスピナーアニメーション付きで「読み込み中...」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>空状態表示</strong></td>
+                                    <td>リクエストがない場合に「ヘルプリクエストがありません」表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-help-list')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="ヘルプリクエスト一覧" id="img-help-list" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-18-10" class="manual-subsection">
+                        <h3>18.10 リクエストカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タイトル表示</strong></td>
+                                    <td>request_titleをクリック可能な太字で表示（クリックで詳細表示）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータスバッジ</strong></td>
+                                    <td>オープン（黄）/割り当て済み（青）/対応中（紫）/解決済み（緑）の色分けバッジ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>緊急度バッジ</strong></td>
+                                    <td>low（緑）/medium（黄）/high（オレンジ）/critical（赤）の色分けバッジ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リクエスター表示</strong></td>
+                                    <td>requesterName（またはID）を「リクエスター: X」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>作成日時表示</strong></td>
+                                    <td>created_atを「作成: YYYY/MM/DD HH:MM」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルパー表示</strong></td>
+                                    <td>assigned_toがある場合に「ヘルパー: X」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルパー割り当てボタン</strong></td>
+                                    <td>openステータス時に表示、割り当てモーダルを開く</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決ボタン</strong></td>
+                                    <td>assigned/in_progressステータス時に表示、解決モーダルを開く</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>詳細表示ボタン</strong></td>
+                                    <td>リクエスト詳細パネルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>選択状態ハイライト</strong></td>
+                                    <td>選択されたカードをピンク色ボーダーとグラデーション背景で強調</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードが浮き上がりピンク色ボーダーになる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-11" class="manual-subsection">
+                        <h3>18.11 リクエスト詳細パネル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>パネルヘッダー</strong></td>
+                                    <td>「リクエスト詳細」タイトルとピンク黄グラデーション背景</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>閉じるボタン（X）</strong></td>
+                                    <td>パネル右上の×ボタンでパネルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タイトル・説明表示</strong></td>
+                                    <td>request_titleとrequest_descriptionを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AIコンテキスト分析表示</strong></td>
+                                    <td>ai_context_summaryがある場合にpreタグで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>固定表示</strong></td>
+                                    <td>パネルを画面右側に固定（幅500px、フルスクロール可能）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-help-detail')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="ヘルプ詳細パネル" id="img-help-detail" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-18-12" class="manual-subsection">
+                        <h3>18.12 推奨ヘルパーセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「推奨ヘルパー」タイトル（✨アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルパー提案カードリスト</strong></td>
+                                    <td>AI提案されたヘルパーをカードリストで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルパー名表示</strong></td>
+                                    <td>full_nameを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>推奨レベルバッジ</strong></td>
+                                    <td>total_match_score>=90で「推奨(高)」緑、>=80で「推奨」青、それ以外は「候補」グレー</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキルマッチスコア表示</strong></td>
+                                    <td>skill_match_scoreを「スキル: X%」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>可用性スコア表示</strong></td>
+                                    <td>availability_scoreを「可用性: X%」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>経験スコア表示</strong></td>
+                                    <td>experience_scoreを「経験: X%」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>総合スコア表示</strong></td>
+                                    <td>total_match_scoreを「総合: X%」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI推論表示</strong></td>
+                                    <td>ai_reasoningをテキストで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>このヘルパーを割り当てボタン</strong></td>
+                                    <td>openステータス時にヘルパーを即座に割り当て</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-help-recommendation')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="推奨ヘルパー"
+                                id="img-help-recommendation" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-18-13" class="manual-subsection">
+                        <h3>18.13 解決ノートセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「解決ノート」タイトル（✨アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決ノート表示</strong></td>
+                                    <td>resolution_notesをテキストで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>効果表示</strong></td>
+                                    <td>effectivenessを「効果: X」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決日時表示</strong></td>
+                                    <td>resolved_atを「解決日時: YYYY/MM/DD HH:MM」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件付き表示</strong></td>
+                                    <td>resolution_notesがある場合のみセクション表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-14" class="manual-subsection">
+                        <h3>18.14 ヘルパー割り当てモーダル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>モーダルヘッダー</strong></td>
+                                    <td>「ヘルパー割り当て」タイトル（📋アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルパー選択</strong></td>
+                                    <td>メンバーリストからヘルパーを選択するドロップダウン</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>キャンセルボタン</strong></td>
+                                    <td>モーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>割り当てボタン</strong></td>
+                                    <td>ヘルパーを割り当て（ローディング中は「割り当て中...」表示）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>背景オーバーレイ</strong></td>
+                                    <td>クリックでモーダルを閉じる半透明オーバーレイ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-15" class="manual-subsection">
+                        <h3>18.15 リクエスト解決モーダル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>モーダルヘッダー</strong></td>
+                                    <td>「リクエスト解決」タイトル（📋アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決ノート入力</strong></td>
+                                    <td>解決内容のテキストエリア（必須）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>効果選択</strong></td>
+                                    <td>very_effective/effective/somewhat_effective/not_effectiveのドロップダウン選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>キャンセルボタン</strong></td>
+                                    <td>モーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>解決ボタン</strong></td>
+                                    <td>リクエストを解決（ローディング中は「解決中...」表示）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>背景オーバーレイ</strong></td>
+                                    <td>クリックでモーダルを閉じる半透明オーバーレイ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-18-16" class="manual-subsection">
+                        <h3>18.16 レスポンシブ対応機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タブレット対応（768px以下）</strong></td>
+                                    <td>詳細パネル全幅表示、下部閉じるボタン表示、フィルタ縦並び</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>モバイル対応（480px以下）</strong></td>
+                                    <td>ボタン全幅表示、タッチターゲット最小48px確保</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>超小画面対応（390px以下）</strong></td>
+                                    <td>さらに最適化されたパディングとフォントサイズ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

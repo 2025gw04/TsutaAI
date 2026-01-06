@@ -1,0 +1,235 @@
+<!-- Section 20 -->
+<section id="section-20" class="manual-section">
+                    <h2>20. 設定画面（/settings）の詳細機能</h2>
+
+                    <div id="subsection-20-1" class="manual-subsection">
+                        <h3>20.1 主要機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タブ切り替え</strong></td>
+                                    <td>LLM API/休日/ユーザー/プロンプト管理/バージョン情報の5タブ切り替え</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>保存ボタン</strong></td>
+                                    <td>各タブの設定を保存（bi-saveアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>エラー・成功メッセージ表示</strong></td>
+                                    <td>操作結果をアラートで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディング表示</strong></td>
+                                    <td>データ読み込み中のスピナー表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-settings-main')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="設定画面メイン"
+                                id="img-settings-main" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-20-2" class="manual-subsection">
+                        <h3>20.2 LLM API設定タブ機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>プロバイダー選択</strong></td>
+                                    <td>Groq/OpenAI/Claude/Ollama/Customから選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロバイダー自動切替</strong></td>
+                                    <td>プロバイダー変更時にデフォルト値（エンドポイント等）を自動設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>APIキー入力</strong></td>
+                                    <td>プロバイダーのAPIキーを入力（パスワード形式で非表示）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>APIキーヘルプテキスト</strong></td>
+                                    <td>プロバイダー別のAPIキー取得先URLリンクを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>エンドポイント入力</strong></td>
+                                    <td>カスタムエンドポイントURLを入力</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>モデル選択</strong></td>
+                                    <td>プロバイダーごとの利用可能モデルをドロップダウン選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Temperature設定</strong></td>
+                                    <td>0-1のスライダーで創造性を設定（0.1刻み）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Max Tokens設定</strong></td>
+                                    <td>1024-131072の範囲で最大トークン数を設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロキシ設定</strong></td>
+                                    <td>プロキシURL、認証情報の設定が可能</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>設定保存</strong></td>
+                                    <td>LLM設定を一括保存（バックエンド再起動が必要な場合あり）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-settings-llm')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="LLM設定" id="img-settings-llm" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-20-3" class="manual-subsection">
+                        <h3>20.3 休日設定タブ機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>休日一覧表示</strong></td>
+                                    <td>登録済み休日をテーブル表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>年度切替</strong></td>
+                                    <td>前年/翌年ボタンで表示対象の年を切り替え</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>新規休日追加ボタン</strong></td>
+                                    <td>休日追加モーダルを開く（bi-plus-circleアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日本の祝日インポートボタン</strong></td>
+                                    <td>インポートモーダルを開く（bi-cloud-downloadアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休日種類バッジ表示</strong></td>
+                                    <td>国民の祝日（赤）/会社休日（青）/その他（グレー）を色分け表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休日削除ボタン</strong></td>
+                                    <td>個別の休日を削除</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-settings-holiday')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="休日設定"
+                                id="img-settings-holiday" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-20-4" class="manual-subsection">
+                        <h3>20.4 ユーザー管理タブ機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ユーザー一覧表示</strong></td>
+                                    <td>全ユーザーをテーブル表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>権限バッジ表示</strong></td>
+                                    <td>管理者（赤）/メンバー（青）をバッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>新規ユーザー追加ボタン</strong></td>
+                                    <td>ユーザー追加モーダルを開く</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ユーザー編集ボタン</strong></td>
+                                    <td>ユーザー情報編集モーダルを開く</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>権限切替ボタン</strong></td>
+                                    <td>管理者⇔メンバーの権限をワンクリックで切替</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ユーザー削除ボタン</strong></td>
+                                    <td>ユーザーを削除（確認ダイアログ付き）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-settings-users')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="ユーザー管理"
+                                id="img-settings-users" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-20-5" class="manual-subsection">
+                        <h3>20.5 プロンプト管理タブ機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>プロンプト一覧表示</strong></td>
+                                    <td>システム内で使用されるプロンプト定義を一覧表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>編集ボタン</strong></td>
+                                    <td>プロンプト編集モーダルを開く</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カスタマイズ状態表示</strong></td>
+                                    <td>システムデフォルトかカスタマイズ済みかを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>デフォルトに戻す</strong></td>
+                                    <td>カスタマイズを破棄して初期値に戻す</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-20-6" class="manual-subsection">
+                        <h3>20.6 バージョン情報タブ機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>現在のバージョン表示</strong></td>
+                                    <td>現在稼働中のアプリケーションバージョンを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>変更履歴表示</strong></td>
+                                    <td>CHANGELOGの内容を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リリース日表示</strong></td>
+                                    <td>バージョンごとのリリース日を表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

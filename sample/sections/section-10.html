@@ -1,0 +1,627 @@
+<!-- Section 10 -->
+<section id="section-10" class="manual-section">
+                    <h2>10. WBS管理画面（/projects/[id]/wbs）の詳細機能</h2>
+
+                    <div id="subsection-10-1" class="manual-subsection">
+                        <h3>10.1 ツールバー（WbsToolbar.svelte）のボタン一覧</h3>
+
+                        <h4>主要アクションボタン</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>ボタン名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>AIでWBS生成</strong></td>
+                                    <td>プロジェクト情報を元に全WBSをAI生成</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ルートタスク追加</strong></td>
+                                    <td>手動で最上位タスクを追加</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>データ操作</strong></td>
+                                    <td>インポート/エクスポートのハブ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WBS保存</strong></td>
+                                    <td>データベースへ確定保存</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>AI機能グループ</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>ボタン名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>AIアシスタント</strong></td>
+                                    <td>チャット形式でタスク操作</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リスケジュール提案</strong></td>
+                                    <td>遅延検知とリスケ提案（通知バッジ付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI自動割り当て</strong></td>
+                                    <td>メンバースキルベースの自動アサイン</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI期間設定</strong></td>
+                                    <td>タスク複雑度から期間を自動計算</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>編集操作</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>ボタン名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>元に戻す</strong></td>
+                                    <td>Undo</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>やり直し</strong></td>
+                                    <td>Redo</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>履歴</strong></td>
+                                    <td>変更履歴パネル表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>表示切替</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>ボタン名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ツリービュー</strong></td>
+                                    <td>階層構造表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ボードビュー</strong></td>
+                                    <td>カンバン形式</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ガントチャート</strong></td>
+                                    <td>タイムライン表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カレンダービュー</strong></td>
+                                    <td>カレンダー形式</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>検索・フィルタ</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>検索ボックス</strong></td>
+                                    <td>タスク名検索</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ソート</strong></td>
+                                    <td>期限/優先度/担当者/進捗率順</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>フィルタ</strong></td>
+                                    <td>担当者/ステータス/優先度/タグ/期限範囲</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>その他メニュー（...ボタン）</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>アーカイブを表示/非表示</strong></td>
+                                    <td>完了タスクの表示切替</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI健全性チェック</strong></td>
+                                    <td>WBS全体の問題を診断</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>工数を再計算</strong></td>
+                                    <td>全タスク工数再計算</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>テンプレートとして保存</strong></td>
+                                    <td>WBS構造をテンプレート化</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>テンプレートから読み込み</strong></td>
+                                    <td>テンプレート適用</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-wbs-toolbar')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="WBSツールバー" id="img-wbs-toolbar" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-10-2" class="manual-subsection">
+                        <h3>10.2 表示ビュー詳細</h3>
+
+                        <h4>ツリービュー（WbsTree.svelte）</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>階層構造表示</strong></td>
+                                    <td>タスクの親子関係を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>インライン編集</strong></td>
+                                    <td>タスク属性をその場で編集</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ドラッグ&ドロップ</strong></td>
+                                    <td>タスク移動・並び替え</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>展開/折りたたみ</strong></td>
+                                    <td>子タスクの表示切替</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>右クリックメニュー</strong></td>
+                                    <td>コンテキストメニュー表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カラーコーディング</strong></td>
+                                    <td>優先度・進捗に応じた色分け</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="note">
+                            <strong>右クリックメニューの項目:</strong>
+                            <ul>
+                                <li>タスク選択: 詳細パネル表示</li>
+                                <li>AI分解: サブタスク自動生成</li>
+                                <li>AI改善: タスク内容のブラッシュアップ</li>
+                                <li>子タスク追加: 手動で子タスク追加</li>
+                                <li>タスク削除: タスク削除</li>
+                                <li>タスク複製: タスク複製</li>
+                                <li>アーカイブ: タスクをアーカイブ</li>
+                            </ul>
+                        </div>
+                        <div class="feature-image" onclick="openGallery('img-wbs-tree')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="WBSツリービュー" id="img-wbs-tree" />
+                        </div>
+
+                        <h4>ガントチャート（GanttView.svelte）</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タイムライン表示</strong></td>
+                                    <td>時系列でタスクを配置</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>予定バー（青）</strong></td>
+                                    <td>計画期間を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>実績バー（緑）</strong></td>
+                                    <td>実際の作業期間を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ドラッグでタスク移動</strong></td>
+                                    <td>バーをドラッグして開始日変更</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>バー端のリサイズ</strong></td>
+                                    <td>バー端をドラッグして期間調整</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>土日・祝日の色分け</strong></td>
+                                    <td>休日を視覚的に区別</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>月/日付ヘッダー</strong></td>
+                                    <td>月と日付を2段階表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>依存関係の矢印</strong></td>
+                                    <td>タスク間の依存を線で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>クリティカルパス</strong></td>
+                                    <td>重要タスクを赤色で強調</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>マイルストーン</strong></td>
+                                    <td>重要節目をダイヤモンド表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進捗バー</strong></td>
+                                    <td>タスクバー内に進捗率表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-wbs-gantt')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="WBSガントチャート" id="img-wbs-gantt" />
+                        </div>
+
+                        <h4>ボードビュー（BoardView.svelte）</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ステータス列</strong></td>
+                                    <td>未着手/進行中/レビュー中/完了の列</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードのドラッグ</strong></td>
+                                    <td>カードを別列にドラッグでステータス変更</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WIP制限</strong></td>
+                                    <td>各列の最大タスク数設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スイムレーン</strong></td>
+                                    <td>担当者/フェーズごとの横レーン</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カード詳細</strong></td>
+                                    <td>優先度/期限/担当者/タグ表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-wbs-board')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="WBSボードビュー" id="img-wbs-board" />
+                        </div>
+
+                        <h4>カレンダービュー（CalendarView.svelte）</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>月表示/週表示</strong></td>
+                                    <td>表示粒度の切り替え</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスクのドラッグ</strong></td>
+                                    <td>別の日にドラッグして日程変更</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>優先度・ステータスの色分け</strong></td>
+                                    <td>タスクを色で区別</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休日表示</strong></td>
+                                    <td>祝日や休業日の色分け</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>複数タスク</strong></td>
+                                    <td>1日に複数タスクを積み重ねて表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>今日のハイライト</strong></td>
+                                    <td>現在の日付を強調</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>前月/次月ナビゲーション</strong></td>
+                                    <td>月の移動</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>今日に戻るボタン</strong></td>
+                                    <td>ワンクリックで今日にジャンプ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-wbs-calendar')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="WBSカレンダービュー"
+                                id="img-wbs-calendar" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-10-3" class="manual-subsection">
+                        <h3>10.3 タスク詳細パネル（TaskDetailPanel.svelte）</h3>
+
+                        <h4>詳細タブ</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>フィールド名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タスク名</strong></td>
+                                    <td>タイトル編集</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>詳細説明</strong></td>
+                                    <td>Markdown対応、AI生成ボタン付き</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>担当者</strong></td>
+                                    <td>ドロップダウンで選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>開始日</strong></td>
+                                    <td>カレンダーピッカーで設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>終了日</strong></td>
+                                    <td>カレンダーピッカーで設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>実績開始日</strong></td>
+                                    <td>実際の開始日（「今日」ボタン対応）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>実績終了日</strong></td>
+                                    <td>実際の終了日（「今日」ボタン対応）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータス</strong></td>
+                                    <td>未着手/計画中/進行中/レビュー待ち/ブロック中/完了</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>優先度</strong></td>
+                                    <td>高/中/低</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>想定工数</strong></td>
+                                    <td>自動計算・読み取り専用</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進捗率</strong></td>
+                                    <td>0〜100%のスライダー</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>成果物</strong></td>
+                                    <td>成果物の記述</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タグ</strong></td>
+                                    <td>複数タグ追加</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>備考</strong></td>
+                                    <td>補足情報</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>コメントタブ</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>コメント一覧</strong></td>
+                                    <td>時系列でコメント表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>新規コメント追加</strong></td>
+                                    <td>Markdown対応</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>@メンション</strong></td>
+                                    <td>@ユーザー名で通知送信</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リアルタイム更新</strong></td>
+                                    <td>他メンバーのコメントが即座に表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>編集・削除</strong></td>
+                                    <td>自分のコメントの編集・削除</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>依存関係タブ</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>先行タスク</strong></td>
+                                    <td>開始前に完了すべきタスク設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>後続タスク</strong></td>
+                                    <td>完了後に開始できるタスク設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>依存タイプ</strong></td>
+                                    <td>FS/SS/FF/SF から選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リードタイム/ラグタイム</strong></td>
+                                    <td>時間的な余裕や遅延の設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>循環依存検知</strong></td>
+                                    <td>矛盾する依存関係の警告</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>アクティビティログタブ</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>変更履歴</strong></td>
+                                    <td>全変更を時系列で記録</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>詳細情報</strong></td>
+                                    <td>誰が、いつ、何を変更したか</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>差分表示</strong></td>
+                                    <td>変更前後の値を並べて表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-task-detail')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="タスク詳細" id="img-task-detail" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-10-4" class="manual-subsection">
+                        <h3>10.4 モーダル一覧</h3>
+
+                        <h4>AI関連モーダル</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>モーダル名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>GenerationModal</strong></td>
+                                    <td>AIでWBS生成</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WbsAiAssistantPanel</strong></td>
+                                    <td>チャット形式でタスク操作</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TaskDecomposeModal</strong></td>
+                                    <td>AIサブタスク提案</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TaskRefineModal</strong></td>
+                                    <td>AIタスク改善</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RescheduleProposalModal</strong></td>
+                                    <td>リスケジュール提案</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AutoAssignModal</strong></td>
+                                    <td>AI自動割り当て</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AutoDurationModal</strong></td>
+                                    <td>AI期間設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>SanityCheckResults</strong></td>
+                                    <td>健全性チェック結果</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>データ操作モーダル</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>モーダル名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>DataOperationsModal</strong></td>
+                                    <td>データ操作ハブ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TaskImportModal</strong></td>
+                                    <td>タスクインポート（JSON/CSV対応）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>TaskExportModal</strong></td>
+                                    <td>タスクエクスポート（JSON/CSV選択）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4>テンプレート・設定</h4>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>モーダル名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>TemplateManager</strong></td>
+                                    <td>テンプレート管理（保存・読み込み・削除）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>HistoryPanel</strong></td>
+                                    <td>変更履歴パネル（過去/現在/未来の履歴表示、任意時点への復元）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

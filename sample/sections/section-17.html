@@ -1,0 +1,328 @@
+<!-- Section 17 -->
+<section id="section-17" class="manual-section">
+                    <h2>17. メンタルヘルス画面（/mental-health）の詳細機能</h2>
+
+                    <div id="subsection-17-1" class="manual-subsection">
+                        <h3>17.1 ページヘッダー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ページタイトル表示</strong></td>
+                                    <td>「メンタルヘルスダッシュボード」のタイトルを表示（bi-heart-pulseアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サブタイトル表示</strong></td>
+                                    <td>「チームメンバーのメンタルヘルスをAIで分析・サポート」の説明文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>更新ボタン</strong></td>
+                                    <td>データを最新状態に更新（bi-arrow-clockwiseアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>更新中状態表示</strong></td>
+                                    <td>更新中に「更新中...」と表示しボタン無効化</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>グラデーションヘッダー</strong></td>
+                                    <td>紫のグラデーション背景（#667eea → #764ba2）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-mental-header')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メンタルヘルスヘッダー"
+                                id="img-mental-header" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-17-2" class="manual-subsection">
+                        <h3>17.2 エラー・ローディング表示機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>エラーメッセージ表示</strong></td>
+                                    <td>API通信失敗時にエラーメッセージを赤色ボックスで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディング表示</strong></td>
+                                    <td>データ読み込み中にスピナーアニメーション付きで「読み込み中...」表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-17-3" class="manual-subsection">
+                        <h3>17.3 チームサマリーセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「チーム全体のメンタルヘルス（過去7日間）」タイトル（bi-people-fillアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サマリーカードグリッド</strong></td>
+                                    <td>4つの統計カードをレスポンシブグリッドで表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-mental-summary')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メンタルヘルスサマリー"
+                                id="img-mental-summary" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-17-4" class="manual-subsection">
+                        <h3>17.4 チームサマリーカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>平均気分カード</strong></td>
+                                    <td>絵文字（😄/🙂/😐/😟/😢）とスコア（0-5）を紫グラデーションアイコンで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>平均ストレスレベルカード</strong></td>
+                                    <td>スコアを色分け（赤/オレンジ/緑）でピンクグラデーションアイコン付き表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ブロッカー報告カード</strong></td>
+                                    <td>blockerCountを「X件」形式でオレンジグラデーションアイコン付き表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サポート希望カード</strong></td>
+                                    <td>needSupportCountを「X件」形式で青紫グラデーションアイコン付き表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>データなし表示</strong></td>
+                                    <td>データがない場合に「データなし」をグレー文字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードが浮き上がり紫色ボーダーになる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-17-5" class="manual-subsection">
+                        <h3>17.5 サポート必要メンバーセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「サポートが必要なメンバー（X名）」タイトル（bi-person-heartアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバーグリッド表示</strong></td>
+                                    <td>サポートが必要なメンバーをカードグリッドで表示（最小320px）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サポート不要メッセージ</strong></td>
+                                    <td>サポートが不要な場合に「✅ 現在、サポートが必要なメンバーはいません」緑色ボックスで表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-support-needed')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="サポート必要メンバー"
+                                id="img-support-needed" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-17-6" class="manual-subsection">
+                        <h3>17.6 サポート必要メンバーカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>フルネーム表示</strong></td>
+                                    <td>メンバーのフルネームを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ユーザー名表示</strong></td>
+                                    <td>@usernameの形式でユーザー名をグレー文字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>気分スコア表示</strong></td>
+                                    <td>avgMoodを絵文字とスコアで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ストレススコア表示</strong></td>
+                                    <td>avgStressを色分け（赤/オレンジ/緑）で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サポート希望バッジ</strong></td>
+                                    <td>supportNeedsが1以上の場合に「サポート希望: X件」黄色バッジ表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>選択状態ハイライト</strong></td>
+                                    <td>選択されたカードを紫色ボーダーとグラデーション背景で強調</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>クリック選択機能</strong></td>
+                                    <td>カードクリックでメンバー詳細を取得・表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードが浮き上がり紫色ボーダーになる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-17-7" class="manual-subsection">
+                        <h3>17.7 メンバー詳細セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「[フルネーム]の詳細」タイトル（bi-person-circleアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>詳細グリッド表示</strong></td>
+                                    <td>トレンドとアクティビティをグリッドで表示（最小350px）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件付き表示</strong></td>
+                                    <td>メンバー選択時のみ詳細セクションを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-mental-detail')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メンタルヘルス詳細"
+                                id="img-mental-detail" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-17-8" class="manual-subsection">
+                        <h3>17.8 メンタルヘルストレンドカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>カードタイトル表示</strong></td>
+                                    <td>「メンタルヘルストレンド（過去4週間）」タイトル（📊アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>トレンドステータス表示</strong></td>
+                                    <td>「📈 改善中」「📉 悪化」「➡️ 安定」のいずれかを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>週次データリスト</strong></td>
+                                    <td>各週の平均気分（絵文字付き）とストレスを行形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>週ラベル表示</strong></td>
+                                    <td>「Week X」形式で週番号を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>行ホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時に行がスライドしボーダー変化</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-17-9" class="manual-subsection">
+                        <h3>17.9 アクティビティ分析カード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>カードタイトル表示</strong></td>
+                                    <td>「アクティビティ分析（過去24時間）」タイトル（📊アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>異常検知アラート</strong></td>
+                                    <td>hasAnomalyがtrueの場合に「⚠️ 異常検知」と異常リストを黄色ボックスで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>異常なしメッセージ</strong></td>
+                                    <td>異常がない場合に「✅ 異常は検知されていません」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>平均アクティビティスコア表示</strong></td>
+                                    <td>stats.avgActivityScoreを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ログ数表示</strong></td>
+                                    <td>stats.totalLogsを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-activity-analysis')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="アクティビティ分析"
+                                id="img-activity-analysis" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-17-10" class="manual-subsection">
+                        <h3>17.10 レスポンシブ対応機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タブレット対応（768px以下）</strong></td>
+                                    <td>グリッド1列表示、ヘッダー縦並び</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>モバイル対応（480px以下）</strong></td>
+                                    <td>更新ボタン全幅表示、タッチターゲット最小48px確保</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

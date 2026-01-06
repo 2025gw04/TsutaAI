@@ -1,0 +1,461 @@
+<!-- Section 14 -->
+<section id="section-14" class="manual-section">
+                    <h2>14. 作業報告画面（/work-reports）の詳細機能</h2>
+
+                    <div id="subsection-14-1" class="manual-subsection">
+                        <h3>14.1 ページヘッダー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ページタイトル表示</strong></td>
+                                    <td>「📋 作業報告一覧」のタイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サブタイトル表示</strong></td>
+                                    <td>「メンバーの日報と作業ログを確認できます」の説明文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>エラーメッセージ表示</strong></td>
+                                    <td>API通信失敗時にエラーメッセージを赤色アラートで表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-work-report-header')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="作業報告ヘッダー"
+                                id="img-work-report-header" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-14-2" class="manual-subsection">
+                        <h3>14.2 フィルタパネル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>メンバーフィルタ</strong></td>
+                                    <td>ドロップダウンで特定ユーザーの報告を絞り込み</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日付フィルタ</strong></td>
+                                    <td>日付入力フィールドで特定日の報告を絞り込み</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>表示モード選択</strong></td>
+                                    <td>「日報 + 作業ログ」「日報のみ」「作業ログのみ」の3モード切り替え</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>フィルタクリアボタン</strong></td>
+                                    <td>すべてのフィルタ条件をリセット</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>フィルタ即時適用</strong></td>
+                                    <td>フィルタ変更時に即座にリストを更新（applyFilters関数）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-work-report-filter')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="作業報告フィルタ"
+                                id="img-work-report-filter" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-14-3" class="manual-subsection">
+                        <h3>14.3 ローディング表示機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>スピナー表示</strong></td>
+                                    <td>データ読み込み中にスピナーアニメーションを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>読み込みメッセージ</strong></td>
+                                    <td>「データを読み込んでいます...」メッセージを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-14-4" class="manual-subsection">
+                        <h3>14.4 日報セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー</strong></td>
+                                    <td>「📝 日報」タイトルと件数を青色ヘッダーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日報一覧テーブル</strong></td>
+                                    <td>フィルタされた日報を一覧表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>空状態表示</strong></td>
+                                    <td>該当する日報がない場合のメッセージ表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件付き表示</strong></td>
+                                    <td>表示モードが「日報のみ」または「両方」の場合のみ表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>レスポンシブ幅調整</strong></td>
+                                    <td>表示モードに応じてカラム幅を自動調整（6列または12列）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-daily-report-list')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="日報一覧"
+                                id="img-daily-report-list" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-14-5" class="manual-subsection">
+                        <h3>14.5 日報テーブル列機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>日付列</strong></td>
+                                    <td>report_dateを日本語日付形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバー列</strong></td>
+                                    <td>user_name（member_nameから取得）を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>満足度列</strong></td>
+                                    <td>satisfaction_levelを絵文字（😊/😐/😞）付きバッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>達成率列</strong></td>
+                                    <td>achievement_rateを緑色プログレスバーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>要約列</strong></td>
+                                    <td>summaryをトランケート（最大300px幅）で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>詳細ボタン</strong></td>
+                                    <td>クリックで日報詳細モーダルを開く</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日付ソート</strong></td>
+                                    <td>日付の新しい順にソート</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-14-6" class="manual-subsection">
+                        <h3>14.6 作業ログセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー</strong></td>
+                                    <td>「⏱️ 作業ログ」タイトルと件数を緑色ヘッダーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>作業ログ一覧テーブル</strong></td>
+                                    <td>フィルタされた作業ログを一覧表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>空状態表示</strong></td>
+                                    <td>該当する作業ログがない場合のメッセージ表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件付き表示</strong></td>
+                                    <td>表示モードが「作業ログのみ」または「両方」の場合のみ表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>レスポンシブ幅調整</strong></td>
+                                    <td>表示モードに応じてカラム幅を自動調整（6列または12列）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-work-log-list')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="作業ログ一覧" id="img-work-log-list" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-14-7" class="manual-subsection">
+                        <h3>14.7 作業ログテーブル列機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>開始時刻列</strong></td>
+                                    <td>start_timeを日本語日時形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバー列</strong></td>
+                                    <td>user_nameを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>作業時間列</strong></td>
+                                    <td>duration_minutesを「X時間Y分」形式のバッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>活動種別列</strong></td>
+                                    <td>activity_typeを日本語ラベル（コーディング/会議/レビュー等）のバッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>詳細ボタン</strong></td>
+                                    <td>クリックで作業ログ詳細モーダルを開く</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>開始時刻ソート</strong></td>
+                                    <td>開始時刻の新しい順にソート</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-14-8" class="manual-subsection">
+                        <h3>14.8 活動種別ラベル対応</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>coding</strong></td>
+                                    <td>「コーディング」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>meeting</strong></td>
+                                    <td>「会議」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>review</strong></td>
+                                    <td>「レビュー」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>planning</strong></td>
+                                    <td>「計画」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>testing</strong></td>
+                                    <td>「テスト」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>documentation</strong></td>
+                                    <td>「ドキュメント作成」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>research</strong></td>
+                                    <td>「調査」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>other</strong></td>
+                                    <td>「その他」と表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-14-9" class="manual-subsection">
+                        <h3>14.9 日報詳細モーダル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>モーダルヘッダー</strong></td>
+                                    <td>「📝 日報詳細」タイトルを青色ヘッダーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>閉じるボタン（X）</strong></td>
+                                    <td>ヘッダー右上の×ボタンでモーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日付表示</strong></td>
+                                    <td>report_dateを日本語日付形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバー表示</strong></td>
+                                    <td>user_nameを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>満足度表示</strong></td>
+                                    <td>satisfaction_levelを絵文字付きバッジで大きく表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>達成率表示</strong></td>
+                                    <td>achievement_rateを緑色バッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>集中度表示</strong></td>
+                                    <td>focus_levelを黄色バッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>難易度表示</strong></td>
+                                    <td>difficulty_levelを赤色バッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>学習度表示</strong></td>
+                                    <td>learning_levelを水色プログレスバーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>要約表示</strong></td>
+                                    <td>summaryをアラートボックス内に表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>コメント表示</strong></td>
+                                    <td>commentが存在する場合にアラートボックス内に表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI生成バッジ</strong></td>
+                                    <td>ai_generatedがtrueの場合に「AI生成」バッジを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>作成日時表示</strong></td>
+                                    <td>created_atを日本語日時形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>閉じるボタン</strong></td>
+                                    <td>モーダルフッターの「閉じる」ボタンでモーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>背景オーバーレイ</strong></td>
+                                    <td>モーダル背景を半透明黒色でオーバーレイ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-daily-report-detail')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="日報詳細"
+                                id="img-daily-report-detail" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-14-10" class="manual-subsection">
+                        <h3>14.10 作業ログ詳細モーダル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>モーダルヘッダー</strong></td>
+                                    <td>「⏱️ 作業ログ詳細」タイトルを緑色ヘッダーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>閉じるボタン（X）</strong></td>
+                                    <td>ヘッダー右上の×ボタンでモーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバー表示</strong></td>
+                                    <td>user_nameを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>活動種別表示</strong></td>
+                                    <td>activity_typeを日本語ラベルのバッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>開始時刻表示</strong></td>
+                                    <td>start_timeを日本語日時形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>終了時刻表示</strong></td>
+                                    <td>end_timeを日本語日時形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>作業時間表示</strong></td>
+                                    <td>duration_minutesを「X時間Y分」形式で大きく表示（アラートボックス内）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メモ表示</strong></td>
+                                    <td>notesが存在する場合にアラートボックス内に表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>作成日時表示</strong></td>
+                                    <td>created_atを日本語日時形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>閉じるボタン</strong></td>
+                                    <td>モーダルフッターの「閉じる」ボタンでモーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>背景オーバーレイ</strong></td>
+                                    <td>モーダル背景を半透明黒色でオーバーレイ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-work-log-detail')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="作業ログ詳細"
+                                id="img-work-log-detail" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-14-11" class="manual-subsection">
+                        <h3>14.11 レスポンシブ対応機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タブレット対応（768px以下）</strong></td>
+                                    <td>テーブルをカードレイアウトに変換、ヘッダー非表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>モバイル対応（480px以下）</strong></td>
+                                    <td>タッチターゲット最小48px確保、モーダルフルスクリーン化</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>データラベル属性</strong></td>
+                                    <td>カードレイアウト時に各セルにラベルを表示（data-label属性）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

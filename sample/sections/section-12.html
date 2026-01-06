@@ -1,0 +1,157 @@
+<!-- Section 12 -->
+<section id="section-12" class="manual-section">
+                    <h2>12. プロジェクト健全性画面（/project-health）の詳細機能</h2>
+
+                    <div id="subsection-12-1" class="manual-subsection">
+                        <h3>12.1 主要機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>プロジェクト選択</strong></td>
+                                    <td>ドロップダウンで対象プロジェクトを選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>健全性スコア計算</strong></td>
+                                    <td>AIで健全性スコアを算出</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-project-health-main')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="プロジェクト健全性"
+                                id="img-project-health-main" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-12-2" class="manual-subsection">
+                        <h3>12.2 タブ構成（3タブ）</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>タブ名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>健全性スコアタブ</strong></td>
+                                    <td>0-100のスコアと履歴表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>バーンダウンタブ</strong></td>
+                                    <td>プロジェクトのバーンダウンチャート</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>クリティカルパスタブ</strong></td>
+                                    <td>重要タスクチェーンの可視化</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-12-3" class="manual-subsection">
+                        <h3>12.3 健全性スコアタブ詳細</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>総合スコア表示</strong></td>
+                                    <td>0-100のスコアと良好/注意/警告/危険ラベル</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スコア色分け</strong></td>
+                                    <td>80以上緑/60以上黄/40以上オレンジ/赤</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スコア履歴表示</strong></td>
+                                    <td>過去30日間のスコア推移</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スコア計算ボタン</strong></td>
+                                    <td>AIで健全性スコアを再計算</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リスク要因表示</strong></td>
+                                    <td>検出されたリスク要因一覧</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>推奨アクション表示</strong></td>
+                                    <td>改善のための推奨アクション</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-health-score')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="健全性スコア" id="img-health-score" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-12-4" class="manual-subsection">
+                        <h3>12.4 バーンダウンタブ詳細</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>バーンダウンチャート表示</strong></td>
+                                    <td>残タスク数の推移グラフ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>バーンダウン記録ボタン</strong></td>
+                                    <td>現在のバーンダウンをDBに記録</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>過去30日分表示</strong></td>
+                                    <td>バーンダウン履歴を表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-health-burndown')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="バーンダウンチャート"
+                                id="img-health-burndown" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-12-5" class="manual-subsection">
+                        <h3>12.5 クリティカルパスタブ詳細</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>クリティカルタスク一覧</strong></td>
+                                    <td>重要タスクチェーンをリスト表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>クリティカルパス分析ボタン</strong></td>
+                                    <td>AIでクリティカルパスを分析</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスク詳細表示</strong></td>
+                                    <td>各タスクの期間・依存関係を表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-health-critical-path')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="クリティカルパス"
+                                id="img-health-critical-path" />
+                        </div>
+                    </div>
+                </section>

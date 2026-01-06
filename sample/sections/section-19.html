@@ -1,0 +1,432 @@
+<!-- Section 19 -->
+<section id="section-19" class="manual-section">
+                    <h2>19. 成長記録画面（/members/[id]/growth）の詳細機能</h2>
+
+                    <div id="subsection-19-1" class="manual-subsection">
+                        <h3>19.1 ページヘッダー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ページタイトル表示</strong></td>
+                                    <td>「成長レポート」のタイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サブタイトル表示</strong></td>
+                                    <td>「メンバーのスキル成長、パフォーマンス、貢献記録を確認できます」の説明文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>期間選択</strong></td>
+                                    <td>過去3ヶ月/6ヶ月/12ヶ月のドロップダウン選択（デフォルト6ヶ月）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバー一覧に戻るボタン</strong></td>
+                                    <td>/membersへのリンク（bi-arrow-leftアイコン付き）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-growth-header')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="成長記録ヘッダー"
+                                id="img-growth-header" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-19-2" class="manual-subsection">
+                        <h3>19.2 エラー・ローディング表示機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>エラーメッセージ表示</strong></td>
+                                    <td>API通信失敗時にエラーメッセージを赤色ボックスで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディング表示</strong></td>
+                                    <td>データ読み込み中に「読み込み中です…」表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-19-3" class="manual-subsection">
+                        <h3>19.3 概要セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「概要」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サマリーグリッド表示</strong></td>
+                                    <td>4つの概要項目をレスポンシブグリッドで表示（最小200px）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>総スキル数表示</strong></td>
+                                    <td>summary.totalSkillsを大きな数値で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>平均スキルレベル表示</strong></td>
+                                    <td>summary.avgSkillLevelを小数点1桁で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>成長したスキル数表示</strong></td>
+                                    <td>summary.improvedSkillsを大きな数値で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>アクティブな目標数表示</strong></td>
+                                    <td>activeステータスの目標数をカウントして表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-growth-summary')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="成長記録サマリー"
+                                id="img-growth-summary" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-19-4" class="manual-subsection">
+                        <h3>19.4 スキル成長履歴セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「スキル成長履歴」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>履歴未登録メッセージ</strong></td>
+                                    <td>履歴がない場合に「スキル成長履歴がありません」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>履歴テーブル表示</strong></td>
+                                    <td>スキル成長履歴をテーブル形式で表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-growth-history')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="スキル成長履歴"
+                                id="img-growth-history" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-19-5" class="manual-subsection">
+                        <h3>19.5 スキル成長履歴テーブル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>記録日列</strong></td>
+                                    <td>recordedDateを日本語日付形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキル名列</strong></td>
+                                    <td>skillNameを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>レベル列</strong></td>
+                                    <td>skillLevelをプログレスバーと「X/10」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>変更理由列</strong></td>
+                                    <td>changeReasonを表示（未設定の場合は「-」）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>備考列</strong></td>
+                                    <td>notesを表示（未設定の場合は「-」、トランケート表示）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>レベルバー表示</strong></td>
+                                    <td>スキルレベルを緑グラデーションのプログレスバーで視覚化</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-19-6" class="manual-subsection">
+                        <h3>19.6 パフォーマンスメトリクスセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「パフォーマンスメトリクス」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メトリクス未登録メッセージ</strong></td>
+                                    <td>メトリクスがない場合に「パフォーマンスメトリクスがありません」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メトリクステーブル表示</strong></td>
+                                    <td>パフォーマンスメトリクスをテーブル形式で表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-performance-metrics')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="パフォーマンスメトリクス"
+                                id="img-performance-metrics" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-19-7" class="manual-subsection">
+                        <h3>19.7 パフォーマンスメトリクステーブル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>月列</strong></td>
+                                    <td>metricDateを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスク完了率列</strong></td>
+                                    <td>taskCompletionRateを「X.X%」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>バグ率列</strong></td>
+                                    <td>bugRateを「X.X%」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ヘルプ回数列</strong></td>
+                                    <td>helpCountを「X回」形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>平均集中度列</strong></td>
+                                    <td>focusLevelAvgを小数点1桁で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>完了タスク数列</strong></td>
+                                    <td>tasksCompletedを「X件」形式で表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-19-8" class="manual-subsection">
+                        <h3>19.8 主な貢献セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「主な貢献」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>貢献未登録メッセージ</strong></td>
+                                    <td>貢献がない場合に「貢献記録がありません」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>貢献カードリスト表示</strong></td>
+                                    <td>貢献をカードリスト形式で表示（左ボーダー青）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-contributions')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="主な貢献" id="img-contributions" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-19-9" class="manual-subsection">
+                        <h3>19.9 貢献カード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タイトル表示</strong></td>
+                                    <td>貢献タイトルを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日付表示</strong></td>
+                                    <td>contributionDateを日本語日付形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>種類バッジ表示</strong></td>
+                                    <td>contributionTypeを日本語ラベル（タスク完了/メンタリング等）の青色バッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>影響度バッジ表示</strong></td>
+                                    <td>impactLevelを色分け（high:赤、medium:オレンジ、low:緑）バッジで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>説明表示</strong></td>
+                                    <td>descriptionが存在する場合にグレー文字で表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-19-10" class="manual-subsection">
+                        <h3>19.10 貢献種別ラベル対応</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>task_completion</strong></td>
+                                    <td>「タスク完了」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>mentoring</strong></td>
+                                    <td>「メンタリング」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>documentation</strong></td>
+                                    <td>「ドキュメント作成」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>innovation</strong></td>
+                                    <td>「改善・革新」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>other</strong></td>
+                                    <td>「その他」と表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-19-11" class="manual-subsection">
+                        <h3>19.11 成長目標セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「成長目標」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>目標未設定メッセージ</strong></td>
+                                    <td>目標がない場合に「成長目標が設定されていません」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>目標カードリスト表示</strong></td>
+                                    <td>目標をカードリスト形式で表示（左ボーダー青）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-growth-goals')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="成長目標" id="img-growth-goals" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-19-12" class="manual-subsection">
+                        <h3>19.12 目標カード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タイトル表示</strong></td>
+                                    <td>goalTitleを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータスバッジ表示</strong></td>
+                                    <td>statusを色分け（active:青、completed:緑、cancelled:グレー）バッジで日本語ラベル表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>説明表示</strong></td>
+                                    <td>goalDescriptionが存在する場合にグレー文字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>目標スキル表示</strong></td>
+                                    <td>targetSkillとtargetLevelを「目標スキル: X (Lv.Y)」形式でbi-trophyアイコン付き表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>推定期間表示</strong></td>
+                                    <td>estimatedDurationWeeksを「推定期間: X週間」形式でbi-calendarアイコン付き表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進捗バー表示</strong></td>
+                                    <td>activeステータス時にprogressを青グラデーションプログレスバーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進捗パーセント表示</strong></td>
+                                    <td>progressを「X%」形式でプログレスバー中央に表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-19-13" class="manual-subsection">
+                        <h3>19.13 ステータスラベル対応</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>active</strong></td>
+                                    <td>「アクティブ」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>completed</strong></td>
+                                    <td>「完了」と表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>cancelled</strong></td>
+                                    <td>「キャンセル」と表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

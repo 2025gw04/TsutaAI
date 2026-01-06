@@ -1,0 +1,253 @@
+<!-- Section 3 -->
+<section id="section-3" class="manual-section">
+                    <h2>3. ダッシュボード画面（/dashboard）の詳細機能</h2>
+
+                    <div id="subsection-3-1" class="manual-subsection">
+                        <h3>3.1 メトリクスグリッド</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>メトリクス名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>総プロジェクト数</strong></td>
+                                    <td>登録済みの全プロジェクト数を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>アクティブ案件</strong></td>
+                                    <td>完了済み以外のプロジェクト数を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>期限超過タスク数</strong></td>
+                                    <td>期限を過ぎた未完了タスクの数を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>直近期限タスク数</strong></td>
+                                    <td>今週（7日以内）が締切のタスク数を表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-metrics')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メトリクスグリッド" id="img-metrics" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-3-2" class="manual-subsection">
+                        <h3>3.2 ProjectCardコンポーネント</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>プロジェクト名表示</strong></td>
+                                    <td>プロジェクト名とクリックで詳細ページへ遷移</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクト説明</strong></td>
+                                    <td>プロジェクト概要テキスト表示（未入力時はデフォルトメッセージ）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータスバッジ</strong></td>
+                                    <td>計画中/進行中/保留/完了のステータス表示（色分け）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進捗リング</strong></td>
+                                    <td>円形プログレスバーで進捗率を視覚表示（AIサマリー優先、なければタスク統計から算出）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>現在フェーズ表示</strong></td>
+                                    <td>AIサマリーの現在フェーズを表示（未解析時は「フェーズ未解析」）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AIサマリーテキスト</strong></td>
+                                    <td>AIによるプロジェクトサマリー表示（未取得時は案内メッセージ）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスク統計表示</strong></td>
+                                    <td>総タスク数・完了タスク数・直近期限タスク数を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WBSへのリンク</strong></td>
+                                    <td>クリックでプロジェクトのWBS画面へ遷移</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>詳細ページへのリンク</strong></td>
+                                    <td>クリックでプロジェクト詳細ページへ遷移</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-project-card')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="プロジェクトカード"
+                                id="img-project-card" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-3-3" class="manual-subsection">
+                        <h3>3.3 AlertsPanelコンポーネント</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>AIリスクアラート一覧</strong></td>
+                                    <td>AIが検知したリスク・注意・情報を一覧表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>重大度別表示</strong></td>
+                                    <td>重大（high/赤）・注意（medium/黄）・情報（low/緑）で色分け表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI再生成ボタン</strong></td>
+                                    <td>「AI再生成」ボタンでアラートを再生成</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディング表示</strong></td>
+                                    <td>AI解析中のスピナー表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>エラー表示</strong></td>
+                                    <td>接続エラー時のメッセージ表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>空表示</strong></td>
+                                    <td>アラートがない場合の「緊急度の高いアラートは検知されていません」メッセージ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクトID表示</strong></td>
+                                    <td>各アラートに関連するプロジェクトIDを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-alerts-panel')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="アラートパネル" id="img-alerts-panel" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-3-4" class="manual-subsection">
+                        <h3>3.4 TeamStatusWidgetコンポーネント</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>メンバー稼働状況一覧</strong></td>
+                                    <td>各メンバーの名前・負荷率・ステータス・リスクレベルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>負荷スコア表示</strong></td>
+                                    <td>アクティブタスク・期限間近タスクから算出した負荷率（%）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータスラベル</strong></td>
+                                    <td>過負荷/高稼働/適正/余裕ありのラベル表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リスクレベル色分け</strong></td>
+                                    <td>critical（赤）/warning（オレンジ）/balanced（緑）で色分け</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>アクティブタスク数</strong></td>
+                                    <td>各メンバーの進行中タスク数表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>期限間近タスク数</strong></td>
+                                    <td>各メンバーの今週期限タスク数表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>今週完了タスク数</strong></td>
+                                    <td>各メンバーの完了タスク数表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>センチメント分析表示</strong></td>
+                                    <td>チーム全体のセンチメントスコア・サマリーを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ポジティブキーワード</strong></td>
+                                    <td>センチメント分析で抽出されたポジティブな単語一覧</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ネガティブキーワード</strong></td>
+                                    <td>センチメント分析で抽出されたネガティブな単語一覧</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>センチメントAI再生成</strong></td>
+                                    <td>センチメント分析を再実行するボタン</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-team-status')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="チーム稼働状況" id="img-team-status" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-3-5" class="manual-subsection">
+                        <h3>3.5 リアルタイム更新機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>WebSocketプロジェクト更新</strong></td>
+                                    <td>プロジェクトの作成・更新をリアルタイム反映</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WebSocketタスク更新</strong></td>
+                                    <td>タスク更新があった場合にダッシュボード全体を再読み込み</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>WebSocketAIアラート</strong></td>
+                                    <td>AIからの新しいアラートをリアルタイムで追加</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-3-6" class="manual-subsection">
+                        <h3>3.6 AI機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>プロジェクトサマリーAI生成</strong></td>
+                                    <td>各プロジェクトの進捗・フェーズ・サマリーをAIで生成してDB保存</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リスクアラートAI生成</strong></td>
+                                    <td>プロジェクト状況からリスクをAIで検知してDB保存</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクトサマリーDB読込</strong></td>
+                                    <td>保存済みAIサマリーをDBから読み込み</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>アラートDB読込</strong></td>
+                                    <td>保存済みAIアラートをDBから読み込み</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

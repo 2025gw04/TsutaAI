@@ -1,0 +1,71 @@
+<!-- Section 21 -->
+<section id="section-21" class="manual-section">
+                    <h2>21. バージョン管理・変更履歴画面（/versions）の詳細機能</h2>
+
+                    <div id="subsection-21-1" class="manual-subsection">
+                        <h3>21.1 変更履歴一覧機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>変更履歴テーブル表示</strong></td>
+                                    <td>データベースへの変更履歴（監査ログ）をテーブル表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>テーブル名表示</strong></td>
+                                    <td>操作対象のテーブル名を表示（projects, tasksなど）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>アクションバッジ表示</strong></td>
+                                    <td>INSERT（緑）/UPDATE（青）/DELETE（赤）を色分け表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>変更者表示</strong></td>
+                                    <td>操作を行ったユーザー名を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>変更日時表示</strong></td>
+                                    <td>操作日時を日本語形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>変更内容詳細展開</strong></td>
+                                    <td>行クリックまたは詳細ボタンで変更前後の値をJSON形式で表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-versions-list')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="変更履歴一覧" id="img-versions-list" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-21-2" class="manual-subsection">
+                        <h3>21.2 フィルター機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>テーブルフィルター</strong></td>
+                                    <td>特定のテーブルに対する操作履歴のみを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>アクションフィルター</strong></td>
+                                    <td>特定のアクション（INSERTのみ等）で絞り込み</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>期間フィルター（将来拡張）</strong></td>
+                                    <td>操作日で範囲絞り込み</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

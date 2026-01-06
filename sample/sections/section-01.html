@@ -1,0 +1,186 @@
+<!-- Section 1 -->
+<section id="section-1" class="manual-section">
+                    <h2>1. 全画面(ルート)一覧</h2>
+                    <p>TsutaAI Web Adminの全画面構成と機能概要の一覧です。</p>
+
+                    <div id="subsection-1-1" class="manual-subsection">
+                        <h3>1.1 概要・分析</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>パス</th>
+                                    <th>画面名・機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/</code></td>
+                                    <td><strong>ログイン画面</strong><br>認証機能、認証後ダッシュボードへリダイレクト</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/dashboard</code></td>
+                                    <td><strong>ダッシュボード</strong><br>プロジェクト概要カード、メトリクス（総プロジェクト数・アクティブ案件・期限超過・直近期限）、AIアラートパネル、チーム稼働状況ウィジェットを統合表示。WebSocketによるリアルタイム更新対応
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/reports</code></td>
+                                    <td><strong>レポート生成</strong><br>プロジェクトレポート、全プロジェクトレポート、ユーザー作業レポートを生成・エクスポート</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/alerts</code></td>
+                                    <td><strong>AIアラート一覧</strong><br>アラート管理画面。重要度・種類・既読未読でフィルター、詳細モーダル表示、AI更新機能</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-1-2" class="manual-subsection">
+                        <h3>1.2 プロジェクト管理</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>パス</th>
+                                    <th>画面名・機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/projects</code></td>
+                                    <td><strong>プロジェクト一覧</strong><br>稼働中の案件を確認し、詳細からWBSやAI提案を確認。新規作成・インポート・削除機能あり</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/projects/new</code></td>
+                                    <td><strong>新規プロジェクト作成</strong><br>プロジェクト情報入力、AI自動生成機能（全フィールド包括的生成）、チームメンバー選択、AIによる推奨メンバー提案
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/projects/new/wbs-builder</code></td>
+                                    <td><strong>WBSビルダー（初期構築）</strong><br>新規プロジェクトのWBS初期構築画面</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/projects/import</code></td>
+                                    <td><strong>プロジェクトインポート</strong><br>外部ファイルからのプロジェクト読み込み</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/projects/[id]</code></td>
+                                    <td><strong>プロジェクト詳細</strong><br>プロジェクトの詳細情報表示</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/projects/[id]/dashboard</code></td>
+                                    <td><strong>プロジェクトダッシュボード</strong><br>特定プロジェクトのダッシュボード表示</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/projects/[id]/wbs</code></td>
+                                    <td><strong>WBS管理画面（最重要）</strong><br>プロジェクトのWBS表示・編集・タスク管理</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/estimates</code></td>
+                                    <td><strong>見積もり一覧</strong><br>見積もり一覧表示（期間未定型・期間固定型・タスクベース型・予算固定型）、ステータス管理（下書き・作業中・完了）、新規作成・削除機能
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/estimates/new</code></td>
+                                    <td><strong>新規見積もり作成</strong><br>見積もりパターン選択、詳細情報入力</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/estimates/[id]</code></td>
+                                    <td><strong>見積もり詳細・AIチャット対話画面</strong><br>見積もり詳細表示、AIとの対話による見積もり精査</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/sprints</code></td>
+                                    <td><strong>スプリント管理</strong><br>スプリント一覧・作成・フィルター（プロジェクト・ステータス）、スプリント詳細（概要・進捗・パフォーマンス・分析の4タブ）、スプリント開始・完了操作
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/project-health</code></td>
+                                    <td><strong>プロジェクト健全性</strong><br>健全性スコア・バーンダウンチャート・クリティカルパスの3タブ表示、AIによる健全性計算</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-1-3" class="manual-subsection">
+                        <h3>1.3 進捗・タスク管理</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>パス</th>
+                                    <th>画面名・機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/progress-tracking</code></td>
+                                    <td><strong>進捗トラッキング</strong><br>高リスクタスク・遅延タスク・進行中プロジェクトのサマリー表示、リスクレベル別タスク一覧（高・中・低）、プロジェクト選択による進捗サマリー表示
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/work-reports</code></td>
+                                    <td><strong>作業報告</strong><br>日報と作業ログの一覧・フィルター（ユーザー・日付・表示モード）、詳細モーダル表示、満足度・達成率・集中度・難易度・学習度の指標管理
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-1-4" class="manual-subsection">
+                        <h3>1.4 チーム管理</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>パス</th>
+                                    <th>画面名・機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/members</code></td>
+                                    <td><strong>メンバー管理</strong><br>メンバー一覧、稼働状況（アクティブタスク・期限間近・完了タスク・負荷スコア）、スキル表示、プロンプト管理（作成・編集・削除）、メンバー作成・編集機能
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/members/[id]/growth</code></td>
+                                    <td><strong>メンバー成長記録</strong><br>個人の成長履歴・スキル推移表示</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/vacations</code></td>
+                                    <td><strong>休暇管理</strong><br>休暇一覧・新規登録（有給休暇等）・削除、AI影響分析（期間指定による分析実行）</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/mental-health</code></td>
+                                    <td><strong>メンタルヘルスダッシュボード</strong><br>チームサマリー表示、サポート必要ユーザーのアラート、ユーザー選択による詳細（トレンド分析・アクティビティ異常検知）、ムード・ストレス指標表示
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/help-requests</code></td>
+                                    <td><strong>ヘルプリクエスト</strong><br>リクエスト一覧・フィルター（ステータス・緊急度・プロジェクト）、新規作成（コンテキスト自動生成オプション）、ヘルパーアサイン、解決記録（効果評価付き）、トップヘルパー表示
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-1-5" class="manual-subsection">
+                        <h3>1.5 システム</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>パス</th>
+                                    <th>画面名・機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/settings</code></td>
+                                    <td><strong>設定</strong><br>5タブ構成（LLM設定・祝日設定・ユーザー管理・AI設定・バージョン情報）。LLM設定ではGroq/OpenAI/Claude/Ollama/カスタムプロバイダー選択、プロキシ設定対応
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>/versions</code></td>
+                                    <td><strong>バージョン管理・変更履歴</strong><br>テーブル別変更履歴表示（INSERT/UPDATE/DELETE）、フィルター（テーブル・アクション）
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

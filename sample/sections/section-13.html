@@ -1,0 +1,409 @@
+<!-- Section 13 -->
+<section id="section-13" class="manual-section">
+                    <h2>13. 進捗トラッキング画面（/progress-tracking）の詳細機能</h2>
+
+                    <div id="subsection-13-1" class="manual-subsection">
+                        <h3>13.1 ページヘッダー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ページタイトル表示</strong></td>
+                                    <td>「進捗トラッキング」のタイトルとアイコンを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サブタイトル表示</strong></td>
+                                    <td>「AIによるリスク予測と進捗分析をリアルタイムで可視化」の説明文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>更新ボタン</strong></td>
+                                    <td>データを最新状態に更新（loadDashboard関数呼び出し）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>更新中状態表示</strong></td>
+                                    <td>更新ボタン押下時に「更新中...」と表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-progress-header')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="進捗トラッキングヘッダー"
+                                id="img-progress-header" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-13-2" class="manual-subsection">
+                        <h3>13.2 エラー・ローディング表示機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>エラーメッセージ表示</strong></td>
+                                    <td>API通信失敗時にエラーメッセージを赤色で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディングオーバーレイ</strong></td>
+                                    <td>データ読み込み中にスピナーと「データを読み込んでいます...」を表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-13-3" class="manual-subsection">
+                        <h3>13.3 サマリー統計機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>高リスクタスク数表示</strong></td>
+                                    <td>高リスクタスクの件数をカード形式で表示（赤色ボーダー）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>遅延タスク数表示</strong></td>
+                                    <td>遅延タスクの件数をカード形式で表示（黄色ボーダー）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進行中プロジェクト数表示</strong></td>
+                                    <td>in_progressまたはactiveステータスのプロジェクト数をカード形式で表示（緑色ボーダー）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードが浮き上がるアニメーション</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-progress-summary')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="進捗サマリー統計"
+                                id="img-progress-summary" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-13-4" class="manual-subsection">
+                        <h3>13.4 リスクレベル別タスクセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「リスクレベル別タスク」タイトルとアイコン表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>高リスクタブ</strong></td>
+                                    <td>高リスクタスクに切り替えるボタン（アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>中リスクタブ</strong></td>
+                                    <td>中リスクタスクに切り替えるボタン（アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>低リスクタブ</strong></td>
+                                    <td>低リスクタスクに切り替えるボタン（アイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>選択タブのハイライト</strong></td>
+                                    <td>選択中のリスクレベルタブをグラデーションで強調表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>空状態表示</strong></td>
+                                    <td>該当リスクレベルのタスクがない場合のメッセージと励ましのアイコン</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-risk-tabs')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="リスクレベルタブ" id="img-risk-tabs" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-13-5" class="manual-subsection">
+                        <h3>13.5 リスクタスクカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タスク名表示</strong></td>
+                                    <td>タスクの名前をアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リスクレベルバッジ</strong></td>
+                                    <td>high/medium/lowを色分けバッジで表示（赤/黄/緑）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>担当者表示</strong></td>
+                                    <td>user_full_nameをアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>現在の進捗表示</strong></td>
+                                    <td>current_progressを進捗率に応じた色（緑/黄/赤）で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>予測完了日表示</strong></td>
+                                    <td>predicted_completion_dateを日本語日付形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>完了確率表示</strong></td>
+                                    <td>completion_probabilityをパーセント形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>納期表示</strong></td>
+                                    <td>due_dateを日本語日付形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>AI提案セクション</strong></td>
+                                    <td>ai_suggestionが存在する場合にロボットアイコン付きで提案を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードがピンク色ボーダーになり浮き上がる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-risk-task-card')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="リスクタスクカード"
+                                id="img-risk-task-card" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-13-6" class="manual-subsection">
+                        <h3>13.6 遅延タスクセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「遅延タスク」タイトルと件数、砂時計アイコンを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件付き表示</strong></td>
+                                    <td>遅延タスクが1件以上ある場合のみセクションを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-13-7" class="manual-subsection">
+                        <h3>13.7 遅延タスクカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タスク名表示</strong></td>
+                                    <td>タスクの名前をアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>遅延バッジ</strong></td>
+                                    <td>「遅延」の赤色バッジを警告アイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>担当者表示</strong></td>
+                                    <td>user_full_nameをアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進捗表示</strong></td>
+                                    <td>current_progressをパーセント形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>完了確率表示</strong></td>
+                                    <td>completion_probabilityを警告色（赤）で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ボトルネック分析セクション</strong></td>
+                                    <td>bottleneck_analysisが存在する場合にファネルアイコン付きで分析を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カード左ボーダー</strong></td>
+                                    <td>遅延カードに赤色の左ボーダーを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-delayed-task-card')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="遅延タスクカード"
+                                id="img-delayed-task-card" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-13-8" class="manual-subsection">
+                        <h3>13.8 プロジェクト別進捗セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「プロジェクト別進捗」タイトルとフロー図アイコンを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクトグリッド表示</strong></td>
+                                    <td>進行中/activeのプロジェクトをグリッド形式で表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-13-9" class="manual-subsection">
+                        <h3>13.9 プロジェクトカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>プロジェクトアイコン</strong></td>
+                                    <td>フォルダアイコンをピンク色背景で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクト名表示</strong></td>
+                                    <td>プロジェクト名を太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>日程表示</strong></td>
+                                    <td>start_date - end_dateをカレンダーアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>選択状態ハイライト</strong></td>
+                                    <td>選択中のプロジェクトカードをピンク色ボーダーとグラデーション背景で強調</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>カードホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にカードがピンク色ボーダーになり浮き上がる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>クリック選択機能</strong></td>
+                                    <td>カードクリックでプロジェクトを選択しサマリーを取得</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-project-progress-card')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="プロジェクト進捗カード"
+                                id="img-project-progress-card" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-13-10" class="manual-subsection">
+                        <h3>13.10 プロジェクトサマリー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>サマリータイトル表示</strong></td>
+                                    <td>「[プロジェクト名] - 進捗サマリー」をチャートアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>総タスク数表示</strong></td>
+                                    <td>totalTasksをリストアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>完了タスク数表示</strong></td>
+                                    <td>completedTasksをチェックアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>進行中タスク数表示</strong></td>
+                                    <td>inProgressTasksをリピートアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>未着手タスク数表示</strong></td>
+                                    <td>todoTasksを円アイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>平均進捗率表示</strong></td>
+                                    <td>avgProgressをスピードメーターアイコン付きで色分け表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>遅延タスク数表示</strong></td>
+                                    <td>delayedTasksを警告アイコン付きで赤色表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>条件付き表示</strong></td>
+                                    <td>プロジェクト選択時のみサマリーセクションを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-project-summary-detail')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="プロジェクト進捗サマリー"
+                                id="img-project-summary-detail" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-13-11" class="manual-subsection">
+                        <h3>13.11 リスク分布機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>リスク分布ヘッダー</strong></td>
+                                    <td>「リスク分布」タイトルをシールドアイコン付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>高リスク件数表示</strong></td>
+                                    <td>riskDistribution.highを赤色バッジ付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>中リスク件数表示</strong></td>
+                                    <td>riskDistribution.mediumを黄色バッジ付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>低リスク件数表示</strong></td>
+                                    <td>riskDistribution.lowを緑色バッジ付きで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>リスクアイテムホバーエフェクト</strong></td>
+                                    <td>マウスオーバー時にアイテムが浮き上がる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-risk-distribution')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="リスク分布"
+                                id="img-risk-distribution" />
+                        </div>
+                    </div>
+                </section>

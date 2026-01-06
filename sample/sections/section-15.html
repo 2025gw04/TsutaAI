@@ -1,0 +1,393 @@
+<!-- Section 15 -->
+<section id="section-15" class="manual-section">
+                    <h2>15. メンバー管理画面（/members）の詳細機能</h2>
+
+                    <div id="subsection-15-1" class="manual-subsection">
+                        <h3>15.1 ページヘッダー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ページタイトル表示</strong></td>
+                                    <td>「メンバー管理」のタイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サブタイトル表示</strong></td>
+                                    <td>「担当プロンプトとタスク状況を俯瞰し、適切な負荷バランスを保ちましょう」の説明文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メンバー追加ボタン</strong></td>
+                                    <td>新規メンバー作成モーダルを表示（bi-person-plusアイコン付き）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-member-header')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メンバー管理ヘッダー"
+                                id="img-member-header" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-15-2" class="manual-subsection">
+                        <h3>15.2 メッセージ・状態表示機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>フラッシュメッセージ表示</strong></td>
+                                    <td>操作結果メッセージを青色ボックスで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディング表示</strong></td>
+                                    <td>「読み込み中です…」メッセージ表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>空状態表示</strong></td>
+                                    <td>メンバー未登録時に「メンバーが登録されていません」メッセージ表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-15-3" class="manual-subsection">
+                        <h3>15.3 メンバーカード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>フルネーム表示</strong></td>
+                                    <td>メンバーのフルネームを太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ユーザー名表示</strong></td>
+                                    <td>@usernameの形式でユーザー名を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>役割バッジ表示</strong></td>
+                                    <td>役割をピル形式バッジで表示（admin:赤、project_manager:黄、member:青）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メールアドレス表示</strong></td>
+                                    <td>メンバーのメールアドレスを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>成長レポートリンク</strong></td>
+                                    <td>/members/{id}/growthへのリンクボタン（bi-graph-upアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>編集ボタン</strong></td>
+                                    <td>メンバー編集モーダルを表示（bi-pencilアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>削除ボタン</strong></td>
+                                    <td>確認後にメンバーを削除（bi-trashアイコン付き）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-member-card')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メンバーカード" id="img-member-card" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-15-4" class="manual-subsection">
+                        <h3>15.4 統計グリッド機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>稼働スコア表示</strong></td>
+                                    <td>loadScoreを色分けカード（critical:赤、warning:黄、balanced:緑）で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>稼働ラベル表示</strong></td>
+                                    <td>loadLabelを稼働スコアカード内に表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>稼働中タスク数表示</strong></td>
+                                    <td>activeTasksをカード形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>今週期限タスク数表示</strong></td>
+                                    <td>dueSoonTasksをカード形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>今週完了タスク数表示</strong></td>
+                                    <td>completedThisWeekをカード形式で表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-member-stats')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メンバーステータス統計"
+                                id="img-member-stats" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-15-5" class="manual-subsection">
+                        <h3>15.5 保有スキルセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「保有スキル」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキル未登録メッセージ</strong></td>
+                                    <td>スキルがない場合に「スキルが登録されていません」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキルバッジグリッド</strong></td>
+                                    <td>スキルをグリッド形式で表示（最小幅180px）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキル名表示</strong></td>
+                                    <td>スキル名を太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキルレベルバー</strong></td>
+                                    <td>スキルレベルを青紫グラデーションのプログレスバーで表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキルレベルテキスト</strong></td>
+                                    <td>「X / 10」形式でレベルを表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-member-skills')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="保有スキル" id="img-member-skills" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-15-6" class="manual-subsection">
+                        <h3>15.6 担当プロンプトセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「担当プロンプト」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロンプト割り当てボタン</strong></td>
+                                    <td>プロンプト割り当てモーダルを表示（bi-plus-lgアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロンプト未設定メッセージ</strong></td>
+                                    <td>プロンプトがない場合に「担当プロンプトは未設定です」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロンプト名表示</strong></td>
+                                    <td>プロンプト名を太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>責任範囲タグ表示</strong></td>
+                                    <td>responsibilityを青色ピル形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ノート表示</strong></td>
+                                    <td>notesをグレー文字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロンプト編集ボタン</strong></td>
+                                    <td>プロンプト編集モーダルを表示（bi-pencilアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロンプト削除ボタン</strong></td>
+                                    <td>確認後にプロンプト割り当てを削除（bi-x-lgアイコン付き）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-assigned-prompts')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="担当プロンプト"
+                                id="img-assigned-prompts" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-15-7" class="manual-subsection">
+                        <h3>15.7 担当タスクセクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションヘッダー表示</strong></td>
+                                    <td>「担当タスク」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスク未割り当てメッセージ</strong></td>
+                                    <td>タスクがない場合に「担当タスクはありません」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスク一覧テーブル表示</strong></td>
+                                    <td>タスクをテーブル形式で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>タスク名列</strong></td>
+                                    <td>タスク名を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロジェクト名列</strong></td>
+                                    <td>プロジェクト名を表示（未割り当ての場合は「未割り当て」）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ステータス列</strong></td>
+                                    <td>タスクのステータスを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>優先度列</strong></td>
+                                    <td>タスクの優先度を表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>期限列</strong></td>
+                                    <td>期限を日本語日付形式で表示（未設定の場合は「未設定」）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-assigned-tasks')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="担当タスク" id="img-assigned-tasks" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-15-8" class="manual-subsection">
+                        <h3>15.8 メンバーモーダル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>作成/編集モード切り替え</strong></td>
+                                    <td>memberModalModeに応じてモーダル内容を切り替え</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ユーザー名入力</strong></td>
+                                    <td>usernameの入力フィールド（作成時のみ）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>フルネーム入力</strong></td>
+                                    <td>fullNameの入力フィールド</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>メールアドレス入力</strong></td>
+                                    <td>emailの入力フィールド</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>役割選択</strong></td>
+                                    <td>roleのドロップダウン選択（admin/project_manager/member）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>スキル編集機能</strong></td>
+                                    <td>スキルの追加・削除・レベル変更</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>キャンセルボタン</strong></td>
+                                    <td>モーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>保存ボタン</strong></td>
+                                    <td>メンバー情報とスキルを保存</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-member-modal')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="メンバー編集モーダル"
+                                id="img-member-modal" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-15-9" class="manual-subsection">
+                        <h3>15.9 プロンプトモーダル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>作成/編集モード切り替え</strong></td>
+                                    <td>promptModalModeに応じてモーダル内容を切り替え</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>プロンプト選択</strong></td>
+                                    <td>カタログからプロンプトを選択（作成時のみ）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>責任範囲入力</strong></td>
+                                    <td>responsibilityの入力フィールド</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ノート入力</strong></td>
+                                    <td>notesのテキストエリア</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>キャンセルボタン</strong></td>
+                                    <td>モーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>保存ボタン</strong></td>
+                                    <td>プロンプト割り当てを保存</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-15-10" class="manual-subsection">
+                        <h3>15.10 レスポンシブ対応機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タブレット対応（768px以下）</strong></td>
+                                    <td>アクションボタン縦並び、テーブルをカードレイアウトに変換</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>モバイル対応（480px以下）</strong></td>
+                                    <td>統計カード1列表示、タッチターゲット最小44px確保</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>

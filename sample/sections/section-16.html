@@ -1,0 +1,266 @@
+<!-- Section 16 -->
+<section id="section-16" class="manual-section">
+                    <h2>16. 休暇管理画面（/vacations）の詳細機能</h2>
+
+                    <div id="subsection-16-1" class="manual-subsection">
+                        <h3>16.1 ページヘッダー機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ページタイトル表示</strong></td>
+                                    <td>「休暇管理」のタイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>サブタイトル表示</strong></td>
+                                    <td>「メンバーの休暇予定を登録し、プロジェクトへの影響を分析します」の説明文</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休暇追加ボタン</strong></td>
+                                    <td>休暇追加モーダルを表示（bi-plus-circleアイコン付き）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-vacation-header')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="休暇管理ヘッダー"
+                                id="img-vacation-header" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-16-2" class="manual-subsection">
+                        <h3>16.2 休暇影響分析セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「休暇影響分析」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>分析開始日入力</strong></td>
+                                    <td>日付ピッカーで分析開始日を設定</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>分析終了日入力</strong></td>
+                                    <td>日付ピッカーで分析終了日を設定（デフォルト30日後）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>影響を分析ボタン</strong></td>
+                                    <td>analyzeVacationImpact APIを呼び出し分析実行（bi-graph-upアイコン付き）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>分析中状態表示</strong></td>
+                                    <td>分析実行中に「分析中…」と表示しボタン無効化</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>分析未実行メッセージ</strong></td>
+                                    <td>分析前に「分析期間を設定して「影響を分析」をクリックしてください」表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-vacation-analysis')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="休暇影響分析"
+                                id="img-vacation-analysis" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-16-3" class="manual-subsection">
+                        <h3>16.3 影響分析カード機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>影響カードグリッド表示</strong></td>
+                                    <td>メンバーごとの影響をグリッド形式で表示（最小280px）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ユーザー名表示</strong></td>
+                                    <td>影響を受けるメンバー名を太字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>役割表示</strong></td>
+                                    <td>メンバーの役割をグレー文字で表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休暇日数表示</strong></td>
+                                    <td>totalVacationDaysを青色背景ボックスで「X日」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休暇詳細リスト</strong></td>
+                                    <td>各休暇の開始日〜終了日（X日）をリスト表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-16-4" class="manual-subsection">
+                        <h3>16.4 登録済み休暇一覧セクション機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>セクションタイトル表示</strong></td>
+                                    <td>「登録済み休暇一覧」タイトルを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ローディング表示</strong></td>
+                                    <td>データ読み込み中に「読み込み中…」表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休暇未登録メッセージ</strong></td>
+                                    <td>休暇がない場合に「休暇が登録されていません」表示</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-vacation-list')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="登録済み休暇一覧"
+                                id="img-vacation-list" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-16-5" class="manual-subsection">
+                        <h3>16.5 休暇一覧テーブル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ユーザー名列</strong></td>
+                                    <td>user_nameを表示（未設定の場合は「ユーザーX」）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>役割列</strong></td>
+                                    <td>roleを表示（未設定の場合は「未設定」）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>開始日列</strong></td>
+                                    <td>start_dateを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>終了日列</strong></td>
+                                    <td>end_dateを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>種類列</strong></td>
+                                    <td>vacation_typeを表示</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>備考列</strong></td>
+                                    <td>notesを表示（未設定の場合は「-」）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>削除ボタン</strong></td>
+                                    <td>確認後に休暇を削除（bi-trashアイコン付き）</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="subsection-16-6" class="manual-subsection">
+                        <h3>16.6 休暇追加モーダル機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>モーダルヘッダー</strong></td>
+                                    <td>「休暇を追加」タイトルと閉じるボタン</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ユーザー選択</strong></td>
+                                    <td>ドロップダウンでユーザーを選択（必須）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>開始日入力</strong></td>
+                                    <td>日付ピッカーで開始日を設定（必須）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>終了日入力</strong></td>
+                                    <td>日付ピッカーで終了日を設定（必須）</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>休暇種類選択</strong></td>
+                                    <td>有給休暇/夏季休暇/特別休暇/その他から選択</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>備考入力</strong></td>
+                                    <td>テキストエリアで備考を入力</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>キャンセルボタン</strong></td>
+                                    <td>モーダルを閉じる</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>登録ボタン</strong></td>
+                                    <td>休暇を登録</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>背景オーバーレイ</strong></td>
+                                    <td>クリックでモーダルを閉じる半透明オーバーレイ</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ESCキー対応</strong></td>
+                                    <td>ESCキーでモーダルを閉じる</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="feature-image" onclick="openGallery('img-vacation-modal')">
+                            <img loading="lazy" src="image/sample_screenshot.png" alt="休暇追加モーダル"
+                                id="img-vacation-modal" />
+                        </div>
+                    </div>
+
+                    <div id="subsection-16-7" class="manual-subsection">
+                        <h3>16.7 レスポンシブ対応機能</h3>
+                        <table class="manual-table">
+                            <thead>
+                                <tr>
+                                    <th>機能名</th>
+                                    <th>機能概要</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>タブレット対応（768px以下）</strong></td>
+                                    <td>テーブルをカードレイアウトに変換、日付入力縦並び</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>モバイル対応（480px以下）</strong></td>
+                                    <td>ボタン全幅表示、タッチターゲット最小48px確保</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>超小画面対応（390px以下）</strong></td>
+                                    <td>さらに最適化されたパディングとフォントサイズ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
