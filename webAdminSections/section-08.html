@@ -1,943 +1,968 @@
 <!-- セッション 8: スプリント管理 -->
 <section id="section-8" class="manual-section">
-<h2>8. スプリント管理（/sprints）</h2>
+    <h2>8. スプリント管理（/sprints）</h2>
     <p>アジャイル開発のスプリントを計画・実行・分析する包括的な機能を提供します。</p>
 
-        <!-- 8.1 概要 -->
-        <div id="subsection-8-1" class="manual-subsection">
-            <h3>8.1 スプリント管理概要</h3>
-            
-            <div class="description-box">
-                <p>スプリント管理画面は、アジャイル開発手法におけるスプリントのライフサイクル全体を管理する中心的な機能です。スプリントの計画立案から実行、完了までの各段階を支援し、チームの生産性を最大化するためのツールを提供します。バーンダウンチャートによる進捗可視化、AIによる達成可能性分析、チームパフォーマンスの評価など、スプリント成功に必要なすべての機能を統合しています。</p>
-            </div>
+    <!-- 8.1 概要 -->
+    <div id="subsection-8-1" class="manual-subsection">
+        <h3>8.1 スプリント管理概要</h3>
 
-            <div class="feature-image" onclick="openGallery('sprint-overview')">
-                <img id="sprint-overview" src="../image/web-admin/800x500.png" alt="スプリント管理画面の全体像">
-            </div>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> スプリント管理のベストプラクティス</h5>
-                <p>スプリント期間は通常2週間（10営業日）を推奨します。短すぎると頻繁なスプリントレビューで管理コストが増加し、長すぎると市場変化への対応が遅れる可能性があります。チームの成熟度やプロジェクトの特性に応じて最適な期間を見つけましょう。</p>
-            </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>主要機能</th>
-                        <th>説明</th>
-                        <th>ユーザー価値</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>スプリント作成</td>
-                        <td>プロジェクト、期間、目標を設定して新しいスプリントを作成</td>
-                        <td>計画的な開発サイクルの開始</td>
-                    </tr>
-                    <tr>
-                        <td>進捗トラッキング</td>
-                        <td>バーンダウンチャートで残り作業量を可視化</td>
-                        <td>進捗状況の直感的な把握</td>
-                    </tr>
-                    <tr>
-                        <td>AI分析</td>
-                        <td>達成可能性やリスク要因をAIが自動分析</td>
-                        <td>データに基づく意思決定支援</td>
-                    </tr>
-                    <tr>
-                        <td>チームパフォーマンス</td>
-                        <td>メンバー別の貢献度とパフォーマンスを評価</td>
-                        <td>チームの生産性向上と公平な評価</td>
-                    </tr>
-                    <tr>
-                        <td>モメンタム分析</td>
-                        <td>作業ペースの変化を4段階で評価</td>
-                        <td>早期の問題検知と対策実行</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="description-box">
+            <p>スプリント管理画面は、アジャイル開発手法におけるスプリントのライフサイクル全体を管理する中心的な機能です。スプリントの計画立案から実行、完了までの各段階を支援し、チームの生産性を最大化するためのツールを提供します。バーンダウンチャートによる進捗可視化、AIによる達成可能性分析、チームパフォーマンスの評価など、スプリント成功に必要なすべての機能を統合しています。
+            </p>
         </div>
 
-        <!-- 8.2 新規スプリント作成 -->
-        <div id="subsection-8-2" class="manual-subsection">
-            <h3>8.2 新規スプリント作成</h3>
-            
-            <div class="description-box">
-                <p>新規スプリント作成機能は、次の開発サイクルのための計画を立てる重要なプロセスです。プロジェクトの選択、スプリント名とゴールの設定、期間の決定、目標ストーリーポイントの指定など、スプリント成功に必要なすべての要素を体系的に設定できます。特にスプリントゴールは、チームの方向性を定める重要な要素として慎重に検討する必要があります。</p>
-            </div>
-
-            <div class="feature-image" onclick="openGallery('sprint-create')">
-                <img id="sprint-create" src="../image/web-admin/800x500.png" alt="スプリント作成フォームの詳細">
-            </div>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">プロジェクト選択</div>
-                    <div class="step-description">スプリントを実行するプロジェクトをドロップダウンから選択します</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">基本情報設定</div>
-                    <div class="step-description">スプリント名とゴールを入力。ゴールは具体的で測可能な内容に</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">期間決定</div>
-                    <div class="step-description">開始日と終了日を設定。通常2週間（10営業日）を推奨</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">目標設定</div>
-                    <div class="step-description">目標ストーリーポイントを設定。チームのベロシティを考慮</div>
-                </div>
-            </div>
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label class="form-label">プロジェクト *</label>
-                    <input type="text" class="form-input" placeholder="選択してください" value="Eコマースサイト改修">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">スプリント名 *</label>
-                    <input type="text" class="form-input" placeholder="例: Sprint 1" value="Sprint 12">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">開始日 *</label>
-                    <input type="date" class="form-input" value="2025-01-13">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">終了日 *</label>
-                    <input type="date" class="form-input" value="2025-01-24">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">目標ストーリーポイント</label>
-                    <input type="number" class="form-input" placeholder="例: 50" value="40">
-                </div>
-                <div class="form-group full-width">
-                    <label class="form-label">スプリントゴール *</label>
-                    <textarea class="form-input" rows="4" placeholder="スプリントのゴールを入力してください...">ユーザー認証機能の実装と、商品検索機能のパフォーマンス改善。完了基準：全ユーザーストーリーのテスト合格、コードレビュー完了</textarea>
-                </div>
-            </div>
-
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> スプリントゴール設定の注意点</h5>
-                <p>スプリントゴールはSMART原則（Specific: 具体的、Measurable: 測可能、Achievable: 達成可能、Relevant: 関連性、Time-bound: 期限あり）に従って設定することが重要です。曖昧な目標はチームの方向性を曖昧にし、達成評価を困難にします。</p>
-            </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>入力項目</th>
-                        <th>必須</th>
-                        <th>説明</th>
-                        <th>設定例</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>プロジェクト</td>
-                        <td>必須</td>
-                        <td>スプリントを実行するプロジェクトを選択</td>
-                        <td>Eコマースサイト改修</td>
-                    </tr>
-                    <tr>
-                        <td>スプリント名</td>
-                        <td>必須</td>
-                        <td>スプリントを識別するための名称</td>
-                        <td>Sprint 12, Sprint 2025-Q1-1</td>
-                    </tr>
-                    <tr>
-                        <td>スプリントゴール</td>
-                        <td>必須</td>
-                        <td>スプリントで達成する具体的な目標</td>
-                        <td>ユーザー認証機能実装</td>
-                    </tr>
-                    <tr>
-                        <td>開始日</td>
-                        <td>必須</td>
-                        <td>スプリントの開始日付</td>
-                        <td>2025-01-13</td>
-                    </tr>
-                    <tr>
-                        <td>終了日</td>
-                        <td>必須</td>
-                        <td>スプリントの終了日付</td>
-                        <td>2025-01-24</td>
-                    </tr>
-                    <tr>
-                        <td>目標SP</td>
-                        <td>任意</td>
-                        <td>達成を目指すストーリーポイント数</td>
-                        <td>40pt</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="feature-image" onclick="openGallery('sprint-overview')">
+            <img id="sprint-overview" src="../image/web-admin/08_sprint-overview.png" alt="スプリント管理画面の全体像">
         </div>
 
-        <!-- 8.3 スプリントのステータス管理 -->
-        <div id="subsection-8-3" class="manual-subsection">
-            <h3>8.3 スプリントのステータス管理</h3>
-            
-            <div class="description-box">
-                <p>スプリントは3つのステータス（計画中、アクティブ、完了）を遷移しながらライフサイクルを完了します。各ステータスは明確な定義と許可される操作が決められており、スプリントの進行を体系的に管理します。ステータス遷移はチームの合意に基づいて実行され、各段階での適切なアクションが求められます。</p>
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> スプリント管理のベストプラクティス</h5>
+            <p>スプリント期間は通常2週間（10営業日）を推奨します。短すぎると頻繁なスプリントレビューで管理コストが増加し、長すぎると市場変化への対応が遅れる可能性があります。チームの成熟度やプロジェクトの特性に応じて最適な期間を見つけましょう。
+            </p>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>主要機能</th>
+                    <th>説明</th>
+                    <th>ユーザー価値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>スプリント作成</td>
+                    <td>プロジェクト、期間、目標を設定して新しいスプリントを作成</td>
+                    <td>計画的な開発サイクルの開始</td>
+                </tr>
+                <tr>
+                    <td>進捗トラッキング</td>
+                    <td>バーンダウンチャートで残り作業量を可視化</td>
+                    <td>進捗状況の直感的な把握</td>
+                </tr>
+                <tr>
+                    <td>AI分析</td>
+                    <td>達成可能性やリスク要因をAIが自動分析</td>
+                    <td>データに基づく意思決定支援</td>
+                </tr>
+                <tr>
+                    <td>チームパフォーマンス</td>
+                    <td>メンバー別の貢献度とパフォーマンスを評価</td>
+                    <td>チームの生産性向上と公平な評価</td>
+                </tr>
+                <tr>
+                    <td>モメンタム分析</td>
+                    <td>作業ペースの変化を4段階で評価</td>
+                    <td>早期の問題検知と対策実行</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 8.2 新規スプリント作成 -->
+    <div id="subsection-8-2" class="manual-subsection">
+        <h3>8.2 新規スプリント作成</h3>
+
+        <div class="description-box">
+            <p>新規スプリント作成機能は、次の開発サイクルのための計画を立てる重要なプロセスです。プロジェクトの選択、スプリント名とゴールの設定、期間の決定、目標ストーリーポイントの指定など、スプリント成功に必要なすべての要素を体系的に設定できます。特にスプリントゴールは、チームの方向性を定める重要な要素として慎重に検討する必要があります。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('sprint-create')">
+            <img id="sprint-create" src="../image/web-admin/08_sprint-overview.png" alt="スプリント作成フォームの詳細">
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">プロジェクト選択</div>
+                <div class="step-description">スプリントを実行するプロジェクトをドロップダウンから選択します</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('sprint-status')">
-                <img id="sprint-status" src="../image/web-admin/800x500.png" alt="スプリントのステータス管理">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">基本情報設定</div>
+                <div class="step-description">スプリント名とゴールを入力。ゴールは具体的で測可能な内容に</div>
             </div>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">計画中</div>
-                    <div class="step-description">スプリントの準備段階。タスクの割り当てや計画の調整を実施</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">アクティブ</div>
-                    <div class="step-description">開発実行段階。進捗記録とパフォーマンス管理が有効化</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">完了</div>
-                    <div class="step-description">スプリント終了。振り返りと次スプリントの計画へ</div>
-                </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">期間決定</div>
+                <div class="step-description">開始日と終了日を設定。通常2週間（10営業日）を推奨</div>
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>ステータス</th>
-                        <th>説明</th>
-                        <th>許可される操作</th>
-                        <th>期間</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="badge-status badge-planning">計画中</span></td>
-                        <td>スプリントの準備と計画段階。タスクの詳細化や担当者割り当てを実施</td>
-                        <td>・スプリント開始<br>・タスク編集<br>・担当者変更</td>
-                        <td>通常1-3日</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge-status badge-active">アクティブ</span></td>
-                        <td>開発実行中。進捗記録、パフォーマンス管理、AI分析が利用可能</td>
-                        <td>・進捗記録<br>・パフォーマンス記録<br>・AI分析実行<br>・スプリント完了</td>
-                        <td>通常1-3週間</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge-status badge-completed">完了</span></td>
-                        <td>スプリント終了。結果の確定と振り返りを実施</td>
-                        <td>・結果閲覧<br>・レポート出力<br>・次スプリント作成</td>
-                        <td>確定後は変更不可</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> ステータス遷移のタイミング</h5>
-                <p>「計画中」から「アクティブ」への移行は、スプリント計画ミーティングでの合意後に実行します。「アクティブ」から「完了」への移行は、スプリントレビューでの成果物受け入れ後に実行するのがベストプラクティスです。</p>
-            </div>
-
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> ステータス変更の注意点</h5>
-                <p>一度「完了」にしたスプリントは元に戻せません。また、「アクティブ」中のスプリントは基本的な計画変更（タスク追加や期間変更）が制限されます。重要な変更が必要な場合は、スプリントを中止して新たに計画し直すことを検討してください。</p>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">目標設定</div>
+                <div class="step-description">目標ストーリーポイントを設定。チームのベロシティを考慮</div>
             </div>
         </div>
 
-        <!-- 8.4 バーンダウンチャート -->
-        <div id="subsection-8-4" class="manual-subsection">
-            <h3>8.4 バーンダウンチャート</h3>
-            
-            <div class="description-box">
-                <p>バーンダウンチャートは、スプリント期間における残り作業量の推移を可視化する重要なツールです。理想線（計画通りの進捗）と実績線（実際の進捗）を比較することで、進捗の遅れや進み具合を直感的に把握できます。SVGベースの高品質なグラフで、日々の進捗記録とともに自動更新され、チーム全体で進捗状況を共有します。</p>
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">プロジェクト *</label>
+                <input type="text" class="form-input" placeholder="選択してください" value="Eコマースサイト改修">
             </div>
-
-            <div class="feature-image" onclick="openGallery('burndown-chart')">
-                <img id="burndown-chart" src="../image/web-admin/800x500.png" alt="バーンダウンチャートの詳細">
+            <div class="form-group">
+                <label class="form-label">スプリント名 *</label>
+                <input type="text" class="form-input" placeholder="例: Sprint 1" value="Sprint 12">
             </div>
-
-            <div class="chart-container">
-                <h4>バーンダウンチャートの構成要素</h4>
-                <div class="chart-placeholder">
-                    <i class="bi bi-graph-down" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p>バーンダウンチャート</p>
-                    <p class="chart-note">理想線（破線）と実績線（実線）で進捗を可視化</p>
-                </div>
+            <div class="form-group">
+                <label class="form-label">開始日 *</label>
+                <input type="date" class="form-input" value="2025-01-13">
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>要素</th>
-                        <th>説明</th>
-                        <th>意味</th>
-                        <th>色分け</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>理想線</td>
-                        <td>計画通りの進捗を示す直線</td>
-                        <td>開始日から終了日まで均等に作業が進む場合の軌跡</td>
-                        <td>灰色の破線</td>
-                    </tr>
-                    <tr>
-                        <td>実績線</td>
-                        <td>実際の進捗を示す線</td>
-                        <td>日々の進捗記録に基づく実際の残り作業量</td>
-                        <td>青色の実線</td>
-                    </tr>
-                    <tr>
-                        <td>データポイント</td>
-                        <td>進捗記録日のマーカー</td>
-                        <td>各日の進捗記録時点での残り作業量</td>
-                        <td>青色の円</td>
-                    </tr>
-                    <tr>
-                        <td>X軸</td>
-                        <td>時間軸（日付）</td>
-                        <td>スプリント期間の日付</td>
-                        <td>下部ラベル</td>
-                    </tr>
-                    <tr>
-                        <td>Y軸</td>
-                        <td>作業量軸（ストーリーポイント）</td>
-                        <td>残り作業量</td>
-                        <td>左部ラベル</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> バーンダウンチャートの読み解き方</h5>
-                <p>実績線が理想線より上にある場合：進捗が遅れている。実績線が理想線より下にある場合：進捗が順調または早い。実績線が水平になっている場合：作業が停滞している。これらのパターンから早期に問題を検知し、対策を講じることが重要です。</p>
+            <div class="form-group">
+                <label class="form-label">終了日 *</label>
+                <input type="date" class="form-input" value="2025-01-24">
             </div>
-
-            <div class="info-box">
-                <h5><i class="bi bi-info-circle"></i> チャート更新のタイミング</h5>
-                <p>バーンダウンチャートは「進捗記録」ボタンをクリックするたびに更新されます。通常は毎日終業時に進捗を記録することで、正確な進捗推移を把握できます。週末や祝日も含めて継続的に記録することが推奨されます。</p>
+            <div class="form-group">
+                <label class="form-label">目標ストーリーポイント</label>
+                <input type="number" class="form-input" placeholder="例: 50" value="40">
+            </div>
+            <div class="form-group full-width">
+                <label class="form-label">スプリントゴール *</label>
+                <textarea class="form-input" rows="4"
+                    placeholder="スプリントのゴールを入力してください...">ユーザー認証機能の実装と、商品検索機能のパフォーマンス改善。完了基準：全ユーザーストーリーのテスト合格、コードレビュー完了</textarea>
             </div>
         </div>
 
-        <!-- 8.5 進捗トラッキング -->
-        <div id="subsection-8-5" class="manual-subsection">
-            <h3>8.5 進捗トラッキング</h3>
-            
-            <div class="description-box">
-                <p>進捗トラッキング機能は、スプリント期間中の日々の進捗を記録・分析する仕組みです。完了したストーリーポイント、残り作業量、デイリーベロシティなどの指標を管理し、モメンタム（作業ペースの変化）を4段階で評価します。これにより、進捗の加速や停滞を早期に検知し、適切な対策を講じることが可能になります。</p>
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> スプリントゴール設定の注意点</h5>
+            <p>スプリントゴールはSMART原則（Specific: 具体的、Measurable: 測可能、Achievable: 達成可能、Relevant: 関連性、Time-bound:
+                期限あり）に従って設定することが重要です。曖昧な目標はチームの方向性を曖昧にし、達成評価を困難にします。</p>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>入力項目</th>
+                    <th>必須</th>
+                    <th>説明</th>
+                    <th>設定例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト</td>
+                    <td>必須</td>
+                    <td>スプリントを実行するプロジェクトを選択</td>
+                    <td>Eコマースサイト改修</td>
+                </tr>
+                <tr>
+                    <td>スプリント名</td>
+                    <td>必須</td>
+                    <td>スプリントを識別するための名称</td>
+                    <td>Sprint 12, Sprint 2025-Q1-1</td>
+                </tr>
+                <tr>
+                    <td>スプリントゴール</td>
+                    <td>必須</td>
+                    <td>スプリントで達成する具体的な目標</td>
+                    <td>ユーザー認証機能実装</td>
+                </tr>
+                <tr>
+                    <td>開始日</td>
+                    <td>必須</td>
+                    <td>スプリントの開始日付</td>
+                    <td>2025-01-13</td>
+                </tr>
+                <tr>
+                    <td>終了日</td>
+                    <td>必須</td>
+                    <td>スプリントの終了日付</td>
+                    <td>2025-01-24</td>
+                </tr>
+                <tr>
+                    <td>目標SP</td>
+                    <td>任意</td>
+                    <td>達成を目指すストーリーポイント数</td>
+                    <td>40pt</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 8.3 スプリントのステータス管理 -->
+    <div id="subsection-8-3" class="manual-subsection">
+        <h3>8.3 スプリントのステータス管理</h3>
+
+        <div class="description-box">
+            <p>スプリントは3つのステータス（計画中、アクティブ、完了）を遷移しながらライフサイクルを完了します。各ステータスは明確な定義と許可される操作が決められており、スプリントの進行を体系的に管理します。ステータス遷移はチームの合意に基づいて実行され、各段階での適切なアクションが求められます。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('sprint-status')">
+            <img id="sprint-status" src="../image/web-admin/08_sprint-detail.png" alt="スプリントのステータス管理">
+        </div>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">計画中</div>
+                <div class="step-description">スプリントの準備段階。タスクの割り当てや計画の調整を実施</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('progress-tracking')">
-                <img id="progress-tracking" src="../image/web-admin/800x500.png" alt="進捗トラッキングの詳細">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">アクティブ</div>
+                <div class="step-description">開発実行段階。進捗記録とパフォーマンス管理が有効化</div>
             </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">完了SP</div>
-                    <div class="stat-value">28</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">残りSP</div>
-                    <div class="stat-value">12</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">デイリーSP</div>
-                    <div class="stat-value">4.0</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">モメンタム</div>
-                    <div class="stat-value">
-                        <span class="momentum-indicator momentum-steady">
-                            <i class="bi bi-dash-circle"></i>
-                            安定
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>モメンタム状態</th>
-                        <th>説明</th>
-                        <th>スコア範囲</th>
-                        <td>推奨アクション</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="momentum-indicator momentum-accelerating"><i class="bi bi-arrow-up-circle"></i> 加速中</span></td>
-                        <td>作業ペースが向上している状態。チームの調子が良い</td>
-                        <td>76-100点</td>
-                        <td>現状維持。次スプリントの目標設定に活用</td>
-                    </tr>
-                    <tr>
-                        <td><span class="momentum-indicator momentum-steady"><i class="bi bi-dash-circle"></i> 安定</span></td>
-                        <td>計画通りのペースで作業が進んでいる状態</td>
-                        <td>51-75点</td>
-                        <td>特に問題なし。定期的な進捗確認を継続</td>
-                    </tr>
-                    <tr>
-                        <td><span class="momentum-indicator momentum-slowing"><i class="bi bi-arrow-down-circle"></i> 減速中</span></td>
-                        <td>作業ペースが低下している状態。何らかの問題が発生</td>
-                        <td>26-50点</td>
-                        <td>原因調査と対策実施。チームサポートを強化</td>
-                    </tr>
-                    <tr>
-                        <td><span class="momentum-indicator momentum-stalled"><i class="bi bi-x-circle"></i> 停滞</span></td>
-                        <td>作業がほとんど進んでいない状態。緊急の対策が必要</td>
-                        <td>0-25点</td>
-                        <td>緊急対策。スプリント計画の見直しを検討</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">進捗記録</div>
-                    <div class="step-description">「進捗記録」ボタンで当日の進捗をシステムに記録</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">データ更新</div>
-                    <div class="step-description">完了SP、残りSP、デイリーベロシティが自動計算</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">モメンタム評価</div>
-                    <div class="step-description">過去数日との比較でモメンタムを4段階で自動評価</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">チャート更新</div>
-                    <div class="step-description">バーンダウンチャートに新しいデータポイントを追加</div>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> 進捗記録のベストタイミング</h5>
-                <p>進捗記録は毎日終業時（17:00-18:00）に実行するのが効果的です。チームメンバー全員が集まるデイリースクラムの後や、タスク管理システムの更新後に記録することで、正確な進捗データを維持できます。</p>
-            </div>
-
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> 記録漏れの影響</h5>
-                <p>進捗記録を忘れると、バーンダウンチャートの精度が低下し、正確な進捗評価が困難になります。特に週末や祝日前後の記録漏れは、モメンタム評価に大きな影響を与えるため、カレンダーにリマインダーを設定することをお勧めします。</p>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">完了</div>
+                <div class="step-description">スプリント終了。振り返りと次スプリントの計画へ</div>
             </div>
         </div>
 
-        <!-- 8.6 チームパフォーマンス -->
-        <div id="subsection-8-6" class="manual-subsection">
-            <h3>8.6 チームパフォーマンス</h3>
-            
-            <div class="description-box">
-                <p>チームパフォーマンス機能は、スプリント期間中の各メンバーの貢献度と生産性を評価・可視化する仕組みです。完了タスク数、完了ストーリーポイント、チーム全体への貢献率、パフォーマンススコアなどの指標をランキング形式で表示し、メンバーの動機付けと公平な評価を支援します。定期的な記録により、個人とチームの成長を追跡できます。</p>
-            </div>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>ステータス</th>
+                    <th>説明</th>
+                    <th>許可される操作</th>
+                    <th>期間</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge-status badge-planning">計画中</span></td>
+                    <td>スプリントの準備と計画段階。タスクの詳細化や担当者割り当てを実施</td>
+                    <td>・スプリント開始<br>・タスク編集<br>・担当者変更</td>
+                    <td>通常1-3日</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-status badge-active">アクティブ</span></td>
+                    <td>開発実行中。進捗記録、パフォーマンス管理、AI分析が利用可能</td>
+                    <td>・進捗記録<br>・パフォーマンス記録<br>・AI分析実行<br>・スプリント完了</td>
+                    <td>通常1-3週間</td>
+                </tr>
+                <tr>
+                    <td><span class="badge-status badge-completed">完了</span></td>
+                    <td>スプリント終了。結果の確定と振り返りを実施</td>
+                    <td>・結果閲覧<br>・レポート出力<br>・次スプリント作成</td>
+                    <td>確定後は変更不可</td>
+                </tr>
+            </tbody>
+        </table>
 
-            <div class="feature-image" onclick="openGallery('team-performance')">
-                <img id="team-performance" src="../image/web-admin/800x500.png" alt="チームパフォーマンスの詳細">
-            </div>
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> ステータス遷移のタイミング</h5>
+            <p>「計画中」から「アクティブ」への移行は、スプリント計画ミーティングでの合意後に実行します。「アクティブ」から「完了」への移行は、スプリントレビューでの成果物受け入れ後に実行するのがベストプラクティスです。
+            </p>
+        </div>
 
-            <div class="performance-rank">
-                <div class="rank-number">1</div>
-                <div class="rank-details">
-                    <div class="rank-name">田中 太郎</div>
-                    <div class="rank-stats">完了タスク: 8件 | 完了SP: 24pt | 貢献率: 35.2%</div>
-                </div>
-                <div class="rank-score">92/100</div>
-            </div>
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> ステータス変更の注意点</h5>
+            <p>一度「完了」にしたスプリントは元に戻せません。また、「アクティブ」中のスプリントは基本的な計画変更（タスク追加や期間変更）が制限されます。重要な変更が必要な場合は、スプリントを中止して新たに計画し直すことを検討してください。
+            </p>
+        </div>
+    </div>
 
-            <div class="performance-rank">
-                <div class="rank-number">2</div>
-                <div class="rank-details">
-                    <div class="rank-name">鈴木 花子</div>
-                    <div class="rank-stats">完了タスク: 6件 | 完了SP: 18pt | 貢献率: 26.5%</div>
-                </div>
-                <div class="rank-score">85/100</div>
-            </div>
+    <!-- 8.4 バーンダウンチャート -->
+    <div id="subsection-8-4" class="manual-subsection">
+        <h3>8.4 バーンダウンチャート</h3>
 
-            <div class="performance-rank">
-                <div class="rank-number">3</div>
-                <div class="rank-details">
-                    <div class="rank-name">佐藤 次郎</div>
-                    <div class="rank-stats">完了タスク: 5件 | 完了SP: 15pt | 貢献率: 22.1%</div>
-                </div>
-                <div class="rank-score">78/100</div>
-            </div>
+        <div class="description-box">
+            <p>バーンダウンチャートは、スプリント期間における残り作業量の推移を可視化する重要なツールです。理想線（計画通りの進捗）と実績線（実際の進捗）を比較することで、進捗の遅れや進み具合を直感的に把握できます。SVGベースの高品質なグラフで、日々の進捗記録とともに自動更新され、チーム全体で進捗状況を共有します。
+            </p>
+        </div>
 
-            <div class="performance-rank">
-                <div class="rank-number">4</div>
-                <div class="rank-details">
-                    <div class="rank-name">伊藤 三郎</div>
-                    <div class="rank-stats">完了タスク: 4件 | 完了SP: 11pt | 貢献率: 16.2%</div>
-                </div>
-                <div class="rank-score">71/100</div>
-            </div>
+        <div class="feature-image" onclick="openGallery('burndown-chart')">
+            <img id="burndown-chart" src="../image/web-admin/08_sprint-burndown.png" alt="バーンダウンチャートの詳細">
+        </div>
 
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>評価指標</th>
-                        <th>説明</th>
-                        <th>計算方法</th>
-                        <th>評価基準</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>完了タスク数</td>
-                        <td>スプリント期間中に完了したタスクの総数</td>
-                        <td>ステータスが「完了」のタスクをカウント</td>
-                        <td>多いほど高評価</td>
-                    </tr>
-                    <tr>
-                        <td>完了SP</td>
-                        <td>完了したタスクのストーリーポイント合計</td>
-                        <td>完了タスクのSPを合算</td>
-                        <td>多いほど高評価</td>
-                    </tr>
-                    <tr>
-                        <td>貢献率</td>
-                        <td>チーム全体の完了SPに対する個人の割合</td>
-                        <td>(個人完了SP ÷ チーム総完了SP) × 100</td>
-                        <td>チーム平均を上回れば高評価</td>
-                    </tr>
-                    <tr>
-                        <td>パフォーマンススコア</td>
-                        <td>総合的な生産性を0-100点で評価</td>
-                        <td>複数指標を加重平均して算出</td>
-                        <td>80点以上が優秀</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">パフォーマンス記録</div>
-                    <div class="step-description">「パフォーマンス記録」ボタンで評価データを収集</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">指標計算</div>
-                    <div class="step-description">完了タスク、SP、貢献率などを自動計算</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">スコア算出</div>
-                    <div class="step-description">複数指標から総合パフォーマンススコアを算出</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">ランキング表示</div>
-                    <div class="step-description">結果をランキング形式でチーム全体に共有</div>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> パフォーマンス評価の活用法</h5>
-                <p>パフォーマンスデータは、個人の評価だけでなくチームの強みと弱みを分析するのにも活用できます。特定のスキルを持つメンバーの貢献度が高い場合、そのスキルを他のメンバーにも展開する研修計画を立てることができます。</p>
-            </div>
-
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> 評価の注意点</h5>
-                <p>パフォーマンススコアはあくまで定量的な指標です。コード品質、レビュー貢献、メンタリングなどの定性的な貢献は反映されません。評価の際は、定量的データと定性的な観察の両方を考慮することが重要です。</p>
+        <div class="chart-container">
+            <h4>バーンダウンチャートの構成要素</h4>
+            <div class="chart-placeholder">
+                <i class="bi bi-graph-down" style="font-size: 3rem; color: var(--primary-color);"></i>
+                <p>バーンダウンチャート</p>
+                <p class="chart-note">理想線（破線）と実績線（実線）で進捗を可視化</p>
             </div>
         </div>
 
-        <!-- 8.7 AI分析機能 -->
-        <div id="subsection-8-7" class="manual-subsection">
-            <h3>8.7 AI分析機能</h3>
-            
-            <div class="description-box">
-                <p>AI分析機能は、スプリントの達成可能性、進捗状況、リスク要因などをAIが自動的に分析し、具体的な推奨事項を提供する高度な機能です。達成可能性スコア、進捗分析、リスク要因の特定、チーム貢献度の評価、モチベーショナルメッセージの生成など、スプリント成功に必要な洞察をリアルタイムで提供します。</p>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                    <th>意味</th>
+                    <th>色分け</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>理想線</td>
+                    <td>計画通りの進捗を示す直線</td>
+                    <td>開始日から終了日まで均等に作業が進む場合の軌跡</td>
+                    <td>灰色の破線</td>
+                </tr>
+                <tr>
+                    <td>実績線</td>
+                    <td>実際の進捗を示す線</td>
+                    <td>日々の進捗記録に基づく実際の残り作業量</td>
+                    <td>青色の実線</td>
+                </tr>
+                <tr>
+                    <td>データポイント</td>
+                    <td>進捗記録日のマーカー</td>
+                    <td>各日の進捗記録時点での残り作業量</td>
+                    <td>青色の円</td>
+                </tr>
+                <tr>
+                    <td>X軸</td>
+                    <td>時間軸（日付）</td>
+                    <td>スプリント期間の日付</td>
+                    <td>下部ラベル</td>
+                </tr>
+                <tr>
+                    <td>Y軸</td>
+                    <td>作業量軸（ストーリーポイント）</td>
+                    <td>残り作業量</td>
+                    <td>左部ラベル</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> バーンダウンチャートの読み解き方</h5>
+            <p>実績線が理想線より上にある場合：進捗が遅れている。実績線が理想線より下にある場合：進捗が順調または早い。実績線が水平になっている場合：作業が停滞している。これらのパターンから早期に問題を検知し、対策を講じることが重要です。
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h5><i class="bi bi-info-circle"></i> チャート更新のタイミング</h5>
+            <p>バーンダウンチャートは「進捗記録」ボタンをクリックするたびに更新されます。通常は毎日終業時に進捗を記録することで、正確な進捗推移を把握できます。週末や祝日も含めて継続的に記録することが推奨されます。</p>
+        </div>
+    </div>
+
+    <!-- 8.5 進捗トラッキング -->
+    <div id="subsection-8-5" class="manual-subsection">
+        <h3>8.5 進捗トラッキング</h3>
+
+        <div class="description-box">
+            <p>進捗トラッキング機能は、スプリント期間中の日々の進捗を記録・分析する仕組みです。完了したストーリーポイント、残り作業量、デイリーベロシティなどの指標を管理し、モメンタム（作業ペースの変化）を4段階で評価します。これにより、進捗の加速や停滞を早期に検知し、適切な対策を講じることが可能になります。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('progress-tracking')">
+            <img id="progress-tracking" src="../image/web-admin/08_progress-tracking.png" alt="進捗トラッキングの詳細">
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">完了SP</div>
+                <div class="stat-value">28</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('ai-analysis')">
-                <img id="ai-analysis" src="../image/web-admin/800x500.png" alt="AI分析機能の詳細">
+            <div class="stat-card">
+                <div class="stat-label">残りSP</div>
+                <div class="stat-value">12</div>
             </div>
-
-            <div class="ai-score-circle score-high">
-                <div class="score-value">78.5</div>
-                <div class="score-label">達成可能性 (%)</div>
+            <div class="stat-card">
+                <div class="stat-label">デイリーSP</div>
+                <div class="stat-value">4.0</div>
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>分析項目</th>
-                        <th>説明</th>
-                        <th>提供される洞察</th>
-                        <th>活用方法</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>達成可能性分析</td>
-                        <td>スプリント目標達成の確率を0-100%で評価</td>
-                        <td>・達成確率<br>・リスクレベル<br>・予測完了ポイント</td>
-                        <td>目標の再検討や計画調整の判断材料</td>
-                    </tr>
-                    <tr>
-                        <td>進捗分析</td>
-                        <td>現在の進捗率と必要な進捗率を比較</td>
-                        <td>・現在の進捗率<br>・必要な進捗率<br>・バーンダウンステータス</td>
-                        <td>作業ペースの調整やリソース配分の最適化</td>
-                    </tr>
-                    <tr>
-                        <td>リスク要因</td>
-                        <td>プロジェクトのリスクを特定と対策提示</td>
-                        <td>・リスクの種類<br>・影響度<br>・対策案</td>
-                        <td>予防的対策の実施とリスク管理の強化</td>
-                    </tr>
-                    <tr>
-                        <td>推奨事項</td>
-                        <td>改善のための具体的なアクションを提案</td>
-                        <td>・優先度<br>・カテゴリ<br>・期待効果</td>
-                        <td>次のアクションプランの策定</td>
-                    </tr>
-                    <tr>
-                        <td>チーム貢献度</td>
-                        <td>メンバー別の貢献をAIが評価・分析</td>
-                        <td>・貢献度<br>・フィードバック<br>・改善点</td>
-                        <td>チーム編成やスキル開発の計画</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">分析実行</div>
-                    <div class="step-description">「AI分析実行」ボタンで分析を開始</div>
+            <div class="stat-card">
+                <div class="stat-label">モメンタム</div>
+                <div class="stat-value">
+                    <span class="momentum-indicator momentum-steady">
+                        <i class="bi bi-dash-circle"></i>
+                        安定
+                    </span>
                 </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">データ収集</div>
-                    <div class="step-description">進捗、パフォーマンス、タスクデータを収集</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">AI分析</div>
-                    <div class="step-description">Groq AIが複数の分析モデルを適用</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">結果表示</div>
-                    <div class="step-description">分析結果をダッシュボードに表示</div>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> AI分析の活用タイミング</h5>
-                <p>AI分析はスプリントの中間点（通常5日目）と、進捗が計画から大きくずれている場合に実行するのが効果的です。定期的な分析により、問題の早期発見と適時な対策実行が可能になります。</p>
-            </div>
-
-            <div class="info-box">
-                <h5><i class="bi bi-info-circle"></i> AI分析の精度について</h5>
-                <p>AI分析の精度は、入力データの品質と量に依存します。進捗記録やパフォーマンス評価を定期的に行うことで、より精度の高い分析結果が得られます。また、AIの推奨事項は参考情報として活用し、最終的な判断はチームの合意に基づいて行うことが重要です。</p>
             </div>
         </div>
 
-        <!-- 8.8 統計情報とメトリクス -->
-        <div id="subsection-8-8" class="manual-subsection">
-            <h3>8.8 統計情報とメトリクス</h3>
-            
-            <div class="description-box">
-                <p>統計情報とメトリクス機能は、スプリントの各種指標を網羅的に表示し、チームのパフォーマンスを多角的に評価するためのダッシュボードです。タスク数、ストーリーポイント、進捗率、ベロシティなどの主要指標をリアルタイムで把握でき、スプリントの健全性を診断するための重要な情報を提供します。</p>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>モメンタム状態</th>
+                    <th>説明</th>
+                    <th>スコア範囲</th>
+                    <td>推奨アクション</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="momentum-indicator momentum-accelerating"><i class="bi bi-arrow-up-circle"></i>
+                            加速中</span></td>
+                    <td>作業ペースが向上している状態。チームの調子が良い</td>
+                    <td>76-100点</td>
+                    <td>現状維持。次スプリントの目標設定に活用</td>
+                </tr>
+                <tr>
+                    <td><span class="momentum-indicator momentum-steady"><i class="bi bi-dash-circle"></i> 安定</span>
+                    </td>
+                    <td>計画通りのペースで作業が進んでいる状態</td>
+                    <td>51-75点</td>
+                    <td>特に問題なし。定期的な進捗確認を継続</td>
+                </tr>
+                <tr>
+                    <td><span class="momentum-indicator momentum-slowing"><i class="bi bi-arrow-down-circle"></i>
+                            減速中</span></td>
+                    <td>作業ペースが低下している状態。何らかの問題が発生</td>
+                    <td>26-50点</td>
+                    <td>原因調査と対策実施。チームサポートを強化</td>
+                </tr>
+                <tr>
+                    <td><span class="momentum-indicator momentum-stalled"><i class="bi bi-x-circle"></i> 停滞</span></td>
+                    <td>作業がほとんど進んでいない状態。緊急の対策が必要</td>
+                    <td>0-25点</td>
+                    <td>緊急対策。スプリント計画の見直しを検討</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">進捗記録</div>
+                <div class="step-description">「進捗記録」ボタンで当日の進捗をシステムに記録</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('statistics-metrics')">
-                <img id="statistics-metrics" src="../image/web-admin/800x500.png" alt="統計情報とメトリクスの詳細">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">データ更新</div>
+                <div class="step-description">完了SP、残りSP、デイリーベロシティが自動計算</div>
             </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">総タスク数</div>
-                    <div class="stat-value">15</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">完了タスク</div>
-                    <div class="stat-value" style="color: var(--success-color);">9</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">進行中タスク</div>
-                    <div class="stat-value" style="color: var(--primary-color);">4</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">残りタスク</div>
-                    <div class="stat-value" style="color: var(--warning-color);">2</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">総ストーリーポイント</div>
-                    <div class="stat-value">40</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">完了ポイント</div>
-                    <div class="stat-value" style="color: var(--success-color);">28</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">進捗率</div>
-                    <div class="stat-value">70.0%</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">ベロシティ</div>
-                    <div class="stat-value">4.0pt/日</div>
-                </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">モメンタム評価</div>
+                <div class="step-description">過去数日との比較でモメンタムを4段階で自動評価</div>
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>メトリクス</th>
-                        <th>説明</th>
-                        <th>計算式</th>
-                        <th>目標値</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>総タスク数</td>
-                        <td>スプリントに含まれる全タスクの数</td>
-                        <td>ステータスに関わらず全タスクをカウント</td>
-                        <td>プロジェクトによる</td>
-                    </tr>
-                    <tr>
-                        <td>完了タスク</td>
-                        <td>完了したタスクの数</td>
-                        <td>ステータスが「完了」のタスク数</td>
-                        <td>総タスクの80%以上</td>
-                    </tr>
-                    <tr>
-                        <td>進行中タスク</td>
-                        <td>現在作業中のタスク数</td>
-                        <td>ステータスが「進行中」のタスク数</td>
-                        <td>総タスクの20-30%</td>
-                    </tr>
-                    <tr>
-                        <td>進捗率</td>
-                        <td>完了した作業の割合</td>
-                        <td>(完了SP ÷ 総SP) × 100</td>
-                        <td>期間経過率と同等以上</td>
-                    </tr>
-                    <tr>
-                        <td>ベロシティ</td>
-                        <td>1日あたりの平均完了SP</td>
-                        <td>完了SP ÷ 経過日数</td>
-                        <td>計画ベロシティを維持</td>
-                    </tr>
-                    <tr>
-                        <td>達成可能性スコア</td>
-                        <td>AIによる目標達成の確率</td>
-                        <td>AIが複数要因から算出</td>
-                        <td>70%以上</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> メトリクス監視のポイント</h5>
-                <p>特に重要なのは「進捗率」と「期間経過率」の比較です。進捗率が期間経過率を下回っている場合、スプリントが遅延しているサインです。また、ベロシティが計画値を大幅に下回る場合は、タスクの見積もりやチームのキャパシティを見直す必要があります。</p>
-            </div>
-
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> メトリクスの解釈注意</h5>
-                <p>メトリクスはあくまで定量的な指標です。タスクの複雑度、品質、チームの学習効果などの定性的な要因は反映されません。メトリクスの異常値を発見した場合は、必ず背景にある要因をチームで話し合うことが重要です。</p>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">チャート更新</div>
+                <div class="step-description">バーンダウンチャートに新しいデータポイントを追加</div>
             </div>
         </div>
 
-        <!-- 8.9 フィルタ機能 -->
-        <div id="subsection-8-9" class="manual-subsection">
-            <h3>8.9 フィルタ機能</h3>
-            
-            <div class="description-box">
-                <p>フィルタ機能は、多数のスプリントから目的のスプリントを効率的に検索・表示するための機能です。プロジェクト別、ステータス別にスプリントを絞り込むことができ、大規模なプロジェクトや長期間の運用においても、必要な情報に素早くアクセスできます。フィルタ条件はリアルタイムで反映され、直感的な操作が可能です。</p>
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> 進捗記録のベストタイミング</h5>
+            <p>進捗記録は毎日終業時（17:00-18:00）に実行するのが効果的です。チームメンバー全員が集まるデイリースクラムの後や、タスク管理システムの更新後に記録することで、正確な進捗データを維持できます。</p>
+        </div>
+
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> 記録漏れの影響</h5>
+            <p>進捗記録を忘れると、バーンダウンチャートの精度が低下し、正確な進捗評価が困難になります。特に週末や祝日前後の記録漏れは、モメンタム評価に大きな影響を与えるため、カレンダーにリマインダーを設定することをお勧めします。
+            </p>
+        </div>
+    </div>
+
+    <!-- 8.6 チームパフォーマンス -->
+    <div id="subsection-8-6" class="manual-subsection">
+        <h3>8.6 チームパフォーマンス</h3>
+
+        <div class="description-box">
+            <p>チームパフォーマンス機能は、スプリント期間中の各メンバーの貢献度と生産性を評価・可視化する仕組みです。完了タスク数、完了ストーリーポイント、チーム全体への貢献率、パフォーマンススコアなどの指標をランキング形式で表示し、メンバーの動機付けと公平な評価を支援します。定期的な記録により、個人とチームの成長を追跡できます。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('team-performance')">
+            <img id="team-performance" src="../image/web-admin/08_team-performance.png" alt="チームパフォーマンスの詳細">
+        </div>
+
+        <div class="performance-rank">
+            <div class="rank-number">1</div>
+            <div class="rank-details">
+                <div class="rank-name">田中 太郎</div>
+                <div class="rank-stats">完了タスク: 8件 | 完了SP: 24pt | 貢献率: 35.2%</div>
             </div>
+            <div class="rank-score">92/100</div>
+        </div>
 
-            <div class="feature-image" onclick="openGallery('filter-function')">
-                <img id="filter-function" src="../image/web-admin/800x500.png" alt="フィルタ機能の詳細">
+        <div class="performance-rank">
+            <div class="rank-number">2</div>
+            <div class="rank-details">
+                <div class="rank-name">鈴木 花子</div>
+                <div class="rank-stats">完了タスク: 6件 | 完了SP: 18pt | 貢献率: 26.5%</div>
             </div>
+            <div class="rank-score">85/100</div>
+        </div>
 
-            <div class="filters">
-                <div class="filter-group">
-                    <label class="form-label">プロジェクト</label>
-                    <select class="form-input">
-                        <option value="">すべて</option>
-                        <option value="1">Eコマースサイト改修</option>
-                        <option value="2">モバイルアプリ開発</option>
-                        <option value="3">基幹システム刷新</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label class="form-label">ステータス</label>
-                    <select class="form-input">
-                        <option value="all">すべて</option>
-                        <option value="planning">計画中</option>
-                        <option value="active">アクティブ</option>
-                        <option value="completed">完了</option>
-                    </select>
-                </div>
+        <div class="performance-rank">
+            <div class="rank-number">3</div>
+            <div class="rank-details">
+                <div class="rank-name">佐藤 次郎</div>
+                <div class="rank-stats">完了タスク: 5件 | 完了SP: 15pt | 貢献率: 22.1%</div>
             </div>
+            <div class="rank-score">78/100</div>
+        </div>
 
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>フィルタ項目</th>
-                        <th>選択肢</th>
-                        <th>用途</th>
-                        <th>組み合わせ</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>プロジェクト</td>
-                        <td>・すべて<br>・各プロジェクト名</td>
-                        <td>特定プロジェクトのスプリントを表示</td>
-                        <td>ステータスフィルタと組み合わせ可能</td>
-                    </tr>
-                    <tr>
-                        <td>ステータス</td>
-                        <td>・すべて<br>・計画中<br>・アクティブ<br>・完了</td>
-                        <td>特定ステータスのスプリントを表示</td>
-                        <td>プロジェクトフィルタと組み合わせ可能</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">フィルタ選択</div>
-                    <div class="step-description">ドロップダウンからフィルタ条件を選択</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">自動適用</div>
-                    <div class="step-description">選択した条件が即座にリストに反映</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">結果確認</div>
-                    <div class="step-description">フィルタされたスプリント一覧を確認</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">詳細表示</div>
-                    <div class="step-description">目的のスプリントを選択して詳細を表示</div>
-                </div>
+        <div class="performance-rank">
+            <div class="rank-number">4</div>
+            <div class="rank-details">
+                <div class="rank-name">伊藤 三郎</div>
+                <div class="rank-stats">完了タスク: 4件 | 完了SP: 11pt | 貢献率: 16.2%</div>
             </div>
+            <div class="rank-score">71/100</div>
+        </div>
 
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> フィルタ活用のコツ</h5>
-                <p>「アクティブ」ステータスでフィルタすると、現在進行中のスプリントのみが表示され、進捗管理に集中できます。「完了」ステータスでフィルタすると、過去のスプリントを振り返り、次回の計画に活かすことができます。</p>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>評価指標</th>
+                    <th>説明</th>
+                    <th>計算方法</th>
+                    <th>評価基準</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>完了タスク数</td>
+                    <td>スプリント期間中に完了したタスクの総数</td>
+                    <td>ステータスが「完了」のタスクをカウント</td>
+                    <td>多いほど高評価</td>
+                </tr>
+                <tr>
+                    <td>完了SP</td>
+                    <td>完了したタスクのストーリーポイント合計</td>
+                    <td>完了タスクのSPを合算</td>
+                    <td>多いほど高評価</td>
+                </tr>
+                <tr>
+                    <td>貢献率</td>
+                    <td>チーム全体の完了SPに対する個人の割合</td>
+                    <td>(個人完了SP ÷ チーム総完了SP) × 100</td>
+                    <td>チーム平均を上回れば高評価</td>
+                </tr>
+                <tr>
+                    <td>パフォーマンススコア</td>
+                    <td>総合的な生産性を0-100点で評価</td>
+                    <td>複数指標を加重平均して算出</td>
+                    <td>80点以上が優秀</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">パフォーマンス記録</div>
+                <div class="step-description">「パフォーマンス記録」ボタンで評価データを収集</div>
             </div>
-
-            <div class="info-box">
-                <h5><i class="bi bi-info-circle"></i> フィルタのリセット</h5>
-                <p>フィルタ条件をクリアするには、各ドロップダウンを「すべて」または初期値に戻します。これにより、全スプリントが再表示されます。フィルタ状態はページ遷移しても保持されるため、意図しない絞り込みに注意してください。</p>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">指標計算</div>
+                <div class="step-description">完了タスク、SP、貢献率などを自動計算</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">スコア算出</div>
+                <div class="step-description">複数指標から総合パフォーマンススコアを算出</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">ランキング表示</div>
+                <div class="step-description">結果をランキング形式でチーム全体に共有</div>
             </div>
         </div>
 
-        <!-- 8.10 活用シーンとベストプラクティス -->
-        <div id="subsection-8-10" class="manual-subsection">
-            <h3>8.10 活用シーンとベストプラクティス</h3>
-            
-            <div class="description-box">
-                <p>スプリント管理機能は、アジャイル開発チームの生産性を最大化するための強力なツールです。適切な活用により、計画の精度向上、進捗の可視化、チームの協調性強化、継続的な改善が実現できます。ここでは、実際の開発現場での活用シーンと、成功のためのベストプラクティスを具体的に紹介します。</p>
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> パフォーマンス評価の活用法</h5>
+            <p>パフォーマンスデータは、個人の評価だけでなくチームの強みと弱みを分析するのにも活用できます。特定のスキルを持つメンバーの貢献度が高い場合、そのスキルを他のメンバーにも展開する研修計画を立てることができます。
+            </p>
+        </div>
+
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> 評価の注意点</h5>
+            <p>パフォーマンススコアはあくまで定量的な指標です。コード品質、レビュー貢献、メンタリングなどの定性的な貢献は反映されません。評価の際は、定量的データと定性的な観察の両方を考慮することが重要です。</p>
+        </div>
+    </div>
+
+    <!-- 8.7 AI分析機能 -->
+    <div id="subsection-8-7" class="manual-subsection">
+        <h3>8.7 AI分析機能</h3>
+
+        <div class="description-box">
+            <p>AI分析機能は、スプリントの達成可能性、進捗状況、リスク要因などをAIが自動的に分析し、具体的な推奨事項を提供する高度な機能です。達成可能性スコア、進捗分析、リスク要因の特定、チーム貢献度の評価、モチベーショナルメッセージの生成など、スプリント成功に必要な洞察をリアルタイムで提供します。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('ai-analysis')">
+            <img id="ai-analysis" src="../image/web-admin/08_ai-analysis.png" alt="AI分析機能の詳細">
+        </div>
+
+        <div class="ai-score-circle score-high">
+            <div class="score-value">78.5</div>
+            <div class="score-label">達成可能性 (%)</div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>分析項目</th>
+                    <th>説明</th>
+                    <th>提供される洞察</th>
+                    <th>活用方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>達成可能性分析</td>
+                    <td>スプリント目標達成の確率を0-100%で評価</td>
+                    <td>・達成確率<br>・リスクレベル<br>・予測完了ポイント</td>
+                    <td>目標の再検討や計画調整の判断材料</td>
+                </tr>
+                <tr>
+                    <td>進捗分析</td>
+                    <td>現在の進捗率と必要な進捗率を比較</td>
+                    <td>・現在の進捗率<br>・必要な進捗率<br>・バーンダウンステータス</td>
+                    <td>作業ペースの調整やリソース配分の最適化</td>
+                </tr>
+                <tr>
+                    <td>リスク要因</td>
+                    <td>プロジェクトのリスクを特定と対策提示</td>
+                    <td>・リスクの種類<br>・影響度<br>・対策案</td>
+                    <td>予防的対策の実施とリスク管理の強化</td>
+                </tr>
+                <tr>
+                    <td>推奨事項</td>
+                    <td>改善のための具体的なアクションを提案</td>
+                    <td>・優先度<br>・カテゴリ<br>・期待効果</td>
+                    <td>次のアクションプランの策定</td>
+                </tr>
+                <tr>
+                    <td>チーム貢献度</td>
+                    <td>メンバー別の貢献をAIが評価・分析</td>
+                    <td>・貢献度<br>・フィードバック<br>・改善点</td>
+                    <td>チーム編成やスキル開発の計画</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">分析実行</div>
+                <div class="step-description">「AI分析実行」ボタンで分析を開始</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('best-practices')">
-                <img id="best-practices" src="../image/web-admin/800x500.png" alt="活用シーンとベストプラクティス">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">データ収集</div>
+                <div class="step-description">進捗、パフォーマンス、タスクデータを収集</div>
             </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">AI分析</div>
+                <div class="step-description">Groq AIが複数の分析モデルを適用</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">結果表示</div>
+                <div class="step-description">分析結果をダッシュボードに表示</div>
+            </div>
+        </div>
 
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>活用シーン</th>
-                        <th>目的</th>
-                        <th>使用機能</th>
-                        <th>期待効果</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>スプリント計画ミーティング</td>
-                        <td>次のスプリントの計画立案</td>
-                        <td>・新規スプリント作成<br>・AI分析<br>・チームパフォーマンス確認</td>
-                        <td>現実的な目標設定と計画の精度向上</td>
-                    </tr>
-                    <tr>
-                        <td>デイリースクラム</td>
-                        <td>日々の進捗確認と課題特定</td>
-                        <td>・進捗トラッキング<br>・バーンダウンチャート<br>・統計情報</td>
-                        <td>問題の早期発見とチームの状況共有</td>
-                    </tr>
-                    <tr>
-                        <td>スプリントレビュー</td>
-                        <td>成果物の受け入れと振り返り</td>
-                        <td>・統計情報<br>・チームパフォーマンス<br>・AI分析結果</td>
-                        <td>客観的な成果評価と次回への改善</td>
-                    </tr>
-                    <tr>
-                        <td>レトロスペクティブ</td>
-                        <td>プロセス改善の検討</td>
-                        <td>・AI分析のリスク要因<br>・推奨事項<br>・モメンタム分析</td>
-                        <td>具体的な改善アクションの特定と実行</td>
-                    </tr>
-                    <tr>
-                        <td>マネジメント報告</td>
-                        <td>経営層への進捗報告</td>
-                        <td>・統計情報ダッシュボード<br>・AI分析結果<br>・進捗レポート</td>
-                        <td>データに基づく客観的な状況報告</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> AI分析の活用タイミング</h5>
+            <p>AI分析はスプリントの中間点（通常5日目）と、進捗が計画から大きくずれている場合に実行するのが効果的です。定期的な分析により、問題の早期発見と適時な対策実行が可能になります。</p>
+        </div>
 
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> 成功するスプリント管理の秘訣</h5>
-                <p>1. **一貫性の維持**: 毎日同じ時間に進捗を記録する<br>
+        <div class="info-box">
+            <h5><i class="bi bi-info-circle"></i> AI分析の精度について</h5>
+            <p>AI分析の精度は、入力データの品質と量に依存します。進捗記録やパフォーマンス評価を定期的に行うことで、より精度の高い分析結果が得られます。また、AIの推奨事項は参考情報として活用し、最終的な判断はチームの合意に基づいて行うことが重要です。
+            </p>
+        </div>
+    </div>
+
+    <!-- 8.8 統計情報とメトリクス -->
+    <div id="subsection-8-8" class="manual-subsection">
+        <h3>8.8 統計情報とメトリクス</h3>
+
+        <div class="description-box">
+            <p>統計情報とメトリクス機能は、スプリントの各種指標を網羅的に表示し、チームのパフォーマンスを多角的に評価するためのダッシュボードです。タスク数、ストーリーポイント、進捗率、ベロシティなどの主要指標をリアルタイムで把握でき、スプリントの健全性を診断するための重要な情報を提供します。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('statistics-metrics')">
+            <img id="statistics-metrics" src="../image/web-admin/08_statistics-metrics.png" alt="統計情報とメトリクスの詳細">
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">総タスク数</div>
+                <div class="stat-value">15</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">完了タスク</div>
+                <div class="stat-value" style="color: var(--success-color);">9</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">進行中タスク</div>
+                <div class="stat-value" style="color: var(--primary-color);">4</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">残りタスク</div>
+                <div class="stat-value" style="color: var(--warning-color);">2</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">総ストーリーポイント</div>
+                <div class="stat-value">40</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">完了ポイント</div>
+                <div class="stat-value" style="color: var(--success-color);">28</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">進捗率</div>
+                <div class="stat-value">70.0%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">ベロシティ</div>
+                <div class="stat-value">4.0pt/日</div>
+            </div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>メトリクス</th>
+                    <th>説明</th>
+                    <th>計算式</th>
+                    <th>目標値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>総タスク数</td>
+                    <td>スプリントに含まれる全タスクの数</td>
+                    <td>ステータスに関わらず全タスクをカウント</td>
+                    <td>プロジェクトによる</td>
+                </tr>
+                <tr>
+                    <td>完了タスク</td>
+                    <td>完了したタスクの数</td>
+                    <td>ステータスが「完了」のタスク数</td>
+                    <td>総タスクの80%以上</td>
+                </tr>
+                <tr>
+                    <td>進行中タスク</td>
+                    <td>現在作業中のタスク数</td>
+                    <td>ステータスが「進行中」のタスク数</td>
+                    <td>総タスクの20-30%</td>
+                </tr>
+                <tr>
+                    <td>進捗率</td>
+                    <td>完了した作業の割合</td>
+                    <td>(完了SP ÷ 総SP) × 100</td>
+                    <td>期間経過率と同等以上</td>
+                </tr>
+                <tr>
+                    <td>ベロシティ</td>
+                    <td>1日あたりの平均完了SP</td>
+                    <td>完了SP ÷ 経過日数</td>
+                    <td>計画ベロシティを維持</td>
+                </tr>
+                <tr>
+                    <td>達成可能性スコア</td>
+                    <td>AIによる目標達成の確率</td>
+                    <td>AIが複数要因から算出</td>
+                    <td>70%以上</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> メトリクス監視のポイント</h5>
+            <p>特に重要なのは「進捗率」と「期間経過率」の比較です。進捗率が期間経過率を下回っている場合、スプリントが遅延しているサインです。また、ベロシティが計画値を大幅に下回る場合は、タスクの見積もりやチームのキャパシティを見直す必要があります。
+            </p>
+        </div>
+
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> メトリクスの解釈注意</h5>
+            <p>メトリクスはあくまで定量的な指標です。タスクの複雑度、品質、チームの学習効果などの定性的な要因は反映されません。メトリクスの異常値を発見した場合は、必ず背景にある要因をチームで話し合うことが重要です。</p>
+        </div>
+    </div>
+
+    <!-- 8.9 フィルタ機能 -->
+    <div id="subsection-8-9" class="manual-subsection">
+        <h3>8.9 フィルタ機能</h3>
+
+        <div class="description-box">
+            <p>フィルタ機能は、多数のスプリントから目的のスプリントを効率的に検索・表示するための機能です。プロジェクト別、ステータス別にスプリントを絞り込むことができ、大規模なプロジェクトや長期間の運用においても、必要な情報に素早くアクセスできます。フィルタ条件はリアルタイムで反映され、直感的な操作が可能です。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('filter-function')">
+            <img id="filter-function" src="../image/web-admin/08_filter-function.png" alt="フィルタ機能の詳細">
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label class="form-label">プロジェクト</label>
+                <select class="form-input">
+                    <option value="">すべて</option>
+                    <option value="1">Eコマースサイト改修</option>
+                    <option value="2">モバイルアプリ開発</option>
+                    <option value="3">基幹システム刷新</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="form-label">ステータス</label>
+                <select class="form-input">
+                    <option value="all">すべて</option>
+                    <option value="planning">計画中</option>
+                    <option value="active">アクティブ</option>
+                    <option value="completed">完了</option>
+                </select>
+            </div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>フィルタ項目</th>
+                    <th>選択肢</th>
+                    <th>用途</th>
+                    <th>組み合わせ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト</td>
+                    <td>・すべて<br>・各プロジェクト名</td>
+                    <td>特定プロジェクトのスプリントを表示</td>
+                    <td>ステータスフィルタと組み合わせ可能</td>
+                </tr>
+                <tr>
+                    <td>ステータス</td>
+                    <td>・すべて<br>・計画中<br>・アクティブ<br>・完了</td>
+                    <td>特定ステータスのスプリントを表示</td>
+                    <td>プロジェクトフィルタと組み合わせ可能</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">フィルタ選択</div>
+                <div class="step-description">ドロップダウンからフィルタ条件を選択</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">自動適用</div>
+                <div class="step-description">選択した条件が即座にリストに反映</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">結果確認</div>
+                <div class="step-description">フィルタされたスプリント一覧を確認</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">詳細表示</div>
+                <div class="step-description">目的のスプリントを選択して詳細を表示</div>
+            </div>
+        </div>
+
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> フィルタ活用のコツ</h5>
+            <p>「アクティブ」ステータスでフィルタすると、現在進行中のスプリントのみが表示され、進捗管理に集中できます。「完了」ステータスでフィルタすると、過去のスプリントを振り返り、次回の計画に活かすことができます。</p>
+        </div>
+
+        <div class="info-box">
+            <h5><i class="bi bi-info-circle"></i> フィルタのリセット</h5>
+            <p>フィルタ条件をクリアするには、各ドロップダウンを「すべて」または初期値に戻します。これにより、全スプリントが再表示されます。フィルタ状態はページ遷移しても保持されるため、意図しない絞り込みに注意してください。
+            </p>
+        </div>
+    </div>
+
+    <!-- 8.10 活用シーンとベストプラクティス -->
+    <div id="subsection-8-10" class="manual-subsection">
+        <h3>8.10 活用シーンとベストプラクティス</h3>
+
+        <div class="description-box">
+            <p>スプリント管理機能は、アジャイル開発チームの生産性を最大化するための強力なツールです。適切な活用により、計画の精度向上、進捗の可視化、チームの協調性強化、継続的な改善が実現できます。ここでは、実際の開発現場での活用シーンと、成功のためのベストプラクティスを具体的に紹介します。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('best-practices')">
+            <img id="best-practices" src="../image/web-admin/08_best-practices.png" alt="活用シーンとベストプラクティス">
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>活用シーン</th>
+                    <th>目的</th>
+                    <th>使用機能</th>
+                    <th>期待効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>スプリント計画ミーティング</td>
+                    <td>次のスプリントの計画立案</td>
+                    <td>・新規スプリント作成<br>・AI分析<br>・チームパフォーマンス確認</td>
+                    <td>現実的な目標設定と計画の精度向上</td>
+                </tr>
+                <tr>
+                    <td>デイリースクラム</td>
+                    <td>日々の進捗確認と課題特定</td>
+                    <td>・進捗トラッキング<br>・バーンダウンチャート<br>・統計情報</td>
+                    <td>問題の早期発見とチームの状況共有</td>
+                </tr>
+                <tr>
+                    <td>スプリントレビュー</td>
+                    <td>成果物の受け入れと振り返り</td>
+                    <td>・統計情報<br>・チームパフォーマンス<br>・AI分析結果</td>
+                    <td>客観的な成果評価と次回への改善</td>
+                </tr>
+                <tr>
+                    <td>レトロスペクティブ</td>
+                    <td>プロセス改善の検討</td>
+                    <td>・AI分析のリスク要因<br>・推奨事項<br>・モメンタム分析</td>
+                    <td>具体的な改善アクションの特定と実行</td>
+                </tr>
+                <tr>
+                    <td>マネジメント報告</td>
+                    <td>経営層への進捗報告</td>
+                    <td>・統計情報ダッシュボード<br>・AI分析結果<br>・進捗レポート</td>
+                    <td>データに基づく客観的な状況報告</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> 成功するスプリント管理の秘訣</h5>
+            <p>1. **一貫性の維持**: 毎日同じ時間に進捗を記録する<br>
                 2. **透明性の確保**: チーム全員がデータにアクセスできる環境<br>
                 3. **定期的な振り返り**: スプリントごとに改善点を特定し実行<br>
                 4. **データ駆動**: 感覚ではなくデータに基づいて意思決定<br>
                 5. **継続的な学習**: 過去のスプリントから教訓を次に活かす</p>
-            </div>
+        </div>
 
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">計画段階</div>
-                    <div class="step-description">過去のデータを参考に現実的なスプリントを計画</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">実行段階</div>
-                    <div class="step-description">毎日の進捗記録と問題の早期発見・対策</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">評価段階</div>
-                    <div class="step-description">客観的なデータで成果を評価し次回に活かす</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">改善段階</div>
-                    <div class="step-description">AI分析とチームの知見でプロセスを継続改善</div>
-                </div>
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">計画段階</div>
+                <div class="step-description">過去のデータを参考に現実的なスプリントを計画</div>
             </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">実行段階</div>
+                <div class="step-description">毎日の進捗記録と問題の早期発見・対策</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">評価段階</div>
+                <div class="step-description">客観的なデータで成果を評価し次回に活かす</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">改善段階</div>
+                <div class="step-description">AI分析とチームの知見でプロセスを継続改善</div>
+            </div>
+        </div>
 
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> よくある失敗パターン</h5>
-                <p>1. **過剰な計画**: 詳細すぎる計画が変更への対応を困難にする<br>
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> よくある失敗パターン</h5>
+            <p>1. **過剰な計画**: 詳細すぎる計画が変更への対応を困難にする<br>
                 2. **データ不足**: 進捗記録の欠如が正確な評価を妨げる<br>
                 3. **無視された警告**: AI分析のリスク警告を放置する<br>
                 4. **個人の過信**: データなしの経験主義で判断する<br>
                 5. **振り返りの欠如**: 同じ間違いを繰り返す</p>
-            </div>
+        </div>
 
-            <div class="info-box">
-                <h5><i class="bi bi-info-circle"></i> ツール導入の成功要因</h5>
-                <p>スプリント管理ツールの成功は、ツールの機能以上にチームの文化と習慣に依存します。全員がツールを正しく使うこと、データの重要性を理解すること、継続的な改善に取り組むことが、アジャイル開発の成功につながります。</p>
-            </section>
+        <div class="info-box">
+            <h5><i class="bi bi-info-circle"></i> ツール導入の成功要因</h5>
+            <p>スプリント管理ツールの成功は、ツールの機能以上にチームの文化と習慣に依存します。全員がツールを正しく使うこと、データの重要性を理解すること、継続的な改善に取り組むことが、アジャイル開発の成功につながります。
+            </p>
+</section>

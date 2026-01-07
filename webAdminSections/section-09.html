@@ -1,712 +1,729 @@
 <!-- セッション 9: プロジェクト健全性 -->
 <section id="section-9" class="manual-section">
-<h2>9. プロジェクト健全性（/project-health）</h2>
+    <h2>9. プロジェクト健全性（/project-health）</h2>
     <p>プロジェクトの健全性を9項目で自動評価し、問題の早期発見を支援します。</p>
 
-        <!-- 9.1 概要 -->
-        <div id="subsection-9-1" class="manual-subsection">
-            <h3>9.1 プロジェクト健全性の概要</h3>
-            
-            <div class="description-box">
-                <p>プロジェクト健全性画面は、プロジェクトの「健康状態」を総合的に診断する医療検査のようなダッシュボードです。進捗達成度、期限順守度、チーム士気、ブロッカー影響、作業速度の5つの評価軸で健全性スコアを算出し、AIが問題点と改善策を提案します。さらにバーンダウンチャートとクリティカルパス分析により、プロジェクトのボトルネックを早期発見できます。</p>
+    <!-- 9.1 概要 -->
+    <div id="subsection-9-1" class="manual-subsection">
+        <h3>9.1 プロジェクト健全性の概要</h3>
+
+        <div class="description-box">
+            <p>プロジェクト健全性画面は、プロジェクトの「健康状態」を総合的に診断する医療検査のようなダッシュボードです。進捗達成度、期限順守度、チーム士気、ブロッカー影響、作業速度の5つの評価軸で健全性スコアを算出し、AIが問題点と改善策を提案します。さらにバーンダウンチャートとクリティカルパス分析により、プロジェクトのボトルネックを早期発見できます。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('health-overview')">
+            <img id="health-overview" src="../image/web-admin/09_health-overview.png" alt="プロジェクト健全性画面の全体像">
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>主要機能</th>
+                    <th>説明</th>
+                    <th>ユーザー価値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>健全性スコア</td>
+                    <td>5つの評価軸を総合した0-100点のスコア</td>
+                    <td>プロジェクトの健康状態を一目で把握</td>
+                </tr>
+                <tr>
+                    <td>バーンダウンチャート</td>
+                    <td>残タスク・残工数の推移を可視化</td>
+                    <td>進捗の遅れを早期発見</td>
+                </tr>
+                <tr>
+                    <td>クリティカルパス分析</td>
+                    <td>プロジェクト完了に影響するタスクを特定</td>
+                    <td>優先すべきタスクの明確化</td>
+                </tr>
+                <tr>
+                    <td>AI分析</td>
+                    <td>リスク要因と改善提案を自動生成</td>
+                    <td>データに基づく意思決定支援</td>
+                </tr>
+                <tr>
+                    <td>履歴管理</td>
+                    <td>過去30日分の健全性スコアを保存</td>
+                    <td>トレンド分析と改善効果の測定</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> 健全性チェックの推奨頻度</h5>
+            <p>健全性スコアは週次（毎週金曜日など）で定期的に計算することを推奨します。バーンダウンは毎日記録し、クリティカルパスは週次または重要なマイルストーン前に分析することで、プロジェクトの健康状態を継続的に監視できます。
+            </p>
+        </div>
+    </div>
+
+    <!-- 9.2 健全性スコアの計算 -->
+    <div id="subsection-9-2" class="manual-subsection">
+        <h3>9.2 健全性スコアの計算</h3>
+
+        <div class="description-box">
+            <p>健全性スコアは、プロジェクトの状態を0-100点で数値化する総合指標です。5つの評価軸（進捗達成度、期限順守度、チーム士気、ブロッカー影響、作業速度）をそれぞれ評価し、加重平均で最終スコアを算出します。80点以上は「良好」、60-79点は「注意」、40-59点は「警告」、40点未満は「危険」と判定されます。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('health-score-calc')">
+            <img id="health-score-calc" src="../image/web-admin/09_health-overview.png" alt="健全性スコア計算の詳細">
+        </div>
+
+        <div class="score-circle score-excellent">
+            <div class="score-value">85</div>
+            <div class="score-label">良好</div>
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>評価軸</th>
+                    <th>計算方法</th>
+                    <th>重要度</th>
+                    <th>理想値</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><i class="bi bi-graph-up"></i> 進捗達成度</td>
+                    <td>(完了タスク数 ÷ 総タスク数) × 100 ÷ 期間経過率</td>
+                    <td>30%</td>
+                    <td>100%以上（計画以上の進捗）</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-clock"></i> 期限順守度</td>
+                    <td>(期限内完了タスク ÷ 完了タスク数) × 100</td>
+                    <td>25%</td>
+                    <td>90%以上</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-emoji-smile"></i> チーム士気</td>
+                    <td>コメントのセンチメント分析 + メンバー評価</td>
+                    <td>20%</td>
+                    <td>80%以上</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-shield-exclamation"></i> ブロッカー影響</td>
+                    <td>100 - (ブロッカー数 × 影響度係数)</td>
+                    <td>15%</td>
+                    <td>90%以上（ブロッカーが少ない）</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-speedometer2"></i> 作業速度</td>
+                    <td>(実際のベロシティ ÷ 計画ベロシティ) × 100</td>
+                    <td>10%</td>
+                    <td>100%以上</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">プロジェクト選択</div>
+                <div class="step-description">ドロップダウンから対象プロジェクトを選択</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('health-overview')">
-                <img id="health-overview" src="../image/web-admin/800x500.png" alt="プロジェクト健全性画面の全体像">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">スコア計算</div>
+                <div class="step-description">「健全性スコアを計算」ボタンをクリック</div>
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>主要機能</th>
-                        <th>説明</th>
-                        <th>ユーザー価値</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>健全性スコア</td>
-                        <td>5つの評価軸を総合した0-100点のスコア</td>
-                        <td>プロジェクトの健康状態を一目で把握</td>
-                    </tr>
-                    <tr>
-                        <td>バーンダウンチャート</td>
-                        <td>残タスク・残工数の推移を可視化</td>
-                        <td>進捗の遅れを早期発見</td>
-                    </tr>
-                    <tr>
-                        <td>クリティカルパス分析</td>
-                        <td>プロジェクト完了に影響するタスクを特定</td>
-                        <td>優先すべきタスクの明確化</td>
-                    </tr>
-                    <tr>
-                        <td>AI分析</td>
-                        <td>リスク要因と改善提案を自動生成</td>
-                        <td>データに基づく意思決定支援</td>
-                    </tr>
-                    <tr>
-                        <td>履歴管理</td>
-                        <td>過去30日分の健全性スコアを保存</td>
-                        <td>トレンド分析と改善効果の測定</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> 健全性チェックの推奨頻度</h5>
-                <p>健全性スコアは週次（毎週金曜日など）で定期的に計算することを推奨します。バーンダウンは毎日記録し、クリティカルパスは週次または重要なマイルストーン前に分析することで、プロジェクトの健康状態を継続的に監視できます。</p>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">AI分析実行</div>
+                <div class="step-description">AIが5つの評価軸を分析し総合スコアを算出</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">結果表示</div>
+                <div class="step-description">スコア、評価軸、リスク、改善提案を表示</div>
             </div>
         </div>
 
-        <!-- 9.2 健全性スコアの計算 -->
-        <div id="subsection-9-2" class="manual-subsection">
-            <h3>9.2 健全性スコアの計算</h3>
-            
-            <div class="description-box">
-                <p>健全性スコアは、プロジェクトの状態を0-100点で数値化する総合指標です。5つの評価軸（進捗達成度、期限順守度、チーム士気、ブロッカー影響、作業速度）をそれぞれ評価し、加重平均で最終スコアを算出します。80点以上は「良好」、60-79点は「注意」、40-59点は「警告」、40点未満は「危険」と判定されます。</p>
+        <div class="info-box">
+            <h5><i class="bi bi-info-circle"></i> スコアの解釈</h5>
+            <p>健全性スコアは絶対的な基準ではなく、プロジェクトの状態を相対的に評価する指標です。スコアが低くても、適切な対策を講じることで改善できます。重要なのは、スコアの数値そのものよりも、トレンド（上昇傾向か下降傾向か）とAIの改善提案です。
+            </p>
+        </div>
+    </div>
+
+    <!-- 9.3 5つの評価軸の詳細 -->
+    <div id="subsection-9-3" class="manual-subsection">
+        <h3>9.3 5つの評価軸の詳細</h3>
+
+        <div class="description-box">
+            <p>健全性スコアを構成する5つの評価軸は、それぞれ独立して計算され、プロジェクトの異なる側面を評価します。各軸は0-100%のスコアで表示され、プログレスバーで視覚的に確認できます。この多角的な評価により、プロジェクトの強みと弱みを正確に把握できます。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('five-metrics')">
+            <img id="five-metrics" src="../image/web-admin/09_five-metrics.png" alt="5つの評価軸の詳細">
+        </div>
+
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i class="bi bi-graph-up"></i>
+                    <span>進捗達成度</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 85%"></div>
+                </div>
+                <div class="metric-value">85%</div>
             </div>
 
-            <div class="feature-image" onclick="openGallery('health-score-calc')">
-                <img id="health-score-calc" src="../image/web-admin/800x500.png" alt="健全性スコア計算の詳細">
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i class="bi bi-clock"></i>
+                    <span>期限順守度</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 78%"></div>
+                </div>
+                <div class="metric-value">78%</div>
             </div>
 
-            <div class="score-circle score-excellent">
-                <div class="score-value">85</div>
-                <div class="score-label">良好</div>
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i class="bi bi-emoji-smile"></i>
+                    <span>チーム士気</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 92%"></div>
+                </div>
+                <div class="metric-value">92%</div>
             </div>
 
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>評価軸</th>
-                        <th>計算方法</th>
-                        <th>重要度</th>
-                        <th>理想値</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><i class="bi bi-graph-up"></i> 進捗達成度</td>
-                        <td>(完了タスク数 ÷ 総タスク数) × 100 ÷ 期間経過率</td>
-                        <td>30%</td>
-                        <td>100%以上（計画以上の進捗）</td>
-                    </tr>
-                    <tr>
-                        <td><i class="bi bi-clock"></i> 期限順守度</td>
-                        <td>(期限内完了タスク ÷ 完了タスク数) × 100</td>
-                        <td>25%</td>
-                        <td>90%以上</td>
-                    </tr>
-                    <tr>
-                        <td><i class="bi bi-emoji-smile"></i> チーム士気</td>
-                        <td>コメントのセンチメント分析 + メンバー評価</td>
-                        <td>20%</td>
-                        <td>80%以上</td>
-                    </tr>
-                    <tr>
-                        <td><i class="bi bi-shield-exclamation"></i> ブロッカー影響</td>
-                        <td>100 - (ブロッカー数 × 影響度係数)</td>
-                        <td>15%</td>
-                        <td>90%以上（ブロッカーが少ない）</td>
-                    </tr>
-                    <tr>
-                        <td><i class="bi bi-speedometer2"></i> 作業速度</td>
-                        <td>(実際のベロシティ ÷ 計画ベロシティ) × 100</td>
-                        <td>10%</td>
-                        <td>100%以上</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">プロジェクト選択</div>
-                    <div class="step-description">ドロップダウンから対象プロジェクトを選択</div>
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i class="bi bi-shield-exclamation"></i>
+                    <span>ブロッカー影響</span>
                 </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">スコア計算</div>
-                    <div class="step-description">「健全性スコアを計算」ボタンをクリック</div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 65%"></div>
                 </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">AI分析実行</div>
-                    <div class="step-description">AIが5つの評価軸を分析し総合スコアを算出</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">結果表示</div>
-                    <div class="step-description">スコア、評価軸、リスク、改善提案を表示</div>
-                </div>
+                <div class="metric-value">65%</div>
             </div>
 
-            <div class="info-box">
-                <h5><i class="bi bi-info-circle"></i> スコアの解釈</h5>
-                <p>健全性スコアは絶対的な基準ではなく、プロジェクトの状態を相対的に評価する指標です。スコアが低くても、適切な対策を講じることで改善できます。重要なのは、スコアの数値そのものよりも、トレンド（上昇傾向か下降傾向か）とAIの改善提案です。</p>
+            <div class="metric-card">
+                <div class="metric-header">
+                    <i class="bi bi-speedometer2"></i>
+                    <span>作業速度</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar-fill" style="width: 88%"></div>
+                </div>
+                <div class="metric-value">88%</div>
             </div>
         </div>
 
-        <!-- 9.3 5つの評価軸の詳細 -->
-        <div id="subsection-9-3" class="manual-subsection">
-            <h3>9.3 5つの評価軸の詳細</h3>
-            
-            <div class="description-box">
-                <p>健全性スコアを構成する5つの評価軸は、それぞれ独立して計算され、プロジェクトの異なる側面を評価します。各軸は0-100%のスコアで表示され、プログレスバーで視覚的に確認できます。この多角的な評価により、プロジェクトの強みと弱みを正確に把握できます。</p>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>評価軸</th>
+                    <th>良好な状態</th>
+                    <th>問題のある状態</th>
+                    <th>改善アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>進捗達成度</td>
+                    <td>計画通りまたは計画以上に進んでいる</td>
+                    <td>計画より大幅に遅れている</td>
+                    <td>リソース追加、スコープ調整、効率化</td>
+                </tr>
+                <tr>
+                    <td>期限順守度</td>
+                    <td>90%以上のタスクが期限内に完了</td>
+                    <td>期限遅れが頻発している</td>
+                    <td>見積もり精度向上、バッファ確保、リスケジュール</td>
+                </tr>
+                <tr>
+                    <td>チーム士気</td>
+                    <td>ポジティブなコメントが多い</td>
+                    <td>不満や疲労の兆候が見られる</td>
+                    <td>1on1実施、負荷軽減、モチベーション施策</td>
+                </tr>
+                <tr>
+                    <td>ブロッカー影響</td>
+                    <td>ブロッカーが少なく迅速に解決</td>
+                    <td>多数のタスクがブロック状態</td>
+                    <td>ブロッカー優先解決、依存関係の見直し</td>
+                </tr>
+                <tr>
+                    <td>作業速度</td>
+                    <td>計画通りまたはそれ以上のペース</td>
+                    <td>作業ペースが著しく低下</td>
+                    <td>障害除去、スキル強化、ツール改善</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> 評価軸の優先順位</h5>
+            <p>すべての評価軸が重要ですが、プロジェクトの状況によって優先順位が変わります。納期が厳しいプロジェクトでは「進捗達成度」と「期限順守度」を、長期プロジェクトでは「チーム士気」と「作業速度」を重視すると効果的です。
+            </p>
+        </div>
+    </div>
+
+    <!-- 9.4 AI分析結果 -->
+    <div id="subsection-9-4" class="manual-subsection">
+        <h3>9.4 AI分析結果</h3>
+
+        <div class="description-box">
+            <p>AI分析機能は、健全性スコア計算時に自動的に実行され、プロジェクトの総合評価、リスク要因、改善提案の3つの要素を生成します。AIは過去のプロジェクトデータと業界ベストプラクティスを参照し、現在のプロジェクト状態に最適化されたアドバイスを提供します。これにより、管理者は具体的なアクションプランを立てやすくなります。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('ai-analysis')">
+            <img id="ai-analysis" src="../image/web-admin/09_ai-analysis.png" alt="AI分析結果の詳細">
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>分析要素</th>
+                    <th>内容</th>
+                    <th>出力例</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><i class="bi bi-lightbulb"></i> 総合評価</td>
+                    <td>プロジェクト全体の状態を要約</td>
+                    <td>「プロジェクトは概ね順調ですが、一部のタスクで遅延が見られます。チームの士気は高く維持されています」</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-exclamation-triangle"></i> リスク要因</td>
+                    <td>発生している問題や潜在リスクを列挙</td>
+                    <td>「期限超過タスク3件、ブロッカー2件、スキル不足による遅延」</td>
+                </tr>
+                <tr>
+                    <td><i class="bi bi-check2-circle"></i> 改善提案</td>
+                    <td>具体的なアクションアイテムを提案</td>
+                    <td>「ブロッカーの優先解決、リソース追加の検討、週次レビューの強化」</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">データ収集</div>
+                <div class="step-description">タスク、コメント、進捗、メンバー情報を収集</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('five-metrics')">
-                <img id="five-metrics" src="../image/web-admin/800x500.png" alt="5つの評価軸の詳細">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">パターン分析</div>
+                <div class="step-description">AIが問題パターンとトレンドを検出</div>
             </div>
-
-            <div class="metric-grid">
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <i class="bi bi-graph-up"></i>
-                        <span>進捗達成度</span>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: 85%"></div>
-                    </div>
-                    <div class="metric-value">85%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <i class="bi bi-clock"></i>
-                        <span>期限順守度</span>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: 78%"></div>
-                    </div>
-                    <div class="metric-value">78%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <i class="bi bi-emoji-smile"></i>
-                        <span>チーム士気</span>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: 92%"></div>
-                    </div>
-                    <div class="metric-value">92%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <i class="bi bi-shield-exclamation"></i>
-                        <span>ブロッカー影響</span>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: 65%"></div>
-                    </div>
-                    <div class="metric-value">65%</div>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <i class="bi bi-speedometer2"></i>
-                        <span>作業速度</span>
-                    </div>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: 88%"></div>
-                    </div>
-                    <div class="metric-value">88%</div>
-                </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">評価生成</div>
+                <div class="step-description">総合評価とリスク要因をテキスト生成</div>
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>評価軸</th>
-                        <th>良好な状態</th>
-                        <th>問題のある状態</th>
-                        <th>改善アクション</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>進捗達成度</td>
-                        <td>計画通りまたは計画以上に進んでいる</td>
-                        <td>計画より大幅に遅れている</td>
-                        <td>リソース追加、スコープ調整、効率化</td>
-                    </tr>
-                    <tr>
-                        <td>期限順守度</td>
-                        <td>90%以上のタスクが期限内に完了</td>
-                        <td>期限遅れが頻発している</td>
-                        <td>見積もり精度向上、バッファ確保、リスケジュール</td>
-                    </tr>
-                    <tr>
-                        <td>チーム士気</td>
-                        <td>ポジティブなコメントが多い</td>
-                        <td>不満や疲労の兆候が見られる</td>
-                        <td>1on1実施、負荷軽減、モチベーション施策</td>
-                    </tr>
-                    <tr>
-                        <td>ブロッカー影響</td>
-                        <td>ブロッカーが少なく迅速に解決</td>
-                        <td>多数のタスクがブロック状態</td>
-                        <td>ブロッカー優先解決、依存関係の見直し</td>
-                    </tr>
-                    <tr>
-                        <td>作業速度</td>
-                        <td>計画通りまたはそれ以上のペース</td>
-                        <td>作業ペースが著しく低下</td>
-                        <td>障害除去、スキル強化、ツール改善</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> 評価軸の優先順位</h5>
-                <p>すべての評価軸が重要ですが、プロジェクトの状況によって優先順位が変わります。納期が厳しいプロジェクトでは「進捗達成度」と「期限順守度」を、長期プロジェクトでは「チーム士気」と「作業速度」を重視すると効果的です。</p>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">提案作成</div>
+                <div class="step-description">実行可能な改善提案を具体的に提示</div>
             </div>
         </div>
 
-        <!-- 9.4 AI分析結果 -->
-        <div id="subsection-9-4" class="manual-subsection">
-            <h3>9.4 AI分析結果</h3>
-            
-            <div class="description-box">
-                <p>AI分析機能は、健全性スコア計算時に自動的に実行され、プロジェクトの総合評価、リスク要因、改善提案の3つの要素を生成します。AIは過去のプロジェクトデータと業界ベストプラクティスを参照し、現在のプロジェクト状態に最適化されたアドバイスを提供します。これにより、管理者は具体的なアクションプランを立てやすくなります。</p>
-            </div>
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> AI分析の限界</h5>
+            <p>AI分析は強力なツールですが、完璧ではありません。プロジェクトの文脈や組織特有の事情を完全には理解できない場合があります。AI提案は参考情報として活用し、最終的な意思決定はプロジェクトマネージャーの判断で行うことが重要です。
+            </p>
+        </div>
+    </div>
 
-            <div class="feature-image" onclick="openGallery('ai-analysis')">
-                <img id="ai-analysis" src="../image/web-admin/800x500.png" alt="AI分析結果の詳細">
-            </div>
+    <!-- 9.5 バーンダウンチャート -->
+    <div id="subsection-9-5" class="manual-subsection">
+        <h3>9.5 バーンダウンチャート</h3>
 
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>分析要素</th>
-                        <th>内容</th>
-                        <th>出力例</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><i class="bi bi-lightbulb"></i> 総合評価</td>
-                        <td>プロジェクト全体の状態を要約</td>
-                        <td>「プロジェクトは概ね順調ですが、一部のタスクで遅延が見られます。チームの士気は高く維持されています」</td>
-                    </tr>
-                    <tr>
-                        <td><i class="bi bi-exclamation-triangle"></i> リスク要因</td>
-                        <td>発生している問題や潜在リスクを列挙</td>
-                        <td>「期限超過タスク3件、ブロッカー2件、スキル不足による遅延」</td>
-                    </tr>
-                    <tr>
-                        <td><i class="bi bi-check2-circle"></i> 改善提案</td>
-                        <td>具体的なアクションアイテムを提案</td>
-                        <td>「ブロッカーの優先解決、リソース追加の検討、週次レビューの強化」</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="description-box">
+            <p>バーンダウンチャートは、プロジェクト開始から現在までの残タスク数と残工数の推移をグラフ化する機能です。理想的な減少曲線と実際の進捗を比較することで、進捗の遅れや加速を視覚的に把握できます。過去30日分のデータを保存し、トレンド分析が可能です。毎日の進捗記録により、正確なプロジェクト完了予測が行えます。
+            </p>
+        </div>
 
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">データ収集</div>
-                    <div class="step-description">タスク、コメント、進捗、メンバー情報を収集</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">パターン分析</div>
-                    <div class="step-description">AIが問題パターンとトレンドを検出</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">評価生成</div>
-                    <div class="step-description">総合評価とリスク要因をテキスト生成</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">提案作成</div>
-                    <div class="step-description">実行可能な改善提案を具体的に提示</div>
-                </div>
-            </div>
+        <div class="feature-image" onclick="openGallery('burndown-chart')">
+            <img id="burndown-chart" src="../image/web-admin/09_burndown-chart.png" alt="バーンダウンチャートの詳細">
+        </div>
 
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> AI分析の限界</h5>
-                <p>AI分析は強力なツールですが、完璧ではありません。プロジェクトの文脈や組織特有の事情を完全には理解できない場合があります。AI提案は参考情報として活用し、最終的な意思決定はプロジェクトマネージャーの判断で行うことが重要です。</p>
+        <div class="chart-container">
+            <h4>バーンダウンチャートの見方</h4>
+            <div class="chart-placeholder">
+                <i class="bi bi-graph-down-arrow" style="font-size: 3rem; color: var(--primary-color);"></i>
+                <p>残タスク・残工数の減少トレンド</p>
+                <p style="font-size: 0.875rem; margin-top: 1rem;">理想線との乖離でプロジェクトの健全性を判断</p>
             </div>
         </div>
 
-        <!-- 9.5 バーンダウンチャート -->
-        <div id="subsection-9-5" class="manual-subsection">
-            <h3>9.5 バーンダウンチャート</h3>
-            
-            <div class="description-box">
-                <p>バーンダウンチャートは、プロジェクト開始から現在までの残タスク数と残工数の推移をグラフ化する機能です。理想的な減少曲線と実際の進捗を比較することで、進捗の遅れや加速を視覚的に把握できます。過去30日分のデータを保存し、トレンド分析が可能です。毎日の進捗記録により、正確なプロジェクト完了予測が行えます。</p>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="bi bi-calendar3"></i></div>
+                <div class="stat-label">データ件数</div>
+                <div class="stat-value">25日</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('burndown-chart')">
-                <img id="burndown-chart" src="../image/web-admin/800x500.png" alt="バーンダウンチャートの詳細">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="bi bi-list-task"></i></div>
+                <div class="stat-label">残タスク</div>
+                <div class="stat-value">18</div>
             </div>
-
-            <div class="chart-container">
-                <h4>バーンダウンチャートの見方</h4>
-                <div class="chart-placeholder">
-                    <i class="bi bi-graph-down-arrow" style="font-size: 3rem; color: var(--primary-color);"></i>
-                    <p>残タスク・残工数の減少トレンド</p>
-                    <p style="font-size: 0.875rem; margin-top: 1rem;">理想線との乖離でプロジェクトの健全性を判断</p>
-                </div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="bi bi-calendar3"></i></div>
-                    <div class="stat-label">データ件数</div>
-                    <div class="stat-value">25日</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="bi bi-list-task"></i></div>
-                    <div class="stat-label">残タスク</div>
-                    <div class="stat-value">18</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"><i class="bi bi-clock-history"></i></div>
-                    <div class="stat-label">残工数</div>
-                    <div class="stat-value">124h</div>
-                </div>
-            </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>記録項目</th>
-                        <th>説明</th>
-                        <th>活用方法</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>実際の残タスク数</td>
-                        <td>その日時点での未完了タスクの総数</td>
-                        <td>タスク完了ペースの把握</td>
-                    </tr>
-                    <tr>
-                        <td>実際の残工数</td>
-                        <td>未完了タスクの見積もり工数合計</td>
-                        <td>プロジェクト完了までの所要時間予測</td>
-                    </tr>
-                    <tr>
-                        <td>理想的な残タスク数</td>
-                        <td>計画通り進んだ場合の残タスク数</td>
-                        <td>進捗の遅れ・進みの比較基準</td>
-                    </tr>
-                    <tr>
-                        <td>理想的な残工数</td>
-                        <td>計画通り進んだ場合の残工数</td>
-                        <td>工数消化ペースの評価</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">記録実行</div>
-                    <div class="step-description">「本日のバーンダウンを記録」ボタンをクリック</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">データ収集</div>
-                    <div class="step-description">システムが自動的に残タスク・残工数を計算</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">履歴保存</div>
-                    <div class="step-description">データベースに記録を保存</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">グラフ更新</div>
-                    <div class="step-description">バーンダウンチャートに新しいポイントを追加</div>
-                </div>
-            </div>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> バーンダウン記録のタイミング</h5>
-                <p>バーンダウンは毎日終業時（17:00-18:00）に記録するのが理想的です。特に、チームの定例会議（デイリースタンドアップなど）の後に記録することで、最新の進捗状況を正確に反映できます。週末や祝日も含めて継続的に記録すると、より正確なトレンド分析が可能になります。</p>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="bi bi-clock-history"></i></div>
+                <div class="stat-label">残工数</div>
+                <div class="stat-value">124h</div>
             </div>
         </div>
 
-        <!-- 9.6 クリティカルパス分析 -->
-        <div id="subsection-9-6" class="manual-subsection">
-            <h3>9.6 クリティカルパス分析</h3>
-            
-            <div class="description-box">
-                <p>クリティカルパス分析は、プロジェクト完了に最も影響を与えるタスクの連鎖を特定する機能です。CPM（Critical Path Method）アルゴリズムを使用し、タスクの依存関係、所要時間、スラック（余裕時間）を計算します。クリティカルパス上のタスクは遅延すると直接プロジェクト全体の遅延につながるため、最優先で管理する必要があります。</p>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>記録項目</th>
+                    <th>説明</th>
+                    <th>活用方法</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>実際の残タスク数</td>
+                    <td>その日時点での未完了タスクの総数</td>
+                    <td>タスク完了ペースの把握</td>
+                </tr>
+                <tr>
+                    <td>実際の残工数</td>
+                    <td>未完了タスクの見積もり工数合計</td>
+                    <td>プロジェクト完了までの所要時間予測</td>
+                </tr>
+                <tr>
+                    <td>理想的な残タスク数</td>
+                    <td>計画通り進んだ場合の残タスク数</td>
+                    <td>進捗の遅れ・進みの比較基準</td>
+                </tr>
+                <tr>
+                    <td>理想的な残工数</td>
+                    <td>計画通り進んだ場合の残工数</td>
+                    <td>工数消化ペースの評価</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">記録実行</div>
+                <div class="step-description">「本日のバーンダウンを記録」ボタンをクリック</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('critical-path')">
-                <img id="critical-path" src="../image/web-admin/800x500.png" alt="クリティカルパス分析の詳細">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">データ収集</div>
+                <div class="step-description">システムが自動的に残タスク・残工数を計算</div>
             </div>
-
-            <table class="task-table">
-                <thead>
-                    <tr>
-                        <th><i class="bi bi-file-text"></i> タスク名</th>
-                        <th><i class="bi bi-person"></i> 担当者</th>
-                        <th><i class="bi bi-percent"></i> 進捗</th>
-                        <th><i class="bi bi-flag"></i> ステータス</th>
-                        <th><i class="bi bi-calendar-event"></i> スラック(日)</th>
-                        <th><i class="bi bi-link"></i> ブロック数</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="critical-task">
-                        <td class="task-name">データベース設計</td>
-                        <td>田中 太郎</td>
-                        <td>
-                            <div class="progress-mini">
-                                <div class="progress-mini-fill" style="width: 65%"></div>
-                            </div>
-                            <span>65%</span>
-                        </td>
-                        <td><span class="badge badge-critical"><i class="bi bi-exclamation-circle"></i> クリティカル</span></td>
-                        <td>0</td>
-                        <td><span class="block-count">3</span></td>
-                    </tr>
-                    <tr class="critical-task">
-                        <td class="task-name">API開発</td>
-                        <td>鈴木 花子</td>
-                        <td>
-                            <div class="progress-mini">
-                                <div class="progress-mini-fill" style="width: 40%"></div>
-                            </div>
-                            <span>40%</span>
-                        </td>
-                        <td><span class="badge badge-critical"><i class="bi bi-exclamation-circle"></i> クリティカル</span></td>
-                        <td>0</td>
-                        <td><span class="block-count">2</span></td>
-                    </tr>
-                    <tr>
-                        <td class="task-name">UI設計</td>
-                        <td>佐藤 次郎</td>
-                        <td>
-                            <div class="progress-mini">
-                                <div class="progress-mini-fill" style="width: 80%"></div>
-                            </div>
-                            <span>80%</span>
-                        </td>
-                        <td><span class="badge badge-normal"><i class="bi bi-check-circle"></i> 通常</span></td>
-                        <td>5</td>
-                        <td><span class="block-count">0</span></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>分析項目</th>
-                        <th>説明</th>
-                        <th>判断基準</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>クリティカルタスク</td>
-                        <td>スラックがゼロのタスク（遅延が許されない）</td>
-                        <td>最優先で進捗管理</td>
-                    </tr>
-                    <tr>
-                        <td>スラック（余裕日数）</td>
-                        <td>遅延してもプロジェクト全体に影響しない日数</td>
-                        <td>0日=クリティカル、1-3日=準クリティカル、4日以上=余裕あり</td>
-                    </tr>
-                    <tr>
-                        <td>ブロッキング数</td>
-                        <td>このタスクが完了しないと開始できないタスク数</td>
-                        <td>多いほど影響範囲が大きい</td>
-                    </tr>
-                    <tr>
-                        <td>依存関係</td>
-                        <td>このタスクの開始条件となる先行タスク</td>
-                        <td>先行タスクの遅延リスクを監視</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">分析実行</div>
-                    <div class="step-description">「クリティカルパスを分析」ボタンをクリック</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">依存関係解析</div>
-                    <div class="step-description">タスク間の依存関係をグラフ構造で解析</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">CPM計算</div>
-                    <div class="step-description">最早開始時刻と最遅開始時刻を算出</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">結果表示</div>
-                    <div class="step-description">クリティカルタスクをハイライト表示</div>
-                </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">履歴保存</div>
+                <div class="step-description">データベースに記録を保存</div>
             </div>
-
-            <div class="warning-box">
-                <h5><i class="bi bi-exclamation-triangle"></i> クリティカルパスの動的変化</h5>
-                <p>クリティカルパスは固定ではなく、タスクの進捗や遅延によって動的に変化します。あるタスクが完了したり遅延したりすると、別のタスクが新たにクリティカルパスに含まれることがあります。そのため、週次または重要なマイルストーン前に再分析することが重要です。</p>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">グラフ更新</div>
+                <div class="step-description">バーンダウンチャートに新しいポイントを追加</div>
             </div>
         </div>
 
-        <!-- 9.7 健全性スコアの履歴管理 -->
-        <div id="subsection-9-7" class="manual-subsection">
-            <h3>9.7 健全性スコアの履歴管理</h3>
-            
-            <div class="description-box">
-                <p>健全性スコアの履歴管理機能は、過去30日分のスコアを保存し、トレンド分析を可能にします。スコアの推移をグラフ化することで、プロジェクトの健康状態が改善傾向にあるか悪化傾向にあるかを一目で判断できます。また、特定の施策を実施した前後でスコアを比較することで、改善効果を定量的に測定できます。</p>
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> バーンダウン記録のタイミング</h5>
+            <p>バーンダウンは毎日終業時（17:00-18:00）に記録するのが理想的です。特に、チームの定例会議（デイリースタンドアップなど）の後に記録することで、最新の進捗状況を正確に反映できます。週末や祝日も含めて継続的に記録すると、より正確なトレンド分析が可能になります。
+            </p>
+        </div>
+    </div>
+
+    <!-- 9.6 クリティカルパス分析 -->
+    <div id="subsection-9-6" class="manual-subsection">
+        <h3>9.6 クリティカルパス分析</h3>
+
+        <div class="description-box">
+            <p>クリティカルパス分析は、プロジェクト完了に最も影響を与えるタスクの連鎖を特定する機能です。CPM（Critical Path
+                Method）アルゴリズムを使用し、タスクの依存関係、所要時間、スラック（余裕時間）を計算します。クリティカルパス上のタスクは遅延すると直接プロジェクト全体の遅延につながるため、最優先で管理する必要があります。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('critical-path')">
+            <img id="critical-path" src="../image/web-admin/09_critical-path.png" alt="クリティカルパス分析の詳細">
+        </div>
+
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th><i class="bi bi-file-text"></i> タスク名</th>
+                    <th><i class="bi bi-person"></i> 担当者</th>
+                    <th><i class="bi bi-percent"></i> 進捗</th>
+                    <th><i class="bi bi-flag"></i> ステータス</th>
+                    <th><i class="bi bi-calendar-event"></i> スラック(日)</th>
+                    <th><i class="bi bi-link"></i> ブロック数</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="critical-task">
+                    <td class="task-name">データベース設計</td>
+                    <td>田中 太郎</td>
+                    <td>
+                        <div class="progress-mini">
+                            <div class="progress-mini-fill" style="width: 65%"></div>
+                        </div>
+                        <span>65%</span>
+                    </td>
+                    <td><span class="badge badge-critical"><i class="bi bi-exclamation-circle"></i> クリティカル</span></td>
+                    <td>0</td>
+                    <td><span class="block-count">3</span></td>
+                </tr>
+                <tr class="critical-task">
+                    <td class="task-name">API開発</td>
+                    <td>鈴木 花子</td>
+                    <td>
+                        <div class="progress-mini">
+                            <div class="progress-mini-fill" style="width: 40%"></div>
+                        </div>
+                        <span>40%</span>
+                    </td>
+                    <td><span class="badge badge-critical"><i class="bi bi-exclamation-circle"></i> クリティカル</span></td>
+                    <td>0</td>
+                    <td><span class="block-count">2</span></td>
+                </tr>
+                <tr>
+                    <td class="task-name">UI設計</td>
+                    <td>佐藤 次郎</td>
+                    <td>
+                        <div class="progress-mini">
+                            <div class="progress-mini-fill" style="width: 80%"></div>
+                        </div>
+                        <span>80%</span>
+                    </td>
+                    <td><span class="badge badge-normal"><i class="bi bi-check-circle"></i> 通常</span></td>
+                    <td>5</td>
+                    <td><span class="block-count">0</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>分析項目</th>
+                    <th>説明</th>
+                    <th>判断基準</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>クリティカルタスク</td>
+                    <td>スラックがゼロのタスク（遅延が許されない）</td>
+                    <td>最優先で進捗管理</td>
+                </tr>
+                <tr>
+                    <td>スラック（余裕日数）</td>
+                    <td>遅延してもプロジェクト全体に影響しない日数</td>
+                    <td>0日=クリティカル、1-3日=準クリティカル、4日以上=余裕あり</td>
+                </tr>
+                <tr>
+                    <td>ブロッキング数</td>
+                    <td>このタスクが完了しないと開始できないタスク数</td>
+                    <td>多いほど影響範囲が大きい</td>
+                </tr>
+                <tr>
+                    <td>依存関係</td>
+                    <td>このタスクの開始条件となる先行タスク</td>
+                    <td>先行タスクの遅延リスクを監視</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">分析実行</div>
+                <div class="step-description">「クリティカルパスを分析」ボタンをクリック</div>
             </div>
-
-            <div class="feature-image" onclick="openGallery('score-history')">
-                <img id="score-history" src="../image/web-admin/800x500.png" alt="健全性スコア履歴の詳細">
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">依存関係解析</div>
+                <div class="step-description">タスク間の依存関係をグラフ構造で解析</div>
             </div>
-
-            <div class="chart-container">
-                <h4>健全性スコア推移グラフ（過去30日）</h4>
-                <div class="chart-placeholder">
-                    <i class="bi bi-graph-up" style="font-size: 3rem; color: var(--success-color);"></i>
-                    <p>スコアの上昇・下降トレンドを可視化</p>
-                    <p style="font-size: 0.875rem; margin-top: 1rem;">改善施策の効果を定量的に測定</p>
-                </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">CPM計算</div>
+                <div class="step-description">最早開始時刻と最遅開始時刻を算出</div>
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>分析視点</th>
-                        <th>確認項目</th>
-                        <th>対応アクション</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>上昇トレンド</td>
-                        <td>スコアが継続的に上昇している</td>
-                        <td>現在の施策を継続、成功要因を他プロジェクトに展開</td>
-                    </tr>
-                    <tr>
-                        <td>下降トレンド</td>
-                        <td>スコアが継続的に下降している</td>
-                        <td>原因分析と対策の即時実施、エスカレーション検討</td>
-                    </tr>
-                    <tr>
-                        <td>急激な変化</td>
-                        <td>短期間で大幅にスコアが変動</td>
-                        <td>変化の原因を特定（イベント、人員変更など）</td>
-                    </tr>
-                    <tr>
-                        <td>横ばい</td>
-                        <td>スコアが一定期間変化しない</td>
-                        <td>現状維持か停滞かを評価、新たな改善施策の検討</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> 履歴データの活用法</h5>
-                <p>履歴データは単なる記録ではなく、将来の意思決定に活用できる貴重な資産です。同様のプロジェクトを開始する際に、過去のスコア推移を参考にすることで、どのフェーズでリスクが高まるかを予測できます。また、改善施策の効果検証にも活用でき、PDCAサイクルの高速化に貢献します。</p>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">結果表示</div>
+                <div class="step-description">クリティカルタスクをハイライト表示</div>
             </div>
         </div>
 
-        <!-- 9.8 活用シーンとベストプラクティス -->
-        <div id="subsection-9-8" class="manual-subsection">
-            <h3>9.8 活用シーンとベストプラクティス</h3>
-            
-            <div class="description-box">
-                <p>プロジェクト健全性機能は、プロジェクトマネージャーの強力な支援ツールです。適切なタイミングで活用することで、問題の早期発見、データに基づく意思決定、ステークホルダーへの説得力のある報告が可能になります。ここでは、実際のプロジェクト運営における効果的な活用シーンとベストプラクティスを紹介します。</p>
+        <div class="warning-box">
+            <h5><i class="bi bi-exclamation-triangle"></i> クリティカルパスの動的変化</h5>
+            <p>クリティカルパスは固定ではなく、タスクの進捗や遅延によって動的に変化します。あるタスクが完了したり遅延したりすると、別のタスクが新たにクリティカルパスに含まれることがあります。そのため、週次または重要なマイルストーン前に再分析することが重要です。
+            </p>
+        </div>
+    </div>
+
+    <!-- 9.7 健全性スコアの履歴管理 -->
+    <div id="subsection-9-7" class="manual-subsection">
+        <h3>9.7 健全性スコアの履歴管理</h3>
+
+        <div class="description-box">
+            <p>健全性スコアの履歴管理機能は、過去30日分のスコアを保存し、トレンド分析を可能にします。スコアの推移をグラフ化することで、プロジェクトの健康状態が改善傾向にあるか悪化傾向にあるかを一目で判断できます。また、特定の施策を実施した前後でスコアを比較することで、改善効果を定量的に測定できます。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('score-history')">
+            <img id="score-history" src="../image/web-admin/09_score-history.png" alt="健全性スコア履歴の詳細">
+        </div>
+
+        <div class="chart-container">
+            <h4>健全性スコア推移グラフ（過去30日）</h4>
+            <div class="chart-placeholder">
+                <i class="bi bi-graph-up" style="font-size: 3rem; color: var(--success-color);"></i>
+                <p>スコアの上昇・下降トレンドを可視化</p>
+                <p style="font-size: 0.875rem; margin-top: 1rem;">改善施策の効果を定量的に測定</p>
             </div>
+        </div>
 
-            <div class="feature-image" onclick="openGallery('best-practices')">
-                <img id="best-practices" src="../image/web-admin/800x500.png" alt="活用シーンとベストプラクティス">
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>分析視点</th>
+                    <th>確認項目</th>
+                    <th>対応アクション</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>上昇トレンド</td>
+                    <td>スコアが継続的に上昇している</td>
+                    <td>現在の施策を継続、成功要因を他プロジェクトに展開</td>
+                </tr>
+                <tr>
+                    <td>下降トレンド</td>
+                    <td>スコアが継続的に下降している</td>
+                    <td>原因分析と対策の即時実施、エスカレーション検討</td>
+                </tr>
+                <tr>
+                    <td>急激な変化</td>
+                    <td>短期間で大幅にスコアが変動</td>
+                    <td>変化の原因を特定（イベント、人員変更など）</td>
+                </tr>
+                <tr>
+                    <td>横ばい</td>
+                    <td>スコアが一定期間変化しない</td>
+                    <td>現状維持か停滞かを評価、新たな改善施策の検討</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> 履歴データの活用法</h5>
+            <p>履歴データは単なる記録ではなく、将来の意思決定に活用できる貴重な資産です。同様のプロジェクトを開始する際に、過去のスコア推移を参考にすることで、どのフェーズでリスクが高まるかを予測できます。また、改善施策の効果検証にも活用でき、PDCAサイクルの高速化に貢献します。
+            </p>
+        </div>
+    </div>
+
+    <!-- 9.8 活用シーンとベストプラクティス -->
+    <div id="subsection-9-8" class="manual-subsection">
+        <h3>9.8 活用シーンとベストプラクティス</h3>
+
+        <div class="description-box">
+            <p>プロジェクト健全性機能は、プロジェクトマネージャーの強力な支援ツールです。適切なタイミングで活用することで、問題の早期発見、データに基づく意思決定、ステークホルダーへの説得力のある報告が可能になります。ここでは、実際のプロジェクト運営における効果的な活用シーンとベストプラクティスを紹介します。
+            </p>
+        </div>
+
+        <div class="feature-image" onclick="openGallery('best-practices')">
+            <img id="best-practices" src="../image/web-admin/09_best-practices.png" alt="活用シーンとベストプラクティス">
+        </div>
+
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>活用シーン</th>
+                    <th>実施内容</th>
+                    <th>使用機能</th>
+                    <th>期待効果</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>週次進捗会議</td>
+                    <td>プロジェクトの健康状態を報告</td>
+                    <td>・健全性スコア<br>・5つの評価軸<br>・AI分析結果</td>
+                    <td>客観的データに基づく状況共有と意思決定</td>
+                </tr>
+                <tr>
+                    <td>経営層報告</td>
+                    <td>プロジェクトの総合的な健康状態を報告</td>
+                    <td>・健全性スコア<br>・スコア履歴（トレンド）<br>・リスク要因</td>
+                    <td>説得力のある報告と適切な支援の獲得</td>
+                </tr>
+                <tr>
+                    <td>リスク管理</td>
+                    <td>潜在的なリスクの早期発見</td>
+                    <td>・クリティカルパス分析<br>・ブロッカー影響評価<br>・AI リスク要因</td>
+                    <td>問題の予防と早期対処</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト振り返り</td>
+                    <td>成功要因と改善点の特定</td>
+                    <td>・スコア履歴<br>・バーンダウンチャート<br>・評価軸の推移</td>
+                    <td>次回プロジェクトへの教訓抽出</td>
+                </tr>
+                <tr>
+                    <td>改善施策評価</td>
+                    <td>施策実施前後のスコア比較</td>
+                    <td>・スコア履歴<br>・各評価軸の変化<br>・バーンダウンの変化</td>
+                    <td>施策の効果検証とPDCAサイクル</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="workflow-steps">
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div class="step-title">定期計測</div>
+                <div class="step-description">週次で健全性スコアを計算し基準値を維持</div>
             </div>
-
-            <table class="feature-table">
-                <thead>
-                    <tr>
-                        <th>活用シーン</th>
-                        <th>実施内容</th>
-                        <th>使用機能</th>
-                        <th>期待効果</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>週次進捗会議</td>
-                        <td>プロジェクトの健康状態を報告</td>
-                        <td>・健全性スコア<br>・5つの評価軸<br>・AI分析結果</td>
-                        <td>客観的データに基づく状況共有と意思決定</td>
-                    </tr>
-                    <tr>
-                        <td>経営層報告</td>
-                        <td>プロジェクトの総合的な健康状態を報告</td>
-                        <td>・健全性スコア<br>・スコア履歴（トレンド）<br>・リスク要因</td>
-                        <td>説得力のある報告と適切な支援の獲得</td>
-                    </tr>
-                    <tr>
-                        <td>リスク管理</td>
-                        <td>潜在的なリスクの早期発見</td>
-                        <td>・クリティカルパス分析<br>・ブロッカー影響評価<br>・AI リスク要因</td>
-                        <td>問題の予防と早期対処</td>
-                    </tr>
-                    <tr>
-                        <td>プロジェクト振り返り</td>
-                        <td>成功要因と改善点の特定</td>
-                        <td>・スコア履歴<br>・バーンダウンチャート<br>・評価軸の推移</td>
-                        <td>次回プロジェクトへの教訓抽出</td>
-                    </tr>
-                    <tr>
-                        <td>改善施策評価</td>
-                        <td>施策実施前後のスコア比較</td>
-                        <td>・スコア履歴<br>・各評価軸の変化<br>・バーンダウンの変化</td>
-                        <td>施策の効果検証とPDCAサイクル</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <div class="step-number">1</div>
-                    <div class="step-title">定期計測</div>
-                    <div class="step-description">週次で健全性スコアを計算し基準値を維持</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">2</div>
-                    <div class="step-title">問題検知</div>
-                    <div class="step-description">スコア低下やクリティカルタスク遅延を早期発見</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">3</div>
-                    <div class="step-title">対策実施</div>
-                    <div class="step-description">AI提案を参考に具体的なアクションを実行</div>
-                </div>
-                <div class="workflow-step">
-                    <div class="step-number">4</div>
-                    <div class="step-title">効果測定</div>
-                    <div class="step-description">施策後のスコア変化で効果を定量評価</div>
-                </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div class="step-title">問題検知</div>
+                <div class="step-description">スコア低下やクリティカルタスク遅延を早期発見</div>
             </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div class="step-title">対策実施</div>
+                <div class="step-description">AI提案を参考に具体的なアクションを実行</div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div class="step-title">効果測定</div>
+                <div class="step-description">施策後のスコア変化で効果を定量評価</div>
+            </div>
+        </div>
 
-            <div class="tip-box">
-                <h5><i class="bi bi-lightbulb"></i> プロジェクト健全性管理の成功の鍵</h5>
-                <p>1. **定期的な計測**: 週次で健全性スコアを計算する習慣化<br>
+        <div class="tip-box">
+            <h5><i class="bi bi-lightbulb"></i> プロジェクト健全性管理の成功の鍵</h5>
+            <p>1. **定期的な計測**: 週次で健全性スコアを計算する習慣化<br>
                 2. **データの共有**: チーム全員がスコアを確認できる透明性<br>
                 3. **早期対応**: スコア低下の兆候を見逃さず即座に対策<br>
                 4. **継続的改善**: 履歴データから学び、次回に活かす<br>
                 5. **バランス重視**: 特定の評価軸だけでなく全体を俯瞰</p>
-            </div>
+        </div>
 
-            <div class="info-box">
-                <h5><i class="bi bi-info-circle"></i> 健全性スコアだけに頼らない</h5>
-                <p>健全性スコアは有用な指標ですが、それだけでプロジェクトのすべてを判断することはできません。定性的な情報（チームメンバーの声、顧客フィードバック、組織の事情）も併せて考慮し、総合的な判断を行うことが重要です。スコアはあくまで意思決定を支援するツールであり、最終的な判断は人間が行うべきです。</p>
-            </section>
+        <div class="info-box">
+            <h5><i class="bi bi-info-circle"></i> 健全性スコアだけに頼らない</h5>
+            <p>健全性スコアは有用な指標ですが、それだけでプロジェクトのすべてを判断することはできません。定性的な情報（チームメンバーの声、顧客フィードバック、組織の事情）も併せて考慮し、総合的な判断を行うことが重要です。スコアはあくまで意思決定を支援するツールであり、最終的な判断は人間が行うべきです。
+            </p>
+</section>
