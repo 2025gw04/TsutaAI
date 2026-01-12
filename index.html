@@ -458,6 +458,7 @@
                             <img src="image/2_2.png" alt="Assign 2" class="carousel-image">
                             <img src="image/2_3.png" alt="Assign 3" class="carousel-image">
                             <img src="image/2_4.png" alt="Assign 4" class="carousel-image">
+                            <img src="image/2_5.png" alt="Assign 5" class="carousel-image">
                         </div>
                         <div
                             class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300 flex items-center justify-center">
@@ -565,10 +566,13 @@
                     <h3 class="text-xl font-bold text-gray-900 mb-2">12種類の見積もりパターン</h3>
                     <p class="text-gray-600 text-sm mb-4">期間未定・予算固定・フェーズベース・アジャイル等、あらゆるプロジェクトに対応。AIが3点見積もりと効率化率を自動算出。
                     </p>
-                    <div class="h-48 rounded-xl bg-gray-100 flex items-center justify-center text-gray-400">
-                        <div class="text-center">
-                            <i class="fas fa-calculator text-5xl mb-3"></i>
-                            <p class="text-sm font-semibold">見積もり機能</p>
+                    <div class="h-48 rounded-xl bg-gray-100 overflow-hidden relative group cursor-pointer"
+                        data-carousel="carousel-7">
+                        <div class="carousel-container">
+                            <img src="image/7_1.png" alt="Mitsumori 1" class="carousel-image active">
+                            <img src="image/7_2.png" alt="Mitsumori 2" class="carousel-image">
+                            <img src="image/7_3.png" alt="Mitsumori 3" class="carousel-image">
+                            <img src="image/7_4.png" alt="Mitsumori 4" class="carousel-image">
                         </div>
                     </div>
                 </div>
@@ -809,28 +813,16 @@
             </div>
 
             <div
-                class="relative w-full aspect-video min-h-[400px] md:min-h-0 rounded-3xl overflow-hidden bg-gray-900 shadow-2xl group cursor-pointer">
-                <!-- Video Placeholder styling -->
-                <div
-                    class="absolute inset-0 flex flex-col items-center justify-center text-white z-10 bg-gradient-to-tr from-gray-900 to-gray-800 px-6">
-                    <div
-                        class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-play text-2xl md:text-3xl ml-1 md:ml-2 text-white"></i>
-                    </div>
-                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4">🎬 デモ動画（作成予定）</h3>
-                    <p class="text-gray-400 text-xs md:text-sm text-center max-w-md leading-relaxed">
-                        ① プロジェクト作成 → AI WBS生成の流れ（30秒）<br>
-                        ② ガントチャートでのスケジュール調整（20秒）<br>
-                        ③ デスクトップアプリでの作業開始 → AI分析（30秒）<br>
-                        ④ 自動日報生成の流れ（20秒）<br>
-                        <span class="text-gray-500 text-[10px] md:text-xs mt-2 inline-block">合計: 約1分40秒の紹介動画</span>
-                    </p>
-                </div>
+                class="relative w-full aspect-video min-h-[400px] md:min-h-0 rounded-3xl overflow-hidden bg-gray-900 shadow-2xl">
+                <video class="w-full h-full object-cover" controls>
+                    <source src="image/TsutaAI.mp4" type="video/mp4">
+                    お使いのブラウザは動画タグをサポートしていません。
+                </video>
             </div>
-            <div class="mt-6 bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                <h3 class="font-bold text-gray-900 mb-2">ツタAI 製品デモ（1分40秒）</h3>
+            <!-- <div class="mt-6 bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                <h3 class="font-bold text-gray-900 mb-2">ツタAI 製品デモ</h3>
                 <p class="text-gray-600 text-sm">プロジェクト作成からタスク完了まで、ツタAIの主要機能をわかりやすく紹介します。</p>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -1058,7 +1050,8 @@
                     <div class="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">📖</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">Web
                         Admin 詳細マニュアル</h3>
-                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">カテゴリー別メニュー、28種類のAI機能、見積もり、作業報告、進捗トラッキングなど、Web管理画面の全機能を実際の画面に沿って詳しく解説します</p>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                        カテゴリー別メニュー、28種類のAI機能、見積もり、作業報告、進捗トラッキングなど、Web管理画面の全機能を実際の画面に沿って詳しく解説します</p>
                     <span class="text-sm font-bold text-primary flex items-center gap-2">マニュアルを見る <i
                             class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
                 </a>
@@ -1067,7 +1060,8 @@
                     <div class="text-4xl mb-4 group-hover:scale-110 transition-transform origin-left">📱</div>
                     <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">Desktop
                         App 詳細マニュアル</h3>
-                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">15個のウィンドウ、29種類のAI機能、日報自動生成、カンバンボード、作業監視など、デスクトップアプリの全機能を実際の画面に沿って詳しく説明します</p>
+                    <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                        15個のウィンドウ、29種類のAI機能、日報自動生成、カンバンボード、作業監視など、デスクトップアプリの全機能を実際の画面に沿って詳しく説明します</p>
                     <span class="text-sm font-bold text-primary flex items-center gap-2">マニュアルを見る <i
                             class="fas fa-arrow-right text-xs transform group-hover:translate-x-1 transition-transform"></i></span>
                 </a>

@@ -1,0 +1,278 @@
+<!-- セクション 1: はじめに・概要 -->
+<section id="section-1" class="manual-section">
+    <h2>1. はじめに</h2>
+    <p>TsutaAIデスクトップアプリケーションのユーザーマニュアルへようこそ。本マニュアルは、すべてのソースコード（XAML/C#）を分析して作成されており、日々のタスク管理と業務効率化を強力にサポートするTsutaAIの全機能を網羅しています。
+    </p>
+
+    <div id="subsection-1-1" class="manual-subsection">
+        <h3>1.1 マニュアル構成</h3>
+        <p>本マニュアルは、機能カテゴリごとに以下の構成で分かれています。</p>
+
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>カテゴリ</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>はじめに</td>
+                    <td>マニュアルの概要、画面フロー、基本的な使い方</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>アプリケーション入口</td>
+                    <td>ログイン、API設定、プロキシ設定</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>メインハブ</td>
+                    <td>ダッシュボード（メイン画面）</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>作業実行・タスク管理</td>
+                    <td>ウィジェット、看板ボード、タスク詳細、個人タスク編集</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>プロジェクト管理・分析</td>
+                    <td>プロジェクト管理、ダッシュボード、成長記録、日報</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>支援・設定・その他</td>
+                    <td>AIアシスタント、ヘルプ依頼、メンタルヘルス、設定</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-1-2" class="manual-subsection">
+        <h3>1.2 画面一覧</h3>
+        <p>TsutaAIデスクトップアプリケーションには、以下の画面が含まれています。</p>
+
+        <h4>エントリーポイント（認証・設定）</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面名</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ログイン画面</td>
+                    <td>ユーザー認証を行う初期画面</td>
+                </tr>
+                <tr>
+                    <td>API接続設定</td>
+                    <td>バックエンドサーバーのURL設定</td>
+                </tr>
+                <tr>
+                    <td>プロキシ設定</td>
+                    <td>プロキシサーバー経由接続の設定</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>メインハブ</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面名</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ダッシュボード</td>
+                    <td>本日のタスク確認、各機能へのナビゲーション</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>作業実行・タスク管理</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面名</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>作業ウィジェット</td>
+                    <td>タスク作業中の時間計測・管理</td>
+                </tr>
+                <tr>
+                    <td>看板ボード</td>
+                    <td>カンバン形式でのタスクステータス管理</td>
+                </tr>
+                <tr>
+                    <td>タスク詳細</td>
+                    <td>タスクの詳細情報、コメント、添付ファイル管理</td>
+                </tr>
+                <tr>
+                    <td>個人タスク編集</td>
+                    <td>プロジェクト外の個人タスク作成・編集</td>
+                </tr>
+                <tr>
+                    <td>タスクコメント一覧</td>
+                    <td>タスクに紐づくコメントの閲覧</td>
+                </tr>
+                <tr>
+                    <td>コメント追加</td>
+                    <td>タスクへのコメント追加</td>
+                </tr>
+                <tr>
+                    <td>進捗率編集</td>
+                    <td>タスクの進捗率をスライダーで設定</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>プロジェクト管理・分析</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面名</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト管理</td>
+                    <td>プロジェクトの作成・編集・削除</td>
+                </tr>
+                <tr>
+                    <td>プロジェクト編集</td>
+                    <td>プロジェクト基本情報の入力</td>
+                </tr>
+                <tr>
+                    <td>メンバー管理</td>
+                    <td>プロジェクトメンバーの追加・削除・ロール変更</td>
+                </tr>
+                <tr>
+                    <td>ユーザー選択</td>
+                    <td>メンバー追加時のユーザー検索・選択</td>
+                </tr>
+                <tr>
+                    <td>プロジェクトダッシュボード</td>
+                    <td>ヘルススコア、バーンダウン、クリティカルパス分析</td>
+                </tr>
+                <tr>
+                    <td>AI活動分析</td>
+                    <td>集中度・効率性のAI分析結果</td>
+                </tr>
+                <tr>
+                    <td>成長記録</td>
+                    <td>スキル成長、パフォーマンス、目標管理</td>
+                </tr>
+                <tr>
+                    <td>日報</td>
+                    <td>1日の作業振り返りとAIフィードバック</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>支援・設定・その他</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>画面名</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AIアシスタント</td>
+                    <td>チャット形式でのAI操作支援</td>
+                </tr>
+                <tr>
+                    <td>ヘルプ依頼</td>
+                    <td>チームへのヘルプリクエスト作成</td>
+                </tr>
+                <tr>
+                    <td>メンタルヘルスチェック</td>
+                    <td>気分・ストレスレベルの記録</td>
+                </tr>
+                <tr>
+                    <td>設定</td>
+                    <td>アプリケーション各種設定</td>
+                </tr>
+                <tr>
+                    <td>タスク変更通知</td>
+                    <td>リアルタイムタスク変更通知</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-1-3" class="manual-subsection">
+        <h3>1.3 アプリケーションの基本的な使い方</h3>
+        <p>ログインから作業開始までの基本的な流れをご紹介します。</p>
+
+        <h4>1. アプリケーションを起動</h4>
+        <p>TsutaAI.exeをダブルクリックして起動します。</p>
+
+        <h4>2. ログイン</h4>
+        <p>ユーザーIDとパスワードを入力し、「ログイン」ボタンをクリックします。初回の場合は、API設定でサーバーURLを設定してください。</p>
+
+        <h4>3. ダッシュボードでタスクを確認</h4>
+        <p>本日のタスク一覧が表示されます。取り組みたいタスクにチェックを入れて順番を調整できます。</p>
+
+        <h4>4. 作業を開始</h4>
+        <p>「今日の作業を開始」ボタンをクリックすると、作業ウィジェットが起動し、時間計測が始まります。</p>
+
+        <h4>5. タスクを完了</h4>
+        <p>「完了」ボタンでタスクを完了にします。次のタスクに自動的に切り替わります。</p>
+
+        <h4>6. 作業を終了</h4>
+        <p>「本日の作業を終了」をクリックすると、日報画面でその日の振り返りを記録して送信します。</p>
+
+        <div class="tip">
+            <strong>💡 使い方のヒント</strong>
+            タスクの選択と順序調整を行うことで、より効率的に1日の作業を進めることができます。AIアドバイスも参考にしてみてください。
+        </div>
+    </div>
+
+    <div id="subsection-1-4" class="manual-subsection">
+        <h3>1.4 技術仕様</h3>
+        <p>TsutaAIデスクトップアプリケーションの技術仕様は以下の通りです。</p>
+
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プラットフォーム</td>
+                    <td>Windows (WPF)</td>
+                </tr>
+                <tr>
+                    <td>開発言語</td>
+                    <td>C#</td>
+                </tr>
+                <tr>
+                    <td>UIフレームワーク</td>
+                    <td>XAML</td>
+                </tr>
+                <tr>
+                    <td>通信方式</td>
+                    <td>REST API + WebSocket</td>
+                </tr>
+                <tr>
+                    <td>ローカルDB</td>
+                    <td>SQLite</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

@@ -13,8 +13,8 @@
                 ヘルプリクエスト画面は、プロジェクトメンバーが困っている時に支援を求め、AIが最適なヘルパーを推奨するマッチングプラットフォームです。統計ダッシュボード（6つの指標カード）、トップヘルパーランキング、リクエスト作成フォーム、フィルター機能付きリクエスト一覧、詳細パネル（AIコンテキスト分析・ヘルパー推奨リスト・解決ノート）という5つの主要エリアで構成されます。各リクエストは、緊急度（critical/high/medium/low）とステータス（open/assigned/in_progress/resolved）という2つの軸で管理され、AIが過去のタスク実績とスキルデータを基に最も適任なヘルパーを自動的に推奨します。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('help-request-overview')">
-            <img id="help-request-overview" src="../image/web-admin/15_help-request-overview.png" />
+        <div class="feature-image" onclick="openGallery('15_help-request-overview')">
+            <img id="15_help-request-overview" src="image/web-admin/15_help-request-overview.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -72,8 +72,8 @@
                 統計ダッシュボードは、ヘルプリクエストシステムの全体的な稼働状況を6つの指標カードで可視化します。各カードはアイコン（60×60px、角丸15px）、ラベル（大文字、レタースペース0.5px）、数値（2rem、グラデーション文字）という3層構造で統一されています。①総リクエスト数カード（ピンク→黄色グラデーション）、②オープンカード（黄色グラデーション）、③対応中カード（青グラデーション）、④解決済みカード（緑グラデーション）、⑤解決率カード（紫グラデーション、パーセンテージ表示）、⑥平均解決日数カード（紫グラデーション、日数表示）という6つのカードがレスポンシブグリッド（220px最小幅）で配置され、ホバー時には上方向に5px浮き上がるアニメーション効果があります。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('stats-dashboard')">
-            <img id="stats-dashboard" src="../image/web-admin/15_stats-dashboard.png" />
+        <div class="feature-image" onclick="openGallery('15_stats-dashboard')">
+            <img id="15_stats-dashboard" src="image/web-admin/15_stats-dashboard.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -146,8 +146,8 @@
                 トップヘルパーランキングは、過去にヘルプリクエストを解決したメンバーの中から、特に貢献度の高い上位10名を自動抽出して表示する功労者表彰エリアです。各ヘルパーはカード形式（50×50pxのアイコン、フルネーム、解決数、総対応数）で表示され、解決数の降順でソートされます。カードはレスポンシブグリッド（280px最小幅）で配置され、ホバー時には紫の枠線とシャドウ効果、上方向3pxの浮き上がりアニメーションが適用されます。このランキングは、チーム内で誰が積極的にサポートしているかを可視化し、貢献文化を促進する目的で設計されています。定期的に確認し、貢献度の高いメンバーへの感謝や表彰の材料として活用できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('top-helpers')">
-            <img id="top-helpers" src="../image/web-admin/15_top-helpers.png" />
+        <div class="feature-image" onclick="openGallery('15_top-helpers')">
+            <img id="15_top-helpers" src="image/web-admin/15_top-helpers.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -200,8 +200,8 @@
                 新規リクエスト作成フォームは、「新規リクエスト作成」ボタンをクリックすることで展開される5フィールドのフォームです。①タスクID（必須、数値入力）、②リクエスターID（必須、数値入力）、③緊急度（ドロップダウン、4段階：low/medium/high/critical）、④タイトル（必須、テキスト入力、最大255文字）、⑤説明（任意、テキストエリア、4行）という5つの入力項目と、⑥AIによるコンテキスト自動生成チェックボックス（デフォルトON）が含まれます。フォームはレスポンシブグリッド（250px最小幅）で配置され、タイトルと説明は全幅表示されます。作成ボタンをクリックすると、バックエンドAPIにPOSTリクエストが送信され、AIコンテキスト生成が有効な場合は自動的に背景情報が抽出されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('create-form')">
-            <img id="create-form" src="../image/web-admin/15_create-form.png" />
+        <div class="feature-image" onclick="openGallery('15_create-form')">
+            <img id="15_create-form" src="image/web-admin/15_create-form.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -266,9 +266,6 @@
             <p>
                 ヘルプリクエストは、緊急度（urgency）とステータス（status）という2つの軸で管理されます。緊急度は4段階（critical=緊急、high=高、medium=中、low=低）で設定され、それぞれ赤・オレンジ・黄色・緑のバッジカラーで視覚的に区別されます。ステータスは4段階（open=オープン、assigned=割り当て済み、in_progress=対応中、resolved=解決済み）で遷移し、それぞれ黄色・青・紫・緑のバッジカラーで表示されます。リクエストカードには、この2つのバッジが常に並んで表示され、一目で優先度と進行状況を把握できます。緊急度が高いリクエストは、リスト上部に優先的に表示され、早期対応を促します。
             </p>
-        </div>
-        <div class="feature-image" onclick="openGallery('urgency-status')">
-            <img id="urgency-status" src="../image/web-admin/15_urgency-status.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -361,8 +358,8 @@
                 + openのリクエスト」といった高度な絞り込みが可能です。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('filters')">
-            <img id="filters" src="../image/web-admin/15_filters.png" />
+        <div class="feature-image" onclick="openGallery('15_filters')">
+            <img id="15_filters" src="image/web-admin/15_filters.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -405,8 +402,8 @@
                 リクエストカードをクリックすると、画面右側に固定サイドパネル（幅500px、モバイルでは全幅）が展開され、リクエストの詳細情報が表示されます。パネルは3つのセクションで構成されます。①基本情報セクション（タイトル、説明、作成日時、リクエスター、ヘルパー）、②AIコンテキスト分析セクション（タスクの作業ログ、ファイル変更履歴、過去のコメントから自動抽出された背景情報をpre形式で表示）、③推奨ヘルパーセクション（スキルマッチ度、可用性、経験値、総合スコアという4つの指標でランク付けされたヘルパーリスト）という3つのエリアが縦に並びます。AIコンテキスト分析は、リクエスト作成時に「AIコンテキスト自動生成」が有効だった場合のみ表示されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('request-detail')">
-            <img id="request-detail" src="../image/web-admin/15_request-detail.png" />
+        <div class="feature-image" onclick="openGallery('15_request-detail')">
+            <img id="15_request-detail" src="image/web-admin/15_request-detail.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -456,8 +453,8 @@
                 APIを呼び出し、①スキルマッチ度（リクエストに必要なスキルとヘルパーのスキルの一致度、0-100%）、②可用性スコア（現在の作業負荷と空き時間、0-100%）、③経験値スコア（過去の解決実績と類似タスクの経験、0-100%）という3つの指標を算出します。さらに、これら3つを総合した総合マッチ度（total_match_score、0-100%）と、AI推奨理由（ai_reasoning、日本語の文章）が生成されます。推奨ヘルパーは総合マッチ度の降順でソートされ、90%以上は「推奨(高)」（緑バッジ）、80-89%は「推奨」（青バッジ）、80%未満は「候補」（グレーバッジ）として表示されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('helper-suggestion')">
-            <img id="helper-suggestion" src="../image/web-admin/15_helper-suggestion.png" />
+        <div class="feature-image" onclick="openGallery('15_helper-suggestion')">
+            <img id="15_helper-suggestion" src="image/web-admin/15_helper-suggestion.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -538,9 +535,6 @@
             <p>
                 ヘルプリクエストの典型的なライフサイクルは、①作成（open）→②割り当て（assigned）→③対応開始（in_progress）→④解決（resolved）という4段階で進行します。①リクエストカードの「ヘルパー割り当て」ボタンをクリックすると、割り当てモーダルが開き、全メンバーのドロップダウンリストから手動でヘルパーを選択できます（推奨ヘルパーからワンクリック割り当ても可能）。②割り当てが完了すると、ステータスが「assigned」に変更され、ヘルパーにメール通知が送信されます（機能未実装の場合あり）。③ヘルパーが対応を開始すると、ステータスを「in_progress」に手動変更します。④問題が解決したら、「解決」ボタンをクリックして解決モーダルを開き、解決ノート（必須）と効果評価（4段階）を入力して完了します。
             </p>
-        </div>
-        <div class="feature-image" onclick="openGallery('assign-resolve-flow')">
-            <img id="assign-resolve-flow" src="../image/web-admin/15_assign-resolve-flow.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -623,9 +617,6 @@
             <p>
                 ヘルプリクエストシステムを効果的に活用するためのベストプラクティスとして、5つのワークフローを推奨します。①困った時の即座のリクエスト作成（30分以上悩んだら作成）、②朝礼でのオープンリクエスト確認（毎日9:00-9:10）、③週次でのトップヘルパー表彰（毎週金曜夕方）、④月次での解決率・平均解決日数レビュー（毎月第1営業日）、⑤四半期でのヘルパー育成計画（解決実績の少ないメンバーへのサポート）という5段階のサイクルを確立することで、ヘルプリクエストをチーム文化として定着させ、助け合いの習慣を促進できます。特に重要なのは、「困った時に助けを求めることは恥ずかしいことではない」という心理的安全性の醸成です。
             </p>
-        </div>
-        <div class="feature-image" onclick="openGallery('best-practices-help')">
-            <img id="best-practices-help" src="../image/web-admin/15_best-practices-help.png" />
         </div>
 
         <div class="workflow-steps">
@@ -717,10 +708,4 @@
         </div>
     </div>
 
-    </div>
-
-    <!-- ギャラリーモーダル -->
-    <div id="galleryModal" class="gallery-modal" onclick="closeGallery()">
-        <span class="close-modal">&times;</span>
-        <img id="galleryImage" src="" alt="拡大画像">
 </section>

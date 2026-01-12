@@ -1,0 +1,297 @@
+<!-- セクション 6: 支援・設定・その他 (Support & Settings) -->
+<section id="section-6" class="manual-section">
+    <h2>6. 支援・設定・その他</h2>
+    <p>ユーザー支援機能、ヘルスケア、アプリ全体の設定、通知など、作業を円滑に進めるための補助機能群です。</p>
+
+    <div id="subsection-6-1" class="manual-subsection">
+        <h3>6.1 AIアシスタント画面</h3>
+        <p>チャット形式でAIに相談しながら、タスクの確認や操作を行える画面です。自然な言葉でAIに話しかけるだけで、様々な操作ができます。</p>
+
+        <h4>画面構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>チャット履歴エリア</td>
+                    <td>AIとの会話履歴（ローカルDBに保存、次回起動時に復元）</td>
+                </tr>
+                <tr>
+                    <td>メッセージ入力欄</td>
+                    <td>Enterで送信、Shift+Enterで改行</td>
+                </tr>
+                <tr>
+                    <td>@メンション機能</td>
+                    <td>「@」入力で担当タスク一覧を表示、選択で自動入力</td>
+                </tr>
+                <tr>
+                    <td>変更プレビューパネル</td>
+                    <td>AI提案の変更内容を確認してから適用可能</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>できること（コマンド例）</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>カテゴリ</th>
+                    <th>コマンド例</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>タスク確認</td>
+                    <td>「担当タスクを確認」</td>
+                    <td>自分のタスク一覧を表示</td>
+                </tr>
+                <tr>
+                    <td>タスク検索</td>
+                    <td>「タスクを検索：○○」</td>
+                    <td>キーワードでタスクを検索</td>
+                </tr>
+                <tr>
+                    <td>詳細表示</td>
+                    <td>「@タスク名 の詳細」</td>
+                    <td>特定タスクの詳細情報を表示</td>
+                </tr>
+                <tr>
+                    <td>進捗更新</td>
+                    <td>「@タスク名 の進捗を50%に更新」</td>
+                    <td>タスクの進捗率を変更</td>
+                </tr>
+                <tr>
+                    <td>完了設定</td>
+                    <td>「@タスク名 を完了にする」</td>
+                    <td>タスクを完了状態に変更</td>
+                </tr>
+                <tr>
+                    <td>コメント追加</td>
+                    <td>「@タスク名 にコメント追加：レビュー待ち」</td>
+                    <td>タスクにコメントを追加</td>
+                </tr>
+                <tr>
+                    <td>ヘルプ</td>
+                    <td>「/help」</td>
+                    <td>コマンド一覧を表示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>ボタン説明</h4>
+        <ul class="item-list">
+            <li><strong>送信ボタン</strong>メッセージをAIに送信（Enterキーでも可）</li>
+            <li><strong>適用ボタン</strong>AIが提案した変更をサーバーに反映</li>
+            <li><strong>キャンセルボタン</strong>AIの提案を適用せずに閉じる</li>
+            <li><strong>履歴クリアボタン</strong>チャット履歴をすべて削除</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-2" class="manual-subsection">
+        <h3>6.2 ヘルプ依頼画面</h3>
+        <p>特定のタスクについて、チームメンバーに助けを求めるための画面です。</p>
+
+        <h4>入力項目</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>タスク選択</td>
+                    <td>ヘルプが必要なタスクをドロップダウンから選択（自分の未完了タスクのみ）</td>
+                </tr>
+                <tr>
+                    <td>タイトル（必須）</td>
+                    <td>ヘルプリクエストの件名</td>
+                </tr>
+                <tr>
+                    <td>説明（任意）</td>
+                    <td>問題の詳細（状況、試したこと、必要なサポート内容）</td>
+                </tr>
+                <tr>
+                    <td>緊急度</td>
+                    <td>低（数日以内）/ 中（なるべく早め）/ 高（すぐに対応必要）</td>
+                </tr>
+                <tr>
+                    <td>AI自動コンテキスト生成</td>
+                    <td>チェックするとAIが状況説明を補足</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>ボタン説明</h4>
+        <ul class="item-list">
+            <li><strong>作成ボタン</strong>ヘルプリクエストを作成してチームに送信</li>
+            <li><strong>キャンセルボタン</strong>作成せずに画面を閉じる</li>
+        </ul>
+    </div>
+
+    <div id="subsection-6-3" class="manual-subsection">
+        <h3>6.3 メンタルヘルスチェック画面</h3>
+        <p>その日の気分やストレスレベルを記録する画面です。記録後、AIからのアドバイスを受け取れます。</p>
+
+        <h4>入力項目</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>気分評価</td>
+                    <td>5段階の絵文字で選択（😞😐🙂😊😄）</td>
+                </tr>
+                <tr>
+                    <td>ストレスレベル</td>
+                    <td>1（なし）〜5（強いストレス）、色付き数字ボタンで選択</td>
+                </tr>
+                <tr>
+                    <td>ブロッカー/問題報告</td>
+                    <td>チェックすると詳細入力欄が表示</td>
+                </tr>
+                <tr>
+                    <td>サポート要請</td>
+                    <td>チェックすると詳細入力欄が表示</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>ボタン説明</h4>
+        <ul class="item-list">
+            <li><strong>記録するボタン</strong>入力内容をサーバーに送信、AIアドバイスを表示</li>
+            <li><strong>キャンセルボタン</strong>何も記録せずに画面を閉じる</li>
+        </ul>
+
+        <div class="note">
+            <strong>⚠️ 注意事項</strong>
+            1日1回の記録が推奨されています。同じ日に複数回記録する場合は確認メッセージが表示されます。ブロッカーやサポート要請は管理者に共有される場合があります。
+        </div>
+    </div>
+
+    <div id="subsection-6-4" class="manual-subsection">
+        <h3>6.4 設定画面</h3>
+        <p>アプリケーションの各種設定を行う画面です。7つのタブで構成されています。</p>
+
+        <h4>タブ構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>タブ</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロフィール</td>
+                    <td>ユーザー名（変更不可）、氏名、メールアドレス、スキル一覧の管理</td>
+                </tr>
+                <tr>
+                    <td>API接続</td>
+                    <td>TsutaAIサーバーのURL設定、接続テスト</td>
+                </tr>
+                <tr>
+                    <td>作業フォルダ</td>
+                    <td>ファイル変更・Git変更を監視するフォルダの選択</td>
+                </tr>
+                <tr>
+                    <td>監視設定</td>
+                    <td>マウス・キーボード・アクティブウィンドウ監視、自動保存間隔、アイドル検出時間</td>
+                </tr>
+                <tr>
+                    <td>休暇管理</td>
+                    <td>休暇期間の登録（スケジュール計算から除外）</td>
+                </tr>
+                <tr>
+                    <td>Git/SVN</td>
+                    <td>バージョン管理システム連携設定（VCSタイプ、パス、認証情報）</td>
+                </tr>
+                <tr>
+                    <td>通知設定</td>
+                    <td>タスク開始/終了、休憩推奨、AIアラート、サウンドのオン・オフ</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>スキル管理（プロフィールタブ）</h4>
+        <p>スキル名と習熟度（1-7段階）を登録できます。AIが作業支援の参考情報として使用します。</p>
+        <ul class="item-list">
+            <li><strong>追加ボタン</strong>新しいスキルを追加</li>
+            <li><strong>更新ボタン</strong>選択中のスキルを更新</li>
+            <li><strong>✕ボタン</strong>スキルを削除</li>
+        </ul>
+
+        <h4>監視設定の詳細</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>選択肢</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>自動保存間隔</td>
+                    <td>15分 / 30分 / 60分 / 120分</td>
+                </tr>
+                <tr>
+                    <td>アイドル検出時間</td>
+                    <td>5分 / 10分 / 15分 / 20分</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-6-5" class="manual-subsection">
+        <h3>6.5 タスク変更通知ダイアログ</h3>
+        <p>管理者やチームメンバーがタスク内容を変更した場合に表示される通知ダイアログです。</p>
+
+        <h4>画面構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>要素</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ヘッダー</td>
+                    <td>「⚡ タスク変更通知」タイトルと最終更新時刻</td>
+                </tr>
+                <tr>
+                    <td>タスク情報</td>
+                    <td>変更されたタスクの名前と関連プロジェクト</td>
+                </tr>
+                <tr>
+                    <td>変更点リスト</td>
+                    <td>変更内容が箇条書きで表示（例：期限変更、優先度変更、ステータス変更）</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>ボタン説明</h4>
+        <ul class="item-list">
+            <li><strong>確認しましたボタン</strong>通知を確認済みとしてマークし、ダイアログを閉じる</li>
+        </ul>
+
+        <div class="note">
+            <strong>⚠️ 注意事項</strong>
+            <ul>
+                <li>この通知は、作業ウィジェット使用中やダッシュボード表示中にリアルタイムで表示されます</li>
+                <li>WebSocket通信で変更を受信しているため、インターネット接続が必要です</li>
+                <li>「確認しました」を押すまで通知は消えません</li>
+            </ul>
+        </div>
+    </div>
+</section>

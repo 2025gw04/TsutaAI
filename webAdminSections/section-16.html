@@ -14,8 +14,8 @@
                 API設定、祝日設定、ユーザー管理、プロンプト管理、バージョン情報）で構成される包括的な管理インターフェースです。管理者のみがアクセス可能なこの画面では、AI機能の根幹を成すLLMプロバイダーの選択（Groq/OpenAI/Claude/Ollama/カスタム）、プロキシ設定、スケジュール計算に必要な祝日データのインポート、システムユーザーの追加・編集・削除、29種類のAI機能で使用されるプロンプトのカスタマイズ、デスクトップアプリのダウンロードとバージョン履歴の確認という、すべてのシステム設定を一元管理できます。各タブは独立して機能し、横スクロール可能なタブバーでモバイルにも最適化されています。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('settings-overview')">
-            <img id="settings-overview" src="../image/web-admin/16_settings-overview.png" />
+        <div class="feature-image" onclick="openGallery('16_settings-overview')">
+            <img id="16_settings-overview" src="image/web-admin/16_settings-overview.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -77,8 +77,8 @@
                 Groqはgpt-oss-20b/120b/llama-3.1-8b、OpenAIはGPT-5.2/5/5-mini/5-nano、ClaudeはOpus4.5/Sonnet4.5）、Temperature（0.0-1.0、スライダー）と最大トークン数（1024-131072）も調整可能です。さらに、企業ネットワーク環境向けにプロキシ設定（URL、ユーザー名、パスワード）も提供されています。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('llm-api-settings')">
-            <img id="llm-api-settings" src="../image/web-admin/16_llm-api-settings.png" />
+        <div class="feature-image" onclick="openGallery('16_llm-api-settings')">
+            <img id="16_llm-api-settings" src="image/web-admin/16_llm-api-settings.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -193,8 +193,8 @@
                 水色バッジ）に分類され、視覚的に区別されます。手動で祝日を追加するモーダルと、日本の祝日を一括インポートするモーダルの2つの登録方法があり、後者では`japanese-holidays`ライブラリを使用して内閣府公式データに基づく祝日（ハッピーマンデー、春分・秋分、振替休日を含む）を最大20年分まとめてインポートできます。既存の祝日はスキップされるため、重複の心配はありません。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('holiday-settings')">
-            <img id="holiday-settings" src="../image/web-admin/16_holiday-settings.png" />
+        <div class="feature-image" onclick="openGallery('16_holiday-settings')">
+            <img id="16_holiday-settings" src="image/web-admin/16_holiday-settings.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -281,8 +281,8 @@
                 グレーバッジ）を即座に切り替えられます。新規ユーザー作成モーダルでは、5つのフィールド（ユーザー名、氏名、メールアドレス、権限、パスワード）を入力し、ユーザー名は一度設定すると変更不可です。編集モーダルでは、ユーザー名以外のすべてのフィールドを変更でき、パスワードは空欄の場合は変更されません。削除時には確認ダイアログが表示され、誤削除を防ぎます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('user-management')">
-            <img id="user-management" src="../image/web-admin/16_user-management.png" />
+        <div class="feature-image" onclick="openGallery('16_user-management')">
+            <img id="16_user-management" src="image/web-admin/16_user-management.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -357,8 +357,8 @@
                 `{project_name}`、`{task_title}`）、実行時に実際の値に置き換えられます。「デフォルトに戻す」ボタンで、カスタマイズ前の元のプロンプトに復元できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('prompt-management')">
-            <img id="prompt-management" src="../image/web-admin/16_prompt-management.png" />
+        <div class="feature-image" onclick="openGallery('16_prompt-management')">
+            <img id="16_prompt-management" src="image/web-admin/16_prompt-management.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -424,8 +424,8 @@
                 Admin）が表示され、最新リリース日も記載されます。中央部にはデスクトップアプリのダウンロードカードがあり、「デスクトップアプリをダウンロード」ボタンをクリックすると、`/DesktopApp.zip`ファイルがダウンロードされます。下部には変更履歴が時系列で表示され、各バージョンごとに「追加（緑）」「変更（黄）」「修正（青）」「削除（赤）」という4つのカテゴリーでリスト化されます。過去のすべてのバージョンの変更内容を確認でき、システムの進化過程を追跡できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('version-info')">
-            <img id="version-info" src="../image/web-admin/16_version-info.png" />
+        <div class="feature-image" onclick="openGallery('16_version-info')">
+            <img id="16_version-info" src="image/web-admin/16_version-info.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -515,8 +515,17 @@
                 設定画面では、5種類のモーダル（祝日追加、祝日インポート、ユーザー追加・編集、プロンプト編集）が使用されます。すべてのモーダルは、画面中央に表示され、背景が暗くなるオーバーレイ効果（rgba(0,0,0,0.5)）を持ちます。モーダルの共通操作として、①右上の「×」ボタン、②「キャンセル」ボタン、③背景のオーバーレイをクリック、という3つの方法で閉じることができます。また、Escキーでも閉じられます（実装されている場合）。モーダル内のフォームは、必須フィールドが未入力の場合、エラーメッセージが表示され、送信ボタンが無効化されます。プロンプト編集モーダルのみ、サイズが大きい（modal-lg）ため、20行のテキストエリアを快適に編集できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('modals')">
-            <img id="modals" src="../image/web-admin/16_modals.png" />
+        <div class="feature-image" onclick="openGallery('16_modals1')">
+            <img id="16_modals1" src="image/web-admin/16_modals1.png" />
+        </div>
+        <div class="feature-image" onclick="openGallery('16_modals2')">
+            <img id="16_modals2" src="image/web-admin/16_modals2.png" />
+        </div>
+        <div class="feature-image" onclick="openGallery('16_modals3')">
+            <img id="16_modals3" src="image/web-admin/16_modals3.png" />
+        </div>
+        <div class="feature-image" onclick="openGallery('16_modals4')">
+            <img id="16_modals4" src="image/web-admin/16_modals4.png" />
         </div>
         <table class="feature-table">
             <thead>
@@ -696,9 +705,6 @@
                 API、祝日、初期ユーザーを設定、②定期メンテナンス（月次、四半期ごと）で祝日データの更新とユーザー情報の見直し、③AI機能のカスタマイズ（必要に応じて）でプロンプトを業務に最適化、④セキュリティ監査（半年ごと）で不要なユーザーの削除と権限の見直し、⑤バージョン管理（リリースごと）でCHANGELOGの更新とデスクトップアプリの配布という5段階のサイクルを確立することで、システムを常に最新・最適な状態に保つことができます。特に重要なのは、管理者権限を持つユーザーを複数確保し、単一障害点（SPOF）を作らないことです。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('best-practices-settings')">
-            <img id="best-practices-settings" src="../image/web-admin/16_best-practices-settings.png" />
-        </div>
 
         <div class="workflow-steps">
             <div class="workflow-step">
@@ -792,10 +798,4 @@
         </div>
     </div>
 
-    </div>
-
-    <!-- ギャラリーモーダル -->
-    <div id="galleryModal" class="gallery-modal" onclick="closeGallery()">
-        <span class="close-modal">&times;</span>
-        <img id="galleryImage" src="" alt="拡大画像">
 </section>

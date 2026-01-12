@@ -83,6 +83,14 @@ body {
     z-index: 10;
 }
 
+/* Return to top button styling */
+.sidebar-brand a[href="index.html"]:last-child:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+
 .sidebar-header {
     padding: 1.5rem 1.5rem 0.75rem;
     font-size: 0.875rem;
@@ -894,6 +902,13 @@ ul.item-list li strong {
     .sidebar-brand {
         padding: 1rem 1.25rem;
     }
+
+    /* Return button responsive styling */
+    .sidebar-brand a[href="index.html"]:last-child {
+        font-size: 0.85rem;
+        padding: 0.45rem 0.9rem;
+    }
+
 
     .sidebar-header {
         padding: 1.25rem 1.25rem 0.5rem;

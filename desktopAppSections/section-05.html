@@ -1,0 +1,271 @@
+<!-- セクション 5: プロジェクト管理・分析 (Project & Analysis) -->
+<section id="section-5" class="manual-section">
+    <h2>5. プロジェクト管理・分析</h2>
+    <p>長期的なプロジェクトの管理、活動データの分析・振り返りを行う画面群です。</p>
+
+    <div id="subsection-5-1" class="manual-subsection">
+        <h3>5.1 プロジェクト管理画面</h3>
+        <p>プロジェクトの作成・編集・削除、メンバー管理を行う画面です。</p>
+
+        <h4>プロジェクトカードに含まれる情報</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト名</td>
+                    <td>プロジェクトのタイトル</td>
+                </tr>
+                <tr>
+                    <td>ステータス</td>
+                    <td>計画中・進行中・完了・保留</td>
+                </tr>
+                <tr>
+                    <td>説明</td>
+                    <td>プロジェクトの概要説明文</td>
+                </tr>
+                <tr>
+                    <td>期間</td>
+                    <td>開始日〜終了日</td>
+                </tr>
+                <tr>
+                    <td>健全性スコア</td>
+                    <td>0-100の健全性指標</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>ボタン説明</h4>
+        <ul class="item-list">
+            <li><strong>新規作成</strong>新しいプロジェクトを作成</li>
+            <li><strong>更新</strong>一覧を最新情報に更新</li>
+            <li><strong>メンバー管理</strong>メンバー管理画面を開く</li>
+            <li><strong>編集</strong>プロジェクト情報を編集</li>
+            <li><strong>削除</strong>プロジェクトを削除</li>
+        </ul>
+    </div>
+
+    <div id="subsection-5-2" class="manual-subsection">
+        <h3>5.2 プロジェクト編集・メンバー管理</h3>
+
+        <h4>プロジェクト編集の入力項目</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>必須</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>プロジェクト名</td>
+                    <td>必須</td>
+                    <td>プロジェクトの名称</td>
+                </tr>
+                <tr>
+                    <td>説明</td>
+                    <td>任意</td>
+                    <td>目的や概要（200文字程度推奨）</td>
+                </tr>
+                <tr>
+                    <td>開始日</td>
+                    <td>-</td>
+                    <td>開始予定日をカレンダーから選択</td>
+                </tr>
+                <tr>
+                    <td>終了日</td>
+                    <td>-</td>
+                    <td>終了予定日をカレンダーから選択</td>
+                </tr>
+                <tr>
+                    <td>ステータス</td>
+                    <td>-</td>
+                    <td>計画中/進行中/完了/保留</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>メンバーのロール種類</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>ロール</th>
+                    <th>権限</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>オーナー</td>
+                    <td>すべての操作が可能。削除も可能</td>
+                </tr>
+                <tr>
+                    <td>メンバー</td>
+                    <td>タスク作成・編集、コメント追加が可能</td>
+                </tr>
+                <tr>
+                    <td>閲覧者</td>
+                    <td>閲覧のみ可能。変更不可</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-5-3" class="manual-subsection">
+        <h3>5.3 プロジェクトダッシュボード</h3>
+        <p>プロジェクト全体の状況を視覚的に分析・確認する画面です。4つのタブで構成されています。</p>
+
+        <h4>タブ構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>タブ</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ヘルススコア</td>
+                    <td>進捗・納期・チームモラル・ブロッカー・ベロシティの5指標で健全性評価</td>
+                </tr>
+                <tr>
+                    <td>バーンダウン</td>
+                    <td>日付ごとの残タスク数と理想ラインの比較グラフ</td>
+                </tr>
+                <tr>
+                    <td>クリティカルパス</td>
+                    <td>プロジェクト完了に影響する重要タスク経路の分析</td>
+                </tr>
+                <tr>
+                    <td>スプリント</td>
+                    <td>アジャイル開発のスプリント管理</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-5-4" class="manual-subsection">
+        <h3>5.4 AI活動分析画面</h3>
+        <p>作業効率をAIが分析し、スコアとアドバイスを表示する画面です。</p>
+
+        <h4>スコアカード（3指標）</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>指標</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>集中度</td>
+                    <td>作業中の集中状態の評価</td>
+                </tr>
+                <tr>
+                    <td>進捗度</td>
+                    <td>タスク完了ペースの評価</td>
+                </tr>
+                <tr>
+                    <td>効率性</td>
+                    <td>見積りと実績の乖離度</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>タブ構成</h4>
+        <ul class="item-list">
+            <li><strong>分析結果タブ</strong>サマリー、問題点、改善提案、入力統計</li>
+            <li><strong>履歴タブ</strong>過去の分析結果とスコア推移</li>
+        </ul>
+    </div>
+
+    <div id="subsection-5-5" class="manual-subsection">
+        <h3>5.5 成長記録画面</h3>
+        <p>スキルレベル、パフォーマンス、目標管理など自己成長を記録する画面です。</p>
+
+        <h4>タブ構成</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>タブ</th>
+                    <th>内容</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>スキル成長</td>
+                    <td>スキル履歴（推移グラフ）、現在のスキル一覧</td>
+                </tr>
+                <tr>
+                    <td>パフォーマンス</td>
+                    <td>タスク完了率、集中度平均、ヘルプ回数、推移グラフ</td>
+                </tr>
+                <tr>
+                    <td>貢献記録</td>
+                    <td>チームへの貢献履歴</td>
+                </tr>
+                <tr>
+                    <td>成長目標</td>
+                    <td>アクティブな目標、完了目標、AI目標提案</td>
+                </tr>
+                <tr>
+                    <td>AI分析</td>
+                    <td>強み分析、成長機会提案</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="subsection-5-6" class="manual-subsection">
+        <h3>5.6 日報画面</h3>
+        <p>1日の作業を振り返り、日報を作成・送信する画面です。</p>
+
+        <h4>画面構成</h4>
+        <ul class="item-list">
+            <li><strong>AI生成日報エリア</strong>完了タスク、進行中タスク、Git活動、ファイル変更、明日の予定を自動生成</li>
+            <li><strong>タスク一覧エリア</strong>完了したタスクと残っているタスク</li>
+            <li><strong>AIフィードバックエリア</strong>今日の作業分析と明日へのアドバイス</li>
+        </ul>
+
+        <h4>自己評価項目</h4>
+        <table class="manual-table">
+            <thead>
+                <tr>
+                    <th>項目</th>
+                    <th>説明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>満足度</td>
+                    <td>顔アイコンで5段階選択（😞😐😊😄😍）</td>
+                </tr>
+                <tr>
+                    <td>達成度</td>
+                    <td>自動計算または手動調整可能</td>
+                </tr>
+                <tr>
+                    <td>集中度</td>
+                    <td>1〜5で評価</td>
+                </tr>
+                <tr>
+                    <td>難易度</td>
+                    <td>1〜5で評価</td>
+                </tr>
+                <tr>
+                    <td>学び</td>
+                    <td>1〜5で評価</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>💡 操作手順</strong>
+            日報内容を確認・編集 → タスク一覧を確認 → 自己評価を入力 → AIフィードバックを確認 → 「送信」をクリック
+        </div>
+    </div>
+</section>

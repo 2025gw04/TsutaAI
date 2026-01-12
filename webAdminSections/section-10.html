@@ -10,8 +10,9 @@
             <p>進捗トラッキング画面は、プロジェクトマネージャーが全プロジェクトの進捗状況を一目で把握できる統合ダッシュボードです。高リスクタスク、遅延タスク、進行中プロジェクトの数をサマリーカードで表示し、リスクレベル別にタスクを絞り込んで詳細を確認できます。各タスクにはAI提案やボトルネック分析が付随し、問題の早期発見と解決策の提示を実現します。プロジェクト別に進捗サマリーを表示し、リスク分布も可視化することで、的確な意思決定をサポートします。リアルタイムで更新されるデータにより、常に最新の状況を把握できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('progress-tracking-overview')">
-            <img id="progress-tracking-overview" src="../image/web-admin/10_progress-tracking-overview.png" alt="進捗トラッキング画面全体">
+        <div class="feature-image" onclick="openGallery('10_progress-tracking-overview')">
+            <img id="10_progress-tracking-overview" src="image/web-admin/10_progress-tracking-overview.png"
+                alt="進捗トラッキング画面全体">
         </div>
         <table class="feature-table">
             <thead>
@@ -58,8 +59,8 @@
             <p>画面上部に3つのサマリーカードが表示され、全プロジェクトの重要指標を一目で把握できます。「高リスクタスク」カードは赤色で強調表示され、注意が必要なタスクの数を示します。「遅延タスク」カードは黄色で表示され、納期を過ぎたタスクの総数を表示します。「進行中プロジェクト」カードは緑色で、現在アクティブなプロジェクトの数を示します。各カードにはアイコンと大きな数値が表示され、視覚的に理解しやすいデザインになっています。カードをホバーすると軽く浮き上がるアニメーションがあり、クリックすると詳細セクションにスクロールします。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('summary-cards')">
-            <img id="summary-cards" src="../image/web-admin/10_summary-cards.png" alt="サマリーカード">
+        <div class="feature-image" onclick="openGallery('10_summary-cards')">
+            <img id="10_summary-cards" src="image/web-admin/10_summary-cards.png" alt="サマリーカード">
         </div>
         <table class="feature-table">
             <thead>
@@ -107,8 +108,8 @@
                     class="bi bi-check-circle-fill"></i>）が付いています。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('risk-tabs')">
-            <img id="risk-tabs" src="../image/web-admin/10_risk-tabs.png" alt="リスクレベル選択タブ">
+        <div class="feature-image" onclick="openGallery('10_risk-tabs')">
+            <img id="10_risk-tabs" src="image/web-admin/10_risk-tabs.png" alt="リスクレベル選択タブ">
         </div>
         <table class="feature-table">
             <thead>
@@ -155,8 +156,8 @@
             <p>リスクタスクカードには、各タスクの詳細情報が構造化されて表示されます。カード上部にタスク名とリスクバッジが表示され、視覚的にリスクレベルを識別できます。カード本体には、担当者名、現在の進捗率（色分けされた%表示）、予測完了日、完了確率、納期の5つの重要情報が整理されています。進捗率は80%以上が緑、50-79%が黄、50%未満が赤で色分けされ、一目で状況を判断できます。完了確率はAIが算出した0-100%の数値で、納期までにタスクが完了する可能性を示します。カードをホバーすると軽く浮き上がり、ボーダーが紫色に変わります。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('risk-task-card')">
-            <img id="risk-task-card" src="../image/web-admin/10_risk-task-card.png" alt="リスクタスクカード">
+        <div class="feature-image" onclick="openGallery('10_risk-task-card')">
+            <img id="10_risk-task-card" src="image/web-admin/10_risk-task-card.png" alt="リスクタスクカード">
         </div>
         <table class="feature-table">
             <thead>
@@ -214,8 +215,8 @@
             <p>リスクタスクカードの下部に、AIが生成した具体的な提案が表示されます（ai_suggestionフィールドが存在する場合のみ）。AI提案ボックスは紫色のグラデーション背景で強調表示され、ロボットアイコンと「AI提案」ヘッダーが付きます。提案内容は自然言語で記述され、「担当者のスキルレベルを考慮して、より簡単なタスクに分割することをお勧めします」「依存関係にあるタスクが遅延しているため、先にそちらの解消を優先してください」などの実用的なアドバイスが含まれます。提案は過去のプロジェクトデータ、メンバーのパフォーマンス履歴、現在の負荷状況を分析して生成されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('ai-suggestion')">
-            <img id="ai-suggestion" src="../image/web-admin/10_ai-suggestion.png" alt="AI提案ボックス">
+        <div class="feature-image" onclick="openGallery('10_ai-suggestion')">
+            <img id="10_ai-suggestion" src="image/web-admin/10_ai-suggestion.png" alt="AI提案ボックス">
         </div>
         <table class="feature-table">
             <thead>
@@ -269,8 +270,8 @@
                 (X)」と件数が表示されます。各遅延タスクカードは赤いボーダーで強調表示され、ステータスバッジに「遅延」と表示されます。カードには担当者、進捗率、完了確率が表示され、リスクタスクカードと同様の構造になっています。特に重要な違いは、遅延タスクにはAI提案の代わりに「ボトルネック分析」が表示される点です。ボトルネック分析では、遅延の具体的な原因（例：依存タスクの未完了、リソース不足、技術的困難）が特定され、解決策が示されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('delayed-tasks')">
-            <img id="delayed-tasks" src="../image/web-admin/10_delayed-tasks.png" alt="遅延タスクセクション">
+        <div class="feature-image" onclick="openGallery('10_delayed-tasks')">
+            <img id="10_delayed-tasks" src="image/web-admin/10_delayed-tasks.png" alt="遅延タスクセクション">
         </div>
         <table class="feature-table">
             <thead>
@@ -323,8 +324,8 @@
             <p>ボトルネック分析は、遅延タスクの根本原因を特定するAI機能です。遅延タスクカードの下部に紫色のグラデーション背景で表示され、ファネルアイコンと「ボトルネック分析」ヘッダーが付きます。分析内容は自然言語で記述され、「依存タスクBが未完了のため着手できていません」「必要なライブラリの選定に時間がかかっています」「担当者が別プロジェクトで多忙のため作業時間が確保できていません」など、具体的な原因が示されます。AIは以下のデータソースを分析してボトルネックを特定します：①タスクの依存関係、②担当者の作業ログ、③ブロッカー登録履歴、④コメント履歴、⑤他タスクの負荷状況。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('bottleneck-analysis')">
-            <img id="bottleneck-analysis" src="../image/web-admin/10_bottleneck-analysis.png" alt="ボトルネック分析">
+        <div class="feature-image" onclick="openGallery('10_bottleneck-analysis')">
+            <img id="10_bottleneck-analysis" src="image/web-admin/10_bottleneck-analysis.png" alt="ボトルネック分析">
         </div>
         <table class="feature-table">
             <thead>
@@ -377,8 +378,8 @@
             <p>プロジェクト別進捗セクションでは、進行中の全プロジェクトがカード形式で一覧表示されます。各プロジェクトカードには、フォルダアイコン、プロジェクト名、開始日-終了日が表示されます。カードをクリックすると、そのプロジェクトの詳細な進捗サマリーが下部に展開されます。サマリーには、総タスク数、完了タスク数、進行中タスク数、未着手タスク数、平均進捗率、遅延タスク数の6つの指標が表示されます。さらに、リスク分布セクションでは高・中・低リスクのタスク数が視覚的に表示され、プロジェクト全体の健全性を一目で把握できます。選択中のプロジェクトカードは紫色の背景で強調表示されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('project-summary')">
-            <img id="project-summary" src="../image/web-admin/10_project-summary.png" alt="プロジェクト別進捗サマリー">
+        <div class="feature-image" onclick="openGallery('10_project-summary')">
+            <img id="10_project-summary" src="image/web-admin/10_project-summary.png" alt="プロジェクト別進捗サマリー">
         </div>
         <table class="feature-table">
             <thead>
@@ -442,9 +443,7 @@
             <p>画面右上には「更新」ボタンが配置されており、クリックすると全データを再取得してダッシュボードをリフレッシュできます。更新中はボタンが「更新中...」に変わり、クリックできなくなります。データ取得中は画面全体に半透明の白いオーバーレイが表示され、中央に紫色のスピナーアニメーションと「データを読み込んでいます...」というメッセージが表示されます。データ取得が完了するとオーバーレイがフェードアウトし、最新のデータが表示されます。エラーが発生した場合は、画面上部に赤いエラーメッセージが表示され、具体的なエラー内容が示されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('loading-refresh')">
-            <img id="loading-refresh" src="../image/web-admin/10_loading-refresh.png" alt="更新ボタンとローディング">
-        </div>
+
         <table class="feature-table">
             <thead>
                 <tr>
@@ -489,9 +488,6 @@
         <div class="description-box">
             <p>進捗トラッキング画面は、プロジェクトマネージャーの日常業務において最も頻繁に使用される画面の一つです。毎朝のスタンドアップミーティング前にこの画面を確認し、高リスクタスクと遅延タスクをチェックすることで、チームに対して的確な指示を出せます。週次の進捗報告では、プロジェクト別サマリーを活用して経営層に現状を報告します。AI提案とボトルネック分析を活用することで、問題の早期発見と迅速な対策が可能になり、プロジェクトの成功率が大幅に向上します。この画面を効果的に活用することで、プロジェクトマネージャーはより戦略的な意思決定に時間を使えるようになります。
             </p>
-        </div>
-        <div class="feature-image" onclick="openGallery('best-practices')">
-            <img id="best-practices" src="../image/web-admin/10_best-practices.png" alt="活用シーンとベストプラクティス">
         </div>
 
         <div class="workflow-steps">
@@ -574,5 +570,4 @@
         </div>
     </div>
 
-    <!-- ギャラリーモーダル -->
 </section>

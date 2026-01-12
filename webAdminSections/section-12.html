@@ -10,8 +10,8 @@
             <p>メンバー管理画面は、チームメンバーの基本情報、保有スキル、担当プロンプト、稼働状況、担当タスクを一元的に管理する画面です。各メンバーはカード形式で表示され、カードには稼働スコア、稼働中タスク数、今週期限のタスク数、今週完了したタスク数の4つの統計情報が含まれます。稼働スコアはリスクレベル（critical/warning/balanced）で色分けされ、過負荷状態のメンバーを一目で識別できます。スキルセクションでは各メンバーの技術スキルとレベル（1-10段階）がプログレスバーで視覚的に表示されます。担当プロンプトセクションでは、AIプロンプトの責任者を割り当て・管理できます。成長レポートへのリンクもあり、メンバーの長期的な成長を追跡できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('members-overview')">
-            <img id="members-overview" src="../image/web-admin/12_members-overview.png" alt="メンバー管理画面全体">
+        <div class="feature-image" onclick="openGallery('12_members-overview')">
+            <img id="12_members-overview" src="image/web-admin/12_members-overview.png" alt="メンバー管理画面全体">
         </div>
         <table class="feature-table">
             <thead>
@@ -64,8 +64,8 @@
             <p>メンバーカードは、各メンバーの情報を視覚的に整理したカード形式のUIです。カードヘッダーには氏名、ユーザー名（@付き）、ロールバッジ、メールアドレスが表示されます。ロールは3種類（admin/project_manager/member）で、それぞれ赤・黄・青の色分けされたバッジで表示されます。カードヘッダー右側には成長レポートボタン、編集ボタン、削除ボタンの3つのアクションボタンが配置されています。カード本体には統計グリッド、スキルセクション、担当プロンプトセクション、担当タスクセクションの4つのセクションが縦に並んでいます。全体は白い背景に灰色のボーダーで囲まれ、ホバー時に軽く浮き上がるアニメーションがあります。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('member-card')">
-            <img id="member-card" src="../image/web-admin/12_member-card.png" alt="メンバーカードの構造">
+        <div class="feature-image" onclick="openGallery('12_member-card')">
+            <img id="12_member-card" src="image/web-admin/12_member-card.png" alt="メンバーカードの構造">
         </div>
         <table class="feature-table">
             <thead>
@@ -131,8 +131,8 @@
             <p>稼働状況統計は、各メンバーの現在の作業負荷を4つの指標で示します。稼働スコアは0-100の数値で、メンバーの総合的な負荷状態を表します。スコアが80以上の場合は「critical（過負荷）」として赤色表示、60-79は「warning（注意）」として黄色表示、59以下は「balanced（バランス良好）」として緑色表示されます。稼働中タスクは現在進行中のタスク数、今週期限は今週中に期限が来るタスク数、今週完了は今週完了したタスク数を示します。これらの統計はリアルタイムで更新され、メンバーの現在の状況を正確に反映します。統計グリッドはレスポンシブデザインで、画面サイズに応じて2列または1列に自動調整されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('workload-stats')">
-            <img id="workload-stats" src="../image/web-admin/12_workload-stats.png" alt="稼働状況統計">
+        <div class="feature-image" onclick="openGallery('12_workload-stats')">
+            <img id="12_workload-stats" src="image/web-admin/12_workload-stats.png" alt="稼働状況統計">
         </div>
         <table class="feature-table">
             <thead>
@@ -215,8 +215,8 @@
             <p>スキル管理セクションでは、各メンバーが保有する技術スキルとそのレベルを管理します。スキルは名前とレベル（1-10段階）で構成され、レベルはプログレスバーで視覚的に表示されます。レベル1-3は初級、4-6は中級、7-9は上級、10はエキスパートと解釈されます。スキルバッジは2列のグリッドレイアウトで表示され、各バッジにはスキル名、レベルバー、数値（X/10）が含まれます。スキル情報はメンバーモーダルで編集でき、複数のスキルを同時に管理できます。スキルデータはタスク自動割り当て機能で活用され、メンバーのスキルレベルに応じて最適なタスクが割り当てられます。スキルが未登録のメンバーには「スキルが登録されていません」というメッセージが表示されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('skills-management')">
-            <img id="skills-management" src="../image/web-admin/12_skills-management.png" alt="スキル管理">
+        <div class="feature-image" onclick="openGallery('12_skills-management')">
+            <img id="12_skills-management" src="image/web-admin/12_skills-management.png" alt="スキル管理">
         </div>
         <table class="feature-table">
             <thead>
@@ -269,9 +269,7 @@
             <p>担当プロンプト管理セクションでは、各メンバーが責任を持つAIプロンプトを管理します。TsutaAIには29種類のAI機能があり、それぞれにプロンプトテンプレートが存在します。プロンプトの品質維持と継続的な改善のため、各プロンプトに責任者を割り当てます。プロンプトアイテムには、プロンプト名、責任範囲（任意）、メモ（任意）が表示されます。責任範囲には「主担当」「レビュアー」「更新担当」などの役割を記述できます。メモには改善履歴や注意事項を記録できます。プロンプトの割り当ては「割り当て」ボタンから行い、プロンプトカタログから選択して割り当てます。編集・削除も可能で、柔軟にプロンプト管理を運用できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('prompt-management')">
-            <img id="prompt-management" src="../image/web-admin/12_prompt-management.png" alt="担当プロンプト管理">
-        </div>
+
         <table class="feature-table">
             <thead>
                 <tr>
@@ -317,8 +315,8 @@
             <p>担当タスク一覧セクションでは、各メンバーが現在担当している全タスクがテーブル形式で表示されます。テーブルには、タスク名、プロジェクト名、ステータス、優先度、期限の5列が含まれます。タスクはプロジェクトをまたいで全て表示され、メンバーの全体的な作業負荷を一目で把握できます。プロジェクト名が「未割り当て」の場合は、プロジェクトに属さない独立タスクです。ステータスは「todo」「in_progress」「done」などの値が表示されます。優先度は「high」「medium」「low」で表示され、期限は日本語形式の日付（YYYY/MM/DD）で表示されます。テーブルはレスポンシブデザインで、モバイル画面ではカード形式に自動変換されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('assigned-tasks')">
-            <img id="assigned-tasks" src="../image/web-admin/12_assigned-tasks.png" alt="担当タスク一覧">
+        <div class="feature-image" onclick="openGallery('12_assigned-tasks')">
+            <img id="12_assigned-tasks" src="image/web-admin/12_assigned-tasks.png" alt="担当タスク一覧">
         </div>
         <table class="feature-table">
             <thead>
@@ -377,8 +375,8 @@
             <p>メンバーモーダルは、新規メンバーの追加または既存メンバー情報の編集を行うモーダルウィンドウです。モーダルには基本情報セクションとスキルセクションの2つがあります。基本情報セクションでは、ユーザー名、氏名、メールアドレス、ロールを入力します。ユーザー名は一意である必要があり、英数字とアンダースコアのみ使用可能です。ロールは「admin」「project_manager」「member」から選択します。スキルセクションでは、複数のスキルを追加・編集・削除できます。各スキルにはスキル名（テキスト入力）とスキルレベル（1-10のスライダー）を設定します。モーダル下部には「キャンセル」と「保存」ボタンがあり、保存ボタンをクリックすると入力内容がバリデーションされ、問題なければサーバーに送信されます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('member-modal')">
-            <img id="member-modal" src="../image/web-admin/12_member-modal.png" alt="メンバーモーダル">
+        <div class="feature-image" onclick="openGallery('12_member-modal')">
+            <img id="12_member-modal" src="image/web-admin/12_member-modal.png" alt="メンバーモーダル">
         </div>
         <table class="feature-table">
             <thead>
@@ -437,8 +435,8 @@
             <p>プロンプトモーダルは、メンバーにAIプロンプトの責任を割り当てる、または既存の割り当てを編集するためのモーダルウィンドウです。割り当てモードでは、プロンプトカタログからプロンプトを選択し、責任範囲とメモを入力します。プロンプトカタログは、システムに登録されている全29種類のAIプロンプトのリストです。各プロンプトには名前とプレビュー（簡単な説明）が含まれています。編集モードでは、プロンプト名は変更不可（グレーアウト）で、責任範囲とメモのみ編集できます。責任範囲には「主担当」「副担当」「レビュアー」などの役割を記述し、メモには改善履歴や注意事項を記録します。モーダル下部には「キャンセル」と「保存」ボタンがあります。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('prompt-modal')">
-            <img id="prompt-modal" src="../image/web-admin/12_prompt-modal.png" alt="プロンプトモーダル">
+        <div class="feature-image" onclick="openGallery('12_prompt-modal')">
+            <img id="12_prompt-modal" src="image/web-admin/12_prompt-modal.png" alt="プロンプトモーダル">
         </div>
         <table class="feature-table">
             <thead>
@@ -484,8 +482,11 @@
             <p>成長レポートは、各メンバーの長期的な成長を追跡・分析する専用ページです。メンバーカードの「成長レポート」ボタンをクリックすると、そのメンバー専用の成長レポートページ（/members/{memberId}/growth）に遷移します。成長レポートページでは、過去6ヶ月間の日報データ、作業ログデータ、タスク完了履歴などを分析し、メンバーの強み、成長機会、推奨目標をAIが自動生成します。強み分析では、メンバーが特に優れている領域（例：コーディング速度、問題解決能力、コミュニケーション）を3-5個抽出します。成長機会では、スキルギャップや改善すべき領域を2-4個提示します。推奨目標では、SMART原則に基づいた具体的な目標を2-3個提案します。このレポートは1on1ミーティングや評価面談で活用できます。
             </p>
         </div>
-        <div class="feature-image" onclick="openGallery('growth-report')">
-            <img id="growth-report" src="../image/web-admin/12_growth-report.png" alt="成長レポート">
+        <div class="feature-image" onclick="openGallery('12_growth-report')">
+            <img id="12_growth-report" src="image/web-admin/12_growth-report.png" alt="成長レポート">
+        </div>
+        <div class="feature-image" onclick="openGallery('12_growth-report2')">
+            <img id="12_growth-report2" src="image/web-admin/12_growth-report2.png" alt="成長レポート">
         </div>
         <table class="feature-table">
             <thead>
@@ -537,9 +538,6 @@
         <div class="description-box">
             <p>メンバー管理画面は、チームマネジメントの中心的なツールです。週次のリソース会議では、各メンバーの稼働スコアを確認し、過負荷のメンバーにはタスクの再配分を行います。新メンバーの受け入れ時には、メンバーモーダルで基本情報とスキルを登録し、適切なタスクを割り当てます。スキルマトリクスの作成時には、全メンバーのスキル情報をエクスポートし、チーム全体のスキル分布を可視化します。プロンプト品質管理では、各プロンプトの責任者に定期的なレビューを依頼し、プロンプトの継続的な改善を実現します。評価面談では、成長レポートを活用してメンバーの成長を客観的に評価し、次期の目標を設定します。これらの活動により、チーム全体のパフォーマンスと満足度が向上します。
             </p>
-        </div>
-        <div class="feature-image" onclick="openGallery('best-practices')">
-            <img id="best-practices" src="../image/web-admin/12_best-practices.png" alt="活用シーンとベストプラクティス">
         </div>
 
         <div class="workflow-steps">
@@ -627,5 +625,4 @@
         </div>
     </div>
 
-    <!-- ギャラリーモーダル -->
 </section>
