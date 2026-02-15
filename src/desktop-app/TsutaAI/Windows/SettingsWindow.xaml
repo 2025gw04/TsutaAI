@@ -1,0 +1,741 @@
+<Window x:Class="TsutaAI.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:converters="clr-namespace:TsutaAI.Converters"
+        mc:Ignorable="d"
+        Style="{StaticResource BaseWindowStyle}"
+        Title="設定"
+        Width="800"
+        Height="770"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}"
+        ResizeMode="CanResize">
+
+    <Window.Resources>
+        <!-- パーセンテージから幅を計算するコンバーター -->
+        <converters:PercentageToWidthConverter x:Key="PercentageToWidthConverter"/>
+    </Window.Resources>
+
+    <Grid Margin="35">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ヘッダー -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,25">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconBoxIcons Kind="RegularCog"
+                                            Width="32"
+                                            Height="32"
+                                            Foreground="{StaticResource PrimaryBrush}"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,12,0"/>
+                <TextBlock Text="設定"
+                           Foreground="{StaticResource TextBrush}"
+                           FontSize="34"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock Text="アプリケーションの各種設定を変更できます"
+                       Foreground="{StaticResource TextLightBrush}"
+                       FontSize="16"
+                       Margin="44,8,0,0"/>
+        </StackPanel>
+
+        <!-- タブコントロール -->
+        <TabControl Grid.Row="1"
+                    Background="{StaticResource WindowBackgroundBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    Padding="0">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border x:Name="Border" Background="Transparent" BorderThickness="0,0,0,3" BorderBrush="Transparent" Padding="6,3" Margin="0,0,2,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <ContentPresenter ContentSource="Header" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+                                        <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter Property="Foreground" Value="{StaticResource TextLightBrush}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Border" Property="Background" Value="#F3F4F6"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <!-- プロフィール設定タブ -->
+            <TabItem Header="プロフィール">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,8">
+                            <iconPacks:PackIconBoxIcons Kind="RegularUser" Width="18" Height="18" Margin="0,0,8,0"/>
+                            <TextBlock Text="プロフィール" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="ユーザー情報"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,20"/>
+
+                        <TextBlock Text="ユーザー名"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,10,0,8"/>
+                        <TextBox x:Name="UsernameTextBox"
+                                 Style="{StaticResource ModernTextBox}"
+                                 IsReadOnly="True"/>
+
+                        <TextBlock Text="氏名"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,20,0,8"/>
+                        <TextBox x:Name="FullNameTextBox"
+                                 Style="{StaticResource ModernTextBox}"/>
+
+                        <TextBlock Text="メールアドレス"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,20,0,8"/>
+                        <TextBox x:Name="EmailTextBox"
+                                 Style="{StaticResource ModernTextBox}"/>
+
+                        <TextBlock Text="保有スキル"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Margin="0,30,0,15"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ComboBox x:Name="SkillNameComboBox"
+                                      Grid.Column="0"
+                                      Style="{StaticResource ModernComboBox}"
+                                      IsEditable="False"
+                                      Margin="0,0,10,0">
+                                <ComboBoxItem Content="Java"/>
+                                <ComboBoxItem Content="C#"/>
+                                <ComboBoxItem Content="Python"/>
+                                <ComboBoxItem Content="JavaScript"/>
+                                <ComboBoxItem Content="TypeScript"/>
+                                <ComboBoxItem Content="HTML"/>
+                                <ComboBoxItem Content="CSS"/>
+                                <ComboBoxItem Content="SQL"/>
+                                <ComboBoxItem Content="設計書作成"/>
+                                <ComboBoxItem Content="テスト仕様書作成"/>
+                                <ComboBoxItem Content="コードレビュー"/>
+                                <ComboBoxItem Content="プロジェクト管理"/>
+                            </ComboBox>
+
+                            <ComboBox x:Name="SkillLevelComboBox"
+                                      Grid.Column="1"
+                                      Style="{StaticResource ModernComboBox}"
+                                      SelectedIndex="4"
+                                      Margin="0,0,10,0">
+                                <ComboBoxItem Content="1 - 初心者"/>
+                                <ComboBoxItem Content="2 - 少し経験"/>
+                                <ComboBoxItem Content="3 - 基礎レベル"/>
+                                <ComboBoxItem Content="4 - 実務経験"/>
+                                <ComboBoxItem Content="5 - 中級"/>
+                                <ComboBoxItem Content="6 - 応用"/>
+                                <ComboBoxItem Content="7 - 上級"/>
+                                <ComboBoxItem Content="8 - 熟練"/>
+                                <ComboBoxItem Content="9 - エキスパート"/>
+                                <ComboBoxItem Content="10 - マスター"/>
+                            </ComboBox>
+
+                            <Button x:Name="AddSkillButton"
+                                    Grid.Column="2"
+                                    Content="追加"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Width="80"
+                                    Click="AddSkill_Click"/>
+                            
+                            <Button x:Name="ClearSkillSelectionButton"
+                                    Grid.Column="3"
+                                    Content="新規"
+                                    Style="{StaticResource SecondaryButton}"
+                                    Width="80"
+                                    Click="ClearSkillSelectionButton_Click"
+                                    Margin="10,0,0,0"
+                                    Visibility="Collapsed"/>
+                        </Grid>
+
+                        <Border BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Background="{StaticResource WindowBackgroundBrush}"
+                                Margin="0,15,0,0">
+                            <ListBox x:Name="SkillsListBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     MinHeight="150"
+                                     MaxHeight="300"
+                                     SelectionChanged="SkillsListBox_SelectionChanged">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="180"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="60"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0"
+                                                       Text="{Binding SkillName}"
+                                                       Foreground="{StaticResource TextBrush}"
+                                                       FontWeight="SemiBold"
+                                                       FontSize="16"
+                                                       VerticalAlignment="Center"/>
+                                            <Border Grid.Column="1"
+                                                    Height="8"
+                                                    CornerRadius="4"
+                                                    Background="{StaticResource BorderBrush}"
+                                                    Margin="10,0"
+                                                    VerticalAlignment="Center"
+                                                    x:Name="ProgressBarContainer">
+                                                <Border HorizontalAlignment="Left"
+                                                        Height="8"
+                                                        CornerRadius="4"
+                                                        Background="{StaticResource PrimaryBrush}">
+                                                    <Border.Width>
+                                                        <MultiBinding Converter="{StaticResource PercentageToWidthConverter}">
+                                                            <Binding Path="LevelPercentage"/>
+                                                            <Binding ElementName="ProgressBarContainer" Path="ActualWidth"/>
+                                                        </MultiBinding>
+                                                    </Border.Width>
+                                                </Border>
+                                            </Border>
+                                            <TextBlock Grid.Column="2"
+                                                       Foreground="{StaticResource TextLightBrush}"
+                                                       FontSize="14"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Center">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0}/10">
+                                                        <Binding Path="SkillLevel"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                            <Button Grid.Column="3"
+                                                    Content="削除"
+                                                    Style="{StaticResource NegativeButton}"
+                                                    Tag="{Binding}"
+                                                    Width="50"
+                                                    Height="28"
+                                                    Margin="10,0,0,0"
+                                                    Click="DeleteSkill_Click"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+
+                        <Button Content="プロフィールを更新"
+                                Style="{StaticResource SuccessButton}"
+                                Width="180"
+                                Height="44"
+                                HorizontalAlignment="Left"
+                                Margin="0,25,0,0"
+                                Click="UpdateProfile_Click"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- API接続設定タブ -->
+            <TabItem Header="API接続">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,8">
+                            <iconPacks:PackIconBoxIcons Kind="RegularServer" Width="18" Height="18" Margin="0,0,8,0"/>
+                            <TextBlock Text="API接続" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="API接続設定"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,20"/>
+
+                        <TextBlock Text="API URL"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,10,0,8"/>
+                        <TextBox x:Name="ApiUrlTextBox"
+                                 Style="{StaticResource ModernTextBox}"
+                                 Text="http://localhost:3000"/>
+
+                        <Button Content="接続テスト"
+                                Style="{StaticResource SecondaryButton}"
+                                Width="150"
+                                Height="40"
+                                HorizontalAlignment="Left"
+                                Margin="0,20,0,0"
+                                Click="TestConnection_Click"/>
+
+                        <TextBlock x:Name="ConnectionStatusTextBlock"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Margin="0,15,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- 作業フォルダ設定タブ -->
+            <TabItem Header="作業フォルダ">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,8">
+                            <iconPacks:PackIconBoxIcons Kind="RegularFolder" Width="18" Height="18" Margin="0,0,8,0"/>
+                            <TextBlock Text="作業フォルダ" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="作業フォルダ設定"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock Text="監視対象の作業フォルダを設定します。ファイル変更やGitコミット情報を自動収集します。"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   TextWrapping="Wrap"
+                                   LineHeight="22"
+                                   Margin="0,0,0,20"/>
+
+                        <TextBlock Text="作業フォルダパス"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,10,0,8"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="WorkFolderTextBox"
+                                     Grid.Column="0"
+                                     Style="{StaticResource ModernTextBox}"
+                                     Margin="0,0,10,0"/>
+                            <Button Grid.Column="1"
+                                    Content="参照..."
+                                    Style="{StaticResource SecondaryButton}"
+                                    Width="110"
+                                    Height="40"
+                                    Click="BrowseFolder_Click"/>
+                        </Grid>
+
+                        <CheckBox x:Name="MonitorFileChangesCheckBox"
+                                  Content="ファイル変更を監視する"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,20,0,0"
+                                  IsChecked="True"/>
+
+                        <CheckBox x:Name="MonitorGitCheckBox"
+                                  Content="Gitコミット情報を収集する"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="True"/>
+
+                        <TextBlock x:Name="FolderStatusTextBlock"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Margin="0,20,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- 監視設定タブ -->
+            <TabItem Header="監視設定">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,8">
+                            <iconPacks:PackIconBoxIcons Kind="RegularTachometer" Width="18" Height="18" Margin="0,0,8,0"/>
+                            <TextBlock Text="監視設定" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="活動監視設定"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,20"/>
+
+                        <CheckBox x:Name="MonitorMouseCheckBox"
+                                  Content="マウスクリックを監視する"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,10,0,0"
+                                  IsChecked="True"/>
+
+                        <CheckBox x:Name="MonitorKeyboardCheckBox"
+                                  Content="キーボード入力を監視する"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="True"/>
+
+                        <CheckBox x:Name="MonitorActiveWindowCheckBox"
+                                  Content="アクティブウィンドウを監視する"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="True"/>
+
+                        <TextBlock Text="自動保存間隔（分）"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,25,0,8"/>
+                        <ComboBox x:Name="AutoSaveIntervalComboBox"
+                                  Style="{StaticResource ModernComboBox}"
+                                  SelectedIndex="2">
+                            <ComboBoxItem Content="15分"/>
+                            <ComboBoxItem Content="30分"/>
+                            <ComboBoxItem Content="60分"/>
+                            <ComboBoxItem Content="120分"/>
+                        </ComboBox>
+
+                        <TextBlock Text="アイドル検出時間（分）"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,20,0,8"/>
+                        <ComboBox x:Name="IdleTimeComboBox"
+                                  Style="{StaticResource ModernComboBox}"
+                                  SelectedIndex="1">
+                            <ComboBoxItem Content="5分"/>
+                            <ComboBoxItem Content="10分"/>
+                            <ComboBoxItem Content="15分"/>
+                            <ComboBoxItem Content="20分"/>
+                        </ComboBox>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- 休暇管理タブ -->
+            <TabItem Header="休暇管理">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,8">
+                            <iconPacks:PackIconBoxIcons Kind="RegularCalendar" Width="18" Height="18" Margin="0,0,8,0"/>
+                            <TextBlock Text="休暇管理" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="休暇予定管理"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock Text="休暇日を登録すると、管理者にWBS調整の提案が送信されます。"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   TextWrapping="Wrap"
+                                   LineHeight="22"
+                                   Margin="0,0,0,20"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="開始日"
+                                           Foreground="{StaticResource TextLightBrush}"
+                                           Margin="0,0,0,8"/>
+                                <DatePicker x:Name="VacationStartDatePicker"
+                                            Style="{StaticResource ModernDatePicker}"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="10,0,10,0">
+                                <TextBlock Text="終了日"
+                                           Foreground="{StaticResource TextLightBrush}"
+                                           Margin="0,0,0,8"/>
+                                <DatePicker x:Name="VacationEndDatePicker"
+                                            Style="{StaticResource ModernDatePicker}"/>
+                            </StackPanel>
+
+                            <Button Grid.Column="2"
+                                    Content="追加"
+                                    Style="{StaticResource PrimaryButton}"
+                                    Width="110"
+                                    Height="40"
+                                    VerticalAlignment="Bottom"
+                                    Click="AddVacation_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="登録済み休暇"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,25,0,10"/>
+
+                        <Border BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="6"
+                                Background="{StaticResource WindowBackgroundBrush}">
+                            <ListBox x:Name="VacationsListBox"
+                                     Background="Transparent"
+                                     BorderThickness="0"
+                                     MinHeight="150"
+                                     MaxHeight="300">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0"
+                                                       Text="{Binding DisplayText}"
+                                                       Foreground="{StaticResource TextBrush}"
+                                                       FontSize="16"
+                                                       VerticalAlignment="Center"/>
+                                            <Button Grid.Column="1"
+                                                    Content="削除"
+                                                    Style="{StaticResource DangerButton}"
+                                                    Width="70"
+                                                    Height="32"
+                                                    FontSize="15"
+                                                    Click="DeleteVacation_Click"
+                                                    Tag="{Binding}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- Git/SVN設定タブ -->
+            <TabItem Header="Git/SVN">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,8">
+                            <iconPacks:PackIconBoxIcons Kind="BrandsGit" Width="18" Height="18" Margin="0,0,8,0"/>
+                            <TextBlock Text="Git/SVN" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="バージョン管理設定"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,15"/>
+
+                        <TextBlock Text="GitやSVNのコミット情報を自動的に作業内容として認識します。"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   TextWrapping="Wrap"
+                                   LineHeight="22"
+                                   Margin="0,0,0,20"/>
+
+                        <TextBlock Text="バージョン管理システム"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,10,0,8"/>
+                        <ComboBox x:Name="VcsTypeComboBox"
+                                  Style="{StaticResource ModernComboBox}"
+                                  SelectedIndex="0"
+                                  SelectionChanged="VcsTypeComboBox_SelectionChanged">
+                            <ComboBoxItem Content="Git"/>
+                            <ComboBoxItem Content="SVN"/>
+                            <ComboBoxItem Content="使用しない"/>
+                        </ComboBox>
+
+                        <TextBlock Text="リポジトリURL"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,20,0,8"/>
+                        <TextBox x:Name="VcsRepositoryUrlTextBox"
+                                 Style="{StaticResource ModernTextBox}"
+                                 Text=""/>
+
+                        <TextBlock Text="ローカルパス"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,20,0,8"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="VcsLocalPathTextBox"
+                                     Grid.Column="0"
+                                     Style="{StaticResource ModernTextBox}"
+                                     Margin="0,0,10,0"/>
+                            <Button Grid.Column="1"
+                                    Content="参照..."
+                                    Style="{StaticResource SecondaryButton}"
+                                    Width="110"
+                                    Height="40"
+                                    Click="BrowseVcsFolder_Click"/>
+                        </Grid>
+
+                        <TextBlock x:Name="VcsAuthenticationLabel"
+                                   Text="認証情報（SVN用）"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Margin="0,30,0,15"/>
+
+                        <TextBlock x:Name="VcsUsernameLabel"
+                                   Text="ユーザー名"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,10,0,8"/>
+                        <TextBox x:Name="VcsUsernameTextBox"
+                                 Style="{StaticResource ModernTextBox}"/>
+
+                        <TextBlock x:Name="VcsPasswordLabel"
+                                   Text="パスワード"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,20,0,8"/>
+                        <PasswordBox x:Name="VcsPasswordBox"
+                                     Height="40"
+                                     Padding="12,8"
+                                     FontSize="16"
+                                     Background="{StaticResource WindowBackgroundBrush}"
+                                     Foreground="{StaticResource TextBrush}"
+                                     BorderBrush="{StaticResource BorderBrush}"
+                                     BorderThickness="1"/>
+
+                        <TextBlock Text="監視オプション"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"
+                                   Margin="0,30,0,15"/>
+
+                        <CheckBox x:Name="VcsEnableMonitoringCheckBox"
+                                  Content="バージョン管理の監視を有効にする"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,10,0,0"
+                                  IsChecked="True"/>
+
+                        <CheckBox x:Name="VcsAutoRecognizeCommitsCheckBox"
+                                  Content="コミット情報を自動的に作業内容として認識する"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="True"/>
+
+                        <Button Content="接続テスト"
+                                Style="{StaticResource SecondaryButton}"
+                                Width="150"
+                                Height="40"
+                                HorizontalAlignment="Left"
+                                Margin="0,25,0,0"
+                                Click="TestVcsConnection_Click"/>
+
+                        <TextBlock x:Name="VcsStatusTextBlock"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   Margin="0,15,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- 通知設定タブ -->
+            <TabItem Header="通知">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="10,8">
+                            <iconPacks:PackIconBoxIcons Kind="RegularBell" Width="18" Height="18" Margin="0,0,8,0"/>
+                            <TextBlock Text="通知" FontSize="16"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="25">
+                    <StackPanel>
+                        <TextBlock Text="通知設定"
+                                   Foreground="{StaticResource TextBrush}"
+                                   FontSize="20"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,20"/>
+
+                        <CheckBox x:Name="NotifyTaskStartCheckBox"
+                                  Content="タスク開始時刻に通知"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,10,0,0"
+                                  IsChecked="True"/>
+
+                        <CheckBox x:Name="NotifyTaskEndCheckBox"
+                                  Content="タスク終了予定時刻に通知"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="True"/>
+
+                        <CheckBox x:Name="NotifyBreakCheckBox"
+                                  Content="休憩時間を通知"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="False"/>
+
+                        <CheckBox x:Name="NotifyAiAlertCheckBox"
+                                  Content="AIアラートを通知"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="True"/>
+
+                        <CheckBox x:Name="NotifySoundCheckBox"
+                                  Content="通知音を再生"
+                                  Foreground="{StaticResource TextBrush}"
+                                  Margin="0,12,0,0"
+                                  IsChecked="True"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <!-- フッター (保存・キャンセルボタン) -->
+        <Grid Grid.Row="2" Margin="0,25,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="SaveButton"
+                    Grid.Column="1"
+                    Style="{StaticResource SuccessButton}"
+                    Width="130"
+                    FontSize="17"
+                    Margin="0,0,12,0"
+                    Click="SaveSettings_Click"
+                    Cursor="Hand">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconBoxIcons Kind="RegularCheck" Width="18" Height="18" Margin="0,0,8,0"/>
+                        <TextBlock Text="保存" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+
+            <Button x:Name="CancelButton"
+                    Grid.Column="2"
+                    Content="キャンセル"
+                    Style="{StaticResource SecondaryButton}"
+                    Width="130"
+                    FontSize="17"
+                    Click="CancelSettings_Click"
+                    Cursor="Hand"/>
+        </Grid>
+    </Grid>
+</Window>

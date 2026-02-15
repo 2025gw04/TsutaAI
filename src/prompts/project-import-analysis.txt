@@ -1,0 +1,131 @@
+あなたはプロジェクト管理のエキスパートです。以下のファイル内容を解析し、TsutaAIのプロジェクト構造に変換してください。
+
+【ファイル形式】
+{file_type}
+
+【ファイル内容】
+{file_content}
+
+【追加の指示】
+{additional_instructions}
+
+【出力形式】
+以下のJSON形式で出力してください：
+
+{{
+  "project": {{
+    "name": "プロジェクト名",
+    "description": "プロジェクトの説明",
+    "startDate": "2025-01-01",
+    "endDate": "2025-12-31",
+    "status": "planning"
+  }},
+  "tasks": [
+    {{
+      "name": "タスク名",
+      "description": "タスクの説明",
+      "assigneeRole": "担当ロール",
+      "assignee": "担当者名（わかる場合）",
+      "effortDays": 5,
+      "startDate": "2025-01-01",
+      "endDate": "2025-01-05",
+      "deliverable": "成果物",
+      "priority": "high",
+      "dependencies": [],
+      "children": [
+        // 子タスク（階層構造）
+      ]
+    }}
+  ],
+  "warnings": [
+    "不明瞭な点や推測した情報があれば記載"
+  ]
+}}
+
+【重要な注意事項】
+1. ファイル形式（CSV, JSON, Markdown, テキスト）に応じて適切に解析してください
+2. WBS構造（階層的なタスク）を認識し、children配列で表現してください
+3. 日付は YYYY-MM-DD 形式で出力してください
+4. ステータスは planning, active, completed, cancelled のいずれかを選択してください
+5. タスクの優先度は low, medium, high のいずれかを選択してください
+6. タスクのステータスは todo, in_progress, completed, cancelled のいずれかを選択してください
+7. 情報が不足している場合は妥当な推測を行い、warnings配列に記録してください
+8. 必ずJSON形式で出力し、余計な説明文は含めないでください
+9. effortDaysは営業日ベースで設定してください（土日を除外）
+10. 開始日と終了日は、effortDaysと整合性を取ってください
+
+【サンプル出力（JSON形式の場合）】
+{{
+  "project": {{
+    "name": "ECサイトリニューアル",
+    "description": "既存ECサイトを最新技術でリニューアルし、ユーザー体験を向上させる",
+    "startDate": "2025-01-06",
+    "endDate": "2025-06-30",
+    "status": "planning"
+  }},
+  "tasks": [
+    {{
+      "name": "企画・準備",
+      "description": "プロジェクトの全体像を固め計画書を作成する",
+      "assigneeRole": "PM",
+      "assignee": "",
+      "effortDays": 5,
+      "startDate": "2025-01-06",
+      "endDate": "2025-01-10",
+      "deliverable": "プロジェクト計画書",
+      "priority": "high",
+      "status": "todo",
+      "dependencies": [],
+      "children": [
+        {{
+          "name": "キックオフミーティング実施",
+          "description": "ステークホルダーと初回ミーティング",
+          "assigneeRole": "PM",
+          "assignee": "",
+          "effortDays": 2,
+          "startDate": "2025-01-06",
+          "endDate": "2025-01-07",
+          "deliverable": "議事録",
+          "priority": "high",
+          "status": "todo",
+          "dependencies": [],
+          "children": []
+        }},
+        {{
+          "name": "プロジェクト計画書作成",
+          "description": "スコープとスケジュールをまとめる",
+          "assigneeRole": "PM",
+          "assignee": "",
+          "effortDays": 3,
+          "startDate": "2025-01-08",
+          "endDate": "2025-01-10",
+          "deliverable": "プロジェクト計画書",
+          "priority": "high",
+          "status": "todo",
+          "dependencies": [],
+          "children": []
+        }}
+      ]
+    }},
+    {{
+      "name": "要件定義",
+      "description": "システム要件を定義し承認を得る",
+      "assigneeRole": "SE",
+      "assignee": "",
+      "effortDays": 10,
+      "startDate": "2025-01-13",
+      "endDate": "2025-01-24",
+      "deliverable": "要件定義書",
+      "priority": "high",
+      "status": "todo",
+      "dependencies": [],
+      "children": []
+    }}
+  ],
+  "warnings": [
+    "担当者名が明記されていないため、assigneeは空欄としています",
+    "工数の詳細が不明なため、一般的な見積もりを使用しています"
+  ]
+}}
+
+上記の形式に従って、提供されたファイル内容を解析してください。

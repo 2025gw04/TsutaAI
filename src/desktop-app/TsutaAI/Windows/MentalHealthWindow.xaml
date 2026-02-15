@@ -1,0 +1,153 @@
+<Window x:Class="TsutaAI.Windows.MentalHealthWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="メンタルヘルスチェック" Height="700" Width="750"
+        WindowStartupLocation="CenterOwner"
+        Style="{StaticResource BaseWindowStyle}">
+    <Window.Resources>
+        <Style x:Key="RatingButton" TargetType="Button" BasedOn="{StaticResource SecondaryButton}">
+            <Setter Property="Width" Value="56"/>
+            <Setter Property="Height" Value="56"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,24">
+            <TextBlock Text="今日の気分をチェック" Style="{StaticResource H1}"/>
+            <TextBlock Text="今日の気分や状態を記録して、AIからのアドバイスを受け取りましょう"
+                       Style="{StaticResource Body}"
+                       Foreground="{StaticResource TextLightBrush}"
+                       Margin="0,8,0,0"/>
+        </StackPanel>
+
+        <!-- Form -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Mood Rating -->
+                <Border Style="{StaticResource Card}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="😊 今日の気分"
+                                   Style="{StaticResource H2}"
+                                   FontSize="20"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="1 (とても悪い) 〜 5 (とても良い)"
+                                   Style="{StaticResource MutedTextStyle}"
+                                   Margin="0,0,0,16"/>
+                        <StackPanel x:Name="MoodRatingPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="MoodBtn1" Content="😢" Style="{StaticResource RatingButton}" Click="MoodButton_Click" Tag="1"/>
+                            <Button x:Name="MoodBtn2" Content="😟" Style="{StaticResource RatingButton}" Click="MoodButton_Click" Tag="2"/>
+                            <Button x:Name="MoodBtn3" Content="😐" Style="{StaticResource RatingButton}" Click="MoodButton_Click" Tag="3"/>
+                            <Button x:Name="MoodBtn4" Content="🙂" Style="{StaticResource RatingButton}" Click="MoodButton_Click" Tag="4"/>
+                            <Button x:Name="MoodBtn5" Content="😄" Style="{StaticResource RatingButton}" Click="MoodButton_Click" Tag="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Stress Level -->
+                <Border Style="{StaticResource Card}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <TextBlock Text="💪 ストレスレベル"
+                                   Style="{StaticResource H2}"
+                                   FontSize="20"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="1 (とても低い) 〜 5 (とても高い)"
+                                   Style="{StaticResource MutedTextStyle}"
+                                   Margin="0,0,0,16"/>
+                        <StackPanel x:Name="StressRatingPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button x:Name="StressBtn1" Content="1" Style="{StaticResource RatingButton}" Click="StressButton_Click" Tag="1"/>
+                            <Button x:Name="StressBtn2" Content="2" Style="{StaticResource RatingButton}" Click="StressButton_Click" Tag="2"/>
+                            <Button x:Name="StressBtn3" Content="3" Style="{StaticResource RatingButton}" Click="StressButton_Click" Tag="3"/>
+                            <Button x:Name="StressBtn4" Content="4" Style="{StaticResource RatingButton}" Click="StressButton_Click" Tag="4"/>
+                            <Button x:Name="StressBtn5" Content="5" Style="{StaticResource RatingButton}" Click="StressButton_Click" Tag="5"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Blockers -->
+                <Border Style="{StaticResource Card}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <CheckBox x:Name="HasBlockerCheckBox"
+                                  Content="🚧 作業を妨げる問題がある"
+                                  FontSize="18"
+                                  FontWeight="SemiBold"
+                                  Margin="0,0,0,16"
+                                  Checked="HasBlockerCheckBox_CheckedChanged"
+                                  Unchecked="HasBlockerCheckBox_CheckedChanged"/>
+                        <TextBox x:Name="BlockerDetailsTextBox"
+                                 Style="{StaticResource ModernTextBox}"
+                                 Height="80"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalScrollBarVisibility="Auto"
+                                 VerticalContentAlignment="Top"
+                                 Padding="7"
+                                 FontWeight="Bold"
+                                 IsEnabled="False"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Support Needed -->
+                <Border Style="{StaticResource Card}" Margin="0,0,0,20">
+                    <StackPanel>
+                        <CheckBox x:Name="NeedSupportCheckBox"
+                                  Content="🤝 サポートが必要"
+                                  FontSize="18"
+                                  FontWeight="SemiBold"
+                                  Margin="0,0,0,16"
+                                  Checked="NeedSupportCheckBox_CheckedChanged"
+                                  Unchecked="NeedSupportCheckBox_CheckedChanged"/>
+                        <TextBox x:Name="SupportDetailsTextBox"
+                                 Style="{StaticResource ModernTextBox}"
+                                 Height="80"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 VerticalContentAlignment="Top"
+                                 Padding="7"
+                                 FontWeight="Bold"
+                                 VerticalScrollBarVisibility="Auto"
+                                 IsEnabled="False"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- AI Advice (shown after submission) -->
+                <Border x:Name="AiAdvicePanel"
+                        Background="#E9EFFF"
+                        CornerRadius="8"
+                        Padding="20"
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="🤖 AIからのアドバイス" FontWeight="SemiBold" FontSize="18" Margin="0,0,0,10"/>
+                        <TextBlock x:Name="AiAdviceText"
+                                   TextWrapping="Wrap"
+                                   LineHeight="24"
+                                   Style="{StaticResource Body}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,24,0,0">
+            <Button Content="キャンセル"
+                    Width="120"
+                    Click="CancelButton_Click"
+                    Style="{StaticResource SecondaryButton}"/>
+            
+            <Button x:Name="SubmitButton"
+                    Content="記録する"
+                    Width="140"
+                    Click="SubmitButton_Click"
+                    Style="{StaticResource PrimaryButton}"/>
+        </StackPanel>
+    </Grid>
+</Window>

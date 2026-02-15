@@ -1,7 +1,38 @@
 <!-- セッション 11: 作業報告 -->
 <section id="section-11" class="manual-section">
     <h2>11. 作業報告（/work-reports）</h2>
-    <p>メンバーの日報と作業ログを管理し、AIによる自動生成機能を提供します。</p>
+    <p>メンバーの日報と作業ログを統合的に管理する画面です。進捗・タスク管理カテゴリ内の「日報一覧（/daily-reports）」「1時間ごとの活動（/hourly-activity）」と併用して運用します。</p>
+
+    <div id="subsection-11-0" class="manual-subsection">
+        <h3>11.0 関連画面との使い分け</h3>
+        <p>現行実装では、進捗・タスク管理カテゴリに3つの近接画面があります。用途に応じて使い分けることで、確認漏れを防げます。</p>
+        <table class="feature-table">
+            <thead>
+                <tr>
+                    <th>画面</th>
+                    <th>主な目的</th>
+                    <th>主なデータ</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>/daily-reports</code></td>
+                    <td>日報の一覧確認（メンバー・日付単位）</td>
+                    <td>日報本文、AI要約、自己評価指標</td>
+                </tr>
+                <tr>
+                    <td><code>/work-reports</code></td>
+                    <td>日報と作業ログの横断確認</td>
+                    <td>日報データ + 作業ログデータ</td>
+                </tr>
+                <tr>
+                    <td><code>/hourly-activity</code></td>
+                    <td>作業セッションの時系列分析</td>
+                    <td>1時間ごとの活動サマリー、コミット/変更ファイル数</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
     <!-- 11.1 画面概要 -->
     <div id="subsection-11-1" class="manual-subsection">

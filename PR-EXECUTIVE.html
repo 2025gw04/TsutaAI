@@ -7,11 +7,11 @@
     <title>経営判断を支えるAI駆動型プロジェクト管理 - ツタAI</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter & Noto Sans JP -->
+    <!-- Google Fonts: Plus Jakarta Sans & Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
         rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -31,7 +31,7 @@
                         }
                     },
                     fontFamily: {
-                        sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans JP"', 'sans-serif'],
                     },
                     boxShadow: {
                         'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
@@ -126,6 +126,25 @@
             transform: translateY(-5px);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
         }
+
+
+        @media (max-width: 768px) {
+            #navbar .max-w-7xl {
+                padding-right: calc(1rem + env(safe-area-inset-right));
+            }
+
+            #hamburger {
+                width: 44px;
+                height: 44px;
+                margin-right: 0.3rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.78);
+                border: 1px solid rgba(148, 163, 184, 0.28);
+            }
+        }
     </style>
 </head>
 
@@ -157,8 +176,10 @@
                         class="nav-link font-medium text-text-sub hover:text-primary transition-colors">AI機能</a>
                     <a href="#benefits"
                         class="nav-link font-medium text-text-sub hover:text-primary transition-colors">経営メリット</a>
-                    <a href="#pricing"
-                        class="nav-link font-medium text-text-sub hover:text-primary transition-colors">料金</a>
+                    <a href="#implementation"
+                        class="nav-link font-medium text-text-sub hover:text-primary transition-colors">導入プロセス</a>
+                    <!-- <a href="#pricing"
+                        class="nav-link font-medium text-text-sub hover:text-primary transition-colors">料金</a> -->
                     <a href="index.html"
                         class="px-4 py-2 bg-gray-100 text-gray-700 text-sm font-bold rounded-full hover:bg-gray-200 transition-all">
                         <i class="fas fa-home mr-1"></i>トップへ戻る
@@ -188,10 +209,10 @@
                     class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">経営メリット</a>
                 <a href="#implementation"
                     class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">導入プロセス</a>
-                <a href="#support"
+                <!-- <a href="#support"
                     class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">サポート</a>
                 <a href="#pricing"
-                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">料金</a>
+                    class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">料金</a> -->
                 <a href="index.html"
                     class="mobile-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-primary hover:bg-gray-50">トップへ戻る</a>
             </div>
@@ -218,12 +239,12 @@
                 プロジェクト成功率85%向上・コスト60%削減・ROI 400%を実現
             </p>
 
-            <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
+            <!-- <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
                 <a href="#cta"
                     class="px-8 py-4 bg-white text-blue-600 text-lg font-bold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     無料トライアルを申し込む
                 </a>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -262,13 +283,14 @@
                 <h4 class="text-xl font-bold text-blue-600 mb-4">3つのコンポーネント</h4>
                 <ul class="space-y-3">
                     <li class="p-4 bg-gray-50 border-l-4 border-blue-600 rounded-lg">
-                        <strong class="text-blue-600">Web管理画面</strong> - 管理者向けプロジェクト管理ダッシュボード（Svelte 5）。カテゴリー別に整理されたメニューで、概要・分析、プロジェクト管理、進捗・タスク管理、チーム管理、システムの5つのカテゴリーを提供
+                        <strong class="text-blue-600">Web管理画面</strong> - 管理者向けプロジェクト管理ダッシュボード（Svelte
+                        5）。カテゴリー別に整理されたメニューで、概要・分析、プロジェクト管理、進捗・タスク管理、チーム管理、システムの5つのカテゴリーを提供
                     </li>
                     <li class="p-4 bg-gray-50 border-l-4 border-blue-600 rounded-lg">
                         <strong class="text-blue-600">デスクトップアプリ</strong> - メンバー向け作業トラッキングツール（C# WPF）
                     </li>
                     <li class="p-4 bg-gray-50 border-l-4 border-blue-600 rounded-lg">
-                        <strong class="text-blue-600">バックエンドAPI</strong> - 155エンドポイント、28種のAI機能（Web Admin）+ 29種のAI機能（Desktop App）を提供
+                        <strong class="text-blue-600">バックエンドAPI</strong> - 235+エンドポイント、29種類のAI機能を提供
                     </li>
                 </ul>
             </div>
@@ -468,7 +490,8 @@
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">AI機能の価値</h2>
                 <p class="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
-                    ツタAIは<strong class="text-gray-900">Web Adminに28種類、Desktop Appに29種類、合計57種類のAI機能</strong>を搭載。Groq APIを活用し、
+                    ツタAIは<strong
+                        class="text-gray-900">29種類のAI機能</strong>を搭載。Groq、OpenAI、Claude、Ollama、カスタムプロバイダーなど複数のLLMに対応し、
                     高速かつ高精度なプロジェクト管理を実現します。
                 </p>
             </div>
@@ -622,7 +645,7 @@
                     <h4 class="text-xl font-bold text-blue-600 mb-4">4. データ駆動型経営の実現</h4>
                     <ul class="space-y-2">
                         <li class="p-3 bg-gray-50 border-l-4 border-blue-600 rounded-lg text-gray-700">
-                            155エンドポイントからの豊富なデータ収集</li>
+                            235+エンドポイントからの豊富なデータ収集</li>
                         <li class="p-3 bg-gray-50 border-l-4 border-blue-600 rounded-lg text-gray-700">
                             プロジェクト・メンバー・タスク単位での多角的分析</li>
                         <li class="p-3 bg-gray-50 border-l-4 border-blue-600 rounded-lg text-gray-700">AIインサイトによる経営判断支援
@@ -660,9 +683,9 @@
                     <h4 class="text-xl font-bold text-blue-600 mb-4">6. セキュリティ・カスタマイズ性</h4>
                     <ul class="space-y-2">
                         <li class="p-3 bg-gray-50 border-l-4 border-blue-600 rounded-lg text-gray-700">APIキー暗号化 -
-                            AES-256による機密情報の安全な保存</li>
+                            AES-256による機密情報の安全な保存（LLM APIキーなど）</li>
                         <li class="p-3 bg-gray-50 border-l-4 border-blue-600 rounded-lg text-gray-700">プロンプト管理 -
-                            AI機能のカスタマイズで独自の業務フローに最適化</li>
+                            AI機能のプロンプトをカスタマイズ可能、独自の業務フローに最適化</li>
                         <li class="p-3 bg-gray-50 border-l-4 border-blue-600 rounded-lg text-gray-700">ロールベースアクセス制御 -
                             管理者・マネージャー・メンバーの権限分離</li>
                         <li class="p-3 bg-gray-50 border-l-4 border-blue-600 rounded-lg text-gray-700">データ暗号化通信 -
@@ -753,7 +776,7 @@
         </section>
 
         <!-- サポート体制 -->
-        <section id="support" class="mb-24 scroll-mt-24">
+        <!-- <section id="support" class="mb-24 scroll-mt-24">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">サポート体制</h2>
             </div>
@@ -804,10 +827,10 @@
                     </ul>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- 料金プラン -->
-        <section id="pricing" class="mb-24 scroll-mt-24">
+        <!-- <section id="pricing" class="mb-24 scroll-mt-24">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">料金プラン</h2>
                 <p class="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
@@ -869,10 +892,10 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- CTA -->
-        <section id="cta" class="mb-24 scroll-mt-24">
+        <!-- <section id="cta" class="mb-24 scroll-mt-24">
             <div
                 class="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-3xl p-12 text-center shadow-hover mb-8">
                 <h3 class="text-2xl md:text-3xl font-bold mb-4">プロジェクト管理を次のレベルへ</h3>
@@ -880,7 +903,7 @@
                     ツタAI導入で、プロジェクト成功率85%向上、コスト60%削減を実現しませんか？<br>
                     まずは無料トライアルでその効果を実感してください。
                 </p>
-                <a href="mailto:2025gw04@gmail.com?subject=無料トライアル申し込み"
+                <a href="mailto:info@tsutaai.com?subject=無料トライアル申し込み"
                     class="inline-block bg-white text-blue-600 px-10 py-4 rounded-full text-lg font-bold shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     無料トライアルを申し込む
                 </a>
@@ -889,8 +912,8 @@
             <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-soft">
                 <h4 class="text-xl font-bold text-blue-600 mb-4">お問い合わせ</h4>
                 <p class="text-gray-600 mb-2"><strong class="text-gray-900">メール:</strong> <a
-                        href="mailto:2025gw04@gmail.com"
-                        class="text-blue-600 hover:text-blue-700 underline">2025gw04@gmail.com</a></p>
+                        href="mailto:info@tsutaai.com"
+                        class="text-blue-600 hover:text-blue-700 underline">info@tsutaai.com</a></p>
                 <div class="mt-6 p-6 bg-gray-50 rounded-xl">
                     <p class="font-bold text-gray-900 mb-3">お問い合わせ時に以下をお伝えください:</p>
                     <p class="text-gray-700">
@@ -900,7 +923,7 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </section> -->
 
     </div>
 
@@ -944,7 +967,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="index.html#about-name"
                                 class="text-gray-400 hover:text-primary transition-colors">名前の由来</a></li>
-                        <li><a href="mailto:2025gw04@gmail.com"
+                        <li><a href="mailto:info@tsutaai.com"
                                 class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
                     </ul>
                 </div>

@@ -7,11 +7,11 @@
     <title>ツタAI - あなたの仕事をサポートするAIアシスタント</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter & Noto Sans JP -->
+    <!-- Google Fonts: Plus Jakarta Sans & Noto Sans JP -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
         rel="stylesheet">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -31,7 +31,7 @@
                         }
                     },
                     fontFamily: {
-                        sans: ['"Inter"', '"Noto Sans JP"', 'sans-serif'],
+                        sans: ['"Plus Jakarta Sans"', '"Noto Sans JP"', 'sans-serif'],
                     },
                     boxShadow: {
                         'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
@@ -93,6 +93,25 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+
+        @media (max-width: 768px) {
+            #navbar .max-w-7xl {
+                padding-right: calc(1rem + env(safe-area-inset-right));
+            }
+
+            #hamburger {
+                width: 44px;
+                height: 44px;
+                margin-right: 0.3rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 12px;
+                background: rgba(255, 255, 255, 0.78);
+                border: 1px solid rgba(148, 163, 184, 0.28);
             }
         }
     </style>
@@ -178,12 +197,12 @@
                 面倒な作業はAIにお任せ。あなたは本来の仕事に集中できます
             </p>
 
-            <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
+            <!-- <div class="mt-10 flex justify-center gap-4 fade-in-up" style="animation-delay: 0.5s;">
                 <a href="#introduction"
                     class="px-8 py-4 bg-white text-purple-600 text-lg font-bold rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     詳しく見る
                 </a>
-            </div>
+            </div> -->
         </div>
     </section>
 
@@ -540,6 +559,11 @@
                 スマホ・タブレット・PCのブラウザから、いつでもどこでもプロジェクトを確認・管理できます。
             </p>
 
+            <div class="text-center mb-12">
+                <img src="image/web-admin/01_sidebar-overview.png" alt="Web管理画面のスクリーンショット"
+                    class="max-w-full border-2 border-gray-200 rounded-3xl shadow-hover mx-auto">
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
                 <div
                     class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft hover:shadow-hover transition-all">
@@ -673,7 +697,7 @@
         <section id="ai-features" class="mb-24 scroll-mt-24">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-text-main mb-4 tracking-tight">AIがサポートする機能</h2>
-                <p class="text-lg text-text-sub">57種類のAI機能（Web Admin 28種 + Desktop App 29種）があなたの仕事を賢くサポート</p>
+                <p class="text-lg text-text-sub">29種類のAI機能があなたの仕事を賢くサポート</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
@@ -871,7 +895,7 @@
 
             <div
                 class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 rounded-3xl shadow-hover text-center">
-                <h4 class="text-2xl font-bold mb-4">その他にも多数のAI機能（Web Admin 28種 + Desktop App 29種で合計57種類）</h4>
+                <h4 class="text-2xl font-bold mb-4">その他にも多数のAI機能（29種類）</h4>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                     <div>プロジェクトサマリー</div>
                     <div>バーンダウン分析</div>
@@ -1119,7 +1143,7 @@
         </section>
 
         <!-- CTA -->
-        <section id="action" class="mb-24 scroll-mt-24">
+        <!-- <section id="action" class="mb-24 scroll-mt-24">
             <div
                 class="bg-gradient-to-br from-purple-600 to-purple-700 text-white p-8 md:p-12 rounded-3xl shadow-hover text-center mb-8">
                 <h3 class="text-3xl md:text-4xl font-black mb-4">さあ、ツタAIで快適な仕事を始めよう！</h3>
@@ -1127,7 +1151,7 @@
                     面倒な作業はAIにお任せ。あなたは本来の仕事に集中できます。<br>
                     困った時はすぐにヘルプを呼べる、安心の環境です。
                 </p>
-                <a href="mailto:2025gw04@gmail.com?subject=お問い合わせ"
+                <a href="mailto:info@tsutaai.com?subject=お問い合わせ"
                     class="inline-block px-10 py-5 bg-white text-purple-600 text-xl font-black rounded-full shadow-lg hover:bg-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     今すぐお問い合わせ
                 </a>
@@ -1136,9 +1160,9 @@
             <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-soft">
                 <h4 class="text-2xl font-bold text-gray-900 mb-4">サポート窓口</h4>
                 <p class="text-gray-600 mb-4">ご不明な点がありましたら、お気軽にお問い合わせください。</p>
-                <p class="text-gray-600"><strong class="text-purple-600">メール:</strong> 2025gw04@gmail.com</p>
+                <p class="text-gray-600"><strong class="text-purple-600">メール:</strong> info@tsutaai.com</p>
             </div>
-        </section>
+        </section> -->
 
     </div>
 
@@ -1182,7 +1206,7 @@
                     <ul class="space-y-2 text-sm">
                         <li><a href="index.html#about-name"
                                 class="text-gray-400 hover:text-primary transition-colors">名前の由来</a></li>
-                        <li><a href="mailto:2025gw04@gmail.com"
+                        <li><a href="mailto:info@tsutaai.com"
                                 class="text-gray-400 hover:text-primary transition-colors">お問い合わせ</a></li>
                     </ul>
                 </div>

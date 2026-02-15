@@ -1,6 +1,7 @@
 <!-- セッション 1: サイドバー -->
 <section id="section-1" class="manual-section">
     <h2>1. サイドバー</h2>
+    <p class="page-subtitle">更新基準日: 2026-02-14（`web-admin/src/routes/(app)/+layout.svelte` を基準に整合）</p>
     <p>Web管理画面の左側に配置されているナビゲーションメニューです。システムの全機能にアクセスするための主要なインターフェースとして機能します。</p>
 
     <div id="subsection-1-1" class="manual-subsection">
@@ -15,6 +16,7 @@
         <h4>主要な機能</h4>
         <ul class="item-list">
             <li><strong>カテゴリー別メニュー</strong> - 5つのカテゴリーに機能を分類（概要・分析、プロジェクト管理、進捗・タスク管理、チーム管理、システム）</li>
+            <li><strong>16個のメニュー項目</strong> - 日常運用に必要な主要画面へ1クリックで遷移</li>
             <li><strong>折りたたみ機能</strong> - サイドバー全体を折りたたんでコンテンツ領域を広げることが可能</li>
             <li><strong>レスポンシブデザイン</strong> - モバイル端末では自動的にハンバーガーメニューに変更</li>
             <li><strong>リアルタイム接続状態表示</strong> - WebSocket接続状態を視覚的に確認可能</li>
@@ -91,7 +93,7 @@
                 <tr>
                     <td>進捗・タスク管理</td>
                     <td>✅ (list-check)</td>
-                    <td>進捗トラッキング、作業報告</td>
+                    <td>進捗トラッキング、日報一覧、作業報告、1時間ごとの活動</td>
                     <td>タスクの進捗状況を把握し、作業内容を記録・報告する機能群</td>
                 </tr>
                 <tr>
@@ -166,7 +168,7 @@
 
     <div id="subsection-1-5" class="manual-subsection">
         <h3>1.5 全メニューアイテム一覧</h3>
-        <p>サイドバーに表示される全てのメニューアイテムの詳細です。各アイテムには固有のパス、アイコン、説明が設定されています。</p>
+        <p>サイドバーに表示される全メニュー（16項目）の詳細です。各アイテムには固有のパス、アイコン、説明が設定されています。</p>
 
         <div class="feature-image" onclick="openGallery('01_sidebar-menu-item_1')">
             <img id="01_sidebar-menu-item_1" src="image/web-admin/01_sidebar-menu-item_1.png" alt="メニューアイテムの詳細"
@@ -231,7 +233,7 @@
                     <td>見積もり</td>
                     <td><code>/estimates</code></td>
                     <td>🧮 (calculator)</td>
-                    <td>AI効率化見積もり - 4種類の見積もりパターンとAI支援</td>
+                    <td>AI効率化見積もり - 12種類の見積もりパターンとAI支援</td>
                 </tr>
                 <tr>
                     <td>スプリント管理</td>
@@ -271,10 +273,22 @@
                     <td>AI進捗予測と分析 - リスクタスクと遅延タスクの管理</td>
                 </tr>
                 <tr>
+                    <td>日報一覧</td>
+                    <td><code>/daily-reports</code></td>
+                    <td>📘 (journal-text)</td>
+                    <td>自己評価とAI分析 - メンバーごとの日報一覧を確認</td>
+                </tr>
+                <tr>
                     <td>作業報告</td>
                     <td><code>/work-reports</code></td>
                     <td>📋 (clipboard-data)</td>
                     <td>日報と作業ログ - メンバーの作業内容と評価指標の確認</td>
+                </tr>
+                <tr>
+                    <td>1時間ごとの活動</td>
+                    <td><code>/hourly-activity</code></td>
+                    <td>🕒 (clock-history)</td>
+                    <td>デスクトップ活動記録 - 作業セッションの時系列確認</td>
                 </tr>
             </tbody>
         </table>
@@ -346,6 +360,11 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="note">
+            <strong>📘 補足</strong>
+            <code>/versions</code> は独立ルートとして実装されていますが、通常運用では設定画面の「バージョン情報」タブ経由で参照します。
+        </div>
     </div>
 
     <div id="subsection-1-6" class="manual-subsection">

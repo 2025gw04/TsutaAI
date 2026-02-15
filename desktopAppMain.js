@@ -89,11 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         window.openGallery = (imageId) => {
             const sourceImage = document.getElementById(imageId);
-            if (!sourceImage || !sourceImage.src.includes("path/to")) {
-                galleryImage.src = sourceImage.src;
-                galleryModal.classList.add("active");
-                document.addEventListener("keydown", handleGalleryKeydown);
+            if (!sourceImage) {
+                console.warn(`Gallery source image not found: ${imageId}`);
+                return;
             }
+            if (!sourceImage.src || sourceImage.src.includes("path/to")) {
+                return;
+            }
+            galleryImage.src = sourceImage.src;
+            galleryModal.classList.add("active");
+            document.addEventListener("keydown", handleGalleryKeydown);
         };
 
         const closeGallery = () => {

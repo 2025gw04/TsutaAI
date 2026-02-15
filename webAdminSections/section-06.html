@@ -16,7 +16,7 @@
         <ul class="item-list">
             <li><strong>カード形式表示</strong> - 各プロジェクトがカードで表示され、重要情報を一目で確認可能</li>
             <li><strong>新規作成</strong> - 「新規作成」ボタンから新しいプロジェクトを作成</li>
-            <li><strong>インポート機能</strong> - 外部ファイル（JSON、Excel）からプロジェクトをインポート</li>
+            <li><strong>インポート機能</strong> - 外部ファイル（txt/csv/json/md）からプロジェクトをインポート</li>
             <li><strong>プロジェクト削除</strong> - 不要なプロジェクトを削除（関連タスクも一括削除）</li>
             <li><strong>詳細画面へ遷移</strong> - 各カードの「詳細を見る」ボタンからプロジェクト詳細画面に移動</li>
             <li><strong>レスポンシブデザイン</strong> - デスクトップ、タブレット、モバイルに完全対応</li>
@@ -103,7 +103,7 @@
                 <tr>
                     <td>インポート</td>
                     <td>📥</td>
-                    <td>外部ファイル（JSON、Excel）からプロジェクトとタスクを一括インポート。/projects/importに遷移</td>
+                    <td>外部ファイル（txt/csv/json/md）からプロジェクトとタスクを一括インポート。/projects/importに遷移</td>
                 </tr>
                 <tr>
                     <td>新規作成</td>
@@ -291,9 +291,19 @@
                     <td>TsutaAI標準フォーマット。プロジェクト情報とタスクを一括インポート</td>
                 </tr>
                 <tr>
-                    <td>Excel</td>
-                    <td>.xlsx</td>
-                    <td>Excelファイル。シート構造に従ってプロジェクトとタスクをインポート</td>
+                    <td>Text</td>
+                    <td>.txt</td>
+                    <td>プレーンテキストを解析してプロジェクト情報を取り込み</td>
+                </tr>
+                <tr>
+                    <td>CSV</td>
+                    <td>.csv</td>
+                    <td>区切り形式データを読み込み、タスク情報を一括反映</td>
+                </tr>
+                <tr>
+                    <td>Markdown</td>
+                    <td>.md</td>
+                    <td>見出し・箇条書き構造を解析してプロジェクト/タスクに変換</td>
                 </tr>
             </tbody>
         </table>

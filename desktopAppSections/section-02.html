@@ -1,11 +1,16 @@
 <!-- セクション 2: アプリケーション入口 (Entry Points) -->
 <section id="section-2" class="manual-section">
     <h2>2. アプリケーション入口</h2>
+    <p class="page-subtitle">更新基準日: 2026-02-14（`LoginWindow` / `ApiSettingsWindow` / `ProxySettingWindow` を基準に整合）</p>
     <p>アプリケーションを開始するための認証と初期設定を行う画面群です。初めてアプリを使う方は、まずこのセクションの設定を行ってから利用を開始してください。</p>
 
     <div id="subsection-2-1" class="manual-subsection">
         <h3>2.1 ログイン画面</h3>
         <p>アプリケーションを起動すると最初に表示される画面です。登録済みのアカウント情報を入力して、システムにログインします。</p>
+
+        <div class="feature-image" onclick="openGallery('02_login-window')">
+            <img id="02_login-window" src="image/desktop-app/02_login-window.svg" alt="ログイン画面（サンプル）" loading="lazy" />
+        </div>
 
         <h4>画面の目的</h4>
         <p>TsutaAIサーバーに接続し、あなたのユーザー情報を認証します。ログインに成功すると、ダッシュボード画面に自動的に移動し、本日のタスク一覧が表示されます。</p>
@@ -25,7 +30,7 @@
                 </tr>
                 <tr>
                     <td>ユーザーID入力欄</td>
-                    <td>システム管理者から割り当てられたユーザーIDを入力します。半角英数字で入力してください</td>
+                    <td>システム管理者から割り当てられたユーザーIDを入力します（開発環境では初期値が入っている場合があります）</td>
                 </tr>
                 <tr>
                     <td>パスワード入力欄</td>
@@ -58,6 +63,10 @@
                 <tr>
                     <td>API設定ボタン</td>
                     <td>TsutaAIサーバーの接続先URLを変更する場合に使用します</td>
+                </tr>
+                <tr>
+                    <td>終了ボタン</td>
+                    <td>アプリケーションを終了します</td>
                 </tr>
             </tbody>
         </table>
@@ -110,6 +119,10 @@
     <div id="subsection-2-2" class="manual-subsection">
         <h3>2.2 API接続設定画面</h3>
         <p>TsutaAIサーバーへの接続先を設定する画面です。ログイン画面から「API設定」ボタンをクリックすると開きます。</p>
+
+        <div class="feature-image" onclick="openGallery('02_api-settings')">
+            <img id="02_api-settings" src="image/desktop-app/02_api-settings.svg" alt="API接続設定画面（サンプル）" loading="lazy" />
+        </div>
 
         <h4>画面の目的</h4>
         <p>アプリケーションが通信するバックエンドサーバーのURLを設定します。初回起動時や、サーバーのアドレスが変更された場合に使用します。</p>
@@ -174,6 +187,10 @@
     <div id="subsection-2-3" class="manual-subsection">
         <h3>2.3 プロキシ設定画面</h3>
         <p>社内ネットワークなど、プロキシサーバー経由でインターネットに接続する環境向けの設定画面です。ログイン画面から「プロキシ設定」ボタンをクリックすると開きます。</p>
+
+        <div class="feature-image" onclick="openGallery('02_proxy-settings')">
+            <img id="02_proxy-settings" src="image/desktop-app/02_proxy-settings.svg" alt="プロキシ設定画面（サンプル）" loading="lazy" />
+        </div>
 
         <h4>画面の目的</h4>
         <p>企業ネットワークなど、直接インターネットに接続できない環境でアプリケーションを使用する場合に、プロキシサーバーの情報を設定します。</p>

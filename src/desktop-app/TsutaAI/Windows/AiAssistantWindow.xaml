@@ -1,0 +1,369 @@
+<Window x:Class="TsutaAI.Windows.AiAssistantWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:TsutaAI.Windows"
+        mc:Ignorable="d"
+        Style="{StaticResource BaseWindowStyle}"
+        Title="AIアシスタント"
+        Height="700"
+        Width="600"
+        MinHeight="500"
+        MinWidth="450"
+        WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <!-- コンバーター -->
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <local:BoolToVisibilityConverterInverted x:Key="BoolToVisibilityConverterInverted"/>
+        <!-- ユーザーメッセージスタイル -->
+        <Style x:Key="UserMessageBorder" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="CornerRadius" Value="12,12,4,12"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="Margin" Value="60,4,12,4"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="MaxWidth" Value="400"/>
+        </Style>
+
+        <!-- AIメッセージスタイル -->
+        <Style x:Key="AiMessageBorder" TargetType="Border">
+            <Setter Property="Background" Value="#F0FDF4"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="12,12,12,4"/>
+            <Setter Property="Padding" Value="14,10"/>
+            <Setter Property="Margin" Value="12,4,60,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="MaxWidth" Value="400"/>
+        </Style>
+
+        <!-- アイコンボタンスタイル -->
+        <Style x:Key="IconButtonStyle" TargetType="Button" BasedOn="{StaticResource TextButton}">
+            <Setter Property="Width" Value="36"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
+        <!-- プレビューカードスタイル -->
+        <Style x:Key="PreviewCard" TargetType="Border">
+            <Setter Property="Background" Value="#FFFBEB"/>
+            <Setter Property="BorderBrush" Value="{StaticResource WarningBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="12,4,60,4"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ヘッダー -->
+        <Border Grid.Row="0"
+                Background="{StaticResource WindowBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,0,1"
+                Padding="16,12">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Border Background="{StaticResource PrimaryBrush}" CornerRadius="20" Width="36" Height="36" Margin="0,0,12,0">
+                        <iconPacks:PackIconBoxIcons Kind="SolidFace" Foreground="White" Width="20" Height="20"
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="AIアシスタント" FontWeight="Bold" FontSize="18" Foreground="{StaticResource TextBrush}"/>
+                        <TextBlock x:Name="StatusTextBlock" Text="オンライン" Style="{StaticResource LightText}" FontSize="14"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button x:Name="ClearHistoryButton"
+                            Style="{StaticResource IconButtonStyle}"
+                            ToolTip="履歴をクリア"
+                            Click="ClearHistoryButton_Click">
+                        <iconPacks:PackIconBoxIcons Kind="RegularTrash" Width="18" Height="18" Foreground="{StaticResource TextLightBrush}"/>
+                    </Button>
+                    <Button x:Name="HelpButton"
+                            Style="{StaticResource IconButtonStyle}"
+                            ToolTip="ヘルプ"
+                            Click="HelpButton_Click">
+                        <iconPacks:PackIconBoxIcons Kind="RegularHelpCircle" Width="18" Height="18" Foreground="{StaticResource TextLightBrush}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- メッセージエリア -->
+        <ScrollViewer x:Name="MessageScrollViewer"
+                      Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      Padding="0,8">
+            <ItemsControl x:Name="MessagesItemsControl">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <!-- ユーザーメッセージ -->
+                            <Border Style="{StaticResource UserMessageBorder}"
+                                    Visibility="{Binding IsUser, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <TextBlock Text="{Binding Content}"
+                                           TextWrapping="Wrap"
+                                           Foreground="White"
+                                           FontSize="16"/>
+                            </Border>
+
+                            <!-- AIメッセージ -->
+                            <StackPanel Visibility="{Binding IsUser, Converter={StaticResource BoolToVisibilityConverterInverted}}">
+                                <Border Style="{StaticResource AiMessageBorder}">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                            <iconPacks:PackIconBoxIcons Kind="SolidFace" Width="16" Height="16"
+                                                                        Foreground="{StaticResource PrimaryBrush}"
+                                                                        VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                            <TextBlock Text="AI" FontWeight="SemiBold" FontSize="14"
+                                                       Foreground="{StaticResource PrimaryBrush}"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Content}"
+                                                   TextWrapping="Wrap"
+                                                   Foreground="{StaticResource TextBrush}"
+                                                   FontSize="16"
+                                                   LineHeight="22"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- プレビューパネル（変更確認用） -->
+        <Border x:Name="PreviewPanel"
+                Grid.Row="2"
+                Style="{StaticResource PreviewCard}"
+                Visibility="Collapsed">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <iconPacks:PackIconBoxIcons Kind="RegularInfoCircle" Width="18" Height="18"
+                                                Foreground="{StaticResource WarningBrush}"
+                                                VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="変更のプレビュー" FontWeight="SemiBold" FontSize="16"
+                               Foreground="{StaticResource WarningBrush}"/>
+                </StackPanel>
+
+                <ItemsControl x:Name="PreviewItemsControl">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" CornerRadius="6" Padding="10" Margin="0,0,0,8"
+                                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                                        <Border CornerRadius="4" Padding="6,2" Margin="0,0,8,0">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#E0F2FE"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Type}" Value="update">
+                                                            <Setter Property="Background" Value="#FEF3C7"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Type}" Value="create">
+                                                            <Setter Property="Background" Value="#D1FAE5"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding Type}" Value="delete">
+                                                            <Setter Property="Background" Value="#FEE2E2"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <TextBlock Text="{Binding TypeDisplayName}" FontSize="13" FontWeight="SemiBold">
+                                                <TextBlock.Style>
+                                                    <Style TargetType="TextBlock">
+                                                        <Setter Property="Foreground" Value="{StaticResource InfoBrush}"/>
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Type}" Value="update">
+                                                                <Setter Property="Foreground" Value="{StaticResource WarningBrush}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Type}" Value="create">
+                                                                <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Type}" Value="delete">
+                                                                <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </TextBlock.Style>
+                                            </TextBlock>
+                                        </Border>
+                                        <TextBlock Text="{Binding TaskName}" FontWeight="Medium" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock x:Name="ChangesDescription" FontSize="14" Foreground="{StaticResource TextLightBrush}"
+                                               Text="変更内容を確認してください" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,8,0,0">
+                    <Button x:Name="CancelPreviewButton"
+                            Style="{StaticResource SecondaryButton}"
+                            Content="キャンセル"
+                            Width="100"
+                            Height="32"
+                            Margin="0,0,8,0"
+                            Click="CancelPreviewButton_Click"/>
+                    <Button x:Name="ApplyPreviewButton"
+                            Style="{StaticResource PrimaryButton}"
+                            Content="適用する"
+                            Width="100"
+                            Height="32"
+                            Click="ApplyPreviewButton_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- 入力エリア -->
+        <Border Grid.Row="3"
+                Background="{StaticResource WindowBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="12">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- @メンション候補ポップアップ -->
+                <Border x:Name="MentionPopup"
+                        Grid.Row="0"
+                        Background="{StaticResource WindowBackgroundBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Margin="0,0,0,8"
+                        MaxHeight="200"
+                        Visibility="Collapsed">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000000" Opacity="0.1" BlurRadius="8" ShadowDepth="2"/>
+                    </Border.Effect>
+                    <StackPanel>
+                        <TextBlock Text="タスクを選択 (@)"
+                                   FontSize="13"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="10,8,10,4"/>
+                        <ScrollViewer MaxHeight="150" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl x:Name="MentionItemsControl">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border x:Name="MentionItemBorder"
+                                                Background="Transparent"
+                                                Padding="10,8"
+                                                Cursor="Hand"
+                                                MouseLeftButtonDown="MentionItem_Click"
+                                                Tag="{Binding}">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#F0FDF4"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Title}" FontWeight="Medium" FontSize="15"/>
+                                                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                                    <TextBlock Text="{Binding ProjectName}"
+                                                               Style="{StaticResource LightText}"
+                                                               FontSize="13"/>
+                                                    <TextBlock Text=" - "
+                                                               Style="{StaticResource LightText}"
+                                                               FontSize="13"/>
+                                                    <TextBlock FontSize="13">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Setter Property="Foreground" Value="{StaticResource TextLightBrush}"/>
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Status}" Value="in-progress">
+                                                                        <Setter Property="Text" Value="進行中"/>
+                                                                        <Setter Property="Foreground" Value="{StaticResource InfoBrush}"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Status}" Value="not-started">
+                                                                        <Setter Property="Text" Value="未着手"/>
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Status}" Value="done">
+                                                                        <Setter Property="Text" Value="完了"/>
+                                                                        <Setter Property="Foreground" Value="{StaticResource SuccessBrush}"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </StackPanel>
+                </Border>
+
+                <!-- 入力欄と送信ボタン -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="MessageTextBox"
+                             Grid.Column="0"
+                             Style="{StaticResource ModernTextBox}"
+                             Height="40"
+                             VerticalContentAlignment="Center"
+                             Text=""
+                             KeyDown="MessageTextBox_KeyDown"
+                             TextChanged="MessageTextBox_TextChanged">
+                        <TextBox.ToolTip>
+                            <ToolTip Content="メッセージを入力... (@でタスク指定、Enterで送信)"/>
+                        </TextBox.ToolTip>
+                    </TextBox>
+
+                    <Button x:Name="SendButton"
+                            Grid.Column="1"
+                            Style="{StaticResource PrimaryButton}"
+                            Width="80"
+                            Height="40"
+                            Margin="8,0,0,0"
+                            Click="SendButton_Click"
+                            IsEnabled="True">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconBoxIcons x:Name="SendIcon" Kind="RegularSend" Width="16" Height="16" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="SendButtonText" Text="送信" Margin="6,0,0,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+                <!-- ヒント --><!--
+                <TextBlock Grid.Row="1"
+                           Text="ヒント: @でタスク指定"
+                           Style="{StaticResource LightText}"
+                           FontSize="12"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Bottom"
+                           Margin="12,-2,0,0"
+                           IsHitTestVisible="False"/>-->
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

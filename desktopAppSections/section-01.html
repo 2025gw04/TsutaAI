@@ -1,6 +1,7 @@
 <!-- セクション 1: はじめに・概要 -->
 <section id="section-1" class="manual-section">
     <h2>1. はじめに</h2>
+    <p class="page-subtitle">更新基準日: 2026-02-14（`desktop-app/TsutaAI/Windows/*.xaml` と `App.xaml.cs` を基準に整合）</p>
     <p>TsutaAIデスクトップアプリケーションのユーザーマニュアルへようこそ。本マニュアルは、すべてのソースコード（XAML/C#）を分析して作成されており、日々のタスク管理と業務効率化を強力にサポートするTsutaAIの全機能を網羅しています。
     </p>
 
@@ -54,6 +55,10 @@
     <div id="subsection-1-2" class="manual-subsection">
         <h3>1.2 画面一覧</h3>
         <p>TsutaAIデスクトップアプリケーションには、以下の画面が含まれています。</p>
+
+        <div class="feature-image" onclick="openGallery('01_desktop-overview')">
+            <img id="01_desktop-overview" src="image/desktop-app/01_desktop-overview.svg" alt="デスクトップアプリ画面一覧（サンプル）" loading="lazy" />
+        </div>
 
         <h4>エントリーポイント（認証・設定）</h4>
         <table class="manual-table">
@@ -208,6 +213,18 @@
                     <td>タスク変更通知</td>
                     <td>リアルタイムタスク変更通知</td>
                 </tr>
+                <tr>
+                    <td>通知履歴</td>
+                    <td>通知一覧表示、既読/未読管理、関連詳細表示</td>
+                </tr>
+                <tr>
+                    <td>ヘルプリクエスト詳細</td>
+                    <td>通知から遷移するヘルプリクエスト詳細の確認</td>
+                </tr>
+                <tr>
+                    <td>共通アラートダイアログ</td>
+                    <td>情報・警告・エラー・確認（Yes/No）の共通表示</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -220,7 +237,7 @@
         <p>TsutaAI.exeをダブルクリックして起動します。</p>
 
         <h4>2. ログイン</h4>
-        <p>ユーザーIDとパスワードを入力し、「ログイン」ボタンをクリックします。初回の場合は、API設定でサーバーURLを設定してください。</p>
+        <p>ユーザーIDとパスワードを入力し、「ログイン」ボタンをクリックします。初回の場合は、API設定でサーバーURLを設定してください。ログイン成功後はWebSocket接続が開始されます。</p>
 
         <h4>3. ダッシュボードでタスクを確認</h4>
         <p>本日のタスク一覧が表示されます。取り組みたいタスクにチェックを入れて順番を調整できます。</p>
@@ -233,6 +250,9 @@
 
         <h4>6. 作業を終了</h4>
         <p>「本日の作業を終了」をクリックすると、日報画面でその日の振り返りを記録して送信します。</p>
+
+        <h4>7. 通知を確認</h4>
+        <p>ダッシュボードまたは作業ウィジェットの「通知」ボタンから通知履歴を開き、既読化や関連詳細の確認を行えます。</p>
 
         <div class="tip">
             <strong>💡 使い方のヒント</strong>

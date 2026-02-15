@@ -1,7 +1,7 @@
 <!-- セッション 9: プロジェクト健全性 -->
 <section id="section-9" class="manual-section">
     <h2>9. プロジェクト健全性（/project-health）</h2>
-    <p>プロジェクトの健全性を9項目で自動評価し、問題の早期発見を支援します。</p>
+    <p>プロジェクトの健全性を5つの評価軸で自動評価し、問題の早期発見を支援します。</p>
 
     <!-- 9.1 概要 -->
     <div id="subsection-9-1" class="manual-subsection">
@@ -86,31 +86,31 @@
             <tbody>
                 <tr>
                     <td><i class="bi bi-graph-up"></i> 進捗達成度</td>
-                    <td>(完了タスク数 ÷ 総タスク数) × 100 ÷ 期間経過率</td>
+                    <td>現在進捗率と期待進捗率（経過日数ベース）の差分からスコア化</td>
                     <td>30%</td>
                     <td>100%以上（計画以上の進捗）</td>
                 </tr>
                 <tr>
                     <td><i class="bi bi-clock"></i> 期限順守度</td>
-                    <td>(期限内完了タスク ÷ 完了タスク数) × 100</td>
+                    <td>予測完了日と期限日の差（日数）からスコア化</td>
                     <td>25%</td>
                     <td>90%以上</td>
                 </tr>
                 <tr>
                     <td><i class="bi bi-emoji-smile"></i> チーム士気</td>
-                    <td>コメントのセンチメント分析 + メンバー評価</td>
+                    <td>メンタルヘルスログの mood / stress の平均から算出</td>
                     <td>20%</td>
                     <td>80%以上</td>
                 </tr>
                 <tr>
                     <td><i class="bi bi-shield-exclamation"></i> ブロッカー影響</td>
-                    <td>100 - (ブロッカー数 × 影響度係数)</td>
+                    <td>ブロッカー件数に応じた段階評価（現行実装では blockedTasks=0 のため高得点になりやすい）</td>
                     <td>15%</td>
                     <td>90%以上（ブロッカーが少ない）</td>
                 </tr>
                 <tr>
                     <td><i class="bi bi-speedometer2"></i> 作業速度</td>
-                    <td>(実際のベロシティ ÷ 計画ベロシティ) × 100</td>
+                    <td>日次進捗率と平均アクティビティスコアを合成して算出</td>
                     <td>10%</td>
                     <td>100%以上</td>
                 </tr>

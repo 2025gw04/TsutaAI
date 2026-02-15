@@ -131,9 +131,9 @@
         <h4>プレビュー画面の操作</h4>
         <ul class="item-list">
             <li><strong>スクロール</strong> - レポート全体を上下にスクロールして内容を確認</li>
-            <li><strong>エクスポートボタン</strong> - JSON、Markdown、HTMLのいずれかの形式でダウンロード</li>
-            <li><strong>印刷ボタン</strong> - ブラウザの印刷機能を使用して紙媒体に出力</li>
-            <li><strong>再生成ボタン</strong> - 最新データで再度レポートを生成</li>
+            <li><strong>ダウンロードボタン</strong> - JSON / Markdown / HTML のいずれかの形式で保存</li>
+            <li><strong>CSVエクスポート</strong> - プロジェクトレポート選択時のみ「CSV エクスポート」ボタンが表示される</li>
+            <li><strong>再生成</strong> - 「レポート生成」ボタンを再実行して最新データで更新</li>
         </ul>
     </div>
 
@@ -206,7 +206,7 @@
 
     <div id="subsection-4-5" class="manual-subsection">
         <h3>4.5 エクスポート機能</h3>
-        <p>生成されたレポートは、3種類の形式でエクスポートできます。</p>
+        <p>生成されたレポートは、JSON / Markdown / HTML の3形式でダウンロードできます。さらに、プロジェクトレポートではCSVエクスポートも利用できます。</p>
 
         <div class="feature-image" onclick="openGallery('04_reports-export')">
             <img id="04_reports-export" src="image/web-admin/04_reports-export.png" alt="エクスポートボタン" loading="lazy" />
@@ -237,20 +237,25 @@
                     <td>レポートをHTML形式で出力。ウェブブラウザで閲覧可能</td>
                     <td>ウェブ閲覧、共有、印刷</td>
                 </tr>
+                <tr>
+                    <td>CSV（プロジェクトのみ）</td>
+                    <td>プロジェクトレポートの集計データをCSV形式で出力</td>
+                    <td>表計算ソフトでの分析、外部共有</td>
+                </tr>
             </tbody>
         </table>
 
         <h4>エクスポート手順</h4>
         <ul class="item-list">
             <li><strong>ステップ1</strong> - レポートプレビュー画面で内容を確認</li>
-            <li><strong>ステップ2</strong> - 画面上部または下部の「エクスポート」ボタンエリアから希望の形式を選択</li>
+            <li><strong>ステップ2</strong> - 「JSON ダウンロード」「Markdown ダウンロード」「HTML ダウンロード」から希望形式を選択（プロジェクト時は「CSV エクスポート」も選択可能）</li>
             <li><strong>ステップ3</strong> - ブラウザのダウンロード機能により、ファイルが自動的にダウンロードされる</li>
             <li><strong>ステップ4</strong> - ダウンロードしたファイルを開いて内容を確認</li>
         </ul>
 
         <div class="note">
             <strong>📄 ファイル名の形式</strong>
-            エクスポートされるファイル名は、「レポート種類_対象名_日付.拡張子」の形式で自動生成されます。例: 「プロジェクトサマリー_Webサイトリニューアル_20260107.html」
+            JSON / Markdown / HTML は <code>report_{timestamp}.拡張子</code>、CSV（プロジェクト）は <code>project_report_{projectId}.csv</code> の形式で保存されます。
         </div>
     </div>
 

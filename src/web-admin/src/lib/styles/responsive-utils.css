@@ -1,0 +1,612 @@
+/**
+ * レスポンシブユーティリティCSS
+ * 全ページで共通利用するレスポンシブ対応のためのスタイル
+ *
+ * ブレークポイント:
+ * - モバイル: 0px - 639px
+ * - タブレット (sm): 640px - 1023px
+ * - デスクトップ (md): 1024px - 1279px
+ * - ワイドデスクトップ (lg): 1280px以上
+ */
+
+/* ========================================
+   CSSカスタムプロパティ（変数）
+   ======================================== */
+:root {
+	/* ブレークポイント */
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 1024px;
+	--breakpoint-lg: 1280px;
+
+	/* スペーシング（モバイル） */
+	--spacing-xs: 0.5rem; /* 8px */
+	--spacing-sm: 0.75rem; /* 12px */
+	--spacing-md: 1rem; /* 16px */
+	--spacing-lg: 1.5rem; /* 24px */
+	--spacing-xl: 2rem; /* 32px */
+	--spacing-2xl: 2.5rem; /* 40px */
+
+	/* フォントサイズ（モバイル） */
+	--font-size-xs: 0.75rem; /* 12px */
+	--font-size-sm: 0.875rem; /* 14px */
+	--font-size-base: 0.875rem; /* 14px */
+	--font-size-lg: 1rem; /* 16px */
+	--font-size-xl: 1.25rem; /* 20px */
+	--font-size-2xl: 1.5rem; /* 24px */
+	--font-size-3xl: 1.75rem; /* 28px */
+	--font-size-4xl: 2rem; /* 32px */
+
+	/* レスポンシブグリッドのギャップ */
+	--grid-gap: 1.5rem; /* 24px */
+}
+
+/* タブレット以上 */
+@media (min-width: 640px) {
+	:root {
+		--spacing-lg: 2rem; /* 32px */
+		--spacing-xl: 2.5rem; /* 40px */
+		--spacing-2xl: 3rem; /* 48px */
+
+		--font-size-base: 0.9375rem; /* 15px */
+		--font-size-lg: 1.125rem; /* 18px */
+		--font-size-xl: 1.5rem; /* 24px */
+		--font-size-2xl: 1.75rem; /* 28px */
+		--font-size-3xl: 2rem; /* 32px */
+		--font-size-4xl: 2.25rem; /* 36px */
+	}
+}
+
+/* デスクトップ以上 */
+@media (min-width: 1024px) {
+	:root {
+		--font-size-base: 1rem; /* 16px */
+		--font-size-lg: 1.25rem; /* 20px */
+		--font-size-xl: 1.75rem; /* 28px */
+		--font-size-2xl: 2rem; /* 32px */
+		--font-size-3xl: 2.25rem; /* 36px */
+		--font-size-4xl: 2.5rem; /* 40px */
+	}
+}
+
+/* ========================================
+   レスポンシブグリッド
+   ======================================== */
+
+/* 基本グリッド（1列→2列→3列） */
+.grid-responsive {
+	display: grid;
+	gap: var(--grid-gap);
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+	.grid-responsive {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid-responsive {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* 2列グリッド（1列→2列） */
+.grid-responsive-2 {
+	display: grid;
+	gap: var(--grid-gap);
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+	.grid-responsive-2 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+/* 4列グリッド（1列→2列→3列→4列） */
+.grid-responsive-4 {
+	display: grid;
+	gap: var(--grid-gap);
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+	.grid-responsive-4 {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid-responsive-4 {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (min-width: 1280px) {
+	.grid-responsive-4 {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+/* Auto-fit グリッド（自動調整） */
+.grid-auto-fit {
+	display: grid;
+	gap: var(--grid-gap);
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.grid-auto-fit-sm {
+	display: grid;
+	gap: var(--grid-gap);
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.grid-auto-fit-lg {
+	display: grid;
+	gap: var(--grid-gap);
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+/* ========================================
+   レスポンシブヘッダー
+   ======================================== */
+
+/* ページヘッダー（縦積み→横並び） */
+.page-header-responsive {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+	.page-header-responsive {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+/* ボタングループ */
+.button-group-responsive {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+	.button-group-responsive {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.button-group-responsive > * {
+		width: 100%;
+	}
+}
+
+/* ========================================
+   レスポンシブテーブル
+   ======================================== */
+
+.table-responsive {
+	width: 100%;
+	overflow-x: auto;
+}
+
+/* デスクトップ: 通常のテーブル表示 */
+.table-responsive table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+/* モバイル: カード表示に切り替え */
+@media (max-width: 768px) {
+	.table-responsive.card-on-mobile table,
+	.table-responsive.card-on-mobile thead,
+	.table-responsive.card-on-mobile tbody,
+	.table-responsive.card-on-mobile tr {
+		display: block;
+	}
+
+	.table-responsive.card-on-mobile thead {
+		display: none;
+	}
+
+	.table-responsive.card-on-mobile tr {
+		margin-bottom: 1rem;
+		border: 1px solid #e5e7eb;
+		border-radius: 12px;
+		padding: 1rem;
+		background: #ffffff;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+	}
+
+	.table-responsive.card-on-mobile td {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0.5rem 0;
+		border-bottom: 1px solid #f3f4f6;
+	}
+
+	.table-responsive.card-on-mobile td:last-child {
+		border-bottom: none;
+	}
+
+	.table-responsive.card-on-mobile td::before {
+		content: attr(data-label);
+		font-weight: 600;
+		color: #6b7280;
+		margin-right: 1rem;
+		flex-shrink: 0;
+	}
+}
+
+/* ========================================
+   レスポンシブフォーム
+   ======================================== */
+
+/* フォームグリッド */
+.form-grid-responsive {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+	.form-grid-responsive {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.form-grid-responsive {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* フォームグループ（ラベル + 入力） */
+.form-group-responsive {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.form-group-responsive.full-width {
+	grid-column: 1 / -1;
+}
+
+/* ========================================
+   レスポンシブカード
+   ======================================== */
+
+/* カードヘッダー（縦積み→横並び） */
+.card-header-responsive {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: flex-start;
+}
+
+@media (min-width: 640px) {
+	.card-header-responsive {
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+/* カードアクション */
+.card-actions-responsive {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+@media (max-width: 640px) {
+	.card-actions-responsive {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.card-actions-responsive > * {
+		width: 100%;
+	}
+}
+
+/* ========================================
+   表示/非表示ユーティリティ
+   ======================================== */
+
+/* モバイルで非表示 */
+.hide-mobile {
+	display: none !important;
+}
+
+@media (min-width: 640px) {
+	.hide-mobile {
+		display: initial !important;
+	}
+}
+
+/* タブレットで非表示 */
+@media (min-width: 640px) and (max-width: 1023px) {
+	.hide-tablet {
+		display: none !important;
+	}
+}
+
+/* デスクトップで非表示 */
+@media (min-width: 1024px) {
+	.hide-desktop {
+		display: none !important;
+	}
+}
+
+/* モバイルでのみ表示 */
+.show-mobile {
+	display: initial !important;
+}
+
+@media (min-width: 640px) {
+	.show-mobile {
+		display: none !important;
+	}
+}
+
+/* タブレットでのみ表示 */
+.show-tablet {
+	display: none !important;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+	.show-tablet {
+		display: initial !important;
+	}
+}
+
+/* デスクトップでのみ表示 */
+.show-desktop {
+	display: none !important;
+}
+
+@media (min-width: 1024px) {
+	.show-desktop {
+		display: initial !important;
+	}
+}
+
+/* ========================================
+   レイアウトユーティリティ
+   ======================================== */
+
+/* モバイルで縦積み */
+.stack-mobile {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+@media (min-width: 640px) {
+	.stack-mobile {
+		flex-direction: row;
+	}
+}
+
+/* タブレット以下で縦積み */
+.stack-tablet {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+}
+
+@media (max-width: 1023px) {
+	.stack-tablet {
+		flex-direction: column;
+	}
+}
+
+/* ========================================
+   テキストユーティリティ
+   ======================================== */
+
+/* テキスト省略（1行） */
+.text-truncate {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* テキスト折り返し */
+.text-wrap {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+/* テキスト省略（複数行） */
+.text-clamp-2 {
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.text-clamp-3 {
+	display: -webkit-box;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+/* ========================================
+   コンテナ
+   ======================================== */
+
+/* レスポンシブコンテナ */
+.container-responsive {
+	width: 100%;
+	padding-left: var(--spacing-md);
+	padding-right: var(--spacing-md);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (min-width: 640px) {
+	.container-responsive {
+		padding-left: var(--spacing-lg);
+		padding-right: var(--spacing-lg);
+	}
+}
+
+@media (min-width: 1024px) {
+	.container-responsive {
+		padding-left: var(--spacing-xl);
+		padding-right: var(--spacing-xl);
+	}
+}
+
+/* 最大幅付きコンテナ */
+.container-max {
+	width: 100%;
+	max-width: 1280px;
+	padding-left: var(--spacing-md);
+	padding-right: var(--spacing-md);
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@media (min-width: 640px) {
+	.container-max {
+		padding-left: var(--spacing-lg);
+		padding-right: var(--spacing-lg);
+	}
+}
+
+@media (min-width: 1024px) {
+	.container-max {
+		padding-left: var(--spacing-xl);
+		padding-right: var(--spacing-xl);
+	}
+}
+
+/* ========================================
+   スペーシングユーティリティ
+   ======================================== */
+
+/* セクション間のギャップ */
+.section-gap {
+	margin-bottom: var(--spacing-lg);
+}
+
+@media (min-width: 640px) {
+	.section-gap {
+		margin-bottom: var(--spacing-xl);
+	}
+}
+
+@media (min-width: 1024px) {
+	.section-gap {
+		margin-bottom: var(--spacing-2xl);
+	}
+}
+
+/* ========================================
+   レスポンシブモーダル
+   ======================================== */
+
+/* モーダルコンテンツ */
+.modal-content-responsive {
+	position: relative;
+	background: white;
+	border-radius: 20px;
+	padding: 2rem;
+	max-width: 600px;
+	width: 90%;
+	max-height: 90vh;
+	overflow-y: auto;
+}
+
+/* モバイル: 全画面表示 */
+@media (max-width: 768px) {
+	.modal-content-responsive {
+		max-width: 100%;
+		width: 100%;
+		height: 100%;
+		max-height: 100vh;
+		border-radius: 0;
+		padding: 1.5rem;
+	}
+}
+
+/* ========================================
+   アクセシビリティ
+   ======================================== */
+
+/* スクリーンリーダー専用（視覚的に非表示） */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border-width: 0;
+}
+
+/* ========================================
+   タッチ対応
+   ======================================== */
+
+/* タップターゲットサイズ（最小44x44px） */
+.tap-target {
+	min-width: 44px;
+	min-height: 44px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ========================================
+   スクロール
+   ======================================== */
+
+/* 横スクロールコンテナ */
+.scroll-x {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* 縦スクロールコンテナ */
+.scroll-y {
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+/* スクロールバーのスタイリング（Webkit系） */
+.scroll-x::-webkit-scrollbar,
+.scroll-y::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.scroll-x::-webkit-scrollbar-track,
+.scroll-y::-webkit-scrollbar-track {
+	background: #f3f4f6;
+	border-radius: 4px;
+}
+
+.scroll-x::-webkit-scrollbar-thumb,
+.scroll-y::-webkit-scrollbar-thumb {
+	background: #d1d5db;
+	border-radius: 4px;
+}
+
+.scroll-x::-webkit-scrollbar-thumb:hover,
+.scroll-y::-webkit-scrollbar-thumb:hover {
+	background: #9ca3af;
+}

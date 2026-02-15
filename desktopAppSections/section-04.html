@@ -1,11 +1,16 @@
 <!-- セクション 4: 作業実行・タスク管理 (Work Execution) -->
 <section id="section-4" class="manual-section">
     <h2>4. 作業実行・タスク管理</h2>
+    <p class="page-subtitle">更新基準日: 2026-02-14（`WidgetWindow` / `KanbanBoardWindow` / `TaskDetailWindow` 群を基準に整合）</p>
     <p>日々の実作業を行う画面群です。タスクの時間計測、ステータス管理、コメントや進捗の更新などを行います。</p>
 
     <div id="subsection-4-1" class="manual-subsection">
         <h3>4.1 作業ウィジェット</h3>
         <p>ダッシュボードで「今日の作業を開始」をクリックすると表示される、作業中に常に表示されるコンパクトなパネルです。デスクトップの最前面に表示され、作業時間を自動で計測します。</p>
+
+        <div class="feature-image" onclick="openGallery('04_widget-overview')">
+            <img id="04_widget-overview" src="image/desktop-app/04_widget-overview.svg" alt="作業ウィジェット（サンプル）" loading="lazy" />
+        </div>
 
         <h4>画面の目的</h4>
         <p>作業ウィジェットは、タスクへの取り組み時間を自動的に記録し、AIからのリアルタイムフィードバックを受け取りながら効率的に作業を進めるための画面です。</p>
@@ -72,6 +77,10 @@
                     <td>その日の作業を終了し、日報作成画面を表示します</td>
                 </tr>
                 <tr>
+                    <td>通知ボタン</td>
+                    <td>通知履歴画面を開き、未読通知の確認を行います</td>
+                </tr>
+                <tr>
                     <td>最小化ボタン（－）</td>
                     <td>ウィジェットをシステムトレイに格納します</td>
                 </tr>
@@ -96,6 +105,10 @@
     <div id="subsection-4-2" class="manual-subsection">
         <h3>4.2 看板ボード画面</h3>
         <p>カンバン形式でタスクを視覚的に管理する画面です。タスクを列間でドラッグ＆ドロップすることで、ステータスを簡単に変更できます。</p>
+
+        <div class="feature-image" onclick="openGallery('04_kanban-overview')">
+            <img id="04_kanban-overview" src="image/desktop-app/04_kanban-overview.svg" alt="看板ボード画面（サンプル）" loading="lazy" />
+        </div>
 
         <h4>画面の目的</h4>
         <p>タスクを「未着手」「進行中」「完了」「保留」の4つのステータスで管理し、視覚的に進捗状況を把握できます。</p>
@@ -153,7 +166,7 @@
             <tbody>
                 <tr>
                     <td>フィルターボタン</td>
-                    <td>タスクの絞り込み条件を設定するダイアログを開きます</td>
+                    <td>現行版では「実装中」メッセージを表示します</td>
                 </tr>
                 <tr>
                     <td>個人タスク追加ボタン</td>
@@ -172,10 +185,9 @@
         <h4>右クリックメニュー</h4>
         <p>タスクカードを右クリックすると、以下の操作ができるメニューが表示されます：</p>
         <ul class="item-list">
-            <li>タスクを開始</li>
-            <li>進捗率を編集</li>
-            <li>コメントを追加</li>
-            <li>詳細を表示</li>
+            <li><strong>共通</strong>ステータス変更、進捗率変更</li>
+            <li><strong>個人タスク</strong>編集、削除</li>
+            <li><strong>プロジェクトタスク</strong>コメント追加、詳細表示</li>
         </ul>
 
         <div class="note">
@@ -187,6 +199,10 @@
     <div id="subsection-4-3" class="manual-subsection">
         <h3>4.3 タスク詳細画面</h3>
         <p>特定のタスクの詳細情報を確認・編集する画面です。4つのタブで構成されています。</p>
+
+        <div class="feature-image" onclick="openGallery('04_task-detail')">
+            <img id="04_task-detail" src="image/desktop-app/04_task-detail.svg" alt="タスク詳細画面（サンプル）" loading="lazy" />
+        </div>
 
         <h4>画面の目的</h4>
         <p>タスクの全情報を一覧で確認し、コメントの追加やファイルの添付、作業の開始・完了操作を行います。</p>
@@ -279,7 +295,7 @@
                 <tr>
                     <td>タスクタイトル</td>
                     <td>必須</td>
-                    <td>タスクの名前を入力します。64文字以内</td>
+                    <td>タスクの名前を入力します</td>
                 </tr>
                 <tr>
                     <td>説明</td>
@@ -356,6 +372,7 @@
                 </tr>
             </tbody>
         </table>
+        <p>個人タスクではコメント機能は利用できず、プロジェクトタスクのみコメント追加が可能です。</p>
 
         <h4>ボタン説明</h4>
         <table class="manual-table">

@@ -1,7 +1,7 @@
 <!-- セッション 5: AIアラート -->
 <section id="section-5" class="manual-section">
     <h2>5. AIアラート（/alerts）</h2>
-    <p>AIが自動的に検知したプロジェクトのリスク、警告、改善提案を管理する画面です。重要度・種類・既読/未読でフィルタリングでき、詳細な対処方法を確認できます。</p>
+    <p>AIが自動的に検知したプロジェクトのリスク、警告、提案を管理する画面です。重要度・種類・既読/未読でフィルタリングでき、詳細情報を確認できます。</p>
 
     <div id="subsection-5-1" class="manual-subsection">
         <h3>5.1 概要</h3>
@@ -16,9 +16,9 @@
         <ul class="item-list">
             <li><strong>AI自動検知</strong> - プロジェクトの状況を継続的に分析し、リスクや問題を自動的に検知</li>
             <li><strong>3段階の重要度</strong> - 高・中・低の3段階で重要度を分類し、優先順位を明確化</li>
-            <li><strong>3種類のアラートタイプ</strong> - リスク、警告、改善提案の3種類を色分けして表示</li>
+            <li><strong>3種類のアラートタイプ</strong> - リスク、警告、提案の3種類を色分けして表示</li>
             <li><strong>既読/未読管理</strong> - アラートの既読状態を管理し、未対応のアラートを把握</li>
-            <li><strong>詳細モーダル</strong> - 各アラートの詳細情報と推奨アクションを表示</li>
+            <li><strong>詳細モーダル</strong> - 各アラートの詳細情報と関連タスクへの導線を表示</li>
             <li><strong>AI更新機能</strong> - 最新のプロジェクト状況でアラートを再生成</li>
         </ul>
 
@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <td>タイプバッジ</td>
-                    <td>「リスク」「警告」「改善提案」の種類を表示</td>
+                    <td>「リスク」「警告」「提案」の種類を表示</td>
                 </tr>
                 <tr>
                     <td>既読/未読インジケーター</td>
@@ -86,8 +86,8 @@
 
         <h4>カードの操作</h4>
         <ul class="item-list">
-            <li><strong>クリック</strong> - カードをクリックすると、詳細モーダルが開き、より詳しい情報と推奨アクションが表示される</li>
-            <li><strong>既読ボタン</strong> - 目のアイコンボタンをクリックすると、既読/未読を切り替え</li>
+            <li><strong>クリック</strong> - カードをクリックすると、詳細モーダルが開き、より詳しい情報が表示される</li>
+            <li><strong>既読ボタン</strong> - 封筒アイコンボタンをクリックすると、既読/未読を切り替え</li>
             <li><strong>ホバー効果</strong> - カードにマウスを乗せると、わずかに浮き上がり、クリック可能であることを示す</li>
         </ul>
     </div>
@@ -117,7 +117,7 @@
                 </tr>
                 <tr>
                     <td>種類</td>
-                    <td>全て / リスク / 警告 / 改善提案</td>
+                    <td>全て / リスク / 警告 / 提案</td>
                     <td>アラートの種類で絞り込み。「リスク」のみを表示すれば、重大な問題に集中できる</td>
                 </tr>
                 <tr>
@@ -216,7 +216,7 @@
                     <td>タスクの説明不足、ドキュメント不備、軽度の進捗遅れ、コミュニケーション不足</td>
                 </tr>
                 <tr>
-                    <td>改善提案</td>
+                    <td>提案</td>
                     <td>青系</td>
                     <td>より良い方法や効率化の提案</td>
                     <td>タスク分割の提案、リソース再配分の提案、ツール活用の提案、ベストプラクティスの提示</td>
@@ -230,13 +230,13 @@
             <li><strong>リスク（高）</strong> - 緊急対応が必要な重大リスク</li>
             <li><strong>リスク（中）</strong> - 監視が必要な潜在的リスク</li>
             <li><strong>警告（中）</strong> - 改善が望ましい問題</li>
-            <li><strong>改善提案（低）</strong> - 参考にすべき最適化案</li>
+            <li><strong>提案（低）</strong> - 参考にすべき最適化案</li>
         </ul>
     </div>
 
     <div id="subsection-5-6" class="manual-subsection">
         <h3>5.6 詳細モーダル</h3>
-        <p>アラートカードをクリックすると、詳細モーダルが表示され、より詳しい情報と推奨アクションが確認できます。</p>
+        <p>アラートカードをクリックすると、詳細モーダルが表示され、より詳しい情報が確認できます。</p>
 
         <div class="feature-image" onclick="openGallery('05_alerts-detail-modal')">
             <img id="05_alerts-detail-modal" src="image/web-admin/05_alerts-detail-modal.png" alt="アラート詳細モーダル"
@@ -269,12 +269,8 @@
                     <td>問題の背景、影響範囲、根本原因などの追加情報</td>
                 </tr>
                 <tr>
-                    <td>推奨アクション</td>
-                    <td>AIが提案する具体的な対処方法のリスト</td>
-                </tr>
-                <tr>
-                    <td>関連リンク</td>
-                    <td>関連するタスク、プロジェクト、ドキュメントへのリンク</td>
+                    <td>関連タスク操作</td>
+                    <td>関連タスクがある場合に「タスクを確認」ボタンを表示</td>
                 </tr>
             </tbody>
         </table>
@@ -283,14 +279,13 @@
         <ul class="item-list">
             <li><strong>閉じる</strong> - 右上の×ボタン、またはモーダル外をクリックして閉じる</li>
             <li><strong>既読にする</strong> - 詳細モーダルを開くと自動的に既読状態に変更される</li>
-            <li><strong>関連タスクへ移動</strong> - 「タスクを表示」ボタンをクリックすると、関連するタスクの詳細画面に移動</li>
-            <li><strong>プロジェクトへ移動</strong> - プロジェクト名をクリックすると、そのプロジェクトの詳細画面に移動</li>
+            <li><strong>関連タスクへ移動</strong> - 「タスクを確認」ボタンをクリックすると、関連タスクへ遷移</li>
         </ul>
     </div>
 
     <div id="subsection-5-7" class="manual-subsection">
         <h3>5.7 AI更新機能</h3>
-        <p>画面上部の「AI更新」ボタンをクリックすると、最新のプロジェクトデータでアラートを再生成します。</p>
+        <p>画面上部の「AIで更新」ボタンをクリックすると、最新のプロジェクトデータでアラートを再生成します。</p>
 
         <div class="feature-image" onclick="openGallery('05_alerts-refresh')">
             <img id="05_alerts-refresh" src="image/web-admin/05_alerts-refresh.png" alt="AI更新ボタン" loading="lazy" />

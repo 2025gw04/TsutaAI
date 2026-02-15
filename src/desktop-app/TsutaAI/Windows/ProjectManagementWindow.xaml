@@ -1,0 +1,223 @@
+<Window x:Class="TsutaAI.Windows.ProjectManagementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:TsutaAI.Converters"
+        Title="プロジェクト管理" Height="700" Width="1000"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="CanResize"
+        Style="{StaticResource BaseWindowStyle}">
+
+    <Window.Resources>
+        <!-- ステータス → 色変換 -->
+        <local:ProjectStatusToBrushConverter x:Key="StatusToBrushConverter"/>
+        <!-- ステータス → 表示名変換 -->
+        <local:ProjectStatusToDisplayConverter x:Key="StatusToDisplayConverter"/>
+        <!-- Null → Visibility変換 -->
+        <local:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ツールバー -->
+        <Border Grid.Row="0"
+                Background="{StaticResource WindowBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,0,1"
+                Padding="24,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- タイトル -->
+                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                    <TextBlock Text="プロジェクト管理"
+                               Style="{StaticResource H1}"
+                               FontSize="26"/>
+                    <TextBlock x:Name="ProjectCountText"
+                               Text="0件のプロジェクト"
+                               Style="{StaticResource MutedTextStyle}"
+                               Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <!-- ツールバーボタン -->
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <Button Content="🔄 更新"
+                            Width="100"
+                            Click="RefreshButton_Click"
+                            Style="{StaticResource SecondaryButton}"/>
+                    
+                    <Button x:Name="CreateProjectButton"
+                            Content="＋ 新規プロジェクト"
+                            Width="160"
+                            Margin="12,0,0,0"
+                            Click="CreateProjectButton_Click"
+                            Style="{StaticResource PrimaryButton}"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- プロジェクト一覧 -->
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      Background="{StaticResource BackgroundBrush}">
+            <StackPanel Margin="24">
+                <!-- ローディング表示 -->
+                <TextBlock x:Name="LoadingText"
+                           Text="プロジェクトを読み込み中..."
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,80,0,0"
+                           Style="{StaticResource MutedTextStyle}"
+                           FontSize="18"/>
+
+                <!-- プロジェクトなし表示 -->
+                <TextBlock x:Name="NoProjectsText"
+                           Text="プロジェクトがありません。新規作成してください。"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,80,0,0"
+                           Style="{StaticResource MutedTextStyle}"
+                           FontSize="18"
+                           Visibility="Collapsed"/>
+
+                <!-- プロジェクトリスト -->
+                <ItemsControl x:Name="ProjectsList"
+                              Visibility="Collapsed">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource Card}"
+                                    Margin="0,0,0,16"
+                                    MouseEnter="ProjectCard_MouseEnter"
+                                    MouseLeave="ProjectCard_MouseLeave">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- プロジェクト名とステータス -->
+                                    <Grid Grid.Row="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding Name}"
+                                                   Style="{StaticResource H2}"
+                                                   FontSize="22"
+                                                   Foreground="{StaticResource TextBrush}"/>
+
+                                        <Border Grid.Column="1"
+                                                Background="{Binding Status, Converter={StaticResource StatusToBrushConverter}}"
+                                                CornerRadius="4"
+                                                Padding="12,6">
+                                            <TextBlock Text="{Binding Status, Converter={StaticResource StatusToDisplayConverter}}"
+                                                       Foreground="White"
+                                                       FontSize="15"
+                                                       FontWeight="Bold"/>
+                                        </Border>
+                                    </Grid>
+
+                                    <!-- 説明 -->
+                                    <TextBlock Grid.Row="1"
+                                               Text="{Binding Description}"
+                                               TextWrapping="Wrap"
+                                               Style="{StaticResource Body}"
+                                               Foreground="{StaticResource TextLightBrush}"
+                                               Margin="0,12,0,0"
+                                               MaxHeight="60"/>
+
+                                    <!-- 日付とヘルススコア -->
+                                    <Grid Grid.Row="2"
+                                          Margin="0,16,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0"
+                                                    Orientation="Horizontal"
+                                                    Margin="0,0,24,0">
+                                            <TextBlock Text="📅 "
+                                                       FontSize="16"/>
+                                            <TextBlock Text="{Binding StartDate, StringFormat='開始: {0:yyyy/MM/dd}'}"
+                                                       Style="{StaticResource Body}"
+                                                       Foreground="{StaticResource TextLightBrush}"
+                                                       Margin="4,0,16,0"/>
+                                            <TextBlock Text="{Binding EndDate, StringFormat='終了: {0:yyyy/MM/dd}'}"
+                                                       Style="{StaticResource Body}"
+                                                       Foreground="{StaticResource TextLightBrush}"/>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="1"
+                                                    Orientation="Horizontal"
+                                                    Visibility="{Binding HealthScore, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <TextBlock Text="💚 "
+                                                       FontSize="16"/>
+                                            <TextBlock Text="{Binding HealthScore, StringFormat='ヘルス: {0}'}"
+                                                       Style="{StaticResource Body}"
+                                                       Foreground="{StaticResource TextLightBrush}"
+                                                       Margin="4,0,0,0"/>
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <!-- アクションボタン -->
+                                    <StackPanel Grid.Row="3"
+                                                Orientation="Horizontal"
+                                                HorizontalAlignment="Right"
+                                                Margin="0,20,0,0">
+                                        <Button Content="👥 メンバー"
+                                                Width="100"
+                                                Margin="0,0,12,0"
+                                                Tag="{Binding}"
+                                                Click="ManageMembersButton_Click"
+                                                Style="{StaticResource SecondaryButton}"/>
+
+                                        <Button Content="✏️ 編集"
+                                                Width="90"
+                                                Margin="0,0,12,0"
+                                                Tag="{Binding}"
+                                                Click="EditProjectButton_Click"
+                                                Style="{StaticResource SecondaryButton}"/>
+
+                                        <Button x:Name="DeleteProjectButton"
+                                                Content="🗑️ 削除"
+                                                Width="90"
+                                                Tag="{Binding}"
+                                                Click="DeleteProjectButton_Click"
+                                                Style="{StaticResource DangerButton}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- ステータスバー -->
+        <Border Grid.Row="2"
+                Background="{StaticResource WindowBackgroundBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="24,10">
+            <TextBlock x:Name="StatusText"
+                       Text="準備完了"
+                       Style="{StaticResource MutedTextStyle}"/>
+        </Border>
+    </Grid>
+</Window>
