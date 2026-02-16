@@ -101,6 +101,16 @@ async function previewHelpRequest(req, res, next) {
         ...payload,
         candidates
       });
+
+      const scoreSummary = (suggestions?.suggestedHelpers || []).map((s, i) => ({
+        index: i + 1,
+        userId: s?.userId,
+        totalMatchScore: s?.matchScores?.totalMatchScore ?? s?.totalMatchScore ?? s?.overallScore ?? null,
+        skillMatchScore: s?.matchScores?.skillMatchScore ?? s?.skillMatchScore ?? null,
+        availabilityScore: s?.matchScores?.availabilityScore ?? s?.availabilityScore ?? null,
+        experienceScore: s?.matchScores?.experienceScore ?? s?.experienceScore ?? null
+      }));
+      console.log('preview suggestion scores:', JSON.stringify(scoreSummary));
     }
 
     res.json({

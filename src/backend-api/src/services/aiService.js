@@ -3631,10 +3631,30 @@ function rescoreSuggestionsIfUniform(normalizedSuggestions, candidateById, paylo
     return (a.userId ?? 0) - (b.userId ?? 0);
   });
 
-  return rescored.map((s, index) => ({
+  const withRank = rescored.map((s, index) => ({
     ...s,
     suggestionRank: index + 1
   }));
+
+  // If rescoring still leaves the same total for all, apply a tiny deterministic tie-breaker.
+  const rankTotals = withRank.map((s) => toFiniteNumber(s?.matchScores?.totalMatchScore ?? s?.totalMatchScore) ?? 0);
+  const firstRankTotal = rankTotals[0];
+  const stillUniform = rankTotals.every((v) => Math.abs(v - firstRankTotal) < 0.01);
+  if (!stillUniform) {
+    return withRank;
+  }
+
+  return withRank.map((s, idx) => {
+    const adjusted = Math.max(0, ((s.matchScores?.totalMatchScore ?? 0) - (idx * 0.1)));
+    return {
+      ...s,
+      matchScores: {
+        ...(s.matchScores || {}),
+        totalMatchScore: adjusted
+      },
+      totalMatchScore: adjusted
+    };
+  });
 }
 
 function normalizeHelperSuggestions(rawSuggestions, candidates = [], payload = {}) {

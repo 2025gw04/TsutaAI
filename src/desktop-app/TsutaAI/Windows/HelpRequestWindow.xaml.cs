@@ -235,6 +235,16 @@ namespace TsutaAI.Windows
 
                 // Bind Suggestions
                 SuggestionsList.ItemsSource = preview.Suggestions;
+                if (preview?.Suggestions != null && preview.Suggestions.Count > 0)
+                {
+                    var scoreLog = string.Join(", ", preview.Suggestions.Select((s, i) =>
+                        $"#{i + 1}:{s.FullName}(nested={s.MatchScores?.TotalMatchScore:F2}, top={s.TotalMatchScore:F2}, overall={s.OverallScore:F2}, effective={s.EffectiveTotalMatchScore:F2})"));
+                    Logger.Info($"AIメンバー検索スコア: {scoreLog}");
+                }
+                else
+                {
+                    Logger.Info("AIメンバー検索スコア: 候補なし");
+                }
 
                 SwitchToSuggestionView();
             }

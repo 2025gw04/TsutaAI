@@ -286,19 +286,32 @@ async function cancelHelpRequest(requestId) {
  */
 async function createHelperSuggestions(requestId, suggestions) {
   const knex = db.getKnex();
+  const toNumberOrNull = (value) => {
+    if (value === null || value === undefined || value === '') {
+      return null;
+    }
+    const n = Number(value);
+    return Number.isFinite(n) ? n : null;
+  };
 
   await knex.transaction(async (trx) => {
-    for (const sugg of suggestions) {
+    for (const [index, sugg] of suggestions.entries()) {
+      const scores = sugg.matchScores || {};
+      const skillScore = toNumberOrNull(scores.skillMatchScore ?? sugg.skillMatchScore ?? sugg.skillMatch);
+      const availabilityScore = toNumberOrNull(scores.availabilityScore ?? sugg.availabilityScore ?? sugg.availability);
+      const experienceScore = toNumberOrNull(scores.experienceScore ?? sugg.experienceScore ?? sugg.experience);
+      const totalScore = toNumberOrNull(scores.totalMatchScore ?? sugg.totalMatchScore ?? sugg.overallScore);
+
       await trx('help_request_suggestions').insert({
         help_request_id: requestId,
         suggested_user_id: sugg.userId,
-        skill_match_score: sugg.skillMatchScore,
-        availability_score: sugg.availabilityScore,
-        experience_score: sugg.experienceScore,
-        total_match_score: sugg.totalMatchScore,
+        skill_match_score: skillScore,
+        availability_score: availabilityScore,
+        experience_score: experienceScore,
+        total_match_score: totalScore,
         ai_reasoning: sugg.reasoning,
         recommended_approach: sugg.recommendedApproach,
-        suggestion_rank: sugg.suggestionRank
+        suggestion_rank: toNumberOrNull(sugg.suggestionRank) ?? (index + 1)
       });
     }
   });

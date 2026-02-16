@@ -146,6 +146,35 @@ namespace TsutaAI.Models
         [JsonProperty("matchScores")]
         public MatchScores MatchScores { get; set; }
 
+        // Some AI models return score fields at top-level instead of matchScores.
+        [JsonProperty("skillMatchScore")]
+        public double? SkillMatchScore { get; set; }
+
+        [JsonProperty("skill_match_score")]
+        private double? SkillMatchScoreSnakeCase { set => SkillMatchScore = value; }
+
+        [JsonProperty("availabilityScore")]
+        public double? AvailabilityScore { get; set; }
+
+        [JsonProperty("availability_score")]
+        private double? AvailabilityScoreSnakeCase { set => AvailabilityScore = value; }
+
+        [JsonProperty("experienceScore")]
+        public double? ExperienceScore { get; set; }
+
+        [JsonProperty("experience_score")]
+        private double? ExperienceScoreSnakeCase { set => ExperienceScore = value; }
+
+        [JsonProperty("totalMatchScore")]
+        public double? TotalMatchScore { get; set; }
+
+        [JsonProperty("total_match_score")]
+        private double? TotalMatchScoreSnakeCase { set => TotalMatchScore = value; }
+
+        // Legacy compatibility for older prompt outputs.
+        [JsonProperty("overallScore")]
+        public double? OverallScore { get; set; }
+
         [JsonProperty("suggestionRank")]
         public int SuggestionRank { get; set; }
 
@@ -163,6 +192,54 @@ namespace TsutaAI.Models
 
         [JsonProperty("recommendationLevel")]
         public string RecommendationLevel { get; set; }
+
+        [JsonIgnore]
+        public double EffectiveTotalMatchScore =>
+            ResolveEffectiveTotalMatchScore();
+
+        private double ResolveEffectiveTotalMatchScore()
+        {
+            // Prefer nested score if it looks populated.
+            if (MatchScores != null)
+            {
+                if (MatchScores.TotalMatchScore > 0d)
+                {
+                    return MatchScores.TotalMatchScore;
+                }
+
+                var weightedFromNested =
+                    (MatchScores.SkillMatchScore * 0.45d)
+                    + (MatchScores.AvailabilityScore * 0.35d)
+                    + (MatchScores.ExperienceScore * 0.20d);
+
+                if (weightedFromNested > 0d)
+                {
+                    return Math.Round(weightedFromNested, 1);
+                }
+            }
+
+            if (TotalMatchScore.HasValue && TotalMatchScore.Value > 0d)
+            {
+                return TotalMatchScore.Value;
+            }
+
+            if (OverallScore.HasValue && OverallScore.Value > 0d)
+            {
+                return OverallScore.Value;
+            }
+
+            var weightedFromTopLevel =
+                ((SkillMatchScore ?? 0d) * 0.45d)
+                + ((AvailabilityScore ?? 0d) * 0.35d)
+                + ((ExperienceScore ?? 0d) * 0.20d);
+
+            if (weightedFromTopLevel > 0d)
+            {
+                return Math.Round(weightedFromTopLevel, 1);
+            }
+
+            return 0d;
+        }
     }
 
     public class MatchScores
@@ -170,13 +247,25 @@ namespace TsutaAI.Models
         [JsonProperty("skillMatchScore")]
         public double SkillMatchScore { get; set; }
 
+        [JsonProperty("skill_match_score")]
+        private double SkillMatchScoreSnakeCase { set => SkillMatchScore = value; }
+
         [JsonProperty("availabilityScore")]
         public double AvailabilityScore { get; set; }
+
+        [JsonProperty("availability_score")]
+        private double AvailabilityScoreSnakeCase { set => AvailabilityScore = value; }
 
         [JsonProperty("experienceScore")]
         public double ExperienceScore { get; set; }
 
+        [JsonProperty("experience_score")]
+        private double ExperienceScoreSnakeCase { set => ExperienceScore = value; }
+
         [JsonProperty("totalMatchScore")]
         public double TotalMatchScore { get; set; }
+
+        [JsonProperty("total_match_score")]
+        private double TotalMatchScoreSnakeCase { set => TotalMatchScore = value; }
     }
 }
