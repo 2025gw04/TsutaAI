@@ -120,7 +120,7 @@
                                             <TextBlock Text="{Binding FullName}" FontWeight="Bold" FontSize="18"/>
                                             <TextBlock Text="{Binding Username, StringFormat=' ({0})'}" Foreground="{StaticResource TextLightBrush}"/>
                                             <Border Background="{StaticResource PrimaryGradientBrush}" CornerRadius="4" Margin="12,0,0,0" Padding="8,2">
-                                                <TextBlock Text="{Binding MatchScores.TotalMatchScore, StringFormat='マッチ度: {0:F0}%'}" 
+                                                <TextBlock Text="{Binding EffectiveTotalMatchScore, StringFormat='マッチ度: {0:F1}%'}" 
                                                            Foreground="{StaticResource TextWhiteBrush}" FontWeight="SemiBold" FontSize="14"/>
                                             </Border>
                                         </StackPanel>

@@ -3454,10 +3454,14 @@ ${relatedTasksText}`;
 
   try {
     const result = await callAI(prompt, { responseFormat: 'json' });
+    const normalizedHelpers = normalizeHelperSuggestions(result?.suggestedHelpers, payload.candidates, payload);
 
     // Validate result structure
-    if (result && Array.isArray(result.suggestedHelpers) && result.suggestedHelpers.length > 0) {
-      return result;
+    if (normalizedHelpers.length > 0) {
+      return {
+        ...result,
+        suggestedHelpers: normalizedHelpers
+      };
     }
 
     // Fallback if result is valid but empty (or stub)
@@ -3471,6 +3475,257 @@ ${relatedTasksText}`;
   }
 }
 
+function toFiniteNumber(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+  const num = Number(value);
+  return Number.isFinite(num) ? num : null;
+}
+
+function clampScore(value) {
+  const num = toFiniteNumber(value);
+  if (num === null) {
+    return null;
+  }
+  return Math.max(0, Math.min(100, num));
+}
+
+function normalizeSkillToken(token) {
+  return String(token || '')
+    .toLowerCase()
+    .replace(/\(lv\d+\)/g, '')
+    .replace(/[^\wぁ-んァ-ヶ一-龯+#.-]/g, '')
+    .trim();
+}
+
+function extractCandidateSkillTokens(skillsText) {
+  const raw = String(skillsText || '');
+  return [...new Set(
+    raw
+      .split(/[,\n、]/)
+      .map((part) => normalizeSkillToken(part))
+      .filter((part) => part && part !== 'スキル情報なし')
+  )];
+}
+
+function estimateSkillScore(candidate, payload = {}) {
+  const requiredText = [
+    payload.requiredSkills,
+    payload.technicalArea,
+    payload.taskName,
+    payload.contextSummary,
+    payload.requestTitle,
+    payload.requestDescription
+  ]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+
+  const skillTokens = extractCandidateSkillTokens(candidate?.skills);
+  if (skillTokens.length === 0) {
+    return 55;
+  }
+
+  const overlapCount = skillTokens
+    .filter((token) => token.length >= 2 && requiredText.includes(token))
+    .length;
+
+  let score = 58 + Math.min(skillTokens.length, 6) * 3 + Math.min(overlapCount, 3) * 12;
+  if (!requiredText) {
+    score += 6;
+  }
+  return clampScore(score) ?? 55;
+}
+
+function estimateAvailabilityScore(candidate) {
+  const taskCount = toFiniteNumber(candidate?.inProgressTaskCount) ?? 0;
+  const weeklyHours = toFiniteNumber(candidate?.weeklyWorkHours) ?? 0;
+  const avgActivity = toFiniteNumber(candidate?.avgActivityScore) ?? 0;
+  const avgStress = toFiniteNumber(candidate?.avgStress);
+  const avgMood = toFiniteNumber(candidate?.avgMood);
+
+  let score = 100
+    - (taskCount * 12)
+    - (Math.max(0, weeklyHours - 25) * 1.2);
+
+  if (avgActivity >= 85) {
+    score -= 10;
+  } else if (avgActivity > 0 && avgActivity < 50) {
+    score += 5;
+  }
+
+  if (avgStress !== null && avgStress >= 4) {
+    score -= 20;
+  }
+  if (avgMood !== null && avgMood <= 2) {
+    score -= 10;
+  }
+
+  return clampScore(score) ?? 60;
+}
+
+function estimateExperienceScore(candidate) {
+  const recentCompletedTasks = toFiniteNumber(candidate?.recentCompletedTasks) ?? 0;
+  const hasSkillInfo = String(candidate?.skills || '').trim() && String(candidate?.skills || '').includes('なし') === false;
+
+  let score = 45 + Math.min(recentCompletedTasks * 10, 35);
+  if (hasSkillInfo) {
+    score += 10;
+  }
+
+  return clampScore(score) ?? 55;
+}
+
+function buildCandidateBasedScores(candidate, payload = {}) {
+  const skillMatchScore = estimateSkillScore(candidate, payload);
+  const availabilityScore = estimateAvailabilityScore(candidate);
+  const experienceScore = estimateExperienceScore(candidate);
+  const totalMatchScore = Math.round(
+    ((skillMatchScore * 0.45) + (availabilityScore * 0.35) + (experienceScore * 0.20)) * 10
+  ) / 10;
+
+  return {
+    skillMatchScore,
+    availabilityScore,
+    experienceScore,
+    totalMatchScore
+  };
+}
+
+function rescoreSuggestionsIfUniform(normalizedSuggestions, candidateById, payload = {}) {
+  if (!Array.isArray(normalizedSuggestions) || normalizedSuggestions.length < 2) {
+    return normalizedSuggestions;
+  }
+
+  const totals = normalizedSuggestions.map((s) => toFiniteNumber(s?.matchScores?.totalMatchScore ?? s?.totalMatchScore) ?? 0);
+  const first = totals[0];
+  const allSameScore = totals.every((v) => Math.abs(v - first) < 0.01);
+
+  if (!allSameScore) {
+    return normalizedSuggestions;
+  }
+
+  const rescored = normalizedSuggestions.map((s) => {
+    const candidate = candidateById.get(Number(s.userId));
+    if (!candidate) {
+      return s;
+    }
+
+    const scores = buildCandidateBasedScores(candidate, payload);
+    return {
+      ...s,
+      matchScores: scores,
+      skillMatchScore: scores.skillMatchScore,
+      availabilityScore: scores.availabilityScore,
+      experienceScore: scores.experienceScore,
+      totalMatchScore: scores.totalMatchScore
+    };
+  });
+
+  rescored.sort((a, b) => {
+    const totalDiff = (b.matchScores?.totalMatchScore ?? 0) - (a.matchScores?.totalMatchScore ?? 0);
+    if (totalDiff !== 0) return totalDiff;
+    const availabilityDiff = (b.matchScores?.availabilityScore ?? 0) - (a.matchScores?.availabilityScore ?? 0);
+    if (availabilityDiff !== 0) return availabilityDiff;
+    return (a.userId ?? 0) - (b.userId ?? 0);
+  });
+
+  return rescored.map((s, index) => ({
+    ...s,
+    suggestionRank: index + 1
+  }));
+}
+
+function normalizeHelperSuggestions(rawSuggestions, candidates = [], payload = {}) {
+  if (!Array.isArray(rawSuggestions) || rawSuggestions.length === 0) {
+    return [];
+  }
+
+  const candidateById = new Map(
+    (Array.isArray(candidates) ? candidates : [])
+      .filter((c) => c && c.id !== undefined && c.id !== null)
+      .map((c) => [Number(c.id), c])
+  );
+
+  const normalized = rawSuggestions
+    .map((raw, index) => {
+      if (!raw || typeof raw !== 'object') {
+        return null;
+      }
+
+      const userId = toFiniteNumber(raw.userId ?? raw.memberId ?? raw.id);
+      if (userId === null) {
+        return null;
+      }
+
+      const candidate = candidateById.get(Number(userId));
+      const scoreSource = raw.matchScores || {};
+
+      const skillMatchScore = clampScore(
+        scoreSource.skillMatchScore
+        ?? scoreSource.skill_match_score
+        ?? raw.skillMatchScore
+        ?? raw.skill_match_score
+        ?? raw.skillMatch
+      );
+      const availabilityScore = clampScore(
+        scoreSource.availabilityScore
+        ?? scoreSource.availability_score
+        ?? raw.availabilityScore
+        ?? raw.availability_score
+        ?? raw.availability
+      );
+      const experienceScore = clampScore(
+        scoreSource.experienceScore
+        ?? scoreSource.experience_score
+        ?? raw.experienceScore
+        ?? raw.experience_score
+        ?? raw.experience
+      );
+      let totalMatchScore = clampScore(
+        scoreSource.totalMatchScore
+        ?? scoreSource.total_match_score
+        ?? raw.totalMatchScore
+        ?? raw.total_match_score
+        ?? raw.overallScore
+      );
+
+      if (totalMatchScore === null) {
+        const weighted = ((skillMatchScore ?? 0) * 0.45)
+          + ((availabilityScore ?? 0) * 0.35)
+          + ((experienceScore ?? 0) * 0.20);
+        totalMatchScore = Math.round(weighted * 10) / 10;
+      }
+
+      return {
+        userId: Number(userId),
+        fullName: raw.fullName || raw.memberName || candidate?.fullName || candidate?.username || '',
+        username: raw.username || candidate?.username || '',
+        matchScores: {
+          skillMatchScore: skillMatchScore ?? 0,
+          availabilityScore: availabilityScore ?? 0,
+          experienceScore: experienceScore ?? 0,
+          totalMatchScore: totalMatchScore ?? 0
+        },
+        // Keep top-level score fields for backward compatibility.
+        skillMatchScore: skillMatchScore ?? 0,
+        availabilityScore: availabilityScore ?? 0,
+        experienceScore: experienceScore ?? 0,
+        totalMatchScore: totalMatchScore ?? 0,
+        suggestionRank: Number(raw.suggestionRank) || (index + 1),
+        reasoning: raw.reasoning || raw.reason || '',
+        recommendedApproach: raw.recommendedApproach || raw.recommendation || '',
+        strengths: Array.isArray(raw.strengths) ? raw.strengths : [],
+        potentialConcerns: Array.isArray(raw.potentialConcerns) ? raw.potentialConcerns : [],
+        recommendationLevel: raw.recommendationLevel || 'recommended'
+      };
+    })
+    .filter(Boolean);
+
+  return rescoreSuggestionsIfUniform(normalized, candidateById, payload);
+}
+
 function generateFallbackSuggestions(candidates) {
   if (!candidates || !Array.isArray(candidates) || candidates.length === 0) {
     return { suggestedHelpers: [] };
@@ -3481,19 +3736,31 @@ function generateFallbackSuggestions(candidates) {
   const sorted = [...candidates].sort((a, b) => (a.inProgressTaskCount || 0) - (b.inProgressTaskCount || 0));
   const topCandidates = sorted.slice(0, 3);
 
-  const suggestions = topCandidates.map((c, index) => ({
-    userId: c.id,
-    fullName: c.fullName || c.username,
-    username: c.username,
-    reasoning: '現在の作業負荷が比較的低く、対応可能と判断されます。',
-    recommendedApproach: 'チャットで状況を確認し、空き時間に相談を依頼してください。',
-    matchScores: {
-      skillMatchScore: 70, // dummy
-      availabilityScore: 80 - (index * 10), // dummy descending
-      experienceScore: 60, // dummy
-      totalMatchScore: 75 - (index * 5)
-    }
-  }));
+  const suggestions = topCandidates.map((c, index) => {
+    const skillMatchScore = 70; // dummy
+    const availabilityScore = 80 - (index * 10); // dummy descending
+    const experienceScore = 60; // dummy
+    const totalMatchScore = 75 - (index * 5);
+
+    return {
+      userId: c.id,
+      fullName: c.fullName || c.username,
+      username: c.username,
+      reasoning: '現在の作業負荷が比較的低く、対応可能と判断されます。',
+      recommendedApproach: 'チャットで状況を確認し、空き時間に相談を依頼してください。',
+      suggestionRank: index + 1,
+      matchScores: {
+        skillMatchScore,
+        availabilityScore,
+        experienceScore,
+        totalMatchScore
+      },
+      skillMatchScore,
+      availabilityScore,
+      experienceScore,
+      totalMatchScore
+    };
+  });
 
   return { suggestedHelpers: suggestions };
 }
