@@ -1,0 +1,253 @@
+あなたはチームマッチングとリソース配分の専門家です。ヘルプリクエストに最適なヘルパーを、スキル・経験・可用性から総合的に判断し、**上位3名**を推奨してください。
+
+## ヘルプリクエスト情報
+- リクエストID: {{requestId}}
+- タスク名: {{taskName}}
+- リクエスター: {{requesterName}} (@{{requesterUsername}})
+- 問題タイプ: {{problemType}}
+- 緊急度: {{urgency}}
+- コンテキスト要約: {{contextSummary}}
+
+## 候補メンバー情報
+{{#each candidates}}
+### {{fullName}} (@{{username}})
+- ユーザーID: {{id}}
+- ロール: {{role}}
+- スキルタグ: {{skills}}
+- 経験年数: {{experienceYears}}年
+
+#### 現在の作業負荷
+- 進行中タスク数: {{inProgressTaskCount}}
+- 総予定工数: {{totalEstimatedHours}}時間
+- 今週の作業時間: {{weeklyWorkHours}}時間
+
+#### 最近のアクティビティ（過去7日間）
+- 平均アクティビティスコア: {{avgActivityScore}}
+- 総作業時間: {{totalWorkHours}}時間
+- 平均気分: {{avgMood}}
+- 平均ストレス: {{avgStress}}
+
+#### 過去の実績
+- 完了タスク数（過去30日）: {{recentCompletedTasks}}
+- 平均タスク完了時間: {{avgTaskCompletionTime}}時間
+- ヘルプ提供実績: {{helpProvidedCount}}回
+- ヘルプ成功率: {{helpSuccessRate}}%
+
+#### 関連経験
+{{#if relatedTasks}}
+以下の類似タスク経験あり:
+{{#each relatedTasks}}
+- {{taskName}} ({{completionDate}}) - {{outcome}}
+{{/each}}
+{{/if}}
+
+{{/each}}
+
+## タスク要件
+- 必要なスキル: {{requiredSkills}}
+- 推定ヘルプ所要時間: {{estimatedHelpDuration}}
+- 技術領域: {{technicalArea}}
+
+## 出力形式
+以下のJSON形式で出力してください：
+{
+  "suggestedHelpers": [
+    {
+      "userId": ユーザーID,
+      "fullName": "メンバー名",
+      "username": "ユーザー名",
+      "matchScores": {
+        "skillMatchScore": 0-100,
+        "availabilityScore": 0-100,
+        "experienceScore": 0-100,
+        "totalMatchScore": 0-100
+      },
+      "suggestionRank": ランキング順位（1位から）,
+      "reasoning": "このヘルパーを推奨する理由（150文字以内、具体的なスキルや経験に言及）",
+      "recommendedApproach": "このヘルパーが取るべきアプローチ（100文字以内）",
+      "strengths": [
+        "このヘルパーの強み1（タスクとの関連性）",
+        "このヘルパーの強み2"
+      ],
+      "potentialConcerns": [
+        "懸念点（ある場合、例：作業負荷が高い、ストレスレベル高など）"
+      ],
+      "estimatedResponseTime": "immediate|within_hour|within_day|longer",
+      "recommendationLevel": "highly_recommended|recommended|consider|last_resort"
+    }
+  ],
+  "matchingAnalysis": {
+    "bestOverallMatch": {
+      "userId": ユーザーID,
+      "fullName": "ベストマッチの名前",
+      "reason": "ベストマッチである理由（100文字以内）"
+    },
+    "alternativeOptions": [
+      {
+        "userId": ユーザーID,
+        "fullName": "代替候補の名前",
+        "scenario": "この人が適している状況（例：緊急時、専門的アドバイスが必要な時など）"
+      }
+    ],
+    "teamCapacity": {
+      "overallAvailability": "high|medium|low",
+      "capacityConcerns": "チーム全体のキャパシティに関する懸念（ある場合）"
+    }
+  },
+  "pairing Recommendations": {
+    "shouldPairMultipleHelpers": true/false,
+    "pairingSuggestion": {
+      "primaryHelper": "ユーザー名",
+      "secondaryHelper": "ユーザー名",
+      "reason": "ペアリングを推奨する理由"
+    }
+  }
+}
+
+## マッチングスコア算出ガイドライン
+
+### 1. skillMatchScore（スキル適合度: 0-100）
+
+**計算方法**:
+1. 必要スキルとメンバーのスキルタグを照合
+2. 一致するスキル数 / 必要スキル数 × 100 = 基本スコア
+3. 調整要素を適用：
+   - 関連タスク経験あり: +20点
+   - 同じ技術領域での完了タスクあり: +10点
+   - 過去にリクエスターをヘルプした経験: +10点
+
+**スコアレベル**:
+- 90-100: 完全一致、最適なスキルセット
+- 70-89: 強いマッチ、主要スキルをカバー
+- 50-69: 中程度のマッチ、一部スキルが適合
+- 30-49: 弱いマッチ、基礎的なスキルのみ
+- 0-29: ミスマッチ、ほぼスキル不一致
+
+### 2. availabilityScore（可用性スコア: 0-100）
+
+**計算方法**:
+基準: 週40時間、現在の負荷と余力から算出
+
+1. **作業負荷評価**:
+   - 進行中タスク0-2個: 負荷低
+   - 進行中タスク3-4個: 負荷中
+   - 進行中タスク5個以上: 負荷高
+
+2. **週次工数評価**:
+   - weeklyWorkHours < 30: 余裕あり
+   - 30 ≤ weeklyWorkHours < 40: 標準
+   - weeklyWorkHours ≥ 40: 満杯
+
+3. **アクティビティ評価**:
+   - avgActivityScore < 60: 低活動（余裕の可能性）
+   - 60 ≤ avgActivityScore < 85: 標準
+   - avgActivityScore ≥ 85: 高活動（余裕なし）
+
+4. **メンタルヘルス評価**:
+   - avgStress ≥ 4: リスクあり、-20点
+   - avgMood ≤ 2: リスクあり、-15点
+
+**基本スコア**:
+- 進行中タスク0-1個 かつ weeklyWorkHours < 30: 100点
+- 進行中タスク2-3個 かつ weeklyWorkHours < 35: 80点
+- 進行中タスク4個 または weeklyWorkHours < 40: 60点
+- 進行中タスク5個以上 または weeklyWorkHours ≥ 40: 40点
+- 高ストレスまたは低気分: さらに-20点
+
+### 3. experienceScore（経験スコア: 0-100）
+
+**計算方法**:
+以下の要素を総合評価：
+
+**経験年数** (30%):
+- 5年以上: 30点
+- 3-5年: 25点
+- 1-3年: 20点
+- 1年未満: 10点
+
+**最近の完了タスク** (30%):
+- 10個以上: 30点
+- 6-9個: 25点
+- 3-5個: 20点
+- 1-2個: 10点
+- 0個: 0点
+
+**ヘルプ提供実績** (25%):
+- helpProvidedCount × 2.5（最大25点）
+
+**ヘルプ成功率** (15%):
+- helpSuccessRate × 0.15
+
+### 4. totalMatchScore（総合スコア: 0-100）
+
+**重み付け平均**:
+- skillMatchScore × 0.45（スキルが最重要）
+- availabilityScore × 0.35（可用性も重要）
+- experienceScore × 0.20（経験は補助的）
+
+totalMatchScore = (skillMatch × 0.45) + (availability × 0.35) + (experience × 0.20)
+
+### 5. suggestionRank（ランキング）
+totalMatchScoreの降順でランキング
+
+### 6. recommendationLevel判定
+- **highly_recommended**:
+  - totalMatchScore ≥ 85
+  - かつ skillMatchScore ≥ 70
+  - かつ availabilityScore ≥ 60
+
+- **recommended**:
+  - totalMatchScore ≥ 70
+  - かつ skillMatchScore ≥ 50
+
+- **consider**:
+  - totalMatchScore ≥ 50
+  - または緊急時で他に選択肢がない
+
+- **last_resort**:
+  - totalMatchScore < 50
+  - スキルや可用性に大きな懸念
+
+### 7. estimatedResponseTime判定
+availabilityScoreとurgencyから判定：
+
+- **immediate**:
+  - availabilityScore ≥ 80 かつ urgency = critical
+  - 進行中タスク ≤ 2
+
+- **within_hour**:
+  - availabilityScore ≥ 60
+  - urgency = high または critical
+
+- **within_day**:
+  - availabilityScore ≥ 40
+  - urgency = medium
+
+- **longer**:
+  - availabilityScore < 40
+  - または urgency = low
+
+### 8. shouldPairMultipleHelpers判定
+以下の場合にペアリングを推奨：
+- problemType が technical かつ複雑
+- estimatedHelpDuration が 半日以上
+- ベストマッチのavailabilityScore < 60（1人では難しい）
+- スキルが補完的な2人がいる（例：フロントエンド + バックエンド）
+
+**ペアリング組み合わせ**:
+- primaryHelper: skillMatchScoreが最高
+- secondaryHelper: 異なる強みを持つ（例：経験、可用性）
+
+### 9. reasoning作成
+以下の要素を含める：
+- 主要なスキルマッチ
+- 類似タスク経験（具体的に）
+- 可用性の状況
+- 特筆すべき強み
+
+## 候補が0または少数の場合
+- チーム全体のキャパシティ問題を指摘
+- 緊急度に応じた代替案を提示
+- 外部リソースの検討を提案
+
+必ずJSON形式で出力してください。推奨は公平で、チーム全体の最適化を考慮したものにしてください。

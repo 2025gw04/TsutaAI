@@ -1,0 +1,103 @@
+<Window x:Class="TsutaAI.Windows.ProxySettingWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        Style="{StaticResource BaseWindowStyle}"
+        Title="プロキシ設定"
+        Height="530"
+        Width="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ヘッダー -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconBoxIcons Kind="RegularNetworkChart"
+                                            Width="28"
+                                            Height="28"
+                                            Foreground="{StaticResource PrimaryBrush}"
+                                            VerticalAlignment="Center"
+                                            Margin="0,0,12,0"/>
+                <TextBlock Text="プロキシ設定"
+                           Foreground="{StaticResource TextBrush}"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock Text="プロキシサーバーの接続設定を行います"
+                       Foreground="{StaticResource TextLightBrush}"
+                       FontSize="15"
+                       Margin="40,6,0,0"/>
+        </StackPanel>
+
+        <!-- 設定内容 -->
+        <StackPanel Grid.Row="1">
+            <CheckBox x:Name="UseProxyCheckBox"
+                      Content="プロキシを使用する"
+                      Foreground="{StaticResource TextBrush}"
+                      FontSize="16"
+                      FontWeight="SemiBold"
+                      Margin="0,0,0,20"
+                      Checked="UseProxyCheckBox_CheckedChanged"
+                      Unchecked="UseProxyCheckBox_CheckedChanged"/>
+
+            <TextBlock Text="プロキシサーバー URL"
+                       Foreground="{StaticResource TextLightBrush}"
+                       Margin="0,0,0,8"/>
+            <TextBox x:Name="ProxyUriTextBox"
+                     Style="{StaticResource ModernTextBox}"
+                     Margin="0,0,0,15"
+                     Text="http://proxy.example.com:8080"/>
+
+            <TextBlock Text="ユーザー名"
+                       Foreground="{StaticResource TextLightBrush}"
+                       Margin="0,0,0,8"/>
+            <TextBox x:Name="UserNameTextBox"
+                     Style="{StaticResource ModernTextBox}"
+                     Margin="0,0,0,15"/>
+
+            <TextBlock Text="パスワード"
+                       Foreground="{StaticResource TextLightBrush}"
+                       Margin="0,0,0,8"/>
+            <PasswordBox x:Name="PasswordBox"
+                         Style="{StaticResource PasswordBox}"
+                         Margin="0,0,0,0"/>
+        </StackPanel>
+
+        <!-- ボタン -->
+        <Grid Grid.Row="2" Margin="0,20,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="SaveButton"
+                    Grid.Column="1"
+                    Content="保存"
+                    Style="{StaticResource PrimaryButton}"
+                    Width="110"
+                    Height="40"
+                    FontSize="16"
+                    Margin="0,0,10,0"
+                    Click="SaveButton_Click"
+                    Cursor="Hand"/>
+
+            <Button Grid.Column="2"
+                    Content="キャンセル"
+                    Style="{StaticResource SecondaryButton}"
+                    Width="110"
+                    Height="40"
+                    FontSize="16"
+                    Click="CancelButton_Click"
+                    Cursor="Hand"/>
+        </Grid>
+    </Grid>
+</Window>

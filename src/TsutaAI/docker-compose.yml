@@ -1,0 +1,68 @@
+# =================================
+# TsutaAI Docker Compose - 開発環境
+# =================================
+# 使用方法:
+#   開発環境: docker-compose up
+#   テスト環境: docker-compose -f docker-compose.yml -f docker-compose.test.yml up
+#   本番環境: docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+
+version: '3.8'
+
+services:
+  # Backend API
+  backend-api:
+    build:
+      context: ./backend-api
+      dockerfile: Dockerfile
+      target: development
+    container_name: tsutaai-backend-dev
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=development
+      - PORT=3001
+      - DB_CLIENT=better-sqlite3
+      - DATABASE_PATH=/app/data/tsutaai.db
+    volumes:
+      - ./backend-api:/app
+      - /app/node_modules
+      - ./database:/app/data
+      - ./backend-api/logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - tsutaai-network
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3001/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Web Admin (開発環境)
+  web-admin:
+    build:
+      context: ./web-admin
+      dockerfile: Dockerfile
+      target: development
+    container_name: tsutaai-web-dev
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://localhost:3001
+    volumes:
+      - ./web-admin:/app
+      - /app/node_modules
+    restart: unless-stopped
+    networks:
+      - tsutaai-network
+    depends_on:
+      - backend-api
+
+networks:
+  tsutaai-network:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local

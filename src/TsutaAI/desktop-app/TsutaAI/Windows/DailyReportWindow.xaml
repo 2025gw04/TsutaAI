@@ -1,0 +1,279 @@
+﻿<Window x:Class="TsutaAI.Windows.DailyReportWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Style="{StaticResource BaseWindowStyle}"
+        Title="TsutaAI 本日の作業報告"
+        Height="900"
+        Width="1200"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BackgroundBrush}">
+
+    <Grid Margin="40,30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- 1. ヘッダー -->
+        <TextBlock Grid.Row="0"
+                   Style="{StaticResource H1}"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   Text="📊 本日の作業報告" />
+
+        <!-- 2. メインコンテンツ -->
+        <ScrollViewer Grid.Row="1" Padding="0,10,10,0"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- 作業要約（AI自動生成・編集可能） -->
+                <Border Style="{StaticResource Card}" Margin="0,10,0,0">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource H2}" FontSize="20" Margin="0,0,0,15">
+                            <Run Text="📝 本日の作業報告（AI自動生成）" />
+                        </TextBlock>
+                        <TextBlock Text="AIが生成した日報を確認・編集できます"
+                                   Foreground="{StaticResource TextLightBrush}"
+                                   Margin="0,0,0,10"/>
+                        <TextBox x:Name="DailyReportTextBox"
+                                 TextWrapping="Wrap"
+                                 AcceptsReturn="True"
+                                 IsReadOnly="False"
+                                 MinHeight="200"
+                                 VerticalScrollBarVisibility="Auto"
+                                 BorderThickness="1"
+                                 BorderBrush="{StaticResource BorderBrush}"
+                                 Padding="10"
+                                 Background="{StaticResource WindowBackgroundBrush}" />
+                    </StackPanel>
+                </Border>
+
+                <Grid Margin="0,20,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- 左パネル: タスク一覧 -->
+                    <Border Grid.Column="0" Style="{StaticResource Card}" Margin="0,0,10,0">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource H2}" FontSize="18" Margin="0,0,0,15">
+                                <Run Text="📋 タスク一覧" />
+                            </TextBlock>
+
+                            <TextBlock Text="【完了したタスク】" FontWeight="SemiBold" />
+                            <ItemsControl x:Name="CompletedTasksItemsControl" Margin="10,5,0,15">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" Margin="0,2" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <TextBlock Text="【残っているタスク】" FontWeight="SemiBold" />
+                            <ItemsControl x:Name="PendingTasksItemsControl" Margin="10,5,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}" Margin="0,2" Foreground="{StaticResource TextLightBrush}" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 右パネル: 自己評価 -->
+                    <Border Grid.Column="1" Style="{StaticResource Card}" Margin="10,0,0,0">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource H2}" FontSize="20" Margin="0,0,0,10">
+                            <Run Text="⭐ 自己評価" />
+                                </TextBlock>
+
+                                <TextBlock Text="今日の満足度は？" Margin="0,5,0,10" FontWeight="SemiBold" FontSize="16"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5,0,10">
+                                <RadioButton x:Name="SatisfactionVeryBad" GroupName="Satisfaction" Style="{x:Null}" Cursor="Hand" Margin="8,0">
+                                    <Border Background="Transparent" Padding="4" CornerRadius="8">
+                                        <TextBlock Text="😔" FontSize="38">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Opacity" Value="0.4"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=SatisfactionVeryBad}" Value="True">
+                                                            <Setter Property="Opacity" Value="1.0"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </RadioButton>
+                                <RadioButton x:Name="SatisfactionBad" GroupName="Satisfaction" Style="{x:Null}" Cursor="Hand" Margin="8,0">
+                                    <Border Background="Transparent" Padding="4" CornerRadius="8">
+                                        <TextBlock Text="🙂" FontSize="38">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Opacity" Value="0.4"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=SatisfactionBad}" Value="True">
+                                                            <Setter Property="Opacity" Value="1.0"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </RadioButton>
+                                <RadioButton x:Name="SatisfactionNormal" GroupName="Satisfaction" Style="{x:Null}" Cursor="Hand" Margin="8,0" IsChecked="True">
+                                    <Border Background="Transparent" Padding="4" CornerRadius="8">
+                                        <TextBlock Text="😊" FontSize="38">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Opacity" Value="0.4"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=SatisfactionNormal}" Value="True">
+                                                            <Setter Property="Opacity" Value="1.0"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </RadioButton>
+                                <RadioButton x:Name="SatisfactionGood" GroupName="Satisfaction" Style="{x:Null}" Cursor="Hand" Margin="8,0">
+                                    <Border Background="Transparent" Padding="4" CornerRadius="8">
+                                        <TextBlock Text="😄" FontSize="38">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Opacity" Value="0.4"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=SatisfactionGood}" Value="True">
+                                                            <Setter Property="Opacity" Value="1.0"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </RadioButton>
+                                <RadioButton x:Name="SatisfactionExcellent" GroupName="Satisfaction" Style="{x:Null}" Cursor="Hand" Margin="8,0">
+                                    <Border Background="Transparent" Padding="4" CornerRadius="8">
+                                        <TextBlock Text="🎉" FontSize="38">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Opacity" Value="0.4"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding IsChecked, ElementName=SatisfactionExcellent}" Value="True">
+                                                            <Setter Property="Opacity" Value="1.0"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </Border>
+                                </RadioButton>
+                            </StackPanel>
+
+                            <TextBlock Text="今日の達成度は？" Margin="0,10,0,10" FontWeight="SemiBold" FontSize="16"/>
+                            <Slider x:Name="CompletionSlider"
+                                    Minimum="0"
+                                    Maximum="100"
+                                    Value="50"
+                                    IsSnapToTickEnabled="True"
+                                    TickFrequency="5"
+                                    Margin="0,0,0,0"
+                                    Foreground="{StaticResource AccentBrush}"
+                                    Height="28"/>
+                            <TextBlock HorizontalAlignment="Right" Margin="0,0,0,0" FontSize="20" FontWeight="Bold" Foreground="{StaticResource AccentBrush}">
+                        <Run Text="{Binding ElementName=CompletionSlider, Path=Value, StringFormat={}{0:F0}}" />
+                        <Run Text="%" />
+                            </TextBlock>
+
+                            <TextBlock Text="今日の集中度は？" Margin="0,10,0,10" FontWeight="SemiBold" FontSize="16"/>
+                            <Slider x:Name="FocusSlider"
+                                    Minimum="0"
+                                    Maximum="100"
+                                    Value="50"
+                                    IsSnapToTickEnabled="True"
+                                    TickFrequency="5"
+                                    Margin="0,0,0,0"
+                                    Foreground="{StaticResource SuccessBrush}"
+                                    Height="28"/>
+                            <TextBlock HorizontalAlignment="Right" Margin="0,0,0,0" FontSize="20" FontWeight="Bold" Foreground="{StaticResource SuccessBrush}">
+                        <Run Text="{Binding ElementName=FocusSlider, Path=Value, StringFormat={}{0:F0}}" />
+                        <Run Text="%" />
+                            </TextBlock>
+
+                            <TextBlock Text="今日のタスクの難易度は？" Margin="0,10,0,10" FontWeight="SemiBold" FontSize="16"/>
+                            <Slider x:Name="DifficultySlider"
+                                    Minimum="0"
+                                    Maximum="100"
+                                    Value="50"
+                                    IsSnapToTickEnabled="True"
+                                    TickFrequency="5"
+                                    Margin="0,0,0,0"
+                                    Foreground="{StaticResource WarningBrush}"
+                                    Height="28"/>
+                            <TextBlock HorizontalAlignment="Right" Margin="0,0,0,0" FontSize="20" FontWeight="Bold" Foreground="{StaticResource WarningBrush}">
+                        <Run Text="{Binding ElementName=DifficultySlider, Path=Value, StringFormat={}{0:F0}}" />
+                        <Run Text="%" />
+                            </TextBlock>
+
+                            <TextBlock Text="今日の学びの度合いは？" Margin="0,10,0,10" FontWeight="SemiBold" FontSize="16"/>
+                            <Slider x:Name="LearningSlider"
+                                    Minimum="0"
+                                    Maximum="100"
+                                    Value="50"
+                                    IsSnapToTickEnabled="True"
+                                    TickFrequency="5"
+                                    Margin="0,0,0,0"
+                                    Foreground="{StaticResource PrimaryBrush}"
+                                    Height="28"/>
+                            <TextBlock HorizontalAlignment="Right" Margin="0,0,0,0" FontSize="20" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}">
+                        <Run Text="{Binding ElementName=LearningSlider, Path=Value, StringFormat={}{0:F0}}" />
+                        <Run Text="%" />
+                            </TextBlock>
+                        </StackPanel>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
+
+                <!-- AIフィードバック -->
+                <Border Grid.Row="2" Background="#E9EFFF" CornerRadius="8" Padding="20" Margin="0,30,0,0">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource H2}" FontSize="18" Margin="0,0,0,10">
+                    <StackPanel Orientation="Horizontal">
+                        <iconPacks:PackIconBoxIcons Kind="SolidMessageDetail" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <TextBlock Text="AIからのフィードバック" VerticalAlignment="Center" />
+                    </StackPanel>
+                </TextBlock>
+                        <TextBlock x:Name="AiFeedbackTextBlock"
+                           Text="AIがフィードバックを生成しています…"
+                           TextWrapping="Wrap"
+                           LineHeight="22" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 4. 送信ボタン -->
+        <Button Grid.Row="2"
+                x:Name="SubmitButton"
+                Style="{StaticResource PrimaryGradientButton}"
+                Height="56"
+                FontSize="20"
+                FontWeight="SemiBold"
+                Margin="0,35,0,0"
+                Click="SubmitButton_Click"
+                Cursor="Hand">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconBoxIcons Kind="RegularCheckCircle" Width="22" Height="22" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                <TextBlock Text="報告を送信して終了" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

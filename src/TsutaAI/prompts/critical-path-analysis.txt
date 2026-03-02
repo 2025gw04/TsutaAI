@@ -1,0 +1,134 @@
+あなたはプロジェクト管理とクリティカルパス分析の専門家です。タスクの依存関係と進捗から、プロジェクトのクリティカルパスを特定し、リスク評価を行ってください。
+
+## プロジェクト情報
+- プロジェクト名: {{projectName}}
+- 期限: {{deadline}}
+- 現在日: {{currentDate}}
+- 残り日数: {{remainingDays}}日
+
+## タスク情報
+{{#each tasks}}
+### タスク{{index}}: {{name}}
+- タスクID: {{id}}
+- 担当者: {{assignedTo}}
+- 予定工数: {{estimatedHours}}時間
+- 進捗: {{progress}}%
+- ステータス: {{status}}
+- 開始日: {{startDate}}
+- 期限: {{dueDate}}
+- 依存先タスク: {{dependencies}}
+- ブロック中のタスク: {{blockedTasks}}
+- 優先度: {{priority}}
+
+{{/each}}
+
+## 出力形式
+以下のJSON形式で出力してください：
+{
+  "criticalPath": [
+    {
+      "taskId": タスクID,
+      "taskName": "タスク名",
+      "isCritical": true,
+      "slackDays": 0,
+      "earliestStart": "YYYY-MM-DD",
+      "latestStart": "YYYY-MM-DD",
+      "earliestFinish": "YYYY-MM-DD",
+      "latestFinish": "YYYY-MM-DD",
+      "blockingTaskCount": 数値,
+      "blockedByCount": 数値,
+      "dependencyChainLength": 数値,
+      "impactAnalysis": "このタスクの遅延がプロジェクトに与える影響（100文字以内）",
+      "riskAssessment": "リスク評価（50文字以内）"
+    }
+  ],
+  "nonCriticalTasks": [
+    {
+      "taskId": タスクID,
+      "taskName": "タスク名",
+      "isCritical": false,
+      "slackDays": スラック日数,
+      "canBeDelayed": true/false,
+      "impactIfDelayed": "遅延時の影響（50文字以内）"
+    }
+  ],
+  "projectAnalysis": {
+    "criticalPathLength": クリティカルパス上のタスク数,
+    "totalEstimatedDays": 総予定日数,
+    "bottleneckTasks": [
+      {
+        "taskId": タスクID,
+        "taskName": "タスク名",
+        "reason": "ボトルネックである理由（50文字以内）"
+      }
+    ],
+    "riskLevel": "low|medium|high|critical",
+    "canMeetDeadline": true/false,
+    "recommendedActions": [
+      "推奨アクション1（具体的に）",
+      "推奨アクション2（具体的に）",
+      "推奨アクション3（具体的に）"
+    ]
+  },
+  "resourceOptimization": {
+    "overloadedMembers": [
+      {
+        "member": "メンバー名",
+        "taskCount": タスク数,
+        "recommendation": "リソース最適化提案（50文字以内）"
+      }
+    ],
+    "parallelizableGroups": [
+      {
+        "groupName": "並列実行可能グループ名",
+        "taskIds": [タスクID配列],
+        "benefit": "並列化による利点（50文字以内）"
+      }
+    ]
+  }
+}
+
+## クリティカルパス分析ガイドライン
+
+### 1. クリティカルタスクの判定基準
+- 依存関係チェーンの中で最も長い経路上にあるタスク
+- スラック（余裕日数）が0のタスク
+- 遅延すると直接プロジェクト完了日に影響するタスク
+- 多くのタスクをブロックしているタスク
+
+### 2. スラック日数の算出
+slackDays = latestStart - earliestStart
+または
+slackDays = latestFinish - earliestFinish
+
+### 3. リスクレベル判定
+- **critical**: クリティカルパス上のタスクで進捗<50%、かつ期限まで3日以内
+- **high**: クリティカルパス上のタスクで進捗<70%、またはブロッカーあり
+- **medium**: クリティカルパス上のタスクで進捗<90%
+- **low**: 非クリティカルタスク、またはクリティカルでも進捗良好
+
+### 4. ボトルネック特定
+以下の条件に該当するタスクをボトルネックとする：
+- 3つ以上のタスクをブロックしている
+- 依存チェーンの長さが3以上
+- 担当者が他にも複数のタスクを抱えている
+- 進捗が停滞している（1週間以上進捗0%）
+
+### 5. 並列化可能性の評価
+- 依存関係がないタスク群を特定
+- 同じ担当者に集中していないか確認
+- 並列実行によるリスク軽減効果を評価
+
+### 6. リソース最適化
+- 1人に4つ以上のタスクが集中している場合は過負荷と判定
+- クリティカルパス外のタスクを持つメンバーをクリティカルパスに再配置提案
+- スキルマッチも考慮
+
+## 推奨アクションの優先順位
+1. クリティカルパス上の遅延タスクの加速
+2. ボトルネックタスクの優先処理
+3. リソースの再配置
+4. 並列化可能なタスクの同時着手
+5. 非クリティカルタスクの一時延期
+
+必ずJSON形式で出力してください。分析は現実的で実行可能なものにしてください。

@@ -1,0 +1,55 @@
+# Node modules
+node_modules/
+npm-debug.log
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation (除外しない場合もある)
+# docs/
+# README.md
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Build files
+dist/
+build/
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml

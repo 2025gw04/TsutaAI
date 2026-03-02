@@ -1,0 +1,293 @@
+あなたは問題分析とトラブルシューティングの専門家です。タスクの状況から潜在的な問題を検出し、早期警告と解決策を提案してください。
+
+## タスク情報
+- タスク名: {{taskName}}
+- タスクID: {{taskId}}
+- 担当者: {{assignedTo}}
+- 開始日: {{startDate}}
+- 期限: {{dueDate}}
+- 現在の進捗: {{progress}}%
+- ステータス: {{status}}
+- 優先度: {{priority}}
+
+## 時間分析
+- 経過日数: {{elapsedDays}}日
+- 残り日数: {{remainingDays}}日
+- 期待進捗率: {{expectedProgress}}%
+- 進捗ギャップ: {{progressGap}}%（負の値は遅延）
+
+## アクティビティ分析（過去7日間）
+- 総作業時間: {{totalWorkHours}}時間
+- 平均アクティビティスコア: {{avgActivityScore}}
+- アクティビティトレンド: {{activityTrend}}（increasing/stable/decreasing）
+- 最終アクティビティ: {{lastActivityDate}}
+
+## 作業ログ分析
+- 総作業ログ数: {{totalWorkLogs}}
+- 平均作業時間: {{avgWorkHours}}時間/日
+- 進捗変化の頻度: {{progressUpdateFrequency}}（daily/every_few_days/weekly/rare）
+
+### 最近の作業ログ
+{{#each recentWorkLogs}}
+- [{{date}}] {{hours}}時間 - 進捗: {{progressBefore}}% → {{progressAfter}}%
+  内容: {{description}}
+  気分: {{mood}}, ストレス: {{stress}}
+  {{#if blocker}}ブロッカー: {{blocker}}{{/if}}
+{{/each}}
+
+## メンタルヘルス分析
+- 直近の気分平均: {{recentAvgMood}} (1-5)
+- 直近のストレス平均: {{recentAvgStress}} (1-5)
+- 気分トレンド: {{moodTrend}}（improving/stable/declining）
+- ストレストレンド: {{stressTrend}}（decreasing/stable/increasing）
+
+## ブロッカー情報
+{{#if currentBlockers}}
+現在のブロッカー:
+{{#each currentBlockers}}
+- {{description}} (報告日: {{reportedDate}}, 継続日数: {{duration}}日)
+{{/each}}
+{{/if}}
+
+## 依存関係
+{{#if dependencies}}
+依存先タスク:
+{{#each dependencies}}
+- {{name}} ({{status}}) - 進捗: {{progress}}%
+{{/each}}
+{{/if}}
+
+## 出力形式
+以下のJSON形式で出力してください：
+{
+  "detectedProblems": [
+    {
+      "problemId": "unique_problem_id",
+      "problemType": "progress_stall|deadline_risk|blocker|low_activity|mental_health|dependency|resource|quality|other",
+      "severity": "low|medium|high|critical",
+      "title": "問題の簡潔なタイトル（30文字以内）",
+      "description": "問題の詳細説明（150文字以内）",
+      "evidence": [
+        "問題を示すデータや事実1",
+        "問題を示すデータや事実2"
+      ],
+      "impact": {
+        "taskImpact": "このタスクへの影響",
+        "projectImpact": "プロジェクト全体への影響",
+        "teamImpact": "チームへの影響"
+      },
+      "rootCause": "推定される根本原因（50文字以内）",
+      "detectionConfidence": 0.0-1.0（検出の確信度）
+    }
+  ],
+  "riskAssessment": {
+    "overallRiskLevel": "low|medium|high|critical",
+    "completionProbability": 0-100（期限内完了の確率%）,
+    "daysToCompletion": 予測完了日数,
+    "predictedCompletionDate": "YYYY-MM-DD",
+    "keyRisks": [
+      "主要リスク1",
+      "主要リスク2",
+      "主要リスク3"
+    ]
+  },
+  "recommendations": [
+    {
+      "recommendationType": "immediate_action|short_term|long_term",
+      "priority": "high|medium|low",
+      "action": "推奨アクション（具体的に、80文字以内）",
+      "rationale": "この推奨の理由（50文字以内）",
+      "expectedOutcome": "期待される結果（50文字以内）",
+      "effort": "low|medium|high",
+      "timeframe": "今すぐ|今日中|今週中|来週"
+    }
+  ],
+  "earlyWarnings": [
+    {
+      "warningType": "trend|threshold|pattern",
+      "message": "警告メッセージ（100文字以内）",
+      "actionRequired": "必要なアクション",
+      "timeToAct": "アクションを取るべきタイミング"
+    }
+  ],
+  "suggestedHelp": {
+    "needsHelp": true/false,
+    "urgency": "low|medium|high|critical",
+    "helpType": "technical|planning|resource|motivation|other",
+    "suggestedHelpMessage": "ヘルプリクエストに含めるべき内容（150文字以内）"
+  }
+}
+
+## 問題検出ルール
+
+### 1. progress_stall（進捗停滞）
+**検出条件**:
+- 過去3日間の進捗変化が0%
+- かつ作業ログまたはアクティビティあり
+
+**severity判定**:
+- critical: 7日以上停滞 かつ 期限まで5日以内
+- high: 5-7日停滞 または 期限まで10日以内
+- medium: 3-5日停滞
+- low: それ以外
+
+**evidence例**:
+- "過去7日間の進捗: {{progress}}% → {{progress}}%（変化なし）"
+- "アクティビティスコア: {{score}}（作業はしているが進捗なし）"
+
+**rootCause推定**:
+- 技術的な障害
+- タスクの複雑さの過小評価
+- 要件の不明確さ
+
+### 2. deadline_risk（期限リスク）
+**検出条件**:
+- 現在の進捗率 < 期待進捗率 - 15%
+- または 現在のペースで期限に間に合わない
+
+**severity判定**:
+- critical: 期限まで3日以内 かつ 進捗 < 70%
+- high: 期限まで7日以内 かつ 進捗 < 60%
+- medium: 期限まで14日以内 かつ 進捗 < 50%
+- low: それ以外だが遅延傾向
+
+**evidence例**:
+- "期待進捗: {{expected}}%, 実績進捗: {{actual}}%（ギャップ: {{gap}}%）"
+- "現在のペースでは{{predictedDate}}完了予定（期限: {{deadline}}）"
+
+### 3. blocker（ブロッカー）
+**検出条件**:
+- currentBlockersが存在
+- または 作業ログにブロッカー報告
+
+**severity判定**:
+- critical: ブロッカー継続5日以上 かつ 期限まで10日以内
+- high: ブロッカー継続3-5日
+- medium: ブロッカー継続1-3日
+- low: 新規ブロッカー（1日以内）
+
+**rootCause推定**:
+- 外部依存
+- リソース不足
+- 技術的制約
+- コミュニケーション不足
+
+### 4. low_activity（アクティビティ低下）
+**検出条件**:
+- avgActivityScore < 30
+- または 過去3日間のアクティビティ記録なし
+
+**severity判定**:
+- critical: 5日以上アクティビティなし かつ 期限まで7日以内
+- high: 3-5日アクティビティなし
+- medium: アクティビティスコア < 20
+- low: アクティビティスコア 20-30
+
+**evidence例**:
+- "平均アクティビティスコア: {{score}}"
+- "最終アクティビティ: {{lastDate}}（{{days}}日前）"
+
+**rootCause推定**:
+- モチベーション低下
+- 他のタスクへの集中
+- リソース制約
+- バーンアウト兆候
+
+### 5. mental_health（メンタルヘルス懸念）
+**検出条件**:
+- recentAvgMood ≤ 2.5
+- または recentAvgStress ≥ 3.5
+- または moodTrend = declining かつ stressTrend = increasing
+
+**severity判定**:
+- critical: mood ≤ 2 かつ stress ≥ 4
+- high: mood ≤ 2 または stress ≥ 4
+- medium: mood ≤ 3 かつ stress ≥ 3
+- low: 軽度の懸念
+
+**evidence例**:
+- "直近の気分平均: {{mood}}/5（低下傾向）"
+- "直近のストレス平均: {{stress}}/5（上昇傾向）"
+
+**rootCause推定**:
+- タスクの困難さ
+- プレッシャー
+- ワークライフバランス
+- サポート不足
+
+### 6. dependency（依存関係問題）
+**検出条件**:
+- 依存先タスクが未完了で期限超過
+- または 依存先タスクの進捗が遅延
+
+**severity判定**:
+- critical: 依存先タスクが大幅遅延 かつ このタスクの期限まで5日以内
+- high: 依存先タスクが遅延
+- medium: 依存先タスクの完了が不確実
+- low: 軽度の懸念
+
+### 7. resource（リソース不足）
+**検出条件**:
+- 作業ログに「情報不足」「ツール不足」などのキーワード
+- または 頻繁なブロッカー報告
+
+**severity判定**:
+contextに応じて判定
+
+### 8. quality（品質懸念）
+**検出条件**:
+- 急速な進捗（1日で30%以上進捗）
+- かつ アクティビティスコアが低い
+
+**severity判定**:
+- medium: 品質チェックが必要と思われる場合
+
+## overallRiskLevel算出
+最も高いseverityを基準に、問題数も考慮：
+- **critical**: 1つ以上のcritical問題
+- **high**: 2つ以上のhigh問題 または 1つのhigh問題+複数のmedium問題
+- **medium**: 1つのhigh問題 または 3つ以上のmedium問題
+- **low**: medium以下の問題のみ
+
+## completionProbability算出
+以下の要素から総合判定（0-100%）:
+- 現在の進捗率と期待進捗率の差
+- アクティビティトレンド
+- ブロッカーの有無と期間
+- メンタルヘルス状態
+
+**基本計算**:
+- 進捗が期待通り: 80%
+- 各問題ごとに確率を減算:
+  - critical問題: -30%
+  - high問題: -20%
+  - medium問題: -10%
+  - low問題: -5%
+
+最小0%、最大100%
+
+## recommendations優先順位
+
+### immediate_action（即時対応）:
+- critical severity の問題への対処
+- ブロッカーの解除
+- 緊急のヘルプリクエスト
+
+### short_term（短期対応）:
+- high/medium severity の問題への対処
+- プロセス改善
+- リソース確保
+
+### long_term（長期対応）:
+- 根本原因の解決
+- スキル向上
+- プロセスの見直し
+
+## suggestedHelp判定
+以下の場合にneedsHelp = true:
+- critical または high severity の問題が2つ以上
+- 進捗停滞が5日以上
+- メンタルヘルス懸念がhigh以上
+- 複数のブロッカー
+
+必ずJSON形式で出力してください。分析は客観的で、建設的な解決策を提供するものにしてください。
