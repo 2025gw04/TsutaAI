@@ -7,13 +7,13 @@
 
 ## 1) 全体構成（概要）
 
-- `src/TsutaAI/backend-api/`  
+- `backend-api/`  
   Node.js + Express の API サーバー。DB・認証・業務ロジックを担当。
-- `src/TsutaAI/web-admin/`  
+- `web-admin/`  
   SvelteKit の管理画面（ブラウザ）。
-- `src/TsutaAI/desktop-app/`  
+- `desktop-app/`  
   C# WPF のデスクトップアプリ（Windows）。
-- `src/TsutaAI/database/`  
+- `database/`  
   SQLite DB ファイルや SQL を配置。
 
 ---
@@ -30,7 +30,7 @@
 
 ```bash
 git clone <REPOSITORY_URL>
-cd TsutaAI/src/TsutaAI
+cd TsutaAI
 ```
 
 依存関係をインストール:
@@ -48,7 +48,6 @@ npm install
 ## 4) `.env` 作成（backend-api）
 
 ```bash
-# ここから先は src/TsutaAI 配下で実行
 cd backend-api
 cp .env.example .env
 ```
@@ -78,14 +77,14 @@ cd backend-api
 ```
 
 ### 開発・デモ用（サンプルデータあり）
-`src/TsutaAI/backend-api/scripts/init-database.js`
+`backend-api/scripts/init-database.js`
 
 ```bash
 npm run db:init
 ```
 
 ### 最小構成（管理者のみ）
-`src/TsutaAI/backend-api/scripts/init-production.js`
+`backend-api/scripts/init-production.js`
 
 ```bash
 npm run db:init:prod
@@ -126,7 +125,7 @@ npm run dev
 
 ## 7) desktop-app 起動方法（API設定を含む）
 
-1. `src/TsutaAI/desktop-app/TsutaAI.sln` を Visual Studio で開く  
+1. `desktop-app/TsutaAI.sln` を Visual Studio で開く  
 2. `TsutaAI` をスタートアッププロジェクトにして実行（F5）  
 3. ログイン画面の **「API設定」** を開く  
 4. API URL に `http://localhost:3000` を設定（`/api` は不要）  
@@ -152,3 +151,4 @@ npm run db:init:prod
 cd web-admin
 npm run dev
 ```
+
