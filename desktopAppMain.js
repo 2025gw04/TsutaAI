@@ -87,27 +87,87 @@ document.addEventListener("DOMContentLoaded", () => {
         const galleryImage = document.getElementById("galleryImage");
         const galleryClose = document.querySelector(".gallery-close");
 
-        window.openGallery = (imageId) => {
-            const sourceImage = document.getElementById(imageId);
-            if (!sourceImage) {
-                console.warn(`Gallery source image not found: ${imageId}`);
+        // Carousel initialization
+        window.carousels = window.carousels || {};
+        const CAROUSEL_INTERVAL = 3000;
+
+        function initCarousels() {
+            document.querySelectorAll('[data-carousel]').forEach(container => {
+                const carouselId = container.getAttribute('data-carousel');
+                // Only initialize if not already tracked or if elements changed
+                const images = container.querySelectorAll('.carousel-image');
+                if (images.length > 0) {
+                    if (window.carousels[carouselId] && window.carousels[carouselId].interval) {
+                        clearInterval(window.carousels[carouselId].interval);
+                    }
+                    window.carousels[carouselId] = {
+                        container: container,
+                        images: Array.from(images), // Store as array for easy access
+                        currentIndex: 0,
+                        interval: null
+                    };
+                    startCarousel(carouselId);
+                }
+            });
+        }
+
+        window.startCarousel = function(carouselId) {
+            const carousel = window.carousels[carouselId];
+            if (!carousel) return;
+            if (carousel.interval) clearInterval(carousel.interval);
+            carousel.interval = setInterval(() => {
+                nextImage(carouselId);
+            }, CAROUSEL_INTERVAL);
+        };
+
+        window.nextImage = function(carouselId) {
+            const carousel = window.carousels[carouselId];
+            if (!carousel || carousel.images.length === 0) return;
+            carousel.images[carousel.currentIndex].classList.remove('active');
+            carousel.currentIndex = (carousel.currentIndex + 1) % carousel.images.length;
+            carousel.images[carousel.currentIndex].classList.add('active');
+        };
+
+        // Gallery functionality
+        let currentGallery = null;
+        let currentGalleryIndex = 0;
+
+        window.openGallery = (carouselId) => {
+            const carousel = window.carousels[carouselId];
+            if (!carousel || carousel.images.length === 0) {
+                console.warn(`Carousel not found or empty: ${carouselId}`);
                 return;
             }
-            if (!sourceImage.src || sourceImage.src.includes("path/to")) {
-                return;
-            }
-            galleryImage.src = sourceImage.src;
+            currentGallery = carousel;
+            currentGalleryIndex = carousel.currentIndex;
+            if (carousel.interval) clearInterval(carousel.interval);
+
+            galleryImage.src = carousel.images[currentGalleryIndex].src;
             galleryModal.classList.add("active");
             document.addEventListener("keydown", handleGalleryKeydown);
         };
 
-        const closeGallery = () => {
+        window.closeGallery = () => {
             galleryModal.classList.remove("active");
             document.removeEventListener("keydown", handleGalleryKeydown);
+            if (currentGallery) {
+                const id = currentGallery.container.getAttribute('data-carousel');
+                startCarousel(id);
+                currentGallery = null;
+            }
+        };
+
+        window.navigateGallery = (direction) => {
+            if (!currentGallery || currentGallery.images.length === 0) return;
+            const total = currentGallery.images.length;
+            currentGalleryIndex = (currentGalleryIndex + direction + total) % total;
+            galleryImage.src = currentGallery.images[currentGalleryIndex].src;
         };
 
         const handleGalleryKeydown = (e) => {
             if (e.key === "Escape") closeGallery();
+            else if (e.key === "ArrowLeft") navigateGallery(-1);
+            else if (e.key === "ArrowRight") navigateGallery(1);
         };
 
         if (galleryClose) galleryClose.addEventListener("click", closeGallery);
@@ -245,6 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Initial generation
         generateToc();
         observeSections();
+        initCarousels();
 
         // 画像の遅延読み込み処理（Intersection Observer使用）
         function initLazyLoadImages() {
