@@ -541,7 +541,7 @@ ul.item-list li strong {
     color: white;
     font-size: 2.5rem;
     cursor: pointer;
-    padding: 0rem 0.75rem 0.5rem 0.75rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.75rem;
     opacity: 0.9;
     transition: all 0.2s ease;
     line-height: 1;
