@@ -18,11 +18,11 @@
 
 この README の情報源は以下です。
 
-- `src/backend-api/src/**`
-- `src/web-admin/src/**`
-- `src/desktop-app/TsutaAI/**`
-- `src/backend-api/scripts/init-database.js`
-- `package.json`（`src/` / `src/backend-api/` / `src/web-admin/`）
+- `src/TsutaAI/backend-api/src/**`
+- `src/TsutaAI/web-admin/src/**`
+- `src/TsutaAI/desktop-app/TsutaAI/**`
+- `src/TsutaAI/backend-api/scripts/init-database.js`
+- `package.json`（`src/TsutaAI/` / `src/TsutaAI/backend-api/` / `src/TsutaAI/web-admin/`）
 
 ---
 
@@ -30,7 +30,7 @@
 
 TsutaAI は、プロジェクト管理と日々の作業実績を、AI分析と組み合わせて扱う統合システムです。
 
-構成は次の 3 コンポーネントです（いずれも `src/` 配下）。
+構成は次の 3 コンポーネントです（いずれも `src/TsutaAI/` 配下）。
 
 - `backend-api/`:
   Node.js + Express の API サーバー
@@ -39,7 +39,7 @@ TsutaAI は、プロジェクト管理と日々の作業実績を、AI分析と�
 - `desktop-app/`:
   C# WPF デスクトップアプリ（Windows）
 
-加えて、共有データは `src/database/` 配下の DB ファイル/SQL を利用します。
+加えて、共有データは `src/TsutaAI/database/` 配下の DB ファイル/SQL を利用します。
 
 ---
 
@@ -121,7 +121,7 @@ flowchart TB
 
 ```text
 TsutaAI/
-├── src/
+├── src/TsutaAI/
 │   ├── backend-api/          # APIサーバー
 │   ├── web-admin/            # 管理Web UI
 │   ├── desktop-app/          # WPFクライアント
@@ -372,7 +372,7 @@ TsutaAI/
 
 ### 8.5 設定ファイル
 
-`src/desktop-app/TsutaAI/Config/appsettings.yaml`
+`src/TsutaAI/desktop-app/TsutaAI/Config/appsettings.yaml`
 
 主項目:
 
@@ -581,13 +581,13 @@ npm run dev
 
 ### 11.5 desktop-app を起動する
 
-1. `TsutaAI` 直下の `src/desktop-app/TsutaAI.sln` を Visual Studio で開く
-2. `src/desktop-app/TsutaAI/Config/appsettings.yaml` の `API.BaseUrl` を確認
+1. `TsutaAI` 直下の `src/TsutaAI/desktop-app/TsutaAI.sln` を Visual Studio で開く
+2. `src/TsutaAI/desktop-app/TsutaAI/Config/appsettings.yaml` の `API.BaseUrl` を確認
 3. Build & Run
 
 ### 11.6 ルート package.json の使い方
 
-`TsutaAI/src/package.json` で使える主コマンド（`TsutaAI/src` で実行）:
+`TsutaAI/src/TsutaAI/package.json` で使える主コマンド（`TsutaAI/src` で実行）:
 
 ```bash
 npm run dev          # backend-api を起動
