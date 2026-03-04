@@ -20,7 +20,7 @@ class BaseLLMAdapter {
     this.endpoint = config.endpoint;
     this.model = config.model;
     this.temperature = config.temperature || 0.3;
-    this.maxTokens = config.maxTokens || 65536;
+    this.maxTokens = config.maxTokens || 40960;
     this.proxyAgent = config.proxyAgent || null;
   }
 
@@ -93,12 +93,30 @@ class BaseLLMAdapter {
   }
 
   /**
+   * AIからの応答から不要なタグ（<think>など）を除去する
+   * Qwen などの推論モデルが <think>...</think> ブロックを返すため、それを除去する
+   * @param {string} content - AIが生成したコンテンツ
+   * @returns {string} クリーンアップされたコンテンツ
+   */
+  cleanResponseContent(content) {
+    if (typeof content !== 'string') return content;
+
+    // <think>...</think> のブロックを正規表現で削除（非貪欲マッチで改行も含める）
+    let cleaned = content.replace(/<think>[\s\S]*?<\/think>\n?/g, '');
+
+    // もしモデルの生成が途中で止まり、</think>で閉じられていない場合は <think> から末尾までを削除
+    cleaned = cleaned.replace(/<think>[\s\S]*$/g, '');
+
+    return cleaned.trim();
+  }
+
+  /**
    * JSONレスポンスをパース・修復
    * @param {string} content - AIが生成したコンテンツ
    * @returns {Object} パースされたJSON
    */
   parseJsonResponse(content) {
-    let jsonStr = content.trim();
+    let jsonStr = this.cleanResponseContent(content);
 
     // Markdownコードブロックの除去
     if (jsonStr.startsWith('```json')) {

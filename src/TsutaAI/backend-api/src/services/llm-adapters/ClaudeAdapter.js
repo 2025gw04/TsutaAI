@@ -100,7 +100,7 @@ class ClaudeAdapter extends BaseLLMAdapter {
         return this.parseJsonResponse(content);
       }
 
-      return content.trim();
+      return this.cleanResponseContent(content);
     } catch (error) {
       return this.handleError(error, options);
     }
@@ -197,7 +197,7 @@ class ClaudeAdapter extends BaseLLMAdapter {
       }
 
       return {
-        message: content.trim(),
+        message: this.cleanResponseContent(content),
         toolCalls,
         finishReason: data.stop_reason
       };

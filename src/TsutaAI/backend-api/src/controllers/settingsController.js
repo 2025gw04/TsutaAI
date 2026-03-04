@@ -447,7 +447,7 @@ async function testLlmConnection(req, res, next) {
       endpoint,
       model,
       temperature: 0.3,
-      maxTokens: 100
+      maxTokens: 4096  // 推論モデル（Qwenなど）は<think>ブロックで多くのトークンを消費するため余裕を持たせる
     });
     const duration = Date.now() - startTime;
 
@@ -461,7 +461,8 @@ async function testLlmConnection(req, res, next) {
       });
     }
 
-    logger.info(`LLM API test success (${duration}ms): ${result.substring(0, 50)}...`);
+    const resultStr = typeof result === 'string' ? result : JSON.stringify(result);
+    logger.info(`LLM API test success (${duration}ms): ${resultStr.substring(0, 50)}...`);
 
     res.json({
       success: true,

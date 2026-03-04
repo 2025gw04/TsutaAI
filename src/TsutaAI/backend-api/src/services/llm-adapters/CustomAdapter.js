@@ -75,7 +75,7 @@ class CustomAdapter extends BaseLLMAdapter {
         return this.parseJsonResponse(content);
       }
 
-      return content.trim();
+      return this.cleanResponseContent(content);
     } catch (error) {
       return this.handleError(error, options);
     }
@@ -126,7 +126,7 @@ class CustomAdapter extends BaseLLMAdapter {
       const choice = data.choices[0];
 
       return {
-        message: choice.message.content,
+        message: this.cleanResponseContent(choice.message.content),
         toolCalls: choice.message.tool_calls || null,
         finishReason: choice.finish_reason
       };

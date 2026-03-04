@@ -15,7 +15,7 @@
 		llmEndpoint: 'https://api.groq.com/openai/v1/chat/completions',
 		llmModel: 'openai/gpt-oss-20b',
 		temperature: 0.3,
-		maxTokens: 65536,
+		maxTokens: 40960,
 		proxyEnabled: false,
 		proxyUrl: '',
 		proxyUsername: '',
@@ -34,12 +34,14 @@
 			label: 'Groq (高速推論)',
 			defaultEndpoint: 'https://api.groq.com/openai/v1/chat/completions',
 			defaultModel: 'openai/gpt-oss-20b',
+			defaultMaxTokens: 65536,
 			requiresApiKey: true,
 			models: [
-				{ value: 'openai/gpt-oss-20b', label: 'gpt-oss-20b' },
-				{ value: 'openai/gpt-oss-120b', label: 'gpt-oss-120b' },
-				{ value: 'llama-3.1-8b-instant', label: 'llama-3.1-8b' },
-				{ value: 'qwen/qwen3-32b', label: 'qwen3-32b' }
+				{ value: 'openai/gpt-oss-20b', label: 'gpt-oss-20b', maxTokens: 65536 },
+				{ value: 'openai/gpt-oss-120b', label: 'gpt-oss-120b', maxTokens: 65536 },
+				{ value: 'llama-3.3-70b-versatile', label: 'llama-3.3-70b', maxTokens: 32768 },
+				{ value: 'llama-3.1-8b-instant', label: 'llama-3.1-8b', maxTokens: 8192 },
+				{ value: 'qwen/qwen3-32b', label: 'qwen3-32b', maxTokens: 40960 }
 			]
 		},
 		{
@@ -47,12 +49,13 @@
 			label: 'OpenAI (GPT-5.2)',
 			defaultEndpoint: 'https://api.openai.com/v1/chat/completions',
 			defaultModel: 'gpt-5.2',
+			defaultMaxTokens: 16384,
 			requiresApiKey: true,
 			models: [
-				{ value: 'gpt-5.2', label: 'GPT-5.2' },
-				{ value: 'gpt-5-mini', label: 'GPT-5 mini' },
-				{ value: 'gpt-5-nano', label: 'GPT-5 nano' },
-				{ value: 'gpt-5', label: 'GPT-5' }
+				{ value: 'gpt-5.2', label: 'GPT-5.2', maxTokens: 16384 },
+				{ value: 'gpt-5-mini', label: 'GPT-5 mini', maxTokens: 16384 },
+				{ value: 'gpt-5-nano', label: 'GPT-5 nano', maxTokens: 16384 },
+				{ value: 'gpt-5', label: 'GPT-5', maxTokens: 16384 }
 			]
 		},
 		{
@@ -60,11 +63,12 @@
 			label: 'Claude (Anthropic)',
 			defaultEndpoint: 'https://api.anthropic.com/v1/messages',
 			defaultModel: 'claude-opus-4-6',
+			defaultMaxTokens: 8192,
 			requiresApiKey: true,
 			models: [
-				{ value: 'claude-opus-4-6', label: 'Claude Opus 4.6' },
-				{ value: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6' },
-				{ value: 'claude-haiku-4-5', label: 'Claude Haiku 4.5' }
+				{ value: 'claude-opus-4-6', label: 'Claude Opus 4.6', maxTokens: 8192 },
+				{ value: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6', maxTokens: 8192 },
+				{ value: 'claude-haiku-4-5', label: 'Claude Haiku 4.5', maxTokens: 8192 }
 			]
 		},
 		{
@@ -72,13 +76,18 @@
 			label: 'Gemini (Google)',
 			defaultEndpoint: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
 			defaultModel: 'gemini-3-flash-preview',
+			defaultMaxTokens: 8192,
 			requiresApiKey: true,
 			models: [
-				{ value: 'gemini-3-1-pro-preview', label: 'Gemini 3.1 Pro Preview' },
-				{ value: 'gemini-3-flash-preview', label: 'Gemini 3 Flash Preview' },
-				{ value: 'gemini-3-1-flash-lite-preview', label: 'Gemini 3.1 Flash Lite Preview' },
-				{ value: 'gemini-2.5-pro', label: 'Gemini 2.5 Pro' },
-				{ value: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' }
+				{ value: 'gemini-3-1-pro-preview', label: 'Gemini 3.1 Pro Preview', maxTokens: 8192 },
+				{ value: 'gemini-3-flash-preview', label: 'Gemini 3 Flash Preview', maxTokens: 8192 },
+				{
+					value: 'gemini-3-1-flash-lite-preview',
+					label: 'Gemini 3.1 Flash Lite Preview',
+					maxTokens: 8192
+				},
+				{ value: 'gemini-2.5-pro', label: 'Gemini 2.5 Pro', maxTokens: 8192 },
+				{ value: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash', maxTokens: 8192 }
 			]
 		},
 		{
@@ -86,20 +95,22 @@
 			label: 'Ollama (ローカルLLM)',
 			defaultEndpoint: 'http://localhost:11434/v1/chat/completions',
 			defaultModel: 'llama3.2',
+			defaultMaxTokens: 8192,
 			requiresApiKey: false,
 			models: [
-				{ value: 'llama3.2', label: 'Llama 3.2' },
-				{ value: 'llama3.1', label: 'Llama 3.1' },
-				{ value: 'mistral', label: 'Mistral' },
-				{ value: 'codellama', label: 'Code Llama' },
-				{ value: 'gemma2', label: 'Gemma 2' }
+				{ value: 'llama3.2', label: 'Llama 3.2', maxTokens: 8192 },
+				{ value: 'llama3.1', label: 'Llama 3.1', maxTokens: 8192 },
+				{ value: 'mistral', label: 'Mistral', maxTokens: 8192 },
+				{ value: 'codellama', label: 'Code Llama', maxTokens: 8192 },
+				{ value: 'gemma2', label: 'Gemma 2', maxTokens: 8192 }
 			]
 		},
 		{
 			id: 'custom',
-			label: 'カスタム (OpenAI互換)',
+			label: 'カスタム (OpenAI互溛)',
 			defaultEndpoint: '',
 			defaultModel: '',
+			defaultMaxTokens: 8192,
 			requiresApiKey: true,
 			models: [] // カスタムの場合はテキスト入力
 		}
@@ -111,12 +122,29 @@
 		if (provider) {
 			llmSettings.llmEndpoint = provider.defaultEndpoint;
 			llmSettings.llmModel = provider.defaultModel;
+			llmSettings.maxTokens = provider.defaultMaxTokens ?? 8192;
+		}
+	}
+
+	// モデル変更時にmaxTokensを自動設定
+	function handleModelChange() {
+		const provider = availableProviders.find((p) => p.id === llmSettings.llmProvider);
+		const model = provider?.models.find((m) => m.value === llmSettings.llmModel);
+		if (model?.maxTokens) {
+			llmSettings.maxTokens = model.maxTokens;
 		}
 	}
 
 	// 現在のプロバイダーのモデルリストを取得（リアクティブ）
 	$: currentProviderModels =
 		availableProviders.find((p) => p.id === llmSettings.llmProvider)?.models || [];
+
+	// 現在のモデルのmaxTokens上限値（リアクティブ）
+	$: currentModelMaxTokens = (() => {
+		const provider = availableProviders.find((p) => p.id === llmSettings.llmProvider);
+		const model = provider?.models.find((m) => m.value === llmSettings.llmModel);
+		return model?.maxTokens ?? provider?.defaultMaxTokens ?? 8192;
+	})();
 
 	// プロンプト管理
 	let prompts: any[] = [];
@@ -1039,7 +1067,12 @@
 											/>
 											<small class="text-muted"> 使用するモデルの名前を指定してください </small>
 										{:else}
-											<select class="form-select" id="llmModel" bind:value={llmSettings.llmModel}>
+											<select
+												class="form-select"
+												id="llmModel"
+												bind:value={llmSettings.llmModel}
+												on:change={handleModelChange}
+											>
 												{#each currentProviderModels as model}
 													<option value={model.value}>{model.label}</option>
 												{/each}
@@ -1075,10 +1108,12 @@
 											id="maxTokens"
 											bind:value={llmSettings.maxTokens}
 											min="1024"
-											max="131072"
+											max={currentModelMaxTokens}
 											step="1024"
 										/>
-										<small class="text-muted">AI応答の最大長（1024-131072）</small>
+										<small class="text-muted"
+											>AI応答の最大長（1024-{currentModelMaxTokens.toLocaleString()}）</small
+										>
 									</div>
 
 									<hr class="my-4" />

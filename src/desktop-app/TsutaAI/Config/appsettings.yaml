@@ -1,0 +1,15 @@
+﻿API:
+  BaseUrl: "http://localhost:3000"
+  Timeout: 30
+Database:
+  Path: "..\\..\\..\\..\\database\\tsutaai.db"
+App:
+  LogLevel: "Info"
+  AutoSave: true
+  Theme: "Light"
+  Language: "ja-JP"
+Proxy:
+  UseProxy: false
+  ProxyUri: ""
+  UserName: ""
+  Password: ""

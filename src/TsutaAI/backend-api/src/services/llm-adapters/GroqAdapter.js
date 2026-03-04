@@ -16,6 +16,17 @@ class GroqAdapter extends BaseLLMAdapter {
     if (!this.model) {
       this.model = 'llama-3.3-70b-versatile';
     }
+    // Groq推論モデルかどうか判定 (qwenなど <think> ブロックを返すモデル)
+    this.isReasoningModel = this._detectReasoningModel();
+  }
+
+  /**
+   * 推論モデルかどうかを判定する
+   * @returns {boolean}
+   */
+  _detectReasoningModel() {
+    const model = (this.model || '').toLowerCase();
+    return model.includes('qwen') || model.includes('deepseek-r') || model.includes('reasoning');
   }
 
   getProviderName() {
@@ -48,6 +59,12 @@ class GroqAdapter extends BaseLLMAdapter {
         messages
       };
 
+      // 推論モデルの場合、<think>ブロックを非表示にする（最終回答のみ返す）
+      if (this.isReasoningModel) {
+        body.reasoning_effort = 'default';
+        body.reasoning_format = 'hidden';
+      }
+
       // JSON形式を要求する場合
       if (options.responseFormat === 'json') {
         body.response_format = { type: 'json_object' };
@@ -79,7 +96,7 @@ class GroqAdapter extends BaseLLMAdapter {
         return this.parseJsonResponse(content);
       }
 
-      return content.trim();
+      return this.cleanResponseContent(content);
     } catch (error) {
       return this.handleError(error, options);
     }
@@ -114,6 +131,12 @@ class GroqAdapter extends BaseLLMAdapter {
         messages
       };
 
+      // 推論モデルの場合、<think>ブロックを非表示にする（最終回答のみ返す）
+      if (this.isReasoningModel) {
+        body.reasoning_effort = 'default';
+        body.reasoning_format = 'hidden';
+      }
+
       // ツールが指定されている場合（Function Calling）
       if (tools && Array.isArray(tools) && tools.length > 0) {
         body.tools = tools;
@@ -134,7 +157,7 @@ class GroqAdapter extends BaseLLMAdapter {
       const choice = data.choices[0];
 
       return {
-        message: choice.message.content,
+        message: this.cleanResponseContent(choice.message.content),
         toolCalls: choice.message.tool_calls || null,
         finishReason: choice.finish_reason
       };
