@@ -38,31 +38,47 @@
 			models: [
 				{ value: 'openai/gpt-oss-20b', label: 'gpt-oss-20b' },
 				{ value: 'openai/gpt-oss-120b', label: 'gpt-oss-120b' },
-				{ value: 'llama-3.1-8b-instant', label: 'llama-3.1-8b' }
+				{ value: 'llama-3.1-8b-instant', label: 'llama-3.1-8b' },
+				{ value: 'qwen/qwen3-32b', label: 'qwen3-32b' }
 			]
 		},
 		{
 			id: 'openai',
-			label: 'OpenAI (GPT-5)',
+			label: 'OpenAI (GPT-5.2)',
 			defaultEndpoint: 'https://api.openai.com/v1/chat/completions',
 			defaultModel: 'gpt-5.2',
 			requiresApiKey: true,
 			models: [
-				{ value: 'gpt-5.2', label: 'GPT-5.2' }, // 最新フラグシップ[web:40][web:78][web:89]
-				{ value: 'gpt-5', label: 'GPT-5' }, // 一世代前の5系メイン[web:41][web:53]
-				{ value: 'gpt-5-mini', label: 'GPT-5 mini' }, // 軽量版[web:52][web:53]
-				{ value: 'gpt-5-nano', label: 'GPT-5 nano' } // さらに軽量[web:49][web:53]
+				{ value: 'gpt-5.2', label: 'GPT-5.2' },
+				{ value: 'gpt-5-mini', label: 'GPT-5 mini' },
+				{ value: 'gpt-5-nano', label: 'GPT-5 nano' },
+				{ value: 'gpt-5', label: 'GPT-5' }
 			]
 		},
 		{
 			id: 'claude',
 			label: 'Claude (Anthropic)',
 			defaultEndpoint: 'https://api.anthropic.com/v1/messages',
-			defaultModel: 'claude-opus-4.5',
+			defaultModel: 'claude-opus-4-6',
 			requiresApiKey: true,
 			models: [
-				{ value: 'claude-opus-4.5', label: 'Claude Opus 4.5' }, // 最上位フラグシップ[web:38][web:71][web:54]
-				{ value: 'claude-sonnet-4.5', label: 'Claude Sonnet 4.5' } // 汎用・コスパ重視の最新[web:69][web:61]
+				{ value: 'claude-opus-4-6', label: 'Claude Opus 4.6' },
+				{ value: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6' },
+				{ value: 'claude-haiku-4-5', label: 'Claude Haiku 4.5' }
+			]
+		},
+		{
+			id: 'gemini',
+			label: 'Gemini (Google)',
+			defaultEndpoint: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
+			defaultModel: 'gemini-3-flash-preview',
+			requiresApiKey: true,
+			models: [
+				{ value: 'gemini-3-1-pro-preview', label: 'Gemini 3.1 Pro Preview' },
+				{ value: 'gemini-3-flash-preview', label: 'Gemini 3 Flash Preview' },
+				{ value: 'gemini-3-1-flash-lite-preview', label: 'Gemini 3.1 Flash Lite Preview' },
+				{ value: 'gemini-2.5-pro', label: 'Gemini 2.5 Pro' },
+				{ value: 'gemini-2.5-flash', label: 'Gemini 2.5 Flash' }
 			]
 		},
 		{
@@ -978,6 +994,10 @@
 												<small class="text-muted">
 													OpenAI PlatformからAPIキーを取得してください
 												</small>
+											{:else if llmSettings.llmProvider === 'gemini'}
+												<small class="text-muted">
+													Google AI Studio からAPIキーを取得してください
+												</small>
 											{:else if llmSettings.llmProvider === 'groq'}
 												<small class="text-muted">
 													Groq ConsoleからAPIキーを取得してください
@@ -1662,13 +1682,13 @@
 						</div>
 
 						<div class="mb-3 form-check">
-								<input
-									type="checkbox"
-									class="form-check-input"
-									id="isRecurring"
-									bind:checked={newHoliday.is_recurring}
-									disabled={isAddingHoliday}
-								/>
+							<input
+								type="checkbox"
+								class="form-check-input"
+								id="isRecurring"
+								bind:checked={newHoliday.is_recurring}
+								disabled={isAddingHoliday}
+							/>
 							<label class="form-check-label" for="isRecurring"> 毎年繰り返す </label>
 						</div>
 
@@ -1693,7 +1713,12 @@
 					>
 						キャンセル
 					</button>
-					<button type="button" class="btn btn-primary" on:click={addHoliday} disabled={isAddingHoliday}>
+					<button
+						type="button"
+						class="btn btn-primary"
+						on:click={addHoliday}
+						disabled={isAddingHoliday}
+					>
 						{isAddingHoliday ? '追加中...' : '追加'}
 					</button>
 				</div>
@@ -1863,7 +1888,12 @@
 
 						<div class="mb-3">
 							<label for="role" class="form-label">権限</label>
-							<select class="form-select" id="role" bind:value={userForm.role} disabled={isSavingUser}>
+							<select
+								class="form-select"
+								id="role"
+								bind:value={userForm.role}
+								disabled={isSavingUser}
+							>
 								<option value="member">メンバー</option>
 								<option value="admin">管理者</option>
 							</select>
@@ -1900,7 +1930,13 @@
 						キャンセル
 					</button>
 					<button type="button" class="btn btn-primary" on:click={saveUser} disabled={isSavingUser}>
-						{isSavingUser ? (editingUser ? '更新中...' : '作成中...') : editingUser ? '更新' : '作成'}
+						{isSavingUser
+							? editingUser
+								? '更新中...'
+								: '作成中...'
+							: editingUser
+								? '更新'
+								: '作成'}
 					</button>
 				</div>
 			</div>
@@ -1975,7 +2011,12 @@
 					>
 						キャンセル
 					</button>
-					<button type="button" class="btn btn-primary" on:click={savePrompt} disabled={isPromptActionInFlight}>
+					<button
+						type="button"
+						class="btn btn-primary"
+						on:click={savePrompt}
+						disabled={isPromptActionInFlight}
+					>
 						<i class="bi bi-save me-1"></i>
 						{isSavingPrompt ? '保存中...' : '保存'}
 					</button>
